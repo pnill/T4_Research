@@ -162,7 +162,7 @@ I haven't relied on this xbe as much as I should to determine specific things, t
 Some other things that can potentially be gleaned from this would be things such finding where functions have been inlined in the release PC build I don't believe they would've been inlined in this specific build due to otpimization being turned way down.
 
 Another reference to a file which relates to Quagmire specifically would be the following path and error found in the game xbe:
-```
+```cpp
 int sub_1B042()
 {
   int result; // eax
@@ -571,7 +571,7 @@ These actions/modes can be anything from the way a weapon fires to a player crou
 ## God Files
 
 The ".god" files appear to be related to their "WorldBuilder" system for Quagmire and are utilized to compile the actual .ATR/.ATI files down the line I assume, one was seemingly accidentally included in the PC build. It only appears to define generic actors related to the game and has the following in it's header:
-```
+```c
 ;------------------------------------------------------------------------------
 ;                       The .god file for T4
 ;------------------------------------------------------------------------------
@@ -616,7 +616,7 @@ There are no references to this in the game's code that I can identify, there is
 
 `FakeGun.atr` appears to be a `Weapon Wheel` based on it's defined `ACTOR_CODE`.
 
-```
+```c
 ;------------------------------------------------------------------------------
 ; Base AI
 ;------------------------------------------------------------------------------
@@ -850,7 +850,7 @@ There are no references to this in the game's code that I can identify, there is
 #### Rocket1Actor
 The interesting thing about this one is I can't seem to find it defined in the binary anywhere meaning it must've not been compiled in, there is however a actor file in the game files which references this `ACTOR_CODE` located at `data\actors\users\brandg\weapons\ROCKET1\rocket1.atr`, this file however is not referenced in any other actor or actor instance file meaning it's never intended to be loaded into the game and is some cut projectile or weapon. I'm guessing projectile.
 
-```
+```c
 *OBJECT = "Rocket1Actor"
 {
 	*NAME = "Rocket1Actor"
@@ -904,7 +904,7 @@ The interesting thing about this one is I can't seem to find it defined in the b
 ```
 
 There's also Rocket2Actor, but there's nothing extremely notable about it.
-```
+```c
 *OBJECT = "Rocket2Actor"
 {
 	*NAME = "Rocket2Actor"
@@ -922,7 +922,7 @@ The actor file which defines it via it's `ACTOR_CODE` is `data\actors\users\bran
 
 It does appear to get referenced by game files, specifically `precachelists` (PCL files) for serveral levels, but to my knowledge would have to be referenced in either an Actor Instance File (ATI) or Actor File (ATR) to actually be spawned or utilized in a level. Meaning it's either referenced/spawned directly via code somewhere vs a actor based file, or I'm unaware of some other method of loading it into the game if it's not an unused object.
 
-```
+```c
 *OBJECT = "Rocket3Actor"
 {
 	*NAME = "Rocket3Actor"
@@ -972,7 +972,7 @@ As we know the game does define an object for this, and what's interesting is it
 This provides a ton of information into how the AI operates as well as mode definitions and how the game might load this from a binary file such as an actor file. A lot of the properties, groups, modes, and etc. Are going to be loaded by the engine referencing a string in a table, meaning we should be able to reverse engineer how the engine handles each one of these properties and assigns it to the EnemyAIObject in code.
 
 Ultimately, leading to getting a better defined idea of structures/members for both Actor and EnemyAIObjects.
-```
+```c
 ;------------------------------------------------------------------------------
 ; Enemy AI
 ;------------------------------------------------------------------------------
@@ -2719,7 +2719,7 @@ Another interesting variable is the `Inventory Capacity` `Group` definition, I'v
 
 Anything defined in the `VARIABLES` for a player that is prefixed with `PT_` seems to be flight mode specific including camera FOV, distance etc.
 
-```
+```c
 ;------------------------------------------------------------------------------
 ; Player
 ;
@@ -3857,7 +3857,7 @@ The modes suggest that these `AIMODES` definitions are certainly used for more o
 
 There's also another entry in `VARIABLES` for the `PickupType` which is a `Group` definition, this seems to have a list of all potential pickups in the game for both Single Player and Multiplayer, and finally a  `RespawnTimer` further indicating that as expected with `WaitToSpawn` the vtable for `CTurokPickup` likely has some form of a 'spawn' routine that's called while it's being spawned into the game.
 
-```
+```c
 *OBJECT = "TurokPickup"
 {
 	*NAME	= "TurokPickup"
@@ -3997,7 +3997,7 @@ The `WeaponWheel` object appears to inherit no other objects, including an Actor
 
 There's not a ton to say about the variables within the `WeaponWheel` as they seem to mostly be self explanatory, but may be helpful in modifying the actual `WeaponWheel.atr` contained within the game or further deciphering the object in memory.
 
-```
+```c
 ;------------------------------------------------------------------------------
 ; Weapon Wheel
 ;------------------------------------------------------------------------------
@@ -4639,7 +4639,7 @@ There's not a ton to say about the variables within the `WeaponWheel` as they se
 #### WeaponAmmo
 This one is only interesting because it's entirely commented and I've never seen it referenced by the game at all, it appears to have been intended to be a separate object but the ammo in memory is typically stored inside of the weaponwheel itself.
 
-```
+```c
 ;*Object = "WeaponAmmo"
 ;{
 ;	 *Name			 =	 "Weapon Ammo"
@@ -4895,7 +4895,7 @@ Additional variables are:
 
 Other than the above there's really nothing else defined for the DMPlayer which is interesting considering how much data is stored in memory or how many entries there are in it's vtable. There's a wide range of things defined for it's `AIMODES` as well meaning it overrides what it inherits from `Player`
 
-```
+```c
 	*AIMODES = 
 	{
 		"Idle",
@@ -5018,7 +5018,7 @@ There is a `Group` for `Team` that has a `TEAMNAME` combo, with a `ComboList` me
 
 Additionally, there appears to be a `BitField` entry under variables for `ModeFlags` and it has a display name of `ExcludeModes`. This also defines a `BitList` and appears to determine what modes a spawn point will not be used in based on what fields are set.
 
-```
+```c
 		*BitList =
 			{
 				"Predator",			; 1

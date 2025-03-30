@@ -80,7 +80,7 @@ They have these sets of files which seem to be intended for cross platform compa
 
 An example of this is x_string.cpp where they've effectively made their own version of std::string they refer to as x_std::string.
 
-```
+```cpp
 char * x_std::string::New( size_type Capacity ) 
 { 
     Capacity += 10 ; // Always add a little more ... this might prevent some unnecessary reallocations (depending on how the string is used).

@@ -12,7 +12,7 @@ I hope to eventually create individual pages for each of the classes where I hav
 
 | Class / Function | Notes  |
 | :--------------- | :----- |
-| [CTurok4Game](https://github.com/T4_Research/Classes/CTurok4Game.md)      | From what I can tell this is a child of CGame/inherits it, each game built on Quagmire has it's own implementation of this which ultimately calls out to CGame in it's sub-functions/vtable functions. |
+| [CTurok4Game](https://github.com/pnill/T4_Research/blob/master/Classes/CTurok4Game.md)      | From what I can tell this is a child of CGame/inherits it, each game built on Quagmire has it's own implementation of this which ultimately calls out to CGame in it's sub-functions/vtable functions. |
 | SpawnPoint | Kind of as it sounds, handles spawning players or objects into a map, appears to be initialized by very specific ATR files. |
 | FlagSpawnPoint | It may not be it's own class but it is loaded differently, however still uses the exactly same constructor as SpawnPoint |
 | MPPickup | Seems to be related to only very specific pickups in multiplayer. Powerups more than likely but requires more research. |

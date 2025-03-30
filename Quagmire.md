@@ -17,6 +17,8 @@ The source code for Vexx is out there, but I haven't been able to obtain it, oth
 
 The other issue with the Quagmire 3 Source code is either Quagmire (any iteration) never supported DX9 and the entire work of implementing that support was done by Super Happy Fun Fun when porting to PC, or the version is not comparable to what Turok Evolution utilizes so a lot of the window creation, or rendering routines are not a match for what's found in the binary, at least not directly.
 
+The partial source code has been made available [here](https://github.com/pnill/T4_Research/tree/master/TNT)
+
 ## Source Structure
 The main portion of Quagmire 3 I've been able to obtain is structured as follows:
 ```

@@ -1,0 +1,129 @@
+/********************************************************************************
+*                                                                               *
+* Tri-Strip Clip Preprocessing                                                  *
+*                                                                               *
+*********************************************************************************
+*                                                                               *
+* Walk the final vert data looking for vertices with a clip flag set.           *
+*   ALL this loop does is look for the clip flag and send the necessary tris to *
+*   the clipper.  The verts are in screen-space here and are sent to the        *
+*   clipper in screen-space.  It handles the transformation to clip-space.      *
+*                                                                               *
+********************************************************************************/
+
+
+TRI_STRIP_POSTPROCESS:
+    nop                                 ilw.x   vi04, 0(vi14)x          ; load the vert count
+    nop                                 iaddiu  vi05, vi14, 3           ; point to the first kicked vert
+    nop                                 iaddiu  vi12, vi00, 3
+nop         iaddiu vi13, vi00, 7
+    nop                                 ibeq    vi11, vi00, TRI_STRIP_POSTPROCESS_SKIP_STRIDE_INC
+    nop                                 iaddiu  vi01, vi00, 0x01
+    nop                                 iaddiu  vi12, vi12, 1
+    
+TRI_STRIP_POSTPROCESS_SKIP_STRIDE_INC:
+;    nop     iaddiu vi12, vi04, 0
+;    nop     ibeq vi04, vi00, TRI_STRIP_POSTPROCESS_END
+;    nop     isubiu vi12, vi12, 121
+;    nop     ibgtz vi12, TRI_STRIP_POSTPROCESS_END
+
+    nop                                 iaddiu  vi09, vi00, CLIPPER_HEADER
+    nop                                 iaddiu  vi08, vi00, CLIPPER_BUFFER_EVEN
+    nop                                 iaddi   vi07, vi08, 2
+    nop                                 lq.xyzw vf01, 2(vi14)
+    nop                                 isw.z   vi00, 0(vi09)z
+    nop                                 isw.x   vi08, 0(vi09)x
+    nop                                 isw.x   vi00, 0(vi08)x
+    nop                                 isw.y   vi07, 0(vi08)y
+    nop                                 sq.xyzw vf01, 1(vi08)
+    nop                                 iaddiu  vi08, vi00, CLIPPER_BUFFER_ODD
+    nop                                 iaddi   vi07, vi08, 2
+    nop                                 isw.x   vi00, 0(vi08)x
+    nop                                 isw.y   vi07, 0(vi08)y
+    nop                                 sq.xyzw vf01, 1(vi08)
+; load the first 2 verts and see if one of them is clipped
+    nop                                 iadd    vi05, vi05, vi12
+    nop                                 ilw.w   vi07, -1(vi05)w
+    nop                                 iadd    vi05, vi05, vi12
+    nop                                 ilw.w   vi08, -1(vi05)w
+    nop                                 iaddi   vi04, vi04, -2
+    nop                                 iand    vi09, vi07, vi01
+    nop                                 ibeq    vi09, vi00, TRI_STRIP_POSTPROCESS_TEST_SECOND_VERT
+    nop                                 iand    vi09, vi08, vi01
+    nop                                 iaddiu  vi10, vi00, 2
+TRI_STRIP_POSTPROCESS_TEST_SECOND_VERT:
+    nop                                 ibeq    vi09, vi00, TRI_STRIP_POSTPROCESS_LOOP_SETUP
+    nop                                 nop
+    nop                                 iaddiu  vi10, vi00, 3
+TRI_STRIP_POSTPROCESS_LOOP_SETUP:
+    nop                                 iadd    vi05, vi05, vi12
+    nop                                 ilw.w   vi07, -1(vi05)w
+    nop                                 iadd    vi04, vi04, -1
+    nop                                 ibeq    vi04, vi00, TRI_STRIP_POSTPROCESS_END
+    nop                                 nop
+
+TRI_STRIP_POSTPROCESS_LOOP:
+    nop                                 iand    vi08, vi07, vi01
+    nop                                 ibne    vi08, vi00, TRI_STRIP_POSTPROCESS_CLIP_SETUP
+    nop                                 iadd    vi10, vi10, -1
+    nop                                 ibgtz   vi10, TRI_STRIP_POSTPROCESS_CLIP
+    nop                                 nop
+TRI_STRIP_POSTPROCESS_LOOP_AFTER_CLIP:
+    nop                                 iadd    vi05, vi05, vi12
+    nop                                 ilw.w   vi07, -1(vi05)w
+    nop                                 iaddi   vi04, vi04, -1
+    nop                                 ibeq    vi04, vi00, TRI_STRIP_POSTPROCESS_END
+    nop                                 nop
+    nop                                 b       TRI_STRIP_POSTPROCESS_LOOP
+    nop                                 nop
+
+TRI_STRIP_POSTPROCESS_CLIP_SETUP:
+    nop                                 iaddiu  vi10, vi00, 3
+TRI_STRIP_POSTPROCESS_CLIP:
+    nop                                 iaddiu  vi08, vi10, 0
+    nop                                 iaddiu  vi06, vi05, 0
+    nop                                 ibeq    vi08, vi00, TRI_STRIP_POSTPROCESS_CLIP_V2
+    nop                                 iaddi   vi08, vi12, -1
+    nop                                 ibeq    vi08, vi00, TRI_STRIP_POSTPROCESS_CLIP_V1
+    nop                                 nop
+TRI_STRIP_POSTPROCESS_CLIP_V0:
+; first time for this vert, so it is the last vert in a tri
+;  stepping back 2 verts in the strip
+    nop                                 isub    vi06, vi05, vi12
+
+
+TRI_STRIP_POSTPROCESS_CLIP_V1:
+; second time for this vert, so it is the middle vert in a tri
+;  stepping back 1 vert in the strip
+    nop                                 isub    vi06, vi05, vi12
+
+TRI_STRIP_POSTPROCESS_CLIP_V2:
+; last time for this vert, so it is the first vert in a tri
+;  just running the clipper, no stepping necessary
+    nop                                 bal     vi15, TRI_STRIP_CLIP
+    nop                                 nop
+    nop                                 b       TRI_STRIP_POSTPROCESS_LOOP_AFTER_CLIP
+    nop                                 iaddiu  vi01, vi00, 0x01
+
+TRI_STRIP_POSTPROCESS_END:
+; make sure we attempt one final kick on the verts in the clipper bucket
+;    nop                                 bal     vi15, TRI_STRIP_CLIPPER_KICK_BUCKET
+
+    nop                                 nop
+    nop[e]                              nop
+    nop                                 nop
+    nop                                 b       TRI_STRIP_MESH_LOOP
+    nop                                 nop
+
+
+
+
+
+
+
+
+
+
+
+
+

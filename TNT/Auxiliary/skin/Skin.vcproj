@@ -1,0 +1,1376 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="Skin"
+	SccProjectName="&quot;$/TNT/Auxiliary/Skin&quot;, WSGAAAAA"
+	SccAuxPath=""
+	SccLocalPath="."
+	SccProvider="MSSCCI:Microsoft Visual SourceSafe">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+		<Platform
+			Name="Xbox"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="PS2 DevKit Release|Win32"
+			OutputDirectory=".\RPS2DEV"
+			IntermediateDirectory=".\RPS2DEV"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Quagmire\Engine\PS2,$(TNT)\Quagmire\Engine\PS2\Helpers,$(TNT)\Auxiliary\AnimPlay,$(TNT)/Auxiliary/Skin"
+				PreprocessorDefinitions="TARGET_PS2_DEV"
+				StringPooling="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RPS2DEV/Skin.pch"
+				AssemblerListingLocation=".\RPS2DEV/"
+				ObjectFile=".\RPS2DEV/"
+				ProgramDataBaseFileName=".\RPS2DEV/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\RPS2DEV\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DevKit Release|Xbox"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 USB Debug|Win32"
+			OutputDirectory=".\DPS2USB"
+			IntermediateDirectory=".\DPS2USB"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Quagmire\Engine\PS2,$(TNT)\Quagmire\Engine\PS2\Helpers,$(TNT)\Auxiliary\AnimPlay,$(TNT)/Auxiliary/Skin"
+				PreprocessorDefinitions="TARGET_PS2_USB,X_DEBUG"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DPS2USB/Skin.pch"
+				AssemblerListingLocation=".\DPS2USB/"
+				ObjectFile=".\DPS2USB/"
+				ProgramDataBaseFileName=".\DPS2USB/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\DPS2USB\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 USB Debug|Xbox"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PC Release|Win32"
+			OutputDirectory=".\RPC"
+			IntermediateDirectory=".\RPC"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				OptimizeForProcessor="1"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\3rdParty\DX8\Include,$(TNT)\3rdParty\DX8\Lib,$(TNT)/Auxiliary/Skin,$(TNT)\Auxiliary\AnimPlay"
+				PreprocessorDefinitions="NDEBUG"
+				StringPooling="TRUE"
+				RuntimeLibrary="4"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RPC/Skin.pch"
+				AssemblerListingLocation=".\RPC/"
+				ObjectFile=".\RPC/"
+				ProgramDataBaseFileName=".\RPC/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile=".\RPC\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PC Release|Xbox"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DevKit Debug|Win32"
+			OutputDirectory=".\DPS2DEV"
+			IntermediateDirectory=".\DPS2DEV"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Quagmire\Engine\PS2,$(TNT)\Quagmire\Engine\PS2\Helpers,$(TNT)\Auxiliary\AnimPlay,$(TNT)/Auxiliary/Skin"
+				PreprocessorDefinitions="TARGET_PS2_DEV,X_DEBUG"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DPS2DEV/Skin.pch"
+				AssemblerListingLocation=".\DPS2DEV/"
+				ObjectFile=".\DPS2DEV/"
+				ProgramDataBaseFileName=".\DPS2DEV/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\DPS2DEV\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DevKit Debug|Xbox"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="XBox DevKit Release|Win32"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="XBox DevKit Release|Xbox"
+			OutputDirectory=".\RXBOXDEV"
+			IntermediateDirectory=".\RXBOXDEV"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="$(TNT)\Auxiliary\Skin,$(TNT)\Auxiliary\Skin\XBOX,$(TNT)\Auxiliary\Skin\XBOX\Shaders,$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Auxiliary\AnimPlay"
+				PreprocessorDefinitions="TARGET_XBOX_DEV,_XBOX"
+				StringPooling="TRUE"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RXBOXDEV/Skin.pch"
+				AssemblerListingLocation=".\RXBOXDEV/"
+				ObjectFile=".\RXBOXDEV/"
+				ProgramDataBaseFileName=".\RXBOXDEV/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile=".\RXBOXDEV\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DVD Release|Win32"
+			OutputDirectory=".\RPS2DVD"
+			IntermediateDirectory=".\RPS2DVD"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Quagmire\Engine\PS2,$(TNT)\Quagmire\Engine\PS2\Helpers,$(TNT)\Auxiliary\AnimPlay,$(TNT)/Auxiliary/Skin"
+				PreprocessorDefinitions="TARGET_PS2_DVD"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RPS2DVD/Skin.pch"
+				AssemblerListingLocation=".\RPS2DVD/"
+				ObjectFile=".\RPS2DVD/"
+				ProgramDataBaseFileName=".\RPS2DVD/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\RPS2DVD\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DVD Release|Xbox"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 USB Release|Win32"
+			OutputDirectory=".\RPS2USB"
+			IntermediateDirectory=".\RPS2USB"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Quagmire\Engine\PS2,$(TNT)\Quagmire\Engine\PS2\Helpers,$(TNT)\Auxiliary\AnimPlay,$(TNT)/Auxiliary/Skin"
+				PreprocessorDefinitions="TARGET_PS2_USB"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RPS2USB/Skin.pch"
+				AssemblerListingLocation=".\RPS2USB/"
+				ObjectFile=".\RPS2USB/"
+				ProgramDataBaseFileName=".\RPS2USB/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\RPS2USB\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 USB Release|Xbox"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PC Debug|Win32"
+			OutputDirectory=".\DPC"
+			IntermediateDirectory=".\DPC"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				OptimizeForProcessor="1"
+				AdditionalIncludeDirectories="$(TNT)\Auxiliary\Skin,$(TNT)\Quagmire\Engine\PC\Helpers,$(TNT)\Quagmire\Engine\PC,$(TNT)\Auxiliary\Tokenizer,$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Auxiliary\AnimPlay,$(TNT)\3rdParty\DX8\Include,$(TNT)\3rdParty\DX8\Lib,$(TNT)/Auxiliary/Skin,$(TNT)/Auxiliary/Skin/PC/Shaders"
+				PreprocessorDefinitions="TARGET_PC,X_DEBUG"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DPC/Skin.pch"
+				AssemblerListingLocation=".\DPC/"
+				ObjectFile=".\DPC/"
+				ProgramDataBaseFileName=".\DPC/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile=".\DPC\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PC Debug|Xbox"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="XBox DevKit Debug|Win32"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="XBox DevKit Debug|Xbox"
+			OutputDirectory=".\DXBOXDEV"
+			IntermediateDirectory=".\DXBOXDEV"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="$(TNT)\Auxiliary\Skin,$(TNT)\Auxiliary\Skin\XBOX,$(TNT)\Auxiliary\Skin\XBOX\Shaders,$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Auxiliary\AnimPlay"
+				PreprocessorDefinitions="TARGET_XBOX_DEV,X_DEBUG,_XBOX"
+				BasicRuntimeChecks="0"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DXBOXDEV/Skin.pch"
+				AssemblerListingLocation=".\DXBOXDEV/"
+				ObjectFile=".\DXBOXDEV/"
+				ProgramDataBaseFileName=".\DXBOXDEV/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="3"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile=".\DXBOXDEV\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DVD Debug|Win32"
+			OutputDirectory=".\DPS2DVD"
+			IntermediateDirectory=".\DPS2DVD"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Quagmire\Engine\PS2,$(TNT)\Quagmire\Engine\PS2\Helpers,$(TNT)\Auxiliary\AnimPlay,$(TNT)/Auxiliary/Skin"
+				PreprocessorDefinitions="TARGET_PS2_DVD,X_DEBUG"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DPS2DVD/Skin.pch"
+				AssemblerListingLocation=".\DPS2DVD/"
+				ObjectFile=".\DPS2DVD/"
+				ProgramDataBaseFileName=".\DPS2DVD/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\DPS2DVD\Skin.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DVD Debug|Xbox"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Implementation"
+			Filter="">
+			<File
+				RelativePath=".\Skin_Common.cpp">
+			</File>
+			<Filter
+				Name="PS2"
+				Filter="">
+				<File
+					RelativePath=".\ps2\PS2_Skin.cpp">
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_Skin.hpp">
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32">
+						<Tool
+							Name="VCCustomBuildTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32">
+						<Tool
+							Name="VCCustomBuildTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32">
+						<Tool
+							Name="VCCustomBuildTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32">
+						<Tool
+							Name="VCCustomBuildTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Release|Win32">
+						<Tool
+							Name="VCCustomBuildTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32">
+						<Tool
+							Name="VCCustomBuildTool"/>
+					</FileConfiguration>
+				</File>
+				<Filter
+					Name="microcode"
+					Filter="">
+					<File
+						RelativePath=".\ps2\SKIN.dsm">
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Auxiliary\Skin\PS2&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Auxiliary\Skin\PS2&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Auxiliary\Skin\PS2&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Auxiliary\Skin\PS2&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Release|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Auxiliary\Skin\PS2&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Auxiliary\Skin\PS2&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_boot.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_DoubleMatrix.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_EnvMapped.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_flush.vsm">
+					</File>
+					<File
+						RelativePath=".\PS2\SKIN_FlushShadow.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_kernel.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_matrix.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_mcode0.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_memlayout.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_SingleMatrix.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_transform.vsm">
+					</File>
+					<File
+						RelativePath=".\PS2\SKIN_TransMorph.vsm">
+					</File>
+					<File
+						RelativePath=".\PS2\SKIN_TransShadow.vsm">
+					</File>
+					<File
+						RelativePath=".\ps2\SKIN_TripleMatrix.vsm">
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="XBOX"
+				Filter="">
+				<File
+					RelativePath=".\XBOX\XBOX_Skin.cpp">
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_Skin.hpp">
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_SkinBuffer.cpp">
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_SkinBuffer.hpp">
+				</File>
+				<Filter
+					Name="Shaders"
+					Filter="">
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_PShader.h">
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_PShader.psh">
+						<FileConfiguration
+							Name="XBox DevKit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								CommandLine="xsasm -nologo -h -hname s_SKIN_PS_ShadowBuffer &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox DevKit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								CommandLine="xsasm -nologo -h -hname s_SKIN_PS_ShadowBuffer &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PShader_Cheat.h">
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PShader_Cheat.psh">
+						<FileConfiguration
+							Name="XBox DevKit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								CommandLine="xsasm -nologo -h -hname s_SKIN_PS_ShadowBuffer_Cheat &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox DevKit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								CommandLine="xsasm -nologo -h -hname s_SKIN_PS_ShadowBuffer_Cheat &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_VBShader.h">
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_VBShader.vsh">
+						<FileConfiguration
+							Name="XBox DevKit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -h -hname s_SKIN_ObjShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox DevKit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -h -hname s_SKIN_ObjShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_VBShaderDefines.h">
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_VBShadowShader.h">
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_VBShadowShader.vsh">
+						<FileConfiguration
+							Name="XBox DevKit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -h -hname s_SKIN_ShadowShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox DevKit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -h -hname s_SKIN_ShadowShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="PC"
+				Filter="">
+				<File
+					RelativePath=".\PC\PC_Skin.cpp">
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Skin.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_SkinBuffer.cpp">
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_SkinBuffer.hpp">
+				</File>
+				<Filter
+					Name="PC Shaders"
+					Filter="">
+					<File
+						RelativePath=".\PC\Shaders\PC_VBShader.h">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_VBShader.vsh">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_VBShaderDefines.h">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_VBShadowShader.h">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_VBShadowShader.vsh">
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="GameCube"
+				Filter="">
+				<File
+					RelativePath=".\GameCube\GC_Skin.cpp">
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Skin.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_SkinHelp.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_SkinRender.cpp">
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox DevKit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+			</Filter>
+		</Filter>
+		<File
+			RelativePath=".\CommonSkinDefines.hpp">
+		</File>
+		<File
+			RelativePath=".\Skin.hpp">
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

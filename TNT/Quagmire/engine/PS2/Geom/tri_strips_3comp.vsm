@@ -1,0 +1,374 @@
+
+
+
+
+TRI_STRIP_VERT_3_COMP:
+    sub.xyzw    vf09, vf00, vf00        iaddiu      vi08, vi00, 0x7fff      ; step 1 of build ADC const
+    sub.xyzw    vf10, vf00, vf00        iaddiu      vi08, vi08, 0x1         ; step 2 of build ADC const
+    nop                                 ibeq        vi04, vi00, TRI_STRIP_VERT_3_COMP_LOOP_RETURN_FINISHED
+    nop                                 loi         4095.0
+    addi.xy     vf09, vf09, i           loi         30000.0
+    addi.w      vf09, vf09, i           ibeq        vi12, vi00, TRI_STRIP_VERT_3_COMP_LOOP_NOCLIP_SETUP
+    nop                                 lq.xyzw     vf01, 2(vi05)           ; load XYZ
+    nop                                 lq.xyzw     vf02, 0(vi05)           ; load ST
+    nop                                 loi         10.0
+    addi.w      vf10, vf10, i           iaddiu      vi09, vi08, 1           ; set a clip flag var
+
+
+TRI_STRIP_VERT_3_COMP_LOOP_START:
+; load and transform the first 2 verts in this strip
+    mulaw.xyzw  acc, vf23, vf00w        lq.xyzw     vf03, 5(vi05)
+    maddaz.xyzw acc, vf22, vf01z        lq.xyzw     vf04, 3(vi05)
+    madday.xyzw acc, vf21, vf01y        nop
+    maddx.xyzw  vf01, vf20, vf01x       nop
+    mulaw.xyzw  acc, vf23, vf00w        nop
+    maddaz.xyzw acc, vf22, vf03z        nop
+    madday.xyzw acc, vf21, vf03y        nop
+    maddx.xyzw  vf03, vf20, vf03x       div         q, vf00w, vf01w
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 iaddiu      vi05, vi05, 6
+    mulq.xyz    vf01, vf01, q           div         q, vf00w, vf03w
+    mulq.xyzw   vf08, vf02, q           iaddiu      vi03, vi00, 0x00d0      ; set clip test mask
+    nop                                 isw.w       vi08, -4(vi05)
+    nop                                 isw.w       vi08, -1(vi05)
+    sub.xyw     vf11, vf10, vf01        nop
+    sub.xyw     vf12, vf01, vf09        nop
+    ftoi4.xyz   vf07, vf01              iaddi       vi04, vi04, -2
+    mulq.xyz    vf03, vf03, q           nop
+    mulq.xyzw   vf06, vf04, q           fmand       vi07, vi03
+    nop                                 fmand       vi07, vi07
+    nop                                 ibeq        vi07, vi03, TRI_STRIP_VERT_3_COMP_NO_V0_CLIP
+    nop                                 nop
+    nop                                 isw.w       vi09, 2(vi05)
+    
+TRI_STRIP_VERT_3_COMP_NO_V0_CLIP:
+    sub.xyw     vf11, vf10, vf03        lq.xyzw     vf01, 2(vi05)
+    sub.xyw     vf12, vf03, vf09        lq.xyzw     vf02, 0(vi05)
+    ftoi4.xyz   vf05, vf03              ilw.w       vi01, 2(vi05)                               ; load ADC
+    mulaw.xyzw  acc, vf23, vf00         nop
+    maddaz.xyzw acc, vf22, vf01         fmand       vi08, vi03
+    madday.xyzw acc, vf21, vf01         fmand       vi08, vi08
+    maddx.xyzw  vf01, vf20, vf01        ibeq        vi08, vi03, TRI_STRIP_VERT_3_COMP_LOOP_BYPASS
+    nop                                 nop
+    nop                                 isw.w       vi09, 2(vi05)
+    nop                                 b           TRI_STRIP_VERT_3_COMP_LOOP_BYPASS
+    nop                                 isw.w       vi09, 5(vi05)
+    
+TRI_STRIP_VERT_3_COMP_LOOP:
+    mulaw.xyzw  acc, vf23, vf00         iaddiu      vi07, vi08, 0           ; move vi08 to vi07
+    maddaz.xyzw acc, vf22, vf01         iaddiu      vi08, vi02, 0           ; move vi02 to vi08
+    madday.xyzw acc, vf21, vf01         move.xyzw   vf05, vf03
+    maddx.xyzw  vf01, vf20, vf01        move.xyzw   vf06, vf04
+    nop                                 ilw.w       vi01, 2(vi05)
+    nop                                 ibeq        vi04, vi00, TRI_STRIP_VERT_3_COMP_LOOP_RETURN
+TRI_STRIP_VERT_3_COMP_LOOP_BYPASS:      
+    nop                                 nop
+    nop                                 div         q, vf00w, vf01w         ; start 1/W
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    mulq.xyz    vf01, vf01, q           nop                                 ; project XYZ
+    mulq.xyzw   vf04, vf02, q           nop                                 ; store W in UV (ADC or 0)
+    nop                                 iaddiu      vi05, vi05, 3
+    nop                                 iaddiu      vi03, vi00, 0x00D0      ; set clip test mask
+    sub.xyw     vf11, vf10, vf01        nop                                 ; clip test
+    sub.xyw     vf12, vf01, vf09        nop                                 ; clip test
+    ftoi4.xyz   vf03, vf01              nop
+    nop                                 iand        vi10, vi07, vi08
+    nop                                 fmand       vi02, vi03              ; XYZ to fixed      ; clip test
+    nop                                 fmand       vi02, vi02              ; clip test
+    nop                                 iand        vi10, vi10, vi02
+    nop                                 ilw.w       vi01, -1(vi05)
+    nop                                 ibeq        vi10, vi03, TRI_STRIP_VERT_3_COMP_LOOP_END
+    nop                                 iaddiu      vi03, vi00, 0x5         ; adc is stored as 0x8005
+    nop                                 nop
+    nop                                 iand        vi01, vi01, vi03        ; just get the lower 3 bits of vi01
+    nop                                 nop
+    nop                                 ibeq        vi01, vi03, TRI_STRIP_VERT_3_COMP_LOOP_END
+    nop                                 iaddiu      vi01, vi00, CLIPPER_STACK
+    nop                                 isw.y       vi06, 12(vi01)
+    nop                                 isw.w       vi08, 12(vi01)
+    nop                                 bal         vi13, TRI_STRIP_CLIP
+    nop                                 iaddi       vi06, vi05, -9
+
+TRI_STRIP_VERT_3_COMP_AFTER_CLIP:
+    nop                                 iaddiu      vi01, vi00, CLIPPER_STACK
+    nop                                 nop
+    nop                                 ilw.y       vi06, 12(vi01)
+    nop                                 ilw.w       vi08, 12(vi01)
+    nop                                 ilw.w       vi01, -1(vi05)
+    nop                                 nop
+    nop                                 nop
+    nop                                 iaddiu      vi03, vi00, 0x5
+    nop                                 iand        vi03, vi01, vi03
+    nop                                 nop
+    nop                                 ibne        vi03, vi00, TRI_STRIP_VERT_3_COMP_LOOP_END
+    nop                                 nop
+    nop                                 isw.w       vi09, -1(vi05)
+
+TRI_STRIP_VERT_3_COMP_LOOP_END:
+    nop                                 sq.xyz      vf07, -7(vi05)
+    nop                                 sq.xyzw     vf08, -9(vi05)
+    nop                                 lq.xyzw     vf01, 2(vi05)
+    nop                                 lq.xyzw     vf02, 0(vi05)
+    nop                                 move.xyzw   vf07, vf05
+    nop                                 move.xyzw   vf08, vf06
+    nop                                 b           TRI_STRIP_VERT_3_COMP_LOOP
+    nop                                 iaddi       vi04, vi04, -1
+
+TRI_STRIP_VERT_3_COMP_LOOP_RETURN:
+    nop                                 sq.xyz      vf07, -4(vi05)
+    nop                                 sq.xyzw     vf08, -6(vi05)
+    nop                                 sq.xyz      vf05, -1(vi05)
+    nop                                 sq.xyzw     vf06, -3(vi05)
+
+
+
+TRI_STRIP_VERT_3_COMP_LOOP_RETURN_FINISHED:
+    nop                                 jr          vi15
+    nop                                 nop
+
+
+
+
+TRI_STRIP_VERT_3_COMP_LOOP_NOCLIP_SETUP:
+    nop                                 ilw.x       vi04, 0(vi14)x
+    nop                                 iaddiu      vi05, vi14, 3
+    nop                                 lq.xyz      vf01, 2(vi05)
+    nop                                 lq.xyzw     vf02, 0(vi05)
+    nop                                 lq.xyz      vf03, 5(vi05)
+    mulaw.xyzw  acc, vf23, vf00w        lq.xyzw     vf04, 3(vi05)
+    maddaz.xyzw acc, vf22, vf01z        lq.xyz      vf05, 8(vi05)
+    madday.xyzw acc, vf21, vf01y        lq.xyzw     vf06, 6(vi05)
+    maddx.xyzw  vf01, vf20, vf01x       lq.xyzw     vf07, 11(vi05)
+    mulaw.xyzw  acc, vf23, vf00w        lq.xyzw     vf08, 9(vi05)
+    maddaz.xyzw acc, vf22, vf03z        iaddiu      vi05, vi05, 12
+    madday.xyzw acc, vf21, vf03y        nop
+    maddx.xyzw  vf03, vf20, vf03x       div         q, vf00w, vf01w
+    mulaw.xyzw  acc, vf23, vf00w        nop
+    maddaz.xyzw acc, vf22, vf05z        nop
+    madday.xyzw acc, vf21, vf05y        nop
+    maddx.xyzw  vf05, vf20, vf05x       nop
+    nop                                 nop
+    nop                                 move.xyzw   vf14, vf06
+    mulq.xyz    vf01, vf01, q           nop
+    mulq.xyzw   vf10, vf02, q           move.xyzw   vf13, vf05
+    nop                                 lq.xyzw     vf06, 6(vi05)
+    nop                                 nop
+    ftoi4.xyz   vf09, vf01              lq.xyz      vf05, 8(vi05)
+    mulaw.xyzw  acc, vf23, vf00w        nop
+
+
+
+TRI_STRIP_VERT_3_COMP_LOOP_NOCLIP:
+    maddaz.xyzw acc, vf22, vf07z        div         q, vf00w, vf03w
+    madday.xyzw acc, vf21, vf07y        lq.xyz      vf01, 2(vi05)
+    maddx.xyzw  vf07, vf20, vf07x       nop
+    nop                                 lq.xyzw     vf02, 0(vi05)
+    mulaw.xyzw  acc, vf23, vf00w        iaddi       vi04, vi04, -1
+    maddaz.xyzw acc, vf22, vf01z        sq.xyzw     vf10, -12(vi05)
+    madday.xyzw acc, vf21, vf01y        ercpr       p, vf07w
+    mulq.xyz    vf03, vf03, q           sq.xyz      vf09, -10(vi05)
+    mulq.xyzw   vf12, vf04, q           div         q, vf00w, vf13w
+    maddx.xyzw  vf01, vf20, vf01x       lq.xyzw     vf04, 3(vi05)
+    mulaw.xyzw  acc, vf23, vf00w        ibeq        vi04, vi00, TRI_STRIP_VERT_LOOP_3_COMP_END
+    ftoi4.xyz   vf11, vf03              nop
+    maddaz.xyzw acc, vf22, vf05z        iaddi       vi04, vi04, -1
+    madday.xyzw acc, vf21, vf05y        sq.xyzw     vf12, -9(vi05)
+    maddx.xyzw  vf05, vf20, vf05x       nop
+    mulq.xyzw   vf13, vf13, q           sq.xyz      vf11, -7(vi05)
+    mulq.xyzw   vf14, vf14, q           ibeq        vi04, vi00, TRI_STRIP_VERT_LOOP_3_COMP_END
+    nop                                 lq.xyz      vf03, 5(vi05)
+    nop                                 div         q, vf00w, vf01w
+    ftoi4.xyz   vf13, vf13              mfp.w       vf07w, p
+    nop                                 iaddi       vi04, vi04, -1
+    nop                                 sq.xyzw     vf14, -6(vi05)
+    nop                                 ibeq        vi04, vi00, TRI_STRIP_VERT_LOOP_3_COMP_END
+    mulw.xyz    vf15, vf07, vf07w       sq.xyz      vf13, -4(vi05)
+    mulw.xyzw   vf16, vf08, vf07w       move.xyzw   vf14, vf06
+    mulq.xyz    vf01, vf01, q           lq.xyzw     vf06, 18(vi05)
+    mulq.xyzw   vf10, vf02, q           move.xyzw   vf13, vf05
+    ftoi4.xyz   vf15, vf15              lq.xyz      vf05, 20(vi05)
+    nop                                 iaddiu      vi05, vi05, 12
+    mulaw.xyzw  acc, vf23, vf00w        sq.xyzw     vf16, -15(vi05)
+    maddaz.xyzw acc, vf22, vf03z        iaddi       vi04, vi04, -1
+    madday.xyzw acc, vf21, vf03y        sq.xyz      vf15, -13(vi05)
+    maddx.xyzw  vf03, vf20, vf03x       ibeq        vi04, vi00, TRI_STRIP_VERT_LOOP_3_COMP_END
+    ftoi4.xyz   vf09, vf01              lq.xyz      vf07, -1(vi05)
+    nop                                 b           TRI_STRIP_VERT_3_COMP_LOOP_NOCLIP
+    mulaw.xyzw  acc, vf23, vf00w        lq.xyzw     vf08, -3(vi05)
+
+
+
+
+
+TRI_STRIP_VERT_3_COMP_TRANSFORM_ENVMAP_START:
+    sub.xyzw    vf09, vf00, vf00        iaddiu      vi08, vi00, 0x7fff      ; step 1 of build ADC const
+    sub.xyzw    vf10, vf00, vf00        iaddiu      vi08, vi08, 0x1         ; step 2 of build ADC const
+    nop                                 ibeq        vi04, vi00, TRI_STRIP_VERT_3_COMP_LOOP_RETURN_FINISHED_ENVMAP
+    nop                                 loi         4095.0
+    addi.xy     vf09, vf09, i           loi         30000.0
+    addi.w      vf09, vf09, i           iaddiu      vi06, vi00, SUBMESH_FLAGS
+    nop                                 lq.xyzw     vf01, 2(vi05)           ; load XYZ
+    nop                                 lq.xyzw     vf02, 0(vi05)           ; load ST
+    nop                                 iaddiu      vi09, vi08, 1           ; set a clip flag var
+    nop                                 loi         10.0
+    addi.w      vf10, vf10, i           lq.xy       vf13, 0(vi06)
+
+
+TRI_STRIP_VERT_3_COMP_LOOP_START_ENVMAP:
+; load and transform the first 2 verts in this strip
+; add a transformed slide to the UVs
+    mulaw.xyzw  acc, vf23, vf00w        lq.xyzw     vf03, 5(vi05)
+    maddaz.xyzw acc, vf22, vf01z        lq.xyzw     vf04, 3(vi05)
+    madday.xyzw acc, vf21, vf01y        nop
+    maddx.xyzw  vf01, vf20, vf01x       nop
+    mulaw.xyzw  acc, vf23, vf00w        nop
+    maddaz.xyzw acc, vf22, vf03z        nop
+    madday.xyzw acc, vf21, vf03y        loi         4096.0
+    maddx.xyzw  vf03, vf20, vf03x       div         q, vf00w, vf01w
+    addi.y      vf15, vf00, i           nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 iaddiu      vi05, vi05, 6
+    mulq.xyz    vf01, vf01, q           div         q, vf00w, vf03w
+    mulq.xyzw   vf08, vf02, q           iaddiu      vi03, vi00, 0x00D0
+    nop                                 isw.w       vi08, -4(vi05)
+    nop                                 isw.w       vi08, -1(vi05)
+    sub.xyw     vf11, vf10, vf01        nop
+    sub.xyw     vf12, vf01, vf09        loi         2048.0
+    subi.x      vf15, vf01, i           nop
+    mulq.xyz    vf03, vf03, q           nop
+    mulq.xyzw   vf06, vf04, q           fmand       vi07, vi03
+    suby.y      vf15, vf15, vf01        fmand       vi07, vi07
+    ftoi4.xyz   vf07, vf01              nop
+    nop                                 nop
+    nop                                 nop
+    mul.xy      vf16, vf15, vf13        ibeq        vi07, vi03, TRI_STRIP_VERT_3_COMP_LOOP_ENVMAP_NO_CLIP_V0
+    nop                                 nop
+    
+    nop                                 isw.w       vi09, 2(vi05)
+    
+TRI_STRIP_VERT_3_COMP_LOOP_ENVMAP_NO_CLIP_V0:
+    sub.xyw     vf12, vf03, vf09        lq.xyzw     vf01, 2(vi05)
+    sub.xyw     vf11, vf10, vf03        lq.xyzw     vf02, 0(vi05)
+    subi.x      vf15, vf03, i           ilw.w       vi01, 2(vi05)                               ; load ADC
+    suby.y      vf15, vf15, vf03        nop
+    ftoi4.xyz   vf05, vf03              fmand       vi08, vi03
+    nop                                 fmand       vi08, vi08
+    nop                                 nop
+    mul.xy      vf17, vf15, vf13        nop
+    nop                                 nop
+    nop                                 nop
+    add.xyz     vf08, vf08, vf16        ibeq        vi08, vi03, TRI_STRIP_VERT_3_COMP_LOOP_ENVMAP_NO_CLIP_V1
+    add.xyz     vf06, vf06, vf17        nop
+    
+    nop                                 isw.w       vi09, 2(vi05)
+    nop                                 isw.w       vi09, 5(vi05)
+    
+TRI_STRIP_VERT_3_COMP_LOOP_ENVMAP_NO_CLIP_V1:
+TRI_STRIP_VERT_3_COMP_LOOP_ENVMAP:    
+    mulaw.xyzw  acc, vf23, vf00w        nop
+    maddaz.xyzw acc, vf22, vf01z        nop
+    madday.xyzw acc, vf21, vf01y        nop
+    maddx.xyzw  vf01, vf20, vf01x       nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 div         q, vf00w, vf01w
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    mulq.xyz    vf01, vf01, q           nop
+    mulq.xyzw   vf04, vf02, q           nop
+    nop                                 nop
+    nop                                 nop
+    sub.xyw     vf11, vf10, vf01        nop
+    sub.xyw     vf12, vf01, vf09        nop
+    subi.x      vf15, vf01, i           nop
+    suby.y      vf15, vf15, vf01        nop
+    ftoi4.xyz   vf03, vf01              fmand       vi02, vi03
+    nop                                 fmand       vi02, vi02
+    nop                                 nop
+    mul.xy      vf17, vf15, vf13        iand        vi10, vi02, vi07
+    nop                                 iand        vi10, vi10, vi08
+    nop                                 ilw.w       vi01, -1(vi05)
+    nop                                 nop
+    add.xyz     vf04, vf04, vf17        nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    mini.xy     vf04, vf04, i           nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 loi         0.0
+    maxi.xy     vf04, vf04, i           ibeq        vi10, vi03, TRI_STRIP_VERT_3_COMP_ENVMAP_LOOP_END
+    nop                                 iaddiu      vi03, vi00, 0x5
+    nop                                 nop
+    nop                                 iand        vi01, vi01, vi03
+    nop                                 loi         1.0
+    nop                                 ibeq        vi01, vi03, TRI_STRIP_VERT_3_COMP_ENVMAP_LOOP_END
+    nop                                 iaddiu      vi01, vi00, CLIPPER_STACK
+    nop                                 nop
+    nop                                 isw.y       vi06, 12(vi01)
+    nop                                 isw.w       vi08, 12(vi01)
+    nop                                 nop
+    nop                                 nop
+    nop                                 iaddi       vi06, vi05, -9
+    nop                                 bal         vi13, TRI_STRIP_CLIP
+    nop                                 nop
+    
+TRI_STRIP_VERT_3_COMP_AFTER_CLIP_ENVMAP:
+    nop                                 iaddiu      vi01, vi00, CLIPPER_STACK
+    nop                                 nop
+    nop                                 ilw.y       vi06, 12(vi01)
+    nop                                 ilw.w       vi08, 12(vi01)
+    nop                                 ilw.w       vi01, -1(vi05)
+    nop                                 nop
+    nop                                 nop
+    nop                                 iaddiu      vi03, vi00, 0x5
+    nop                                 iand        vi03, vi01, vi03
+    nop                                 nop
+    nop                                 ibne        vi03, vi00, TRI_STRIP_VERT_3_COMP_ENVMAP_LOOP_END
+    nop                                 nop
+    nop                                 isw.w       vi09, -1(vi05)
+
+TRI_STRIP_VERT_3_COMP_ENVMAP_LOOP_END:
+    nop                                 sq.xyz      vf07, -7(vi05)
+    nop                                 sq.xyzw     vf08, -9(vi05)
+    nop                                 iaddiu      vi07, vi08, 0           ; move vi08 to vi07
+    nop                                 move.xyzw   vf07, vf05
+    nop                                 move.xyzw   vf08, vf06
+    nop                                 iaddiu      vi08, vi02, 0           ; move vi02 to vi08
+    nop                                 iaddi       vi04, vi04, -1          
+    nop                                 move.xyzw   vf05, vf03
+    nop                                 move.xyzw   vf06, vf04
+    nop                                 ilw.w       vi01, 2(vi05)                               ; load ADC
+    nop                                 ibeq        vi04, vi00, TRI_STRIP_VERT_3_COMP_LOOP_RETURN_ENVMAP
+    nop                                 lq.xyzw     vf01, 2(vi05)
+    nop                                 b           TRI_STRIP_VERT_3_COMP_LOOP_ENVMAP
+    nop                                 lq.xyzw     vf02, 0(vi05)
+
+TRI_STRIP_VERT_3_COMP_LOOP_RETURN_ENVMAP:
+    nop                                 sq.xyz      vf07, -4(vi05)
+    nop                                 sq.xyzw     vf08, -6(vi05)
+    nop                                 sq.xyz      vf05, -1(vi05)
+    nop                                 sq.xyzw     vf06, -3(vi05)
+
+
+
+TRI_STRIP_VERT_3_COMP_LOOP_RETURN_FINISHED_ENVMAP:
+    nop                                 jr          vi15
+    nop                                 nop

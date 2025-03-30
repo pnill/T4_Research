@@ -1,0 +1,196 @@
+;==========================================================================
+;
+; TRANSFORM_ENV_MAPPED
+;
+;==========================================================================
+;   VI00    Const (0)
+;S  VI01    Const (0xff) used by AND operations
+;L  VI02    Const (1)
+;L  VI03    Addr of matrices
+;L  VI04    Cache index 2
+;L  VI05    temp var
+;L  VI06    NVerts
+;L  VI07    Cache index 1
+;S  VI08    Source Addr of Input buffer
+;S  VI09    Command param 1 - NTransforms
+;   VI10    Command param 2 - Unused
+;   VI11    Opcode from latest command
+;S  VI12    GIF packet buffer base address (for double buffering)
+;S  VI13    RESERVED - Next command address in input buffer for kernel
+;S  VI14    RESERVED - Current address of input buffer for kernel
+;S  VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;L  VF02    Transformed XYZ
+;L  VF03    Color
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;L  VF08    XYZ 1
+;L  VF09    Normal 1
+;L  VF10    UVs
+;L  VF11    XYZ 2
+;L  VF12    Normal 2
+;   VF13
+;   VF14
+;   VF15
+;   VF16
+;   VF17
+;L  VF18    Const (1.0f, 1.0f, 1.0f, 1.0f)
+;L  VF19    Active local to screen matrix qword 0
+;L  VF20    Active local to screen matrix qword 1
+;L  VF21    Active local to screen matrix qword 2
+;L  VF22    Active local to screen matrix qword 3
+;L  VF23    Active NL2W matrix qword 0
+;L  VF24    Active NL2W matrix qword 1
+;L  VF25    Active NL2W matrix qword 2
+;   VF26
+;S  VF27    Light color matrix qword 0
+;S  VF28    Light color matrix qword 1
+;S  VF29    Light color matrix qword 2
+;S  VF30    Light color matrix qword 3
+;S  VF31    Const (128, 16, 0.5, 4095)
+;==========================================================================
+
+TRANSFORM_ENV_MAPPED:
+        ; Read transform NVerts
+        NOP                             ILW.y VI06, 0(VI08)
+
+        ; Load address of matrix A & B
+        NOP                             ILW.x VI03, 1(VI08)                     ; VI03 = Matrix offset
+        NOP                             IADDIU VI03, VI03, MATRIX_CACHE_BASE    ; VI03 += Matrix Base
+
+        ; Read in matrices
+        ; Note the reason for zeroing out VF23..VF25 is that the last row of the L2W is actually the translation, due
+        ; to my weird and warped way of saving memory space. Check out the notes in PS2_Skin.cpp for the reasons why.
+        SUB.xyzw VF23, VF00, VF00       LQ.xyzw VF19, 0(VI03)           ; VF23 = 0      ; Matrix L2S qword 0
+        SUB.xyzw VF24, VF00, VF00       LQ.xyzw VF20, 1(VI03)           ; VF24 = 0      ; Matrix L2S qword 1
+        SUB.xyzw VF25, VF00, VF00       LQ.xyzw VF21, 2(VI03)           ; VF25 = 0      ; Matrix L2S qword 2
+        NOP                             LQ.xyzw VF22, 3(VI03)                           ; Matrix L2S qword 3
+        NOP                             LQ.xyz  VF23, 4(VI03)                           ; Matrix NL2W qword 0
+        NOP                             LQ.xyz  VF24, 5(VI03)                           ; Matrix NL2W qword 1
+        NOP                             LQ.xyz  VF25, 6(VI03)                           ; Matrix NL2W qword 2
+
+        ; Load the const value into VF18
+        SUB.xyzw   VF18, VF00, VF00     NOP                             ; VF18 = 0
+        ADDw.xyzw  VF18, VF18, VF00w    NOP                             ; VF18 = 1
+
+        ; Advance src ptr to vert data
+        NOP                             IADDI VI08, VI08, 2
+
+        ; read source vert
+        NOP                             LQ.xyzw VF08, 0(VI08)           ; load xyz
+        NOP                             LQ.xyzw VF09, 1(VI08)           ; load normal
+
+        ; see if we need a single shot
+        NOP                             IADDIU VI02, VI00, 1            ; VI02 = 1
+        NOP                             IAND VI02, VI06, VI02           ; VI02 &= VI06
+        NOP                             NOP
+        NOP                             IBEQ VI02, VI00, ENVMAPPED_TRANSFORM_TWO_VERTS
+        NOP                             NOP
+
+ENVMAPPED_TRANSFORM_ONE_VERT:
+
+        MULAw.xyzw  ACC, VF00, VF09w    ILW.x VI07, 0(VI08)             ; transform normal  ; read cache index
+        MADDAz.xyzw ACC, VF25, VF09z    IADDI VI06, VI06, -1            ; transform normal  ; NVerts--
+        MADDAy.xyzw ACC, VF24, VF09y    IADDI VI08, VI08, 2             ; transform normal  ; increment source ptr
+        MADDx.xyzw VF09, VF23, VF09x    NOP                             ; transform normal
+
+        MULAw.xyzw  ACC, VF22, VF00w    IAND  VI07, VI07, VI01          ; transform vert    ; mask out the cache index
+        MADDAz.xyzw ACC, VF21, VF08z    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF08y    NOP                             ; transform vert
+        MADDx.xyzw VF02, VF19, VF08x    NOP                             ; transform vert
+
+        MULAx.xyzw    ACC, VF27, VF09x  MOVE.xyzw VF10, VF18            ; calc color        ; UV = 1
+        MADDAy.xyzw   ACC, VF28, VF09y  NOP                             ; calc color
+        MADDAz.xyzw   ACC, VF29, VF09z  NOP                             ; calc color
+        MADDw.xyzw   VF03, VF30, VF09w  DIV Q, VF00w, VF02w             ; calc color (ambient)  ; start the divide
+
+        ADD.xy     VF10, VF10, VF09     NOP                             ; UV += Normal's XY
+        NOP                             NOP
+        NOP                             NOP
+        MAXx.xyzw  VF03, VF03, VF00x    NOP                             ; if(vf03<0) vf03=0
+        MULz.xy    VF10, VF10, VF31z    NOP                             ; UV *= 0.5
+        NOP                             NOP
+
+        MULq.xyzw VF02, VF02, Q         NOP                             ; project the vert
+        MINIx.xyzw VF03, VF03, VF31x    NOP                             ; if(vf03>255) vf03=255
+        NOP                             NOP
+        NOP                             LQ.xyzw VF09, 1(VI08)           ; load normal
+        FTOI4.xyzw VF02, VF02           NOP                             ; convert XYZ to fixed
+        FTOI0.xyzw VF03, VF03           NOP                             ; convert RGB to int
+
+        NOP                             LQ.xyzw VF08, 0(VI08)           ; load xyz
+        NOP                             SQ.xyzw VF10, 256(VI07)         ; store st
+        NOP                             SQ.xyzw VF02, 0(VI07)           ; store xyz
+        NOP                             SQ.xyzw VF03, 128(VI07)         ; store color
+
+        NOP                             IBEQ VI06, VI00, TRANSFORM_FINISHED
+        NOP                             NOP                             ; BDS
+
+
+ENVMAPPED_TRANSFORM_TWO_VERTS:
+
+        MULAw.xyzw  ACC, VF00, VF09w    ILW.x VI07, 0(VI08)             ; transform normal 1    ; read cache index 1
+        MADDAz.xyzw ACC, VF25, VF09z    IADDI VI06, VI06, -1            ; transform normal 1    ; NVerts--
+        MADDAy.xyzw ACC, VF24, VF09y    IADDI VI08, VI08, 2             ; transform normal 1    ; increment source ptr
+        MADDx.xyzw VF09, VF23, VF09x    LQ.xyzw VF12, 1(VI08)           ; transform normal 1    ; load normal 2
+
+        MULAw.xyzw  ACC, VF22, VF00w    IAND  VI07, VI07, VI01          ; transform vert 1      ; mask out cache index 1
+        MADDAz.xyzw ACC, VF21, VF08z    ILW.x VI04, 0(VI08)             ; transform vert 1      ; read cache index 2
+        MADDAy.xyzw ACC, VF20, VF08y    IADDI VI06, VI06, -1            ; transform vert 1      ; NVerts--
+        MADDx.xyzw VF02, VF19, VF08x    LQ.xyzw VF11, 0(VI08)           ; transform vert 1      ; load xyz 2
+
+        MULAx.xyzw    ACC, VF27, VF09x  MOVE.xyzw VF10, VF18            ; calc color 1          ; UV1 = 1
+        MADDAy.xyzw   ACC, VF28, VF09y  IADDI VI08, VI08, 2             ; calc color 1          ; increment source ptr
+        MADDAz.xyzw   ACC, VF29, VF09z  IAND  VI04, VI04, VI01          ; calc color 1          ; mask out cache index 2
+        MADDw.xyzw   VF03, VF30, VF09w  DIV Q, VF00w, VF02w             ; calc color 1(ambient) ; start divide 1
+
+        ADD.xy     VF10, VF10, VF09     NOP                             ; UV1 += Normal's XY
+        MULAw.xyzw  ACC, VF00, VF12w    NOP                             ; transform normal 2
+        MADDAz.xyzw ACC, VF25, VF12z    NOP                             ; transform normal 2
+        MAXx.xyzw  VF03, VF03, VF00x    NOP                             ; if(vf03<0) vf03=0
+        MULz.xy    VF10, VF10, VF31z    NOP                             ; UV1 *= 0.5
+        MADDAy.xyzw ACC, VF24, VF12y    NOP                             ; transform normal 2
+
+        MULq.xyzw VF02, VF02, Q         NOP                             ; project vert 1
+        MINIx.xyzw VF03, VF03, VF31x    NOP                             ; if(vf03>255) vf03=255
+        MADDx.xyzw VF12, VF23, VF12x    SQ.xyzw VF10, 256(VI07)         ; transform normal 2    ; store st 1
+        MULAw.xyzw  ACC, VF22, VF00w    NOP                             ; transform vert 2
+        FTOI4.xyzw VF02, VF02           NOP                             ; convert XYZ1 to fixed
+        FTOI0.xyzw VF03, VF03           NOP                             ; convert RGB1 to int
+
+        MADDAz.xyzw ACC, VF21, VF11z    NOP                             ; transform vert 2
+        MADDAy.xyzw ACC, VF20, VF11y    MOVE.xyzw VF10, VF18            ; transform vert 2      ; UV2 = 1
+        MADDx.xyzw VF02, VF19, VF11x    SQ.xyzw VF02, 0(VI07)           ; transform vert 2      ; store xyz 1
+        MULAx.xyzw    ACC, VF27, VF12x  SQ.xyzw VF03, 128(VI07)         ; calc color 2          ; store color 1
+
+        MADDAy.xyzw   ACC, VF28, VF12y  NOP                             ; calc color 2
+        MADDAz.xyzw   ACC, VF29, VF12z  NOP                             ; calc color 2
+        MADDw.xyzw   VF03, VF30, VF12w  DIV Q, VF00w, VF02w             ; calc color 2(ambient) ; start the divide
+
+        ADD.xy     VF10, VF10, VF12     NOP                             ; UV2 += Normal's XY
+        NOP                             NOP
+        NOP                             NOP
+        MAXx.xyzw  VF03, VF03, VF00x    NOP                             ; if(vf03<0) vf03=0
+        MULz.xy    VF10, VF10, VF31z    NOP                             ; UV2 *= 0.5
+        NOP                             NOP
+
+        MULq.xyzw VF02, VF02, Q         NOP                             ; project vert 2
+        MINIx.xyzw VF03, VF03, VF31x    NOP                             ; if(vf03>255) vf03=255
+        NOP                             NOP
+        NOP                             LQ.xyzw VF09, 1(VI08)           ; load normal 1
+        FTOI4.xyzw VF02, VF02           NOP                             ; convert XYZ2 to fixed
+        FTOI0.xyzw VF03, VF03           NOP                             ; convert RGB2 to int
+
+        NOP                             LQ.xyzw VF08, 0(VI08)           ; load xyz 1
+        NOP                             SQ.xyzw VF10, 256(VI04)         ; store st 2
+        NOP                             SQ.xyzw VF02, 0(VI04)           ; store xyz 2
+
+        NOP                             IBNE VI06, VI00, ENVMAPPED_TRANSFORM_TWO_VERTS
+        NOP                             SQ.xyzw VF03, 128(VI04)         ; store color 2
+
+        NOP                             B TRANSFORM_FINISHED
+        NOP                             NOP

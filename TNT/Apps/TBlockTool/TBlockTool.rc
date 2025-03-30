@@ -1,0 +1,347 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\TBlockTool.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TBLOCKTOOL_DIALOG DIALOGEX 0, 0, 638, 329
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_CENTER | WS_MINIMIZEBOX | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "TextureBlock Tool"
+FONT 8, "Tahoma", 0, 0, 0x0
+BEGIN
+    CONTROL         "List1",IDC_LIST_FILES,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHAREIMAGELISTS | LVS_ALIGNLEFT | 
+                    LVS_NOSORTHEADER | WS_GROUP | WS_TABSTOP,5,8,363,143,
+                    WS_EX_ACCEPTFILES | WS_EX_CLIENTEDGE
+    GROUPBOX        "",IDC_STATIC,2,0,369,204
+    DEFPUSHBUTTON   "EXPORT...",IDC_BUTTON_EXPORT,391,5,75,21,WS_GROUP,
+                    WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Open File...",IDC_BUTTON_OPEN,391,28,75,16,0,
+                    WS_EX_CLIENTEDGE
+    CONTROL         "View Global Settings",IDC_RADIO_VIEWGLOBAL,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,380,52,85,8
+    CONTROL         "View Custom Settings",IDC_RADIO_VIEWCUSTOM,"Button",
+                    BS_AUTORADIOBUTTON,380,64,85,8
+    CONTROL         "Use Global Settings",IDC_CHECK_USEGLOBAL,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,391,77,77,8
+    GROUPBOX        "",IDC_STATIC,373,88,109,237
+    CONTROL         "Swizzle Data",IDC_CHECK_SWIZZLE,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,381,96,56,8
+    CONTROL         "Compressed Format",IDC_CHECK_COMPRESS,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,381,110,80,8
+    CONTROL         "Intensity Map",IDC_CHECK_INTENSITY_MAP,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,381,124,60,8
+    CONTROL         "Apply Alpha",IDC_CHECK_APPLYALPHA,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,381,139,54,8
+    CONTROL         "Based on filename",IDC_CHECK_ALPHA_BYFILE,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,392,151,74,8
+    CONTROL         "Punch Through",IDC_CHECK_PUNCHTHROUGH,"Button",
+                    BS_AUTOCHECKBOX,392,162,64,8
+    CONTROL         "Generate Clear Color",IDC_CHECK_GENTRANSPARENT,"Button",
+                    BS_AUTOCHECKBOX,392,173,83,8
+    CONTROL         "Test for 4-bit Conversion",IDC_4BIT_TEST_CHECK,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,381,186,96,10
+    CONTROL         "Build Mips",IDC_CHECK_BUILDMIPS,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,381,200,47,8
+    EDITTEXT        IDC_EDIT_MIPLEVELS,392,213,34,13,ES_READONLY | ES_NUMBER | 
+                    WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_NMIPLEVELS,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | UDS_NOTHOUSANDS,422,212,10,14
+    LTEXT           "# Levels",IDC_STATIC_NMIPLEVELS,431,215,32,8
+    CONTROL         "Use Custom Mips",IDC_CHECK_CUSTOMMIPS,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,392,231,71,8
+    CONTROL         "Hot Color Fix",IDC_CHECK_HOTCOLOR,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,381,248,57,8
+    CONTROL         "Fix by Luminance",IDC_RADIO_HCF_LUMINANCE,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,392,260,71,8
+    CONTROL         "Fix by Saturation",IDC_RADIO_HCF_SATURATION,"Button",
+                    BS_AUTORADIOBUTTON,392,271,71,8
+    LTEXT           "Hot Color Fix/Test TV",IDC_STATIC_HOTCOLORTV,381,285,69,
+                    8
+    CONTROL         "NTSC",IDC_RADIO_HCF_NTSC,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,392,298,71,8
+    CONTROL         "PAL",IDC_RADIO_HCF_PAL,"Button",BS_AUTORADIOBUTTON,392,
+                    309,71,8
+    GROUPBOX        "Export Target",IDC_STATIC,483,10,101,71,BS_CENTER
+    CONTROL         "Playstation 2",IDC_RADIO_TARGET_PS2,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,
+                    490,22,87,13
+    CONTROL         "GameCube",IDC_RADIO_TARGET_GAMECUBE,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,490,35,87,13
+    CONTROL         "XBOX",IDC_RADIO_TARGET_XBOX,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,490,48,87,13
+    CONTROL         "PC (DirectX8)",IDC_RADIO_TARGET_PC,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE,490,61,87,13
+    GROUPBOX        "",IDC_STATIC,483,78,151,247
+    CONTROL         "Scale Color Intensity (R, G, B, A)",
+                    IDC_CHECK_CHANGEINTENSITY,"Button",BS_AUTOCHECKBOX | 
+                    WS_GROUP | WS_TABSTOP,490,91,121,8
+    EDITTEXT        IDC_EDIT_CSCALE_R,501,104,25,13,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_CSCALE_G,531,104,25,13,ES_NUMBER
+    EDITTEXT        IDC_EDIT_CSCALE_B,560,104,25,13,ES_NUMBER
+    EDITTEXT        IDC_EDIT_CSCALE_A,589,104,25,13,ES_NUMBER
+    CONTROL         "Convert Color Space",IDC_CHECK_COLORSPACE,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,490,127,82,8
+    COMBOBOX        IDC_COMBO_CSPACE_SRC,501,140,81,62,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    LTEXT           "Src Space",IDC_STATIC_CSPACE_CS_SRC,586,141,33,8
+    COMBOBOX        IDC_COMBO_WHITEPT_SRC,501,155,81,62,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Src White Pt",IDC_STATIC_CSPACE_WP_SRC,586,156,41,8
+    COMBOBOX        IDC_COMBO_CSPACE_DST,501,173,81,62,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dst Space",IDC_STATIC_CSPACE_CS_DST,586,174,33,8
+    COMBOBOX        IDC_COMBO_WHITEPT_DST,501,188,81,62,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Dst White Pt",IDC_STATIC_CSPACE_WP_DST,586,189,41,8
+    CONTROL         "Gamma Correction",IDC_CHECK_GAMMA,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,490,213,75,8
+    CONTROL         "Invert Gamma",IDC_CHECK_INV_GAMMA,"Button",
+                    BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,501,227,61,8
+    EDITTEXT        IDC_EDIT_GAMMA_VALUE,501,239,27,13,WS_GROUP
+    LTEXT           "Gamma Value",IDC_STATIC_GAMMAVAL,533,241,44,8
+    COMBOBOX        IDC_COMBO_PRESET_GAMMA,501,254,95,60,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    CONTROL         "Hot Color Test (R, G, B, A)",IDC_CHECK_HOTCOLOR_TEST,
+                    "Button",BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,490,282,
+                    101,8
+    EDITTEXT        IDC_EDIT_HCTEST_R,501,297,25,13,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_HCTEST_G,531,297,25,13,ES_NUMBER
+    EDITTEXT        IDC_EDIT_HCTEST_B,560,297,25,13,ES_NUMBER
+    EDITTEXT        IDC_EDIT_HCTEST_A,589,297,25,13,ES_NUMBER
+    LTEXT           "Texture Count:",IDC_STATIC,59,155,50,8
+    LTEXT           "0",IDC_STATIC_NTEXTURES,112,155,20,8
+    LTEXT           "Current Selection:",IDC_STATIC,136,155,59,8
+    LTEXT           "None",IDC_STATIC_CURSELECTION,198,155,18,8
+    PUSHBUTTON      "Export List to TXT...",IDC_BUTTON_SAVE_TXT,231,154,75,
+                    12,WS_GROUP
+    PUSHBUTTON      "Add...",IDC_BUTTON_ADD,8,172,37,12,WS_GROUP
+    PUSHBUTTON      "Insert...",IDC_BUTTON_INSERT,8,185,37,12,NOT WS_TABSTOP
+    PUSHBUTTON      "Insert Empty",IDC_BUTTON_INSERT_EMPTY,55,172,51,12,
+                    WS_GROUP
+    PUSHBUTTON      "Sort List ABC",IDC_BUTTON_SORTALPHA,55,185,51,12,NOT 
+                    WS_TABSTOP
+    PUSHBUTTON      "&Remove",IDC_BUTTON_REMOVE,117,172,51,12,WS_GROUP
+    PUSHBUTTON      "Remove All",IDC_BUTTON_REMOVEALL,117,185,51,12,NOT 
+                    WS_TABSTOP
+    PUSHBUTTON      "Mov&e Up",IDC_BUTTON_MOVEUP,180,172,51,12,WS_GROUP
+    PUSHBUTTON      "Move &Down",IDC_BUTTON_MOVEDOWN,180,185,51,12,NOT 
+                    WS_TABSTOP
+    PUSHBUTTON      "Swap with...",IDC_BUTTON_SWAPINDEX,243,172,56,12,
+                    WS_GROUP
+    PUSHBUTTON      "Move to...",IDC_BUTTON_MOVEINDEX,243,185,56,12,NOT 
+                    WS_TABSTOP
+    PUSHBUTTON      "Test Export...",IDC_BUTTON_TESTEXPORT,306,172,61,12,
+                    WS_GROUP
+    GROUPBOX        "Status Output",IDC_STATIC,2,206,369,119,BS_CENTER
+    CONTROL         "",IDC_RICHEDIT_OUTPUT,"RICHEDIT",TCS_RAGGEDRIGHT | 
+                    TCS_OWNERDRAWFIXED | TCS_MULTISELECT | WS_BORDER | 
+                    WS_VSCROLL | WS_TABSTOP,5,215,363,90
+    PUSHBUTTON      "Clear",IDC_BUTTON_CLEAR_OUTPUT,341,307,27,12,WS_GROUP
+    CONTROL         "Progress1",IDC_PROGRESS_EXPORT,"msctls_progress32",0x0,
+                    5,309,334,10
+    GROUPBOX        "",IDC_STATIC,374,44,108,46
+    GROUPBOX        "Debug",IDC_STATIC,586,10,48,71,BS_CENTER
+    CONTROL         "Tint Mips",IDC_CHECK_TINTMIPS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,589,23,41,10
+    PUSHBUTTON      "Update ""Props""...",IDC_BUTTON_REFRESH_PROPS,306,185,
+                    61,12,WS_GROUP
+END
+
+IDD_SETINDEX_DIALOG DIALOGEX 0, 0, 85, 25
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Set New Index"
+FONT 8, "Tahoma", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,45,0,40,12,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,45,13,39,12
+    EDITTEXT        IDC_EDIT_SELINDEX,2,6,40,13,ES_NUMBER | WS_GROUP
+END
+
+IDD_CMDLINE_DIALOG DIALOG  0, 0, 323, 138
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_CAPTION | WS_SYSMENU
+CAPTION "TBlockTool CmdLine Output"
+FONT 8, "Tahoma"
+BEGIN
+    PUSHBUTTON      "Cancel",IDC_BUTTON_CLOSE,284,124,37,12
+    CONTROL         "",IDC_RICHEDIT_OUTPUT,"RICHEDIT",TCS_RAGGEDRIGHT | 
+                    TCS_OWNERDRAWFIXED | TCS_MULTISELECT | WS_BORDER | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP,0,0,323,123
+    CONTROL         "Progress1",IDC_PROGRESS_EXPORT,"msctls_progress32",0x0,
+                    1,125,238,11
+    PUSHBUTTON      "Pause",IDC_BUTTON_PAUSE,244,124,37,12,WS_DISABLED
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,6,0,0
+ PRODUCTVERSION 1,6,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "CompanyName", "Acclaim Studios Austin"
+            VALUE "FileDescription", "TBlockTool"
+            VALUE "FileVersion", "1, 6, 0, 0"
+            VALUE "InternalName", "TBlockTool"
+            VALUE "LegalCopyright", "Copyright © 2001, 2002, 2003"
+            VALUE "OriginalFilename", "TBlockTool.exe"
+            VALUE "ProductName", "Acclaim Studios Austin TBlockTool"
+            VALUE "ProductVersion", "1, 6, 0, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_TBLOCKTOOL_DIALOG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 322
+    END
+
+    IDD_SETINDEX_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 78
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 18
+    END
+
+    IDD_CMDLINE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 316
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\TBlockTool.ico"
+IDI_ICON_FILE           ICON                    "res\\TBlockFile.ico"
+IDI_ICON_SMALL          ICON                    "res\\TBlockSmall.ico"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\TBlockTool.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

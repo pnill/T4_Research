@@ -1,0 +1,71 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "AUX_Bitmap"=..\..\Auxiliary\Bitmap\AUX_Bitmap.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/TnT/Apps/RipGeom", ZRCAAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "RipGeom"=.\RipGeom.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/TnT/Apps/RipGeom", ZRCAAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name AUX_Bitmap
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name x_files
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "x_files"=..\..\x_files\x_files.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/TnT/Apps/RipGeom", ZRCAAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

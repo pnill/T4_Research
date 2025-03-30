@@ -1,0 +1,114 @@
+/********************************************************************************
+*                                                                               *
+* Tri-Strip Clip Preprocessing                                                  *
+*                                                                               *
+*********************************************************************************
+*                                                                               *
+* Basics:                                                                       *
+*   Load each vert, clip test the vert, store ADC if the vert is clipped,       *
+*       store a clip flag if the vert is not EnvMapped and is clipped.          *
+*   Later, we will revisit each triangle and clip it properly.  For now, just   *
+*       identify those verts that need to be clipped.                           *
+*                                                                               *
+* Algorithm:                                                                    *
+*   loop on vert count                                                          *
+*       load a vert                                                             *
+*       if vert has ADC set,                                                    *
+*           ignore it                                                           *
+*       else                                                                    *
+*           transform vert with L2C matrix                                      *
+*           clip test vert                                                      *
+*           if anything clipped vert,                                           *
+*               set ADC on vert's W                                             *
+*               set special "is clipped" flag on vert's W                       *
+*               store vert's W                                                  *
+*           endif                                                               *
+*       endelse                                                                 *
+*   endloop                                                                     *
+*   return                                                                      *
+*                                                                               *
+* Registers:                                                                    *
+*   "System" reserved - please do not modifiy (save and restore if necessary)   *
+*       vi11                envmapping flag                                     *
+*       vi12                clip-flag                                           *
+*       vi13                submesh flags                                       *
+*       vi14                itop                                                *
+*       vi15                return address                                      *
+*   Local Usage                                                                 *
+*       Integer:                                                                *
+*           vi01            clip test results                                   *
+*           vi04            check ADC in current vert                           *
+*           vi05            running vert count                                  *
+*           vi06            current vert addr                                   *
+*           vi07            vert stride                                         *
+*           vi08            ADC bit value                                       *
+*           vi09            ADC bit value + Clip Flag                           *
+*           vi10            total vert count                                    *
+*       Floating-point:                                                         *
+*           Constants:                                                          *
+*               vf24-vf27   L2C matrix                                          *
+*           Working variables:                                                  *
+*               vf01        Current Vertex                                      *
+*                                                                               *
+********************************************************************************/
+
+
+
+
+TRI_STRIP_PRECLIP:
+nop jr vi15
+nop nop
+
+    nop                                 ilw.x vi05, 0(vi14)x                    ; load the vert count
+    nop                                 iaddiu vi08, vi00, 0x7fff               ; step 1 of build ADC const
+    nop                                 iaddiu vi08, vi08, 0x1                  ; step 2 of build ADC const
+    nop                                 iaddiu vi06, vi14, 3                    ; calc the starting point
+    nop                                 ibeq vi05, vi00, TRI_STRIP_PRECLIP_LOOP_END
+    nop                                 iaddiu vi07, vi00, 3                    ; build the base stride
+    nop                                 ibeq vi11, vi00, TRI_STRIP_PRECLIP_LOOP_START
+    nop                                 iaddiu vi09, vi08, 1                    ; set a clip flag var
+    nop                                 iadd vi07, vi07, 1                      ; add 1 to stride for envmapping
+    nop                                 isubiu vi09, vi09, 1                    ; clear the clip flag for envmap
+    
+TRI_STRIP_PRECLIP_LOOP_START:
+    nop                                 iadd vi06, vi06, vi07                   ; inc the addr by stride
+    nop                                 lq.xyzw vf01, -1(vi06)                  ; load a vert
+    nop                                 iaddi vi05, vi05, -1                    ; dec the vert count by 1
+    nop                                 iaddiu vi03, vi00, 0x0030
+    nop                                 nop
+TRI_STRIP_PRECLIP_LOOP:
+    mulaw.xyzw acc, vf27, vf00w         mtir.w vi04, vf01w                      ; transform L2C ; load W to int
+    maddaz.xyzw acc, vf26, vf01z        nop
+    madday.xyzw acc, vf25, vf01y        nop
+    maddx.xyzw vf01, vf24, vf01x        nop
+    nop                                 ibeq vi04, vi08, TRI_STRIP_PRECLIP_LOOP_NO_CLIP         ; (W==ADC)?continue
+    nop                                 fmand vi02, vi03
+    nop                                 nop
+    clipw.xyz vf01, vf01w               nop
+    nop                                 ibne vi02, vi00, TRI_STRIP_PRECLIP_LOOP_CLIP
+    nop                                 nop
+    nop                                 nop
+    nop                                 fcand vi01, 0x3f                        ; grab a 1-vert clip result
+    nop                                 nop
+    nop                                 ibeq vi01, vi00, TRI_STRIP_PRECLIP_LOOP_NO_CLIP ; not clipped, skip vert
+    nop                                 nop
+TRI_STRIP_PRECLIP_LOOP_CLIP:
+;    nop                                 isw.w vi09, -1(vi06)                    ; store ADC+Clip for this vert
+    nop                                 iadd vi06, vi06, vi07                   ; inc the addr by stride
+;    nop                                 isw.w vi09, -1(vi06)                    ; store ADC+Clip for this vert
+    nop                                 iadd vi06, vi06, vi07                   ; inc the addr by stride
+;    nop                                 isw.w vi09, -1(vi06)                    ; store ADC+Clip for this vert
+    nop                                 isub vi06, vi06, vi07                   ; dec the addr by stride
+    nop                                 isub vi06, vi06, vi07                   ; dec the addr by stride
+TRI_STRIP_PRECLIP_LOOP_NO_CLIP:
+    nop                                 iadd vi06, vi06, vi07                   ; step to next vert
+    nop                                 iblez vi05, TRI_STRIP_PRECLIP_LOOP_END ; jump to end if out of verts
+    nop                                 lq.xyzw vf01, -1(vi06)                  ; load the next vert
+    nop                                 iaddi vi05, vi05, -1                    ; dec the count for the new vert
+    nop                                 b TRI_STRIP_PRECLIP_LOOP                ; back to loop top
+    nop                                 nop
+TRI_STRIP_PRECLIP_LOOP_END:
+    nop                                 jr vi15                                 ; all done, go home.
+    nop                                 nop
+
+

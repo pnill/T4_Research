@@ -1,0 +1,762 @@
+;==========================================================================
+;
+; TRIS_SHADOW.VSM
+;
+;==========================================================================
+
+;==========================================================================
+;
+; CMD_DRAWTRIS_SHADOW
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03    
+;   VI04    Dest Addr
+;   VI05    Num verts in packet
+;   VI06    Addr of Pos   
+;   VI07
+;   VI08
+;   VI09    Command param 1 - NVerts
+;   VI10    (unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01    Clip   XYZ 0  
+;   VF02    Clip   XYZ 1
+;   VF03    Clip   XYZ 2
+;   VF04    Const fixed-point x=0 y=0 z=0 w=0   (for color)
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10    Source XYZ
+;   VF11    
+;   VF12    
+;   VF13    
+;   VF14
+;   VF15
+;   VF16
+;   VF17    Screen XYZ 0
+;   VF18    Screen XYZ 1
+;   VF19    Screen XYZ 2
+;   VF20    Active local to screen matrix qword 0
+;   VF21    Active local to screen matrix qword 1
+;   VF22    Active local to screen matrix qword 2
+;   VF23    Active local to screen matrix qword 3
+;   VF24    Active local to clip matrix qword 0 
+;   VF25    Active local to clip matrix qword 1 
+;   VF26    Active local to clip matrix qword 2 
+;   VF27    Active local to clip matrix qword 3 
+;   VF28    Active clip to screen matrix qword 0
+;   VF29    Active clip to screen matrix qword 1
+;   VF30    Active clip to screen matrix qword 2
+;   VF31    Active clip to screen matrix qword 3
+;==========================================================================
+;   CMD
+;   Tri Giftag
+;   Fan Giftag
+;==========================================================================
+
+CMD_DRAWTRIS_SHADOW:
+
+        ; Set the shadow colors
+        SUB.xyzw VF04, VF00, VF00       NOP
+        FTOI0.xyzw VF04, VF04           NOP
+
+        ; Start with zero verts in packet
+        NOP                             IADDIU VI05, VI00, 0
+
+        ; Read giftags from input buffer (temporary)
+        NOP                             LQ.xyzw VF01, 1(VI14)                       ; VF01 = Tri Giftag
+        NOP                             LQ.xyzw VF02, 2(VI14)                       ; VF02 = Fan Giftag
+        NOP                             IADDIU  VI02, VI00, CLIPPER_GIF_VERTS_0     ; VI02 = &GifVerts0
+        NOP                             IADDIU  VI03, VI00, CLIPPER_GIF_STALL       ; VI03 = &GifStall
+
+        ; Get ptrs to source data         
+        NOP                             IADDIU  VI06, VI14, 3                       ; VI06 = Addr of Pos
+
+        ; Write giftags to output buffers
+        NOP                             SQ.xyzw VF01, 0(VI12)                       ; Dst = Tri Giftag
+        NOP                             SQ.xyzw VF02, 0(VI02)                       ; GifVerts0[0] = Fan Giftag
+        NOP                             SQ.xyzw VF02, 0(VI03)                       ; GifStall = Fan Giftag
+
+        ; Get destination addresses
+        NOP                             IADDIU VI04, VI12, 1                        ; Dst++
+        NOP                             ISUBIU VI04, VI04, 6                        ; because we do a pre-increment for optimization
+
+;-----------------------------------------
+; LOAD FIRST VERT FOR FIRST TRI
+;-----------------------------------------
+
+        NOP                             LQ.xyzw VF01, 0(VI06)                       ; load xyz0
+
+;------------------------------------------------------------------------
+; Process the three verts for this triangle
+;------------------------------------------------------------------------
+LOADVERTICES_SHADOW:
+
+        MULAx.xyzw  ACC, VF24, VF01x    LQ.xyzw VF02, 1(VI06)           ; transform V0 into clip    ; load xyz1
+        MADDAy.xyzw ACC, VF25, VF01y    NOP                             ; transform V0 into clip
+        MADDAz.xyzw ACC, VF26, VF01z    NOP                             ; transform V0 into clip
+        MADDw.xyzw VF01, VF27, VF01w    NOP                             ; transform V0 into clip              
+
+        MULAx.xyzw  ACC, VF24, VF02x    LQ.xyzw VF03, 2(VI06)           ; transform V1 into clip    ; load xyz2
+        MADDAy.xyzw ACC, VF25, VF02y    NOP                             ; transform V1 into clip
+        MADDAz.xyzw ACC, VF26, VF02z    NOP                             ; transform V1 into clip
+        MADDw.xyzw VF02, VF27, VF02w    NOP                             ; transform V1 into clip              
+
+        MULAx.xyzw  ACC, VF28, VF01x    IADDI VI06, VI06, 3             ; transform V0 into screen  ; increment source addr
+        MADDAy.xyzw ACC, VF29, VF01y    NOP                             ; transform V0 into screen
+        MADDAz.xyzw ACC, VF30, VF01z    NOP                             ; transform V0 into screen
+        MADDw.xyzw VF17, VF31, VF01w    NOP                             ; transform V0 into screen
+
+        MULAx.xyzw  ACC, VF24, VF03x    NOP                             ; transform V2 into clip    
+        MADDAy.xyzw ACC, VF25, VF03y    NOP                             ; transform V2 into clip    
+        MADDAz.xyzw ACC, VF26, VF03z    NOP                             ; transform V2 into clip    
+        MADDw.xyzw VF03, VF27, VF03w    DIV Q, VF00w, VF17w             ; transform V2 into clip    ; start divide for V0
+
+        MULAx.xyzw  ACC, VF28, VF02x    NOP                             ; transform V1 into screen 
+
+        CLIPw.xyz VF01xyz, VF01w        NOP                             ; Get clipflags for V0
+        CLIPw.xyz VF02xyz, VF02w        NOP                             ; Get clipflags for V1
+        CLIPw.xyz VF03xyz, VF03w        NOP                             ; Get clipflags for V2 
+
+        MADDAy.xyzw ACC, VF29, VF02y    NOP                             ; transform V1 into screen
+        MADDAz.xyzw ACC, VF30, VF02z    NOP                             ; transform V1 into screen
+        MADDw.xyzw VF18, VF31, VF02w    NOP                             ; transform V1 into screen
+
+;-----------------------------------------
+; HAVE ALL INFO NEEDED TO DO CLIP CHECK
+;-----------------------------------------
+
+        NOP                             FCAND VI01, 0x3FFFF             
+        NOP                             NOP
+        NOP                             IBEQ VI01, VI00, SKIP_CLIPPING_SHADOW      ; trivial acceptance
+        NOP                             FCOR VI01, 0xFFEFBE ; ^0x01041 X+   ; trivial rejection
+        NOP                             IBNE VI01, VI00, CULLED_TRI_SHADOW
+        NOP                             FCOR VI01, 0xFFDF7D ; ^0x02082 X-
+        NOP                             IBNE VI01, VI00, CULLED_TRI_SHADOW
+        NOP                             FCOR VI01, 0xFF7DF7 ; ^0x08208 Y-
+        NOP                             IBNE VI01, VI00, CULLED_TRI_SHADOW
+        NOP                             FCOR VI01, 0xFFBEFB ; ^0x04104 Y+
+        NOP                             IBNE VI01, VI00, CULLED_TRI_SHADOW
+        NOP                             FCOR VI01, 0xFDF7DF ; ^0x20820 Z-
+        NOP                             IBNE VI01, VI00, CULLED_TRI_SHADOW
+        NOP                             FCOR VI01, 0xFEFBEF ; ^0x10410 Z+
+        NOP                             IBNE VI01, VI00, CULLED_TRI_SHADOW
+        NOP                             NOP 
+
+        NOP                             BAL VI03, SHADOW_CLIPPER   ; branch to clipper
+        NOP                             NOP
+
+CULLED_TRI_SHADOW:
+        NOP                             LQ.xyzw VF01, 0(VI06)               ; load xyz0 for next tri
+        NOP                             B DO_NOT_FINISH_TRI_SHADOW
+        NOP                             NOP
+
+SKIP_CLIPPING_SHADOW:
+
+        MULq.xyzw  VF17, VF17, Q        IADDI VI04, VI04, 6             ; Project screen0           ; move dst addr to next vert
+        MULAx.xyzw  ACC, VF28, VF03x    DIV Q, VF00w, VF18w             ; transform V2 into screen  ; start divide for V1 
+        MADDAy.xyzw ACC, VF29, VF03y    SQ.xyzw VF04, 0(VI04)           ; transform V2 into screen  ; save RGB0
+        MADDAz.xyzw ACC, VF30, VF03z    LQ.xyzw VF01, 0(VI06)           ; transform V2 into screen  ; load xyz0 for next tri
+        MADDw.xyzw VF19, VF31, VF03w    NOP                             ; transform V2 into screen
+        FTOI4.xyzw VF17, VF17           NOP                             ; convert XYZ0 to fixed
+        NOP                             SQ.xyzw VF04, 2(VI04)           ; save RGB1
+        NOP                             SQ.xyzw VF04, 4(VI04)           ; save RGB2
+        MULq.xyzw  VF18, VF18, Q        NOP                             ; Project screen1 
+        NOP                             DIV Q, VF00w, VF19w             ; start divide for V2
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyzw VF18, VF18           NOP                             ; convert XYZ1 to fixed
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             IADDI VI05, VI05, 3             ; increment number of verts in packet
+        MULq.xyzw  VF19, VF19, Q        NOP                             ; Project screen2
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyzw VF19, VF19           SQ.xyzw VF17, 1(VI04)           ; save XYZ0         ; convert XYZ2 to fixed
+        NOP                             NOP
+        NOP                             SQ.xyzw VF18, 3(VI04)           ; save XYZ1
+        NOP                             NOP
+        NOP                             SQ.xyzw VF19, 5(VI04)           ; save XYZ2
+DO_NOT_FINISH_TRI_SHADOW:
+
+;------------------------------------------------------------------------
+; Increment pointers and loop for next triangle
+;------------------------------------------------------------------------
+
+        NOP                             IADDI VI09, VI09, -3            ; decrement loop counter
+        NOP                             NOP
+        NOP                             IBNE VI09, VI00, LOADVERTICES_SHADOW           
+        NOP                             NOP                             ; BDS
+                                                                        
+;------------------------------------------------------------------------
+; Setup giftag and store number of verts
+;------------------------------------------------------------------------
+
+        NOP                             IBEQ VI05, VI00, NO_TRIANGLES_CLIP_SHADOW
+        NOP                             NOP                             ; BDS
+        NOP                             IADDIU VI05, VI05, 0x7FFF
+        NOP                             IADDIU VI05, VI05, 0x01
+        NOP                             ISW.x VI05, 0(VI12)
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+
+;------------------------------------------------------------------------
+; Kick and swap buffers
+;------------------------------------------------------------------------
+
+        NOP                             XGKICK VI12                 ; kick gif to render package 
+        
+        NOP                             IADDIU VI01, VI00, OUTPUT_BUFFER_BASE
+        NOP                             NOP
+        NOP                             IBEQ   VI12, VI01, USING_PACKET_BASE_CLIP_SHADOW
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        USING_PACKET_BASE_CLIP_SHADOW:
+        
+NO_TRIANGLES_CLIP_SHADOW:
+
+
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+
+
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+; The routine to perform clipping
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+
+;------------------------------------------------------------------------
+; The Shadow Clipper
+;
+; Here is the c-like implementation of the shadow clipper
+;
+;   Vars already set:
+;       pSrc = array of verts, it starts as a simple triangle
+;       NSrcVerts = 3;
+;       pDest = empty array
+;       NDestVerts = 0;
+;       OrigClipFlags contains clipping flags for the original poly
+;       TriPlaneMask equals the clipping flags for 3 polys
+;       PlaneMask is the clipping flags for just one poly
+;
+;   PUSH_REGISTERS
+;   for ( Plane = 5; Plane >= 0; Plane-- )
+;   {
+;       if ( (OrigClipFlags & TriPlaneMask[Plane]) == 0 )
+;           continue;
+;       
+;       DUPLICATE_LAST_VERT();
+;       NDestVerts = 0;
+;       for ( i = 0; i < NSrcVerts; i++ )
+;       {
+;           ClipFlags = CLIP( pSrc[i] );
+;           if ( POINT_IS_IN( pSrc[i] ) )
+;           {
+;               pDest[NDestVerts++] = pSrc[i];
+;               if ( POINT_IS_OUT( pSrc[i+1] ) )
+;                   pDest[NDestVerts++] = CLIP_LINE_SEG( pSrc[i], pSrc[i+1], PlaneSign, ClipComponent );
+;           }
+;           else
+;           if ( POINT_IS_IN( pSrc[i+1] )
+;           {
+;               pDest[NDestVerts++] = CLIP_LINE_SEG( pSrc[i], pSrc[i+1], PlaneSign, ClipComponent );
+;           }
+;       }
+;       temp = pSrc;
+;       pSrc = pDest;
+;       pDest = temp;
+;       NSrcVerts = NDestVerts;
+;   }
+;
+;   PROJECT_VERTS
+;   RENDER
+;
+;   POP_REGISTERS
+;
+;------------------------------------------------------------------------
+
+;==========================================================================
+; SHADOW_CLIPPER
+;
+; S - static register -- I don't muck around with it at all
+; P - pushed register -- I push the register on a stack to keep it safe
+; L - local register -- I play with it and don't bother restoring it
+;
+;==========================================================================
+;S  VI00    Const (0)
+;L  VI01    NSrcVerts
+;L  VI02    pSrc
+;S  VI03    Return Address from clipper
+;P  VI04    Clipping flags / pDst
+;P  VI05    Jump offset into ROTATION_TABLE (comes from Plane Table Entry)
+;S  VI06    Addr of Pos   
+;L  VI07    pDst / &DestFanGifTag
+;L  VI08    NDestVerts
+;P  VI09    Jump location into ROTATION_TABLE
+;L  VI10    &ClipperPlanes
+;P  VI11    Curr clip flag mask
+;P  VI12    Next clip flag mask
+;P  VI13    temp
+;P  VI14    Return Address for SHADOW_CLIP_SOURCE_VERTS
+;P  VI15    loop counter
+;==========================================================================
+;S  VF00    Const x=0 y=0 z=0 w=1
+;L  VF01    INPUT: xyz0 in clip space
+;L  VF02    INPUT: xyz1 in clip space
+;L  VF03    INPUT: xyz2 in clip space
+;S  VF04    Const fixed-point x=0 y=0 z=0 w=0   (for color)
+;L  VF05    Plane table entry
+;L  VF06    temp1
+;L  VF07    Curr xyz
+;L  VF08    Next xyz
+;L  VF09    temp2
+;   VF10
+;   VF11    
+;   VF12    
+;   VF13    
+;   VF14
+;   VF15
+;   VF16
+;   VF17
+;   VF18
+;   VF19
+;S  VF20    Active local to screen matrix qword 0
+;S  VF21    Active local to screen matrix qword 1
+;S  VF22    Active local to screen matrix qword 2
+;S  VF23    Active local to screen matrix qword 3
+;S  VF24    Active local to clip matrix qword 0 
+;S  VF25    Active local to clip matrix qword 1 
+;S  VF26    Active local to clip matrix qword 2 
+;S  VF27    Active local to clip matrix qword 3 
+;S  VF28    Active clip to screen matrix qword 0
+;S  VF29    Active clip to screen matrix qword 1
+;S  VF30    Active clip to screen matrix qword 2
+;S  VF31    Active clip to screen matrix qword 3
+;==========================================================================
+;L  CF      INPUT: contains the original clip flags
+;==========================================================================
+
+SHADOW_CLIPPER:
+
+;------------------------------------------------------------------------
+; Save the registers we will destroy
+;------------------------------------------------------------------------
+
+SHADOW_PUSH_REGISTERS:
+
+    NOP                     IADDIU VI01, VI00, CLIPPER_STACK
+    NOP                     ISW.x  VI14, 0(VI01)
+    NOP                     ISW.y  VI15, 0(VI01)
+    NOP                     ISW.z  VI13, 0(VI01)
+    NOP                     ISW.w  VI04, 0(VI01)
+    NOP                     ISW.x  VI11, 1(VI01)
+    NOP                     ISW.y  VI12, 1(VI01)
+    NOP                     ISW.z  VI09, 1(VI01)
+    NOP                     ISW.w  VI05, 1(VI01)
+
+;------------------------------------------------------------------------
+; Initial setup
+;------------------------------------------------------------------------
+
+    ; set pDst and pSrc
+    NOP                     IADDIU VI02, VI00, CLIPPER_VERTS_0
+    NOP                     IADDIU VI07, VI00, CLIPPER_VERTS_1
+
+    ; fill pSrc with first three verts
+    NOP                     SQ.xyzw VF01, 0(VI02)
+    NOP                     SQ.xyzw VF02, 1(VI02)
+    NOP                     SQ.xyzw VF03, 2(VI02)
+
+    ; initialize NSrcVerts
+    NOP                     IADDIU VI01, VI00, 3    ; NSrcVerts = 3
+
+    ; load up pClipperPlanes
+    NOP                     IADDIU VI10, VI00, CLIPPER_PLANES
+
+;------------------------------------------------------------------------
+; clip to the z+ plane
+;------------------------------------------------------------------------
+
+    ; #### TODO: Skip this clipping step if we can
+
+    NOP                     LQ.xyzw VF05, 4(VI10)   ; VF05 = ClipperPlanes[Z+]
+    NOP                     BAL VI14, SHADOW_CLIP_SOURCE_VERTS
+    NOP                     NOP
+    NOP                     IBEQ VI01, VI00, SHADOW_POP_REGISTERS
+    NOP                     NOP
+
+;------------------------------------------------------------------------
+; clip to the z- plane
+;------------------------------------------------------------------------
+
+    ; #### TODO: Skip this clipping step if we can
+
+    NOP                     LQ.xyzw VF05, 5(VI10)   ; VF05 = ClipperPlanes[Z-]
+    NOP                     BAL VI14, SHADOW_CLIP_SOURCE_VERTS
+    NOP                     NOP
+    NOP                     IBEQ VI01, VI00, SHADOW_POP_REGISTERS
+    NOP                     NOP
+
+;------------------------------------------------------------------------
+; clip to the x+ plane
+;------------------------------------------------------------------------
+
+    ; #### TODO: Skip this clipping step if we can
+
+    NOP                     LQ.xyzw VF05, 2(VI10)   ; VF05 = ClipperPlanes[X+]
+    NOP                     BAL VI14, SHADOW_CLIP_SOURCE_VERTS
+    NOP                     NOP
+    NOP                     IBEQ VI01, VI00, SHADOW_POP_REGISTERS
+    NOP                     NOP
+
+;------------------------------------------------------------------------
+; clip to the x- plane
+;------------------------------------------------------------------------
+
+    ; #### TODO: Skip this clipping step if we can
+
+    NOP                     LQ.xyzw VF05, 3(VI10)   ; VF05 = ClipperPlanes[X-]
+    NOP                     BAL VI14, SHADOW_CLIP_SOURCE_VERTS
+    NOP                     NOP
+    NOP                     IBEQ VI01, VI00, SHADOW_POP_REGISTERS
+    NOP                     NOP
+
+;------------------------------------------------------------------------
+; clip to the y+ plane
+;------------------------------------------------------------------------
+
+    ; #### TODO: Skip this clipping step if we can
+
+    NOP                     LQ.xyzw VF05, 0(VI10)   ; VF05 = ClipperPlanes[Y+]
+    NOP                     BAL VI14, SHADOW_CLIP_SOURCE_VERTS
+    NOP                     NOP
+    NOP                     IBEQ VI01, VI00, SHADOW_POP_REGISTERS
+    NOP                     NOP
+
+;------------------------------------------------------------------------
+; clip to the y- plane
+;------------------------------------------------------------------------
+
+    ; #### TODO: Skip this clipping step if we can
+
+    NOP                     LQ.xyzw VF05, 1(VI10)   ; VF05 = ClipperPlanes[Y-]
+    NOP                     BAL VI14, SHADOW_CLIP_SOURCE_VERTS
+    NOP                     NOP
+    NOP                     IBEQ VI01, VI00, SHADOW_POP_REGISTERS
+    NOP                     NOP
+
+;------------------------------------------------------------------------
+; Project the verts
+;------------------------------------------------------------------------
+
+    NOP                     IADD VI15, VI01, VI00                   ; loop = NSrcVerts
+    NOP                     IADDIU VI07, VI00, CLIPPER_GIF_VERTS_0    ; &DestFanGifTag
+    NOP                     IADDIU VI04, VI07, 1                    ; pDest
+
+    ; Kick 0-vert giftag for stall
+    NOP                             IADDIU VI13, VI00, CLIPPER_GIF_STALL
+    NOP                             NOP
+    NOP                             XGKICK VI13
+    NOP                             NOP
+
+SHADOW_PROJ_CLIP_VERTS:
+
+    NOP                             IADDI VI15, VI15, -1            ; loop--
+    NOP                             LQI.xyzw VF07, (VI02++)         ; VF07 = *pSrc++
+    MULAx.xyzw  ACC, VF28, VF07x    NOP                             ; transform V0 into screen
+    MADDAy.xyzw ACC, VF29, VF07y    NOP                             ; transform V0 into screen
+    MADDAz.xyzw ACC, VF30, VF07z    NOP                             ; transform V0 into screen
+    MADDw.xyzw VF07, VF31, VF07w    NOP                             ; transform V0 into screen
+    NOP                             DIV Q, VF00w, VF07w             ; start divide for V0
+    NOP                             SQ.xyzw VF04, 0(VI04)           ; save rgb0
+    NOP                             WAITQ
+    MULQ.xyzw VF07, VF07, Q         NOP                             ; project the vert
+    FTOI4.xyzw VF07, VF07           NOP                             ; convert to fixed point
+    NOP                             SQ.xyzw VF07, 1(VI04)           ; save xyz
+    NOP                             IBNE VI15, VI00, SHADOW_PROJ_CLIP_VERTS
+    NOP                             IADDIU VI04, VI04, 2            ; pDest++ (BDS)
+
+;------------------------------------------------------------------------
+; Render the clipped triangle fan
+;------------------------------------------------------------------------
+
+    ; Set fan giftag count to num of src verts
+    NOP                             IADDIU VI13, VI00, 0x7FFF
+    NOP                             IADDIU VI13, VI13, 0x01
+    NOP                             IADD   VI13, VI13, VI01
+    NOP                             ISW.x  VI13, 0(VI07)
+
+    ; Kick fan giftag
+    NOP                             NOP
+    NOP                             NOP
+    NOP                             NOP
+    NOP                             XGKICK VI07
+    NOP                             NOP
+
+;------------------------------------------------------------------------
+; Restore the registers we destroyed
+;------------------------------------------------------------------------
+
+SHADOW_POP_REGISTERS:
+
+    NOP                     IADDIU VI01, VI00, CLIPPER_STACK
+    NOP                     ILW.x  VI14, 0(VI01)
+    NOP                     ILW.y  VI15, 0(VI01)
+    NOP                     ILW.z  VI13, 0(VI01)
+    NOP                     ILW.w  VI04, 0(VI01)
+    NOP                     ILW.x  VI11, 1(VI01)
+    NOP                     ILW.y  VI12, 1(VI01)
+    NOP                     ILW.z  VI09, 1(VI01)
+    NOP                     ILW.w  VI05, 1(VI01)
+
+;------------------------------------------------------------------------
+; Exit the clipper
+;------------------------------------------------------------------------
+    NOP                     JR VI03
+    NOP                     NOP
+
+
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+; The routine to perform clipping on one plane
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+
+SHADOW_CLIP_SOURCE_VERTS:
+
+;------------------------------------------------------------------------
+; Do some initialization
+;------------------------------------------------------------------------
+
+    NOP                     IADDIU VI08, VI00, 0    ; NDestVerts = 0
+    NOP                     IADD   VI15, VI00, VI00 ; loop = 0
+
+    ; duplicate the last vert
+    NOP                     LQ.xyzw VF06, 0(VI02)   ; vf06 = pSrc[0]
+    NOP                     IADD VI13, VI02, VI01   ; temp = &pSrc[NSrcVerts]
+    NOP                     NOP
+    NOP                     NOP
+    NOP                     SQ.xyzw VF06, 0(VI13)   ; pSrc[NSrcVerts] = vf06
+
+    ; set up the clip flag masks
+    NOP                     MTIR.y VI11, VF05y      ; CurrClipMask
+    NOP                     MTIR.z VI12, VF05z      ; NextClipMask
+
+;------------------------------------------------------------------------
+; Loop through the verts
+;------------------------------------------------------------------------
+
+SHADOW_SOURCE_VERTS_LOOP:
+
+;------------------------------------------------------------------------
+; load the current and next verts
+;------------------------------------------------------------------------
+    NOP                         IADD VI13, VI15, VI02   ; temp = &pSrc[loop]
+    NOP                         LQ.xyzw VF07, 0(VI13)   ; curr = pSrc[loop]
+    NOP                         LQ.xyzw VF08, 1(VI13)   ; next = pSrc[loop+1]
+
+;------------------------------------------------------------------------
+; get the clipping flags for the current and next verts
+;------------------------------------------------------------------------
+
+    CLIPw.xyz VF07xyz, VF07w    NOP                     ; Get curr clip flags
+    CLIPw.xyz VF08xyz, VF08w    NOP                     ; Get next clip flags
+    NOP                         NOP
+    NOP                         NOP
+    NOP                         NOP
+    NOP                         FCGET VI04              ; save clipping flags
+
+;------------------------------------------------------------------------
+; if ( POINT_IS_IN( src[loop] ) )
+;------------------------------------------------------------------------
+    NOP                         IAND VI13, VI04, VI11   ; VI13 = (CurrClip & -X mask)
+    NOP                         NOP
+    NOP                         IBNE VI13, VI00, SHADOW_VERT_OUT        ; if point is out, branch
+    NOP                         NOP
+
+    ; add src[loop] to dest
+    NOP                         IADD VI13, VI07, VI08   ; temp = &pDst[NDestVerts]
+    NOP                         SQ.xyzw VF07, 0(VI13)   ; pDst[NDestVerts] = src[loop]
+    NOP                         IADDIU VI08, VI08, 1    ; NDestVerts++
+
+    ;--------------------------------------------------------------------
+    ; if ( POINT_IS_OUT( src[loop+1] ) )
+    ;--------------------------------------------------------------------
+    NOP                         IAND VI13, VI04, VI12
+    NOP                         NOP
+    NOP                         IBEQ VI13, VI00, SHADOW_VERTS_LOOP_CONT ; if point is in, branch
+    NOP                         NOP
+
+    NOP                         BAL VI13, SHAD_INTERP   ; pSrc[loop] = interp(pSrc[loop], pSrc[loop+1])
+    NOP                         NOP
+    
+    ; add src[loop] to dest
+    NOP                         IADD VI13, VI07, VI08   ; temp = &pDst[NDestVerts]
+    NOP                         SQ.xyzw VF07, 0(VI13)   ; pDst[NDestVerts] = src[loop]
+    NOP                         IADDIU VI08, VI08, 1    ; NDestVerts++
+    
+    NOP                         B SHADOW_VERTS_LOOP_CONT
+    NOP                         NOP
+
+SHADOW_VERT_OUT:
+;------------------------------------------------------------------------
+; else if ( POINT_IS_IN( src[loop+1] ) )
+;------------------------------------------------------------------------
+
+    NOP                         IAND VI13, VI04, VI12
+    NOP                         NOP
+    NOP                         IBNE VI13, VI00, SHADOW_VERTS_LOOP_CONT ; if point is out, branch
+    NOP                         NOP
+
+    NOP                         BAL VI13, SHAD_INTERP   ; pSrc[loop] = interp(pSrc[loop], pSrc[loop+1])
+    NOP                         NOP
+    
+    ; add src[loop] to dest
+    NOP                         IADD VI13, VI07, VI08   ; temp = &pDst[NDestVerts]
+    NOP                         SQ.xyzw VF07, 0(VI13)   ; pDst[NDestVerts] = src[loop]
+    NOP                         IADDIU VI08, VI08, 1    ; NDestVerts++
+
+;------------------------------------------------------------------------
+; Increment the loop counter and move to the next source vert
+;------------------------------------------------------------------------
+SHADOW_VERTS_LOOP_CONT:
+    NOP                         IADDIU VI15, VI15, 1    ; loop++
+    NOP                         NOP
+    NOP                         IBNE VI15, VI01, SHADOW_SOURCE_VERTS_LOOP
+    NOP                         NOP
+
+;------------------------------------------------------------------------
+;       temp = pSrc;
+;       pSrc = pDest;
+;       pDest = temp;
+;       NSrcVerts = NDestVerts;
+;------------------------------------------------------------------------
+    NOP                         IADD VI13, VI02, VI00   ; temp = pSrc
+    NOP                         IADD VI02, VI07, VI00   ; pSrc = pDest
+    NOP                         IADD VI07, VI13, VI00   ; pDest = temp
+    NOP                         IADD VI01, VI08, VI00   ; NSrcVerts = NDestVerts
+
+;------------------------------------------------------------------------
+; Exit the routine
+;------------------------------------------------------------------------
+    NOP                         JR VI14
+    NOP                         NOP
+
+
+
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+; The routine to perform clipping on one plane
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+;========================================================================
+
+;------------------------------------------------------------------------
+;   The current vert and the next vert give you a line segment. To clip
+;   that line segment to a plane, this is how we do it....
+;
+;   Given:
+;       S is the sign of the plane we are clipping to
+;       C is the current vert
+;       N is the next vert
+;       o is the component of the plane we are clipping to
+;
+;   T = ABS(((S * Cw) - (Co)) /
+;           ((No - S * Nw) - (Co - S * Cw)))
+;
+;   Cxyzw = Cxyzw + T * (Nxyzw - Cxyzw)
+;------------------------------------------------------------------------
+
+
+SHAD_INTERP:
+
+        NOP                             MTIR.w VI05, VF05w              ; Jump Offset = PlaneTable.w
+        NOP                             IADDIU VI09, VI05, SHAD_ROTATE_TABLE ; Compute where to jump for rotation
+        MULx.w VF06, VF08, VF05x        NOP                             ; VF06.w = S * Nw
+        MULx.w VF09, VF07, VF05x        NOP                             ; VF09.w = S * Cw
+        SUBw.xyzw VF06, VF08, VF06w     NOP                             ; VF06 = Nxyz - S * Nw
+        SUBw.xyzw VF09, VF07, VF09w     NOP                             ; VF09 = Cxyz - S * Cw
+        SUB.xyzw VF06, VF06, VF09       NOP                             ; VF06 = (Nxyz-S*Nw) - (Cxyz-S*Cw)
+        ABS.xyz VF09, VF09              JR VI09                         ; ???? ; jump to rotate table
+        ABS.xyz VF06, VF06              NOP                             ; ????
+
+SHAD_ROTATE_TABLE:
+        ; To rotate component twice to Z, jump here
+        NOP                             MR32.xyzw VF09, VF09
+        NOP                             MR32.xyzw VF06, VF06
+        ; To rotate component once to Y, jump here
+        NOP                             MR32.xyzw VF09, VF09
+        NOP                             MR32.xyzw VF06, VF06
+        ; To rotate component none to X, jump here
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             DIV Q, VF09x, VF06x     ; T = (C? - S*Cw) / ((N?-S*Nw) - (C?-S*Cw))
+        SUB.xyzw VF09, VF08, VF07       NOP                     ; VF09 = N - C
+        NOP                             WAITQ
+        MULQ VF09, VF09, Q              NOP                     ; VF09 = T*(N-C)
+        ADD.xyzw VF07, VF07, VF09       NOP                     ; VF07 = C + T*(N-C)
+        
+        NOP                             JR VI13
+        NOP                             NOP

@@ -1,0 +1,109 @@
+;==========================================================================
+;
+; MCODE0.VSM - Microcode test
+;
+;==========================================================================
+.vu
+
+.include "memlayout.vsm"
+
+;==========================================================================
+;
+; JUMPTABLE
+;
+; !*!*!*! These instructions must be at instruction address ZERO !*!*!*!
+;
+;==========================================================================
+
+        NOP                             B       BOOT
+        NOP                             NOP        
+        NOP                             B       CMD_LOADMATRICES        
+        NOP                             NOP
+        NOP                             B       CMD_LOADLIGHTS
+        NOP                             NOP
+        NOP                             B       CMD_DRAWTRIS_TC_NOTCLIPPED
+        NOP                             NOP
+        NOP                             B       CMD_DRAWTRIS_TC_CLIPPED
+        NOP                             NOP
+        NOP                             B       CMD_DRAWTRIS_NOCLIP_LIT
+        NOP                             NOP
+        NOP                             B       CMD_DRAWTRIS_CLIP_LIT
+        NOP                             NOP
+        NOP                             B       CMD_DRAWTRIS_SHADOW
+        NOP                             NOP
+        NOP                             B       CMD_DRAWTRIS_ENVMAPPED
+        NOP                             NOP
+        NOP                             B       CMD_LOAD_NL2V
+        NOP                             NOP
+        NOP                             B       CMD_DRAWQUADS_TC_CLIPPED
+        NOP                             NOP
+        /*
+;        NOP                             B       CMD_JUST_KICK
+;        NOP                             NOP
+*/
+
+
+;==========================================================================
+;
+; KERNEL STUB
+;
+;==========================================================================
+
+.include "kernel.vsm"
+.include "boot.vsm"
+.include "lights.vsm"
+.include "matrix.vsm"
+.include "clipper.vsm"
+.include "tris_clip.vsm"
+.include "tris_noclip.vsm"
+.include "tris_clip_lit.vsm"
+.include "tris_noclip_lit.vsm"
+.include "tris_shadow.vsm"
+.include "tris_envmapped.vsm"
+.include "quads_clip.vsm"
+.include "quads_noclip.vsm"
+.include "quad_clipper.vsm"
+
+;==========================================================================
+/*
+CMD_STUB:
+        
+        NOP     NOP
+        NOP[E]  NOP
+        NOP     NOP
+        NOP     B KERNEL_RET
+
+;==========================================================================
+
+CMD_JUST_KICK:
+
+        ; Get source and destination addresses
+        NOP                             IADDIU VI08, VI14, 1
+        NOP                             IADDIU VI10, VI12, 0
+
+JUST_KICK_LOOP:
+        NOP                             LQI.xyzw VF01, (VI08++)
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             IADDI VI09, VI09, -1
+        NOP                             SQI.xyzw VF01, (VI10++)
+        NOP                             IBNE VI09, VI00, JUST_KICK_LOOP
+        NOP                             NOP
+
+        ; Kick data to gif
+        NOP                             XGKICK VI12               
+
+        ; Flip dest buffer
+        NOP                             IADDIU VI01, VI00, OUTPUT_BUFFER_BASE
+        NOP                             NOP
+        NOP                             IBEQ   VI12, VI01, JUST_KICK_PACKET_FLIP
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        JUST_KICK_PACKET_FLIP:
+
+        NOP                             NOP
+        NOP                             B KERNEL_RET
+        NOP                             NOP
+
+*/
+;==========================================================================

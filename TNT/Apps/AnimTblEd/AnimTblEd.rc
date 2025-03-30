@@ -1,0 +1,1553 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\AnimTblEd.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\AnimTblEd.ico"
+IDR_ANIMTBTYPE          ICON    DISCARDABLE     "res\\AnimTblEdDoc.ico"
+IDI_ICON1               ICON    DISCARDABLE     "res\\qbc99.ICO"
+IDI_DRAGCURSOR          ICON    DISCARDABLE     "res\\dragcurs.ico"
+IDI_DROPCURSOR          ICON    DISCARDABLE     "res\\icon2.ico"
+IDI_ICON2               ICON    DISCARDABLE     "res\\icon1.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDR_TREEICONS           BITMAP  DISCARDABLE     "res\\toolbar1.bmp"
+IDR_STATUSICONS         BITMAP  DISCARDABLE     "res\\bmp00001.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+    SEPARATOR
+    BUTTON      ID_PROJECT_EXPORT
+END
+
+IDR_TREEICONS TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_BUTTON32778
+    BUTTON      ID_BUTTON32779
+    BUTTON      ID_BUTTON32786
+    BUTTON      ID_BUTTON32787
+    BUTTON      ID_BUTTON32792
+    BUTTON      ID_BUTTON32793
+    BUTTON      ID_BUTTON32788
+    BUTTON      ID_BUTTON32794
+    BUTTON      ID_BUTTON32789
+    BUTTON      ID_BUTTON32805
+    BUTTON      ID_BUTTON32795
+    BUTTON      ID_BUTTON32790
+    BUTTON      ID_BUTTON32806
+    BUTTON      ID_BUTTON32791
+    BUTTON      ID_BUTTON32796
+    BUTTON      ID_BUTTON32797
+    BUTTON      ID_BUTTON32820
+    BUTTON      ID_BUTTON32821
+    BUTTON      ID_BUTTON32822
+    BUTTON      ID_BUTTON32823
+END
+
+IDR_STATUSICONS TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_BUTTON32817
+    BUTTON      ID_BUTTON32814
+    BUTTON      ID_BUTTON32815
+    BUTTON      ID_BUTTON32816
+    BUTTON      ID_BUTTON32830
+    BUTTON      ID_BUTTON32831
+    BUTTON      ID_BUTTON32832
+    BUTTON      ID_BUTTON32833
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About AnimTblEd...",         ID_APP_ABOUT
+    END
+END
+
+IDR_ANIMTBTYPE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "&Search\tCtrl+F",             ID_EDIT_SEARCH
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        MENUITEM "Properties",                  ID_VIEW_PROPERTIES
+    END
+    POPUP "&Project"
+    BEGIN
+        MENUITEM "&Export",                     ID_PROJECT_EXPORT
+        MENUITEM "E&xport Properties",          ID_PROJECT_EXPORTPROPERTIES
+        MENUITEM SEPARATOR
+        MENUITEM "Source &Files",               ID_PROJECT_SOURCEFILES
+        MENUITEM SEPARATOR
+        MENUITEM "Anim &Methods",               ID_PROJECT_METHODS
+        MENUITEM "Anim Fla&gs",                 ID_PROJECT_FLAGS
+        MENUITEM "Anim &Priorities",            ID_PROJECT_PRIORITIES
+        MENUITEM "Anim &States",                ID_PROJECT_EDITSTATES
+        MENUITEM SEPARATOR
+        MENUITEM "Se&ttings",                   ID_PROJECT_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "Metri&cs",                    ID_PROJECT_METRICS
+        MENUITEM SEPARATOR
+        MENUITEM "&Locomotion Tables",          ID_PROJECT_LOCOMOTIONTABLES
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About AnimTblEd...",         ID_APP_ABOUT
+    END
+END
+
+IDR_MOUSEMENU MENU DISCARDABLE 
+BEGIN
+    POPUP "&Group"
+    BEGIN
+        MENUITEM "Add &Group",                  ID_GROUP_ADDGROUP
+        MENUITEM "Add &Animation",              ID_GROUP_ADDANIMATION
+        MENUITEM "Add Animation(s)",            ID_GROUP_ADDANIMATIONS
+        MENUITEM "Add &Dependancy",             ID_GROUP_ADDTRANS
+        MENUITEM SEPARATOR
+        MENUITEM "Swap Equivalencies",          ID_GROUP_SWAPEQUIV
+        MENUITEM SEPARATOR
+        MENUITEM "&Search\tCtrl+F",             ID_EDIT_SEARCH
+        MENUITEM "S&can Source Code...",        ID_GROUP_SCANSOURCECODE
+        MENUITEM SEPARATOR
+        MENUITEM "&Ignore\tCtrl+I",             ID_TREEITEM_IGNORE
+        MENUITEM "&Edit\tEnter",                ID_GROUP_EDIT
+        MENUITEM SEPARATOR
+        MENUITEM "D&elete",                     ID_GROUP_DELETE
+    END
+    POPUP "&Anim"
+    BEGIN
+        MENUITEM "Add &Dependancy",             ID_ANIM_ADDTRANS
+        MENUITEM SEPARATOR
+        MENUITEM "Swap Equivalencies",          ID_ANIM_SWAPEQUIV
+        MENUITEM SEPARATOR
+        MENUITEM "&Scan Source Code...",        ID_ANIM_SCANSOURCECODE
+        MENUITEM SEPARATOR
+        MENUITEM "&Ignore\tCtrl+I",             ID_TREEITEM_IGNORE
+        MENUITEM "&Edit\tEnter",                ID_ANIM_EDIT
+        MENUITEM SEPARATOR
+        MENUITEM "D&elete",                     ID_ANIM_DELETE
+    END
+    POPUP "Dependancy"
+    BEGIN
+        MENUITEM "&Edit\tEnter",                ID_EQUIV_EDIT
+        MENUITEM SEPARATOR
+        MENUITEM "Disable\tCtrl+I",             ID_DEPENDANCY_DISABLE
+        MENUITEM SEPARATOR
+        MENUITEM "&Delete",                     ID_EQUIV_DELETE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_EDIT_SEARCH,         VIRTKEY, CONTROL, NOINVERT
+    "I",            ID_TREEITEM_IGNORE,     VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_RETURN,      ID_TREEITEM_EDIT,       VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 217, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About AnimTblEd"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "AnimTblEd Version 2.0 Beta",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 1998",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,32,14,WS_GROUP
+END
+
+IDD_SOURCEFILES DIALOG DISCARDABLE  0, 0, 297, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Source Files"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,235,55,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,235,70,50,14
+    PUSHBUTTON      "Add",IDC_ADD,235,10,50,14
+    PUSHBUTTON      "Delete",IDC_DELETE,235,25,50,14
+    LISTBOX         IDC_LIST,10,10,215,75,LBS_SORT | LBS_MULTIPLESEL | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+END
+
+IDD_UNASSIGNED DIALOG DISCARDABLE  100, 100, 186, 206
+STYLE WS_POPUP | WS_CAPTION | WS_THICKFRAME
+CAPTION "Unassigned Identifiers"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_LIST,7,7,172,192,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+END
+
+IDD_GROUPEDIT DIALOG DISCARDABLE  0, 0, 412, 326
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Group Edit"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,239,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,239,24,50,14
+    EDITTEXT        IDC_EDITNAME,78,25,142,12,ES_AUTOHSCROLL
+    RTEXT           "ANIMGROUP_",IDC_STATIC,14,27,63,8
+    GROUPBOX        "Name",IDC_STATIC,7,13,221,31
+    GROUPBOX        "Flags",IDC_FLAGSBOX,190,47,102,128
+    CONTROL         "Flag 0",IDC_FLAG0,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,59,81,8
+    CONTROL         "Flag 2",IDC_FLAG2,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,82,80,8
+    CONTROL         "Flag 3",IDC_FLAG3,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,93,81,8
+    CONTROL         "Flag 4",IDC_FLAG4,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,104,81,8
+    CONTROL         "Flag 5",IDC_FLAG5,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,116,81,8
+    CONTROL         "Flag 6",IDC_FLAG6,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,127,81,8
+    CONTROL         "Flag 7",IDC_FLAG7,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,138,81,8
+    GROUPBOX        "State Settings",IDC_STATESBOX,7,104,176,70
+    SCROLLBAR       IDC_FLAGSCROLL,277,57,10,113,SBS_VERT
+    CONTROL         "Flag 1",IDC_FLAG1,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,70,80,10
+    LTEXT           "Catagory 0",IDC_STATECLASSNAME0,11,117,71,8
+    COMBOBOX        IDC_STATECOMBO0,85,113,80,85,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    SCROLLBAR       IDC_STATESCROLL,167,115,10,52,SBS_VERT
+    LTEXT           "Catagory 1",IDC_STATECLASSNAME1,11,131,71,8
+    COMBOBOX        IDC_STATECOMBO1,85,128,80,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Catagory 2",IDC_STATECLASSNAME2,11,144,71,8
+    COMBOBOX        IDC_STATECOMBO2,85,142,80,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Catagory 3",IDC_STATECLASSNAME3,11,159,71,8
+    COMBOBOX        IDC_STATECOMBO3,85,156,80,87,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Priority",IDC_STATIC,7,76,176,25
+    COMBOBOX        IDC_PRIORITY,16,84,162,126,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Comment",IDC_STATIC_COMMENT,7,212,285,45
+    EDITTEXT        IDC_EDIT_COMMENT,13,222,273,30,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL
+    LTEXT           "",IDC_STATIC_NCHILDREN,155,5,75,8
+    CONTROL         "Flag 8",IDC_FLAG8,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,149,81,8
+    CONTROL         "Flag 9",IDC_FLAG9,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    195,160,81,8
+    GROUPBOX        "Method of Pay Back",IDC_METHODTITLE,7,46,176,27
+    COMBOBOX        IDC_METHOD,15,56,160,128,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Cut Table",IDC_CUTTABLETITLE,192,180,179,27
+    COMBOBOX        IDC_CUTTABLE,199,190,166,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Callback Function",IDC_CALLBACKTITLE,7,180,179,27
+    COMBOBOX        IDC_CALLBACK,14,190,166,84,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ANIMATIONEDIT DIALOG DISCARDABLE  0, 0, 441, 429
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Animation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_ANIMNAME,60,20,269,12,ES_AUTOHSCROLL
+    CONTROL         "Mirrored",IDC_CHECK_RIGHTMIRRORED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,259,78,45,10
+    CONTROL         "Reversed",IDC_CHECK_RIGHTREVERSED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,309,78,45,10
+    PUSHBUTTON      "Change &Right",IDC_BUTTON_RIGHTCHANGEID,377,76,50,14
+    PUSHBUTTON      "<< Swap >>",IDC_BUTTON_SWAP,197,53,48,20,BS_MULTILINE
+    CONTROL         "Mirrored",IDC_CHECK_LEFTMIRRORED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,19,78,45,10
+    CONTROL         "Reversed",IDC_CHECK_LEFTREVERSED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,69,78,45,10
+    PUSHBUTTON      "Change &Left",IDC_BUTTON_LEFTCHANGEID,137,76,46,14
+    COMBOBOX        IDC_METHOD,14,107,105,128,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_PRIORITY,135,107,102,126,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_FRAMERATE,253,107,34,12,ES_RIGHT | ES_AUTOHSCROLL
+    CONTROL         "Link",IDC_LINKTOANIM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,14,136,27,10
+    COMBOBOX        IDC_LINKRATELIST,45,134,164,295,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Flag 0",IDC_FLAG0,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,109,109,8
+    CONTROL         "Flag 1",IDC_FLAG1,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,119,109,10
+    CONTROL         "Flag 2",IDC_FLAG2,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,130,111,8
+    CONTROL         "Flag 3",IDC_FLAG3,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,141,110,8
+    CONTROL         "Flag 4",IDC_FLAG4,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,152,108,8
+    CONTROL         "Flag 5",IDC_FLAG5,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,163,109,8
+    CONTROL         "Flag 6",IDC_FLAG6,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,174,107,8
+    CONTROL         "Flag 7",IDC_FLAG7,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,185,107,8
+    CONTROL         "Flag 8",IDC_FLAG8,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,197,108,8
+    CONTROL         "Flag 9",IDC_FLAG9,"Button",BS_AUTO3STATE | WS_TABSTOP,
+                    304,208,108,8
+    COMBOBOX        IDC_STATECOMBO0,98,183,85,85,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_STATECOMBO1,98,196,85,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_STATECOMBO2,98,209,85,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_STATECOMBO3,98,222,85,87,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Transition States",IDC_TRANSITIONANIM,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,208,172,69,8
+    COMBOBOX        IDC_TRANSCOMBO0,201,183,86,85,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TRANSCOMBO1,201,196,86,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TRANSCOMBO2,201,209,86,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TRANSCOMBO3,201,222,86,87,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_DEPENDANCIES,14,254,356,96,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "New",IDC_BUTTON_NEWDEPENDANCY,377,251,50,14
+    PUSHBUTTON      "Edit",IDC_BUTTON_EDITDEPENDANCY,377,273,50,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DELETEDEPENDANCY,377,291,50,14
+    PUSHBUTTON      "Set as  Default Prerequisite",IDC_BUTTON_DEFAULTPREREQ,
+                    377,321,50,29,BS_MULTILINE
+    COMBOBOX        IDC_CALLBACK,14,369,122,84,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_SELECTCALLBACK,151,369,124,89,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CUTTABLE,296,369,133,86,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_COMMENT,13,396,413,19,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,384,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,384,22,50,14
+    LTEXT           "Beginning State",IDC_STATIC_BEGINNINGSTATE,112,172,51,8
+    RTEXT           "ANIM_",IDC_PREFIX,9,23,49,8
+    GROUPBOX        "Export ID",IDC_STATIC,7,7,327,30
+    GROUPBOX        "Flags",IDC_FLAGSBOX,298,97,136,143
+    GROUPBOX        "Prerequisites/Transitions",IDC_PREREQTRANSTITLE,7,242,
+                    427,115
+    GROUPBOX        "State Settings",IDC_STATESBOX,7,164,286,75
+    SCROLLBAR       IDC_FLAGSCROLL,418,110,10,123,SBS_VERT
+    LTEXT           "Catagory 0",IDC_STATECLASSNAME0,11,185,82,8
+    SCROLLBAR       IDC_STATESCROLL,187,184,10,51,SBS_VERT
+    LTEXT           "Catagory 1",IDC_STATECLASSNAME1,11,198,82,8
+    LTEXT           "Catagory 2",IDC_STATECLASSNAME2,11,211,83,8
+    LTEXT           "Catagory 3",IDC_STATECLASSNAME3,11,224,82,8
+    GROUPBOX        "Priority",IDC_STATIC,130,97,113,27
+    GROUPBOX        "Comment",IDC_STATIC_COMMENT,7,386,427,35
+    GROUPBOX        "Frame Rate",IDC_FRAMERATEBOX,247,97,45,27
+    GROUPBOX        "Right Equivilancy",IDC_RIGHTANIMIDAREA,252,46,182,50
+    GROUPBOX        "Left Equivilancy",IDC_LEFTANIMIDAREA,7,46,182,50
+    EDITTEXT        IDC_EDIT_LEFTID,15,57,167,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_RIGHTID,259,57,168,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    GROUPBOX        "Method of Playback",IDC_METHODTITLE,7,97,117,27
+    GROUPBOX        "Cut Table",IDC_CUTTABLETITLE,289,358,145,27
+    GROUPBOX        "Callback Function",IDC_CALLBACKTITLE,7,359,134,27
+    GROUPBOX        "Group Select-Anim Callback",IDC_SELECTCALLBACKTITLE,145,
+                    359,137,27
+    PUSHBUTTON      "Change &Both",IDC_CHANGEBOTH,197,78,48,14
+    CONTROL         "Flag 10",IDC_FLAG10,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,303,218,111,10
+    CONTROL         "Flag 11",IDC_FLAG11,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,303,228,112,10
+    GROUPBOX        "Link to Animation",IDC_LINKBOX,7,125,285,37
+    LTEXT           "Enter Frame:",IDC_LINKENTERFRAMETITLE,215,136,41,8
+    EDITTEXT        IDC_LINKENTERFRAME,257,135,28,12,ES_RIGHT | 
+                    ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Method",IDC_LINKMETHOD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,149,40,10
+    CONTROL         "Priority",IDC_LINKPRIORITY,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,57,150,37,10
+    CONTROL         "Frame Rate",IDC_LINKRATE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,96,150,53,10
+    CONTROL         "Flags",IDC_LINKFLAGS,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,188,150,33,10
+    CONTROL         "Transitions",IDC_LINKTRANSITIONS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,226,150,50,10
+    CONTROL         "States",IDC_LINKSTATES,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,149,150,36,10
+    CONTROL         "AND",IDC_RADIO_ANDSEARCH,"Button",BS_AUTORADIOBUTTON,
+                    343,14,31,10
+    CONTROL         "OR",IDC_RADIO_ORSEARCH,"Button",BS_AUTORADIOBUTTON,343,
+                    25,27,10
+    GROUPBOX        "Search",IDC_STATIC_SEARCH,341,5,38,32
+    CONTROL         "Search Groups",IDC_CHECK_SEARCHGROUPS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,341,39,64,10
+END
+
+IDD_SOURCEID DIALOG DISCARDABLE  0, 0, 219, 334
+STYLE WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Select Source Identifier"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_SOURCEIDLIST,18,49,189,195,LBS_SORT | WS_VSCROLL | 
+                    WS_TABSTOP
+    LISTBOX         IDC_SOURCEIDLISTMULT,13,49,187,195,LBS_SORT | 
+                    LBS_MULTIPLESEL | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,162,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,162,24,50,14
+    GROUPBOX        "Filters",IDC_STATIC,7,252,205,75
+    CONTROL         "Filter identifiers starting with the following prefixes from the list.",
+                    IDC_CHECK_ENABLEFILTERS,"Button",BS_AUTOCHECKBOX | 
+                    BS_VCENTER | BS_MULTILINE | WS_TABSTOP,22,262,145,15
+    LISTBOX         IDC_LIST_FILTER,13,282,136,39,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "New",IDC_BUTTON_NEWFILTER,156,285,50,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DELETEFILTER,156,304,50,14,
+                    WS_DISABLED
+    CONTROL         "Tab1",IDC_DISPLAYTAB,"SysTabControl32",0x0,7,30,205,219
+END
+
+IDD_EXPORT DIALOG DISCARDABLE  0, 0, 262, 146
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Export"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,205,5,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,25,50,14
+    PUSHBUTTON      "New",IDC_BUTTON_NEWEXPORT,205,55,50,14
+    LISTBOX         IDC_LIST_EXPORT,5,5,190,135,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Export",IDC_BUTTON_EXPORT,205,125,50,14
+    PUSHBUTTON      "Edit",IDC_BUTTON_EDIT,205,75,50,14
+    PUSHBUTTON      "Delete",IDC_BUTTON_DELETE,205,95,50,14
+END
+
+IDD_EQUIVALENCYEDIT DIALOG DISCARDABLE  0, 0, 307, 95
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Animation Source IDs"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "Change",IDC_BUTTON_LEFTCHANGEID,180,15,50,14
+    PUSHBUTTON      "Change",IDC_BUTTON_RIGHTCHANGEID,180,60,50,14
+    DEFPUSHBUTTON   "OK",IDOK,250,5,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,250,22,50,14
+    GROUPBOX        "Right Handed",IDC_STATIC,5,5,235,40
+    GROUPBOX        "Left Handed",IDC_STATIC,5,50,235,40
+    CONTROL         "Mirrored",IDC_CHECK_LEFTMIRRORED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,35,30,45,10
+    CONTROL         "Reversed",IDC_CHECK_LEFTREVERSED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,30,45,10
+    CONTROL         "Mirrored",IDC_CHECK_RIGHTMIRRORED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,35,75,45,10
+    CONTROL         "Reversed",IDC_CHECK_RIGHTREVERSED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,115,75,45,10
+    EDITTEXT        IDC_EDIT_LEFTID,15,15,160,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_RIGHTID,15,60,160,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "Swap",IDC_BUTTON_SWAP,250,70,50,15
+END
+
+IDD_TRANSITIONEDIT DIALOG DISCARDABLE  0, 0, 287, 181
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Prerequisite/Transition"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,230,5,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,230,25,50,14
+    PUSHBUTTON      "Change",IDC_BUTTON_CHANGEFROM,225,55,50,14
+    PUSHBUTTON      "Change",IDC_BUTTON_CHANGETO,225,85,50,14
+    PUSHBUTTON      "Change",IDC_BUTTON_CHANGEPLAY,225,115,50,14
+    EDITTEXT        IDC_EDIT_FROMANIM,10,55,210,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_TOANIM,10,85,210,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_PLAYANIM,10,115,210,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    GROUPBOX        "Play...",IDC_STATIC_PLAY,5,105,275,30
+    GROUPBOX        "To...",IDC_STATIC,5,75,275,30
+    GROUPBOX        "From...",IDC_STATIC,5,45,275,30
+    GROUPBOX        "Blending",IDC_STATIC,141,10,75,30
+    EDITTEXT        IDC_EDIT_BLENDFRAMES,181,20,30,15,ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER
+    CONTROL         "Spin4",IDC_SPIN_BLENDFRAMES,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | UDS_NOTHOUSANDS,201,20,11,15
+    LTEXT           "Frames",IDC_STATIC,145,25,25,8
+    COMBOBOX        IDC_COMBO_PREREQTRANS,10,10,65,35,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_STATIC_DESCRIPTION,5,150,275,25,ES_MULTILINE | 
+                    ES_AUTOHSCROLL | ES_READONLY | WS_HSCROLL
+    LTEXT           "Description of Dependancy:",IDC_STATIC,5,140,90,8
+    CONTROL         "Disable",IDC_CHECK_DISABLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,25,30,40,10
+END
+
+IDD_ANIMID DIALOG DISCARDABLE  0, 0, 202, 301
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Animation"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_LIST_ANIMATIONS,13,48,175,240,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,145,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,145,23,50,14
+    CONTROL         "Tab1",IDC_DISPLAYTAB,"SysTabControl32",0x0,7,30,188,264
+END
+
+IDD_STATEBITSEDIT DIALOG DISCARDABLE  0, 0, 249, 203
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "State Classifications"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,192,9,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,192,26,50,14
+    PUSHBUTTON      "New Classification",IDC_NEWSTATECLASS,176,182,66,14
+    CONTROL         "Tab1",IDC_STATECLASSTAB,"SysTabControl32",WS_TABSTOP,9,
+                    66,233,109
+    PUSHBUTTON      "Delete Classification",IDC_DELETESTATECLASS,100,182,69,
+                    14
+    EDITTEXT        IDC_STATECLASSNAME,93,85,132,12,ES_UPPERCASE | 
+                    ES_AUTOHSCROLL
+    LISTBOX         IDC_STATELIST,50,103,108,63,NOT LBS_NOTIFY | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_ADDSTATE,15,114,30,12
+    PUSHBUTTON      "Modify",IDC_MODIFYSTATE,15,131,30,14
+    PUSHBUTTON      "Delete",IDC_DELETESTATE,15,150,30,12
+    LTEXT           "Name:",IDC_STATICNAME,18,87,22,8
+    LTEXT           "ANIMSTATE_",IDC_STATEDEFINEPREFIX,47,87,46,8
+    LTEXT           "States:",IDC_STATICSTATES,18,101,23,8
+    LTEXT           "Num. States:",IDC_STATICNUMSTATES,166,113,42,8
+    LTEXT           "Start Bit:",IDC_STATICSTARTBIT,179,135,28,8
+    LTEXT           "Num. Bits:",IDC_STATICNUMBITS,174,149,33,8
+    EDITTEXT        IDC_NUMSTATES,209,110,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    EDITTEXT        IDC_STARTBIT,209,132,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    EDITTEXT        IDC_NUMBITS,209,147,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    LTEXT           "_",IDC_STATIC_,227,87,8,8
+    LTEXT           "Remaining Bits:",IDC_STATIC,99,49,50,8
+    EDITTEXT        IDC_REMAININGBITS,153,47,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    LTEXT           "Total State Bits:",IDC_STATIC,7,48,51,8
+    EDITTEXT        IDC_TOTALSTATEBITS,66,46,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TOTALFLAGBITS,66,33,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    LTEXT           "Total Flag Bits:",IDC_STATIC,7,35,48,8
+    LTEXT           "Total Priority Bits:",IDC_STATIC,7,22,55,8
+    EDITTEXT        IDC_TOTALPRIORITYBITS,66,20,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TOTALMETHODBITS2,66,7,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    LTEXT           "Total Method Bits:",IDC_STATIC,7,9,58,8
+END
+
+IDD_EDITSTATENAME DIALOG DISCARDABLE  0, 0, 249, 26
+STYLE DS_MODALFRAME | WS_POPUP
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "ANIMSTATE_CLASSDEFINE_",IDC_STATEDEFINEPREFIX,7,9,121,8
+    EDITTEXT        IDC_STATENAME,128,7,114,12,ES_AUTOHSCROLL
+END
+
+IDD_FLAGEDIT DIALOG DISCARDABLE  0, 0, 159, 194
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Flags"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,102,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,102,24,50,14
+    LISTBOX         IDC_FLAGLIST,6,84,146,86,NOT LBS_NOTIFY | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_ADDFLAG,106,175,38,12
+    PUSHBUTTON      "Delete",IDC_DELETEFLAG,13,175,36,12
+    PUSHBUTTON      "Modify",IDC_MODIFYFLAG,59,175,37,12
+    LTEXT           "Remaining Bits:",IDC_STATIC,7,68,50,8
+    EDITTEXT        IDC_REMAININGBITS,66,67,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    LTEXT           "Total State Bits:",IDC_STATIC,7,48,51,8
+    EDITTEXT        IDC_TOTALSTATEBITS,66,46,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TOTALFLAGBITS,66,33,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    LTEXT           "Total Flag Bits:",IDC_STATIC,7,35,48,8
+    LTEXT           "Total Priority Bits:",IDC_STATIC,7,22,55,8
+    EDITTEXT        IDC_TOTALPRIORITYBITS,66,20,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TOTALMETHODBITS,66,7,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    LTEXT           "Total Method Bits:",IDC_STATIC,7,9,58,8
+END
+
+IDD_PRIORITYEDIT DIALOG DISCARDABLE  0, 0, 159, 194
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Priorities"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,102,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,102,24,50,14
+    LISTBOX         IDC_LIST,9,82,143,87,NOT LBS_NOTIFY | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Remaining Bits:",IDC_STATIC,7,68,50,8
+    EDITTEXT        IDC_REMAININGBITS,66,67,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_ADD,107,175,38,12
+    PUSHBUTTON      "Delete",IDC_DELETE,13,175,36,12
+    LTEXT           "Total State Bits:",IDC_STATIC,7,48,51,8
+    EDITTEXT        IDC_TOTALSTATEBITS,66,46,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TOTALFLAGBITS,66,33,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    LTEXT           "Total Flag Bits:",IDC_STATIC,7,35,48,8
+    PUSHBUTTON      "Modify",IDC_MODIFY,59,175,37,12
+    LTEXT           "Total Priority Bits:",IDC_STATIC,7,22,55,8
+    EDITTEXT        IDC_TOTALPRIORITYBITS,66,20,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TOTALMETHODBITS,66,7,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    LTEXT           "Total Method Bits:",IDC_STATIC,7,9,58,8
+END
+
+IDD_QUESTION DIALOG DISCARDABLE  0, 0, 186, 92
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Question"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&Yes",IDOK,99,71,50,14
+    PUSHBUTTON      "&No",IDCANCEL,39,71,50,14
+    EDITTEXT        IDC_QUESTION,7,26,172,27,ES_CENTER | ES_MULTILINE | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+END
+
+IDD_DIALOG_EDITSTRING DIALOG DISCARDABLE  0, 0, 186, 81
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit String"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT_STRING,5,40,175,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,30,60,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,105,60,50,14
+    CTEXT           "Static",IDC_STATIC_DESCRIPTION,10,5,165,25,
+                    SS_CENTERIMAGE
+END
+
+IDD_PROJECTSETTINGS DIALOG DISCARDABLE  0, 0, 182, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Project Settings"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,125,7,50,14
+    EDITTEXT        IDC_BASEANIMRATE,69,16,41,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Cancel",IDCANCEL,125,24,50,14
+    LTEXT           "Base Anim Rate:",IDC_STATIC,13,17,54,8
+    EDITTEXT        IDC_BITFIELDBITS,70,35,40,12,ES_AUTOHSCROLL
+    LTEXT           "Size of Bitfield:",IDC_STATIC,14,37,47,8
+END
+
+IDD_METRICS DIALOG DISCARDABLE  0, 0, 187, 146
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Metrics"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,65,125,50,14
+    LTEXT           "Number of Anims:",IDC_STATIC,10,20,65,8
+    LTEXT           "Number of Groups:",IDC_STATIC,10,10,75,8
+    LTEXT           "Number of Transitions:",IDC_STATIC,10,40,75,8
+    LTEXT           "Number of Anims w/Transitions:",IDC_STATIC,10,30,110,8
+    LTEXT           "Size of Tables:",IDC_STATIC,10,105,50,8
+    RTEXT           "Static",IDC_NUMANIMS,125,20,55,8
+    RTEXT           "Static",IDC_NUMGROUPS,125,10,55,8
+    RTEXT           "Static",IDC_NUMTRANSITIONS,130,40,50,8
+    RTEXT           "Static",IDC_NUMANIMSWTRANS,130,30,50,8
+    RTEXT           "Static",IDC_SIZEINBYTES,69,105,111,8
+    LTEXT           "Size of Anim Entries:",IDC_STATIC,10,61,67,8
+    LTEXT           "Size of Groups:",IDC_STATIC,10,71,52,8
+    LTEXT           "Size per Transition:",IDC_STATIC,10,80,63,8
+    RTEXT           "Static",IDC_SIZEPERANIM,79,61,101,8
+    RTEXT           "Static",IDC_SIZEPERGROUP,77,71,103,8
+    RTEXT           "Static",IDC_SIZEPERTRANSITION,78,80,102,8
+END
+
+IDD_EXPORTCONFIG DIALOG DISCARDABLE  0, 0, 302, 94
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Export Configuration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,95,73,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,155,73,50,14
+    EDITTEXT        IDC_EDIT_PATHFILE,40,30,195,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "Change",IDC_BUTTON_CHANGEPATH,240,30,50,14
+    CONTROL         "Export Active",IDC_CHECK_ONOFF,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,17,53,61,10
+    LTEXT           "Path:",IDC_STATIC,10,30,30,8
+    EDITTEXT        IDC_EDIT_NAME,40,15,120,12,ES_AUTOHSCROLL
+    LTEXT           "Name:",IDC_STATIC,10,15,30,8
+    CONTROL         "All Caps",IDC_CHECK_ALLCAPS,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,194,52,45,10
+    CONTROL         "Export Separate Data File",IDC_DATASEPARATE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,87,53,97,10
+END
+
+IDD_VIEWPROPERTIES DIALOG DISCARDABLE  0, 0, 186, 148
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "View Properties"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+    LISTBOX         IDC_VP_OPTIONS,13,61,65,74,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_VP_DISPLAYED,106,61,67,74,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      ">>",IDC_VP_ADD,83,80,18,14
+    PUSHBUTTON      "<<",IDC_VP_REMOVE,83,98,18,14
+    GROUPBOX        "Animation Description Format",IDC_STATIC,7,40,172,101
+    LTEXT           "Displayed",IDC_STATIC,117,50,32,8
+    LTEXT           "Options",IDC_STATIC,31,50,25,8
+END
+
+IDD_METHODEDIT DIALOG DISCARDABLE  0, 0, 160, 194
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Methods of motion"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,103,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,103,24,50,14
+    LISTBOX         IDC_LIST,9,82,143,87,NOT LBS_NOTIFY | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Remaining Bits:",IDC_STATIC,7,68,50,8
+    EDITTEXT        IDC_REMAININGBITS,66,67,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_ADD,107,175,38,12
+    PUSHBUTTON      "Delete",IDC_DELETE,13,175,36,12
+    LTEXT           "Total State Bits:",IDC_STATIC,7,48,51,8
+    EDITTEXT        IDC_TOTALSTATEBITS,66,46,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TOTALFLAGBITS,66,33,24,12,ES_CENTER | ES_AUTOHSCROLL | 
+                    ES_READONLY | ES_NUMBER | NOT WS_TABSTOP
+    LTEXT           "Total Flag Bits:",IDC_STATIC,7,35,48,8
+    PUSHBUTTON      "Modify",IDC_MODIFY,59,175,37,12
+    LTEXT           "Total Priority Bits:",IDC_STATIC,7,22,55,8
+    EDITTEXT        IDC_TOTALPRIORITYBITS,66,20,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TOTALMETHODBITS,66,7,24,12,ES_CENTER | 
+                    ES_AUTOHSCROLL | ES_READONLY | ES_NUMBER | NOT 
+                    WS_TABSTOP
+    LTEXT           "Total Method Bits:",IDC_STATIC,7,9,58,8
+END
+
+IDD_LOCOMOTIONTALES DIALOG DISCARDABLE  0, 0, 572, 287
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Locomotion Animation Tables"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,515,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,460,7,50,14
+    LISTBOX         IDC_LOCOMOTIONTABLES,7,7,135,96,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_ADD,7,105,41,14
+    PUSHBUTTON      "Copy",IDC_COPY,55,105,40,14
+    PUSHBUTTON      "Remove",IDC_REMOVE,102,105,41,14
+    EDITTEXT        IDC_NAME,190,18,199,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "+",IDC_PLUS,149,252,26,12
+    PUSHBUTTON      "=",IDC_EQUAL,180,268,26,12
+    PUSHBUTTON      "--",IDC_MINUS,149,268,26,12
+    CONTROL         "Point Foreward",IDC_POINTFOREWARD,"Button",
+                    BS_AUTORADIOBUTTON,16,211,63,10
+    CONTROL         "Side Foreward",IDC_SIDEFOREWARD,"Button",
+                    BS_AUTORADIOBUTTON,16,222,61,10
+    CONTROL         "Phase Shift",IDC_PHASE,"Button",BS_AUTORADIOBUTTON,16,
+                    233,52,10
+    EDITTEXT        IDC_PHASESHIFT,85,230,43,12,ES_AUTOHSCROLL
+    CONTROL         "Spin2",IDC_PHASESHIFTSPIN,"msctls_updown32",
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,122,228,11,14
+    GROUPBOX        "Animation Key",IDC_USEDANIMSTITLE,420,115,145,165
+    LISTBOX         IDC_USEDANIMS,441,125,118,130,LBS_NOINTEGRALHEIGHT | 
+                    WS_TABSTOP
+    LTEXT           "Max NSR",IDC_MAXNSRTITLE,523,48,32,8
+    EDITTEXT        IDC_MAXNSR,522,59,36,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_MAXNSRSPIN,"msctls_updown32",UDS_ALIGNRIGHT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS,545,60,11,14
+    EDITTEXT        IDC_VALUE,372,37,42,14,ES_AUTOHSCROLL
+    CONTROL         "Spin2",IDC_VALUESPIN,"msctls_updown32",UDS_ALIGNRIGHT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS,405,39,11,14
+    GROUPBOX        "Orientation",IDC_ORIENTATION,7,202,135,45
+    GROUPBOX        "",IDC_TABLERECT,148,33,267,247,NOT WS_VISIBLE
+    RTEXT           "Arc:",IDC_SELECTEDARCTITLE,148,38,20,8
+    CTEXT           "888",IDC_SELECTEDARC,169,38,15,8
+    RTEXT           "Zone:",IDC_SELECTEDZONETITLE,148,47,20,8
+    CTEXT           "888",IDC_SELECTEDZONE,168,47,16,8
+    CTEXT           "of",IDC_NUMARCSTITLE,186,38,8,8
+    CTEXT           "888",IDC_NUMARCS,196,38,13,8
+    CTEXT           "of",IDC_NUMZONESTITLE,185,47,8,8
+    CTEXT           "88",IDC_NUMZONES,195,47,12,8
+    LTEXT           "Value",IDC_VALUETITLE,349,39,19,8
+    PUSHBUTTON      "Add",IDC_ADDANIM,441,259,35,14
+    PUSHBUTTON      "Remove",IDC_REMOVEANIM,524,259,35,14
+    LTEXT           "<cntrl> - Line Only",IDC_LINEONLY,355,272,58,8
+    LTEXT           "<shift> - Area Only",IDC_AREAONLY,357,264,58,8
+    SCROLLBAR       IDC_USEDANIMSBAR,549,123,10,130,SBS_VERT
+    CONTROL         "Radian",IDC_RADIAN,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,387,53,28,10
+    EDITTEXT        IDC_OVERLAP,475,59,38,12,ES_AUTOHSCROLL
+    CONTROL         "Spin2",IDC_OVERLAPSPIN,"msctls_updown32",UDS_ALIGNRIGHT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS,501,60,11,14
+    LTEXT           "Overlap NSR",IDC_OVERLAPTITLE,472,49,43,8
+    PUSHBUTTON      "Change",IDC_CHANGEANIM,483,259,35,14
+    GROUPBOX        "NSR Info (Zone/Radius)",IDC_NSRINFO,420,36,145,45
+    CONTROL         "Fixed On Field",IDC_FIXEDONFIELD,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,79,147,59,
+                    10
+    EDITTEXT        IDC_REORIENTANIM,425,96,97,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    GROUPBOX        "Reorientation Animation",IDC_REORIENTANIMTITLE,420,85,
+                    145,29
+    PUSHBUTTON      "Change",IDC_REORIENTANIMCHANGE,526,96,33,12
+    GROUPBOX        "Type",IDC_TABLETYPETITLE,7,121,135,79
+    COMBOBOX        IDC_TABLETYPE,27,130,108,87,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Face Direction",IDC_FACEDIR,"Button",BS_AUTOCHECKBOX | 
+                    NOT WS_VISIBLE | WS_TABSTOP,79,158,58,10
+    GROUPBOX        "Callback",IDC_LOCOCALLBACKTITLE,7,249,135,31
+    COMBOBOX        IDC_CALLBACK,15,260,120,108,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Overlap Arc",IDC_OVERLAPARCTITLE,427,49,38,8
+    EDITTEXT        IDC_OVERLAPARC,427,59,40,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_OVERLAPARCSPIN,"msctls_updown32",
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,458,60,10,
+                    14
+    CONTROL         "Limit Anim NSR",IDC_LIMITEDNSR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,147,61,10
+    CONTROL         "Do Not Export",IDC_DONOTEXPORT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,13,158,60,10
+    COMBOBOX        IDC_STARTANGLE,16,181,56,51,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Start Angle (from)",IDC_STARTANGLETITLE,16,172,55,8
+    LTEXT           "End Angle (to)",IDC_ENDANGLETITLE,83,172,46,8
+    COMBOBOX        IDC_ENDANGLE,81,181,54,61,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Table Name:",IDC_NAMETITLE,159,7,42,8
+END
+
+IDD_SCANSOURCECODE DIALOG DISCARDABLE  0, 0, 302, 207
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Scan Source Code"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_SCAN_FOLDERS,12,58,235,71,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Add...",IDC_SCAN_ADDFOLDER,254,76,35,14
+    PUSHBUTTON      "Remove",IDC_SCAN_REMOVEFOLDER,254,96,35,14
+    CONTROL         "Search Folders Recursively",IDC_SCAN_RECURSIVE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,16,151,102,10
+    CONTROL         "Ignore commented out code",IDC_SCAN_COMMENTS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,16,164,105,10
+    CONTROL         "Recursively Scan for all Child Nodes",
+                    IDC_SCAN_NODERECURSE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,155,151,130,10
+    DEFPUSHBUTTON   "Scan",IDOK,85,186,50,14
+    PUSHBUTTON      "Close",IDCANCEL,164,186,50,14
+    GROUPBOX        "Search Options",IDC_STATIC,7,139,288,40
+    EDITTEXT        IDC_ANIM_NAME,45,18,224,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP
+    LTEXT           "Name:",IDC_STATIC,19,18,22,8
+    CONTROL         "",IDC_NODE_IS_GROUP,"Button",BS_AUTOCHECKBOX | BS_FLAT | 
+                    WS_DISABLED,45,32,16,8
+    LTEXT           "Group",IDC_STATIC,58,32,20,8
+    GROUPBOX        "Parent Node",IDC_STATIC,7,7,288,37
+    GROUPBOX        "Search Folders",IDC_STATIC,7,47,288,88
+    CONTROL         "",IDC_NODE_IS_ANIM,"Button",BS_AUTOCHECKBOX | BS_FLAT | 
+                    WS_DISABLED,95,32,16,8
+    LTEXT           "Animation",IDC_STATIC,108,32,32,8
+END
+
+IDD_SCANRESULTS DIALOG DISCARDABLE  0, 0, 450, 310
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Scan Results"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_NUMKEYWORDS,179,16,40,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_NUMKEYWORDSFOUND,179,27,40,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_NUMFILES,338,15,40,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_NUMLINES,338,27,45,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    NOT WS_BORDER | NOT WS_TABSTOP
+    LISTBOX         IDC_SCANRESULTS_LB,14,54,423,104,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    LISTBOX         IDC_NOMATCH,14,176,423,104,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | 
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,199,289,50,14
+    GROUPBOX        "Scan Matches",IDC_STATIC,7,45,436,118
+    LTEXT           "Number of Keywords Scanned For:",IDC_STATIC,63,15,111,8
+    LTEXT           "Number of Files Scanned:",IDC_STATIC,252,15,82,8
+    LTEXT           "Lines Scanned:",IDC_STATIC,284,27,50,8
+    GROUPBOX        "No Match Found",IDC_STATIC,7,166,436,118
+    LTEXT           "Number of Keywords Found:",IDC_STATIC,84,27,90,8
+    GROUPBOX        "Statistics",IDC_STATIC,7,7,436,35
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "AnimTblEd MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "AnimTblEd\0"
+            VALUE "LegalCopyright", "Copyright (C) 1998\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "AnimTblEd.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "AnimTblEd Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_SOURCEFILES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_UNASSIGNED, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 199
+    END
+
+    IDD_GROUPEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 405
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 319
+    END
+
+    IDD_ANIMATIONEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 434
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 422
+    END
+
+    IDD_SOURCEID, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 212
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 327
+    END
+
+    IDD_EXPORT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 255
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_EQUIVALENCYEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 300
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_TRANSITIONEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 174
+    END
+
+    IDD_ANIMID, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 195
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 294
+    END
+
+    IDD_STATEBITSEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 242
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 196
+    END
+
+    IDD_EDITSTATENAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 242
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 19
+    END
+
+    IDD_FLAGEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 152
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 187
+    END
+
+    IDD_PRIORITYEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 152
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 187
+    END
+
+    IDD_QUESTION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 85
+    END
+
+    IDD_DIALOG_EDITSTRING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 74
+    END
+
+    IDD_PROJECTSETTINGS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 175
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_METRICS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_EXPORTCONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 295
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+
+    IDD_VIEWPROPERTIES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 141
+    END
+
+    IDD_METHODEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 153
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 187
+    END
+
+    IDD_LOCOMOTIONTALES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 565
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 280
+    END
+
+    IDD_SCANSOURCECODE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 295
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 200
+    END
+
+    IDD_SCANRESULTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 443
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 303
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_TRANSITIONEDIT DLGINIT
+BEGIN
+    IDC_COMBO_PREREQTRANS, 0x403, 13, 0
+0x7250, 0x7265, 0x7165, 0x6975, 0x6973, 0x6574, "\000" 
+    IDC_COMBO_PREREQTRANS, 0x403, 11, 0
+0x7254, 0x6e61, 0x6973, 0x6974, 0x6e6f, "\000" 
+    0
+END
+
+IDD_LOCOMOTIONTALES DLGINIT
+BEGIN
+    IDC_TABLETYPE, 0x403, 11, 0
+0x4f4c, 0x4f43, 0x4f4d, 0x4954, 0x4e4f, "\000" 
+    IDC_TABLETYPE, 0x403, 4, 0
+0x5543, 0x0054, 
+    IDC_TABLETYPE, 0x403, 5, 0
+0x5554, 0x4e52, "\000" 
+    IDC_TABLETYPE, 0x403, 10, 0
+0x4e55, 0x4544, 0x4946, 0x454e, 0x0044, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "AnimTblEd"
+    IDR_ANIMTBTYPE          "\nAnimTb\nAnimTb\nAnimTb Files (*.atb)\n.atb\nAnimTblEd.Document\nAnimTb Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "AnimTblEd"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_ADD_SOURCE_FILE      "Add a new source .h file to the project"
+    ID_PROJECT_EXPORT       "Export the Animation Tables"
+    ID_PROJECT_ADDSOURCEFILE "Add a source (.h) file to the project."
+    ID_PROJECT_DELETESOURCEFILE 
+                            "Delete an existing source (.h) file from the project."
+    ID_PROJECT_SOURCEFILES  "Add/Delete source (.h) files from the project."
+    ID_DIALOG_UNASSIGNED    "Lists the unassigned animation ID's."
+    ID_GROUP_ADDGROUP       "Add a new group to the selected group."
+    ID_GROUP_ADDANIMATION   "Add a new animation to the selected group."
+    ID_GROUP_DELETE         "Deletes the selected group."
+    ID_GROUP_EDIT           "Edit the selected group."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_ANIM_EDIT            "Edit the animation"
+    ID_ANIM_DELETE          "Delete the specified animation."
+    ID_ADDEQUIVALENCY       "Add an Equivalent Animation"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EQUIV_EDIT           "Edit Animation Equivalency"
+    ID_EQUIV_DELETE         "Delete this Animation Equivalency"
+    ID_PROJECT_EDITSTATES   "Edit the animation state classes."
+    ID_PROJECT_FLAGS        "Edit the animation flags"
+    ID_PROJECT_BASEANIMRATE "Set the base animation rate for all animations"
+    ID_PROJECT_SETTINGS     "Set project attributes"
+    ID_PROJECT_METRICS      "Info about the export data."
+    ID_PROJECT_EXPORTPROPERTIES "Configure the export before exporting."
+    ID_VIEW_PROPERTIES      "View Properties"
+    ID_PROJECT_METHODS      "Methods of motion"
+    ID_PROJECT_LOCOMOTIONTABLES "Edit locomotion animation tables"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_GROUP_ADDANIMATIONS  "Add more than one animations directly from the list"
+    ID_DEPENDANCY_DISABLE   "Disables the dependancy"
+    ID_TREEITEM_IGNORE      "Do not export this tree item"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_GROUP_SEARCH         "Searches through the group and its children for particular conditions"
+    ID_EDIT_SEARCH          "Searches the selected group's children for particular conditions."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\AnimTblEd.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

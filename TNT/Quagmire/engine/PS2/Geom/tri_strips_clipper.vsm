@@ -1,0 +1,463 @@
+
+
+
+; vi06 has our first incoming vert address
+
+TRI_STRIP_CLIP:
+; this is a triangle splitter version of the clipper
+;   each triangle is split into 4 other triangles (8 verts in 2 strips)
+;       as each vert of the tris are transformed, they are clip tested again
+;       any clipped verts get their tris sent back through the clipper
+;       the clipper is recursive to 4 levels (buffer space for 4)
+
+; This function takes one triangle in local space (pointed to by vi06).
+;   The triangle is first tested for a trivial culling
+
+    nop                                 iaddiu      vi01, vi00, CLIPPER_STACK
+    nop                                 lq.xyzw     vf11, 1(vi06)
+    nop                                 lq.xyzw     vf12, 4(vi06)
+    nop                                 lq.xyzw     vf13, 7(vi06)
+    nop                                 sq.xyzw     vf01, 0(vi01)
+    itof0.xyzw  vf11, vf11              sq.xyzw     vf02, 1(vi01)
+    itof0.xyzw  vf12, vf12              sq.xyzw     vf03, 2(vi01)
+    itof0.xyzw  vf13, vf13              sq.xyzw     vf04, 3(vi01)
+    nop                                 sq.xyzw     vf05, 4(vi01)
+    nop                                 sq.xyzw     vf06, 5(vi01)
+    nop                                 sq.xyzw     vf07, 6(vi01)
+    nop                                 sq.xyzw     vf08, 7(vi01)
+    nop                                 sq.xyzw     vf09, 8(vi01)
+    nop                                 sq.xyzw     vf10, 9(vi01)
+    
+    nop                                 isw.x       vi02, 10(vi01)
+    nop                                 isw.y       vi04, 10(vi01)
+    nop                                 isw.z       vi05, 10(vi01)
+    nop                                 isw.w       vi06, 10(vi01)
+    nop                                 isw.x       vi07, 11(vi01)
+    nop                                 isw.y       vi08, 11(vi01)
+    nop                                 isw.z       vi09, 11(vi01)
+    nop                                 isw.w       vi13, 11(vi01)
+    nop                                 isw.x       vi12, 12(vi01)
+    nop                                 sq.xyzw     vf11, 1(vi06)
+    nop                                 sq.xyzw     vf12, 4(vi06)
+    nop                                 sq.xyzw     vf13, 7(vi06)
+    
+; setup to tell the splitter:
+;   Where the source verts are
+;   Where the dest verts go
+;   How many times we can subdivide
+
+    nop                                 iaddiu      vi09, vi00, CLIPPER_SPLIT_STACK_LVL1
+    nop                                 ilw.w       vi02, 11(vi09)                      ; load even/odd indicator
+    nop                                 iaddiu      vi08, vi00, 4                       ; set max subdivisions
+    nop                                 iaddiu      vi07, vi00, CLIPPER_SPLIT_LVL1      ; set output buffer even
+    
+    
+CLIPPER_SPLIT_SETUP_END:
+    nop                                 iaddiu      vi01, vi00, 1                       ; toggle the buffer
+    nop                                 iadd        vi02, vi02, vi01                    ; add 1 and AND with 1
+    nop                                 iand        vi02, vi02, vi01                    ; 0 becomes 1 becomes 0
+    nop                                 nop
+    nop                                 isw.w       vi02, 11(vi09)
+    nop                                 bal         vi13, TRI_STRIP_CLIP_SPLIT
+    nop                                 nop
+
+
+TRI_STRIP_CLIPPER_SPLIT_RESTORE:
+    nop                                 iaddiu      vi01, vi00, CLIPPER_STACK
+    nop                                 nop
+    nop                                 ilw.w       vi06, 10(vi01)
+    nop                                 lq.xyzw     vf05, 4(vi01)
+    nop                                 lq.xyzw     vf06, 5(vi01)
+    nop                                 lq.xyzw     vf07, 6(vi01)
+    nop                                 lq.xyzw     vf11, 1(vi06)
+    nop                                 lq.xyzw     vf12, 4(vi06)
+    nop                                 lq.xyzw     vf13, 7(vi06)
+    nop                                 lq.xyzw     vf01, 0(vi01)
+    ftoi0.xyzw  vf11, vf11              lq.xyzw     vf02, 1(vi01)
+    ftoi0.xyzw  vf12, vf12              lq.xyzw     vf03, 2(vi01)
+    ftoi0.xyzw  vf13, vf13              lq.xyzw     vf04, 3(vi01)
+    nop                                 lq.xyzw     vf08, 7(vi01)
+    nop                                 sq.xyzw     vf11, 1(vi06)
+    nop                                 sq.xyzw     vf12, 4(vi06)
+    nop                                 sq.xyzw     vf13, 7(vi06)
+    nop                                 lq.xyzw     vf09, 8(vi01)
+    nop                                 lq.xyzw     vf10, 9(vi01)
+
+    nop                                 ilw.x       vi02, 10(vi01)
+    nop                                 ilw.y       vi04, 10(vi01)
+    nop                                 ilw.z       vi05, 10(vi01)
+    nop                                 ilw.w       vi13, 11(vi01)
+    nop                                 ilw.x       vi07, 11(vi01)
+    nop                                 ilw.y       vi08, 11(vi01)
+    nop                                 ilw.z       vi09, 11(vi01)
+    nop                                 jr          vi13
+    nop                                 ilw.x       vi12, 12(vi01)
+
+
+
+
+
+TRI_STRIP_CLIP_SPLIT:
+
+    ; store registers
+    nop                                 sq.xyzw     vf04, 0(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 sq.xyzw     vf05, 1(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 sq.xyzw     vf06, 2(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 sq.xyzw     vf07, 3(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 sq.xyzw     vf08, 4(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 sq.xyzw     vf09, 5(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 sq.xyzw     vf10, 6(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 sq.xyzw     vf11, 7(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 sq.xyzw     vf12, 8(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 isw.x       vi01, 9(vi09)           ; store vert1 clip test results
+    nop                                 isw.y       vi02, 9(vi09)           ; store vert2 clip test results
+    nop                                 isw.z       vi03, 9(vi09)           ; store vert3 clip test results
+    nop                                 isw.w       vi08, 9(vi09)           ; store recurse count
+    nop                                 isw.x       vi05, 10(vi09)          ; store walking buffer ptr
+    nop                                 isw.y       vi04, 10(vi09)          ; store walking vert count
+    nop                                 isw.z       vi13, 10(vi09)          ; store return address
+    nop                                 nop;ibne        vi11, vi00, TRI_STRIP_CLIPPER_SPLIT_ENVMAP
+    nop                                 iaddiu      vi10, vi00, 0x7fff      ; step 1 of build ADC const
+
+    ; do trivial rejection
+    nop                                 lq.xyzw     vf01, 2(vi06)
+    nop                                 lq.xyzw     vf02, 5(vi06)
+    nop                                 lq.xyzw     vf03, 8(vi06)
+    mulaw.xyzw  acc, vf27, vf00         nop
+    maddaz.xyzw acc, vf26, vf01         nop
+    madday.xyzw acc, vf25, vf01         nop
+    maddx.xyzw  vf01, vf24, vf01        nop
+    mulaw.xyzw  acc, vf27, vf00         nop
+    maddaz.xzyw acc, vf26, vf02         nop
+    madday.xyzw acc, vf25, vf02         nop
+    maddx.xyzw  vf02, vf24, vf02        nop
+    mulaw.xyzw  acc, vf27, vf00         nop
+    maddaz.xyzw acc, vf26, vf03         nop
+    madday.xyzw acc, vf25, vf03         nop
+    maddx.xyzw  vf03, vf24, vf03        nop
+    nop                                 iaddiu      vi10, vi10, 0x6         ; step 2 of build ADC const
+    clipw.xyz vf01, vf01w               nop
+    clipw.xyz vf02, vf02w               nop
+    clipw.xyz vf03, vf03w               nop
+    nop                                 nop
+    nop                                 lq.xyzw     vf01, 2(vi06)           ; reload pos0 from input
+    nop                                 lq.xyzw     vf02, 5(vi06)           ; reload pos1 from input
+    nop                                 fcor        vi01, 0xfdf7df ; ^0x020820 Z-
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIP_SPLIT_RESTORE
+    nop                                 fcor        vi01, 0xfefbef ; ^0x010410 Z+
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIP_SPLIT_RESTORE
+    nop                                 fcor        vi01, 0xff7df7 ; ^0x008208 Y-
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIP_SPLIT_RESTORE
+    nop                                 fcor        vi01, 0xffbefb ; ^0x004104 Y+
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIP_SPLIT_RESTORE
+    nop                                 fcor        vi01, 0xffdf7d ; ^0x002082 X-
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIP_SPLIT_RESTORE
+    nop                                 fcor        vi01, 0xffefbe ; ^0x001041 X+
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIP_SPLIT_RESTORE
+
+
+TRI_STRIP_CLIPPER_SPLIT_KICK_STALL:
+; kick a stall GIFtag - the NLOOP value is 0    
+    nop                                 iaddiu      vi01, vi14, 1
+    nop                                 lq.xyzw     vf03, 8(vi06)           ; reload pos2 from input
+    nop                                 xgkick      vi01
+    
+
+; building 6 verts, saving 8 verts
+;  If we are not subdividing further, verts will be reconstructed into a strip
+;   The final strip has 8 verts
+;   Original          Split         Strip Order
+;       2               2               5
+;      / \             / \               \
+;     /   \           4---5           3---4 8
+;    /     \         / \ / \           \     \
+;   1-------3       1---6---3       1---2 6---7
+
+; build in split order
+; load 3 vert positions
+    nop                                 lq.xyzw     vf04, 1(vi06)                                               ; load col0 from input
+    nop                                 lq.xyzw     vf05, 4(vi06)                                               ; load col1 from input
+    sub.xyz     vf10, vf01, vf02        lq.xyzw     vf06, 7(vi06)           ; build vect from pos0 to pos1      ; load col2 from input
+    sub.xyz     vf11, vf02, vf03        lq.xyzw     vf07, 0(vi06)           ; build vect from pos1 to pos2      ; load uv0 from input
+    sub.xyz     vf12, vf03, vf01        lq.xyzw     vf08, 3(vi06)           ; build vect from pos2 to pos0      ; load uv1 from input
+    nop                                 loi         0.5                                                         ; load 0.5 for a div by 2
+    muli.xyz    vf10, vf10, i           lq.xyzw     vf09, 6(vi06)           ; build half-vect from p0 to p1     ; load uv2 from input
+    muli.xyz    vf11, vf11, i           sq.xyzw     vf01, 3(vi07)           ; build half-vect from p1 to p2     ; store pos0 to output
+    muli.xyz    vf12, vf12, i           sq.xyzw     vf02, 15(vi07)          ; build half-vect from p2 to p0     ; store pos1 to output
+    sub.xyzw    vf13, vf04, vf05        sq.xyzw     vf03, 24(vi07)          ; build vect from col0 to col1      ; store pos2 to output
+    sub.xyzw    vf14, vf05, vf06        sq.xyzw     vf04, 2(vi07)           ; build vect from col1 to col2      ; store col0 to output
+    sub.xyzw    vf15, vf06, vf04        sq.xyzw     vf05, 14(vi07)          ; build vect from col2 to col0      ; store col1 to output
+    sub.xyzw    vf16, vf07, vf08        sq.xyzw     vf06, 23(vi07)          ; build vect from uv0 to uv1        ; store col2 to output
+    sub.xyzw    vf17, vf08, vf09        sq.xyzw     vf07, 1(vi07)           ; build vect from uv1 to uv2        ; store uv0 to output
+    sub.xyzw    vf18, vf09, vf07        sq.xyzw     vf08, 13(vi07)          ; build vect from uv2 to uv0        ; store uv1 to output
+    muli.xyzw   vf13, vf13, i           sq.xyzw     vf09, 22(vi07)          ; build half-vect from c0 to c1     ; store uv2 to output
+    muli.xyzw   vf14, vf14, i           isw.w       vi00, 3(vi07)           ; build half-vect from c1 to c2     ; store 0 in W for out pos0
+    muli.xyzw   vf15, vf15, i           isw.w       vi00, 6(vi07)           ; build half-vect from c2 to c0     ; store 0 in W for out pos1
+    muli.xyzw   vf16, vf16, i           isw.w       vi00, 9(vi07)           ; build half-vect from uv0 to uv1   ; store 0 in W for out pos2
+    muli.xyzw   vf17, vf17, i           isw.w       vi00, 12(vi07)          ; build half-vect from uv1 to uv2   ; store 0 in W for out pos3
+    muli.xyzw   vf18, vf18, i           isw.w       vi00, 15(vi07)          ; build half-vect from uv2 to uv0   ; store 0 in W for out pos4
+    sub.xyz     vf10, vf01, vf10        isw.w       vi10, 18(vi07)          ; finish half-vect for p0 to p1     ; store ADC in W for out pos5
+    sub.xyz     vf11, vf02, vf11        isw.w       vi10, 21(vi07)          ; finish half-vect for p1 to p2     ; store ADC in W for out pos6
+    sub.xyz     vf12, vf03, vf12        isw.w       vi00, 24(vi07)          ; finish half-vect for p2 to p0     ; store 0 in W for out pos7
+    sub.xyzw    vf13, vf04, vf13        nop                                 ; finish half-vect for c0 to c1
+    sub.xyzw    vf14, vf05, vf14        sq.xyz      vf10, 9(vi07)           ; finish half-vect for c1 to c2     ; store pos3 to output
+    sub.xyzw    vf15, vf06, vf15        sq.xyz      vf11, 12(vi07)          ; finish half-vect for c2 to c0     ; store pos4 to output
+    sub.xyzw    vf16, vf07, vf16        sq.xyz      vf11, 21(vi07)          ; finish half-vect for uv0 to uv1   ; store pos4 to output for 2nd strip
+    sub.xyzw    vf17, vf08, vf17        sq.xyz      vf12, 6(vi07)           ; finish half-vect for uv1 to uv2   ; store pos5 to output
+    sub.xyzw    vf18, vf09, vf18        sq.xyz      vf12, 18(vi07)          ; finish half-vect for uv2 to uv0   ; store pos5 to output for 2nd strip
+    nop                                 sq.xyzw     vf13, 8(vi07)                                               ; store col3 to output
+    nop                                 sq.xyzw     vf14, 11(vi07)                                              ; store col4 to output
+    nop                                 sq.xyzw     vf14, 20(vi07)                                              ; store col4 to output for 2nd strip
+    nop                                 sq.xyzw     vf15, 5(vi07)                                               ; store col5 to output
+    nop                                 sq.xyzw     vf15, 17(vi07)                                              ; store col5 to output for 2nd strip
+    nop                                 sq.xyzw     vf16, 7(vi07)                                               ; store uv3 to output
+    nop                                 sq.xyzw     vf17, 10(vi07)                                              ; store uv4 to output
+    nop                                 sq.xyzw     vf17, 19(vi07)                                              ; store uv4 to output for 2nd strip
+    nop                                 sq.xyzw     vf18, 4(vi07)                                               ; store uv5 to output
+    nop                                 sq.xyzw     vf18, 16(vi07)                                              ; store uv5 to output for 2nd strip
+
+
+TRI_STRIP_SPLIT_TRANSFORM_AND_KICK:
+
+    sub.xyzw    vf13, vf00, vf00        iaddi       vi08, vi08, -1          ; recurse_count--
+    sub.xyzw    vf14, vf00, vf00        lq.xyzw     vf08, 2(vi14)
+    nop                                 iaddiu      vi12, vi00, 0x7FFF
+    nop                                 iaddiu      vi12, vi12, 9           ; yields 0x8008
+    nop                                 iaddiu      vi04, vi00, 8
+    nop                                 sq.xyzw     vf08, 0(vi07)
+    nop                                 isw.x       vi12, 0(vi07)
+    nop                                 iaddiu      vi05, vi07, 1           ; step over the GIFtag
+
+    nop                                 iaddiu      vi06, vi00, 0x7fff      ; step 1 of build ADC const
+    nop                                 iaddiu      vi06, vi06, 0x2         ; step 2 of build ADC const
+    nop                                 lq.xyzw     vf01, 2(vi05)           ; load XYZ
+    nop                                 lq.xyzw     vf02, 0(vi05)           ; load ST
+    nop                                 lq.xyzw     vf03, 1(vi05)           ; load RGBA
+
+TRI_STRIP_CLIP_SPLIT_TRANSFORM_START:
+    mulaw.xyzw  acc, vf23, vf00         lq.xyzw     vf04, 5(vi05)
+    maddaz.xyzw acc, vf22, vf01         lq.xyzw     vf05, 3(vi05)
+    madday.xyzw acc, vf21, vf01         lq.xyzw     vf06, 4(vi05)
+    maddx.xyzw  vf01, vf20, vf01        nop
+    mulaw.xyzw  acc, vf23, vf00         nop
+    maddaz.xyzw acc, vf22, vf04         nop
+    madday.xyzw acc, vf21, vf04         nop
+    maddx.xyzw  vf04, vf20, vf04        div         q, vf00w, vf01w
+    nop                                 loi         4095.0
+    addi.xy     vf13, vf13, i           loi         30000.0
+    addi.w      vf13, vf13, i           loi         10.0
+    addi.w      vf14, vf14, i           nop
+    nop                                 nop
+    nop                                 iaddiu      vi05, vi05, 6
+    mulq.xyz    vf01, vf01, q           div         q, vf00w, vf04w
+    mulq.xyzw   vf11, vf02, q           iaddiu      vi10, vi00, 0x00D0
+    ftoi0.xyzw  vf12, vf03              isw.w       vi06, -4(vi05)
+    nop                                 isw.w       vi06, -1(vi05)
+    sub.xyw     vf15, vf14, vf01        nop
+    sub.xyw     vf16, vf01, vf13        nop
+    ftoi4.xyz   vf10, vf01              iaddi       vi04, vi04, -2
+    mulq.xyz    vf04, vf04, q           nop
+    mulq.xyzw   vf08, vf05, q           fmand       vi01, vi10
+    ftoi0.xyzw  vf09, vf06              fmand       vi01, vi01
+    nop                                 ibeq        vi01, vi10, TRI_STRIP_CLIP_SPLIT_TRANSFORM_NO_V0_CLIP
+    nop                                 nop
+    nop                                 isw.w       vi06, 2(vi05)
+
+TRI_STRIP_CLIP_SPLIT_TRANSFORM_NO_V0_CLIP:
+    sub.xyw     vf15, vf14, vf04        lq.xyzw     vf01, 2(vi05)
+    sub.xyw     vf16, vf04, vf13        lq.xyzw     vf02, 0(vi05)
+    ftoi4.xyz   vf07, vf04              nop
+    mulaw.xyzw  acc, vf23, vf00w        lq.xyzw     vf03, 1(vi05)
+    maddaz.xyzw acc, vf22, vf01z        fmand       vi02, vi10
+    madday.xyzw acc, vf21, vf01y        fmand       vi02, vi02
+    maddx.xyzw  vf01, vf20, vf01x       nop
+    ftoi0.xyzw  vf06, vf03              nop
+    nop                                 ibeq        vi02, vi10, TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP_BYPASS
+    nop                                 nop
+    nop                                 isw.w       vi06, 2(vi05)
+    nop                                 b           TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP_BYPASS
+    nop                                 isw.w       vi06, 5(vi05)
+
+    
+TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP:
+    mulaw.xyzw  acc, vf23, vf00w        move.xyzw   vf12, vf09
+    maddaz.xyzw acc, vf22, vf01z        iaddiu      vi02, vi03, 0
+    madday.xyzw acc, vf21, vf01y        move.xyzw   vf07, vf04
+    maddx.xyzw  vf01, vf20, vf01x       move.xyzw   vf08, vf05
+    nop                                 iaddi       vi04, vi04, -1
+    nop                                 move.xyzw   vf09, vf06
+    nop                                 ibeq        vi04, vi00, TRI_STRIP_CLIP_SPLIT_RETURN
+TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP_BYPASS:
+    nop                                 div         q, vf00w, vf01w         ; start 1/W
+    nop                                 lq.xyzw     vf03, 1(vi05)
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    ftoi0.xyzw  vf06, vf03              nop
+    nop                                 nop
+    mulq.xyz    vf01, vf01, q           nop                                 ; project XYZ
+    mulq.xyzw   vf05, vf02, q           nop                                 ; project ST
+    nop                                 iaddiu      vi05, vi05, 3
+    nop                                 iaddiu      vi10, vi00, 0x00D0                 ; set clip test mask
+    sub.xyw     vf15, vf14, vf01        nop                                 ; clip test
+    sub.xyw     vf16, vf01, vf13        nop                                 ; clip test
+    ftoi4.xyz   vf04, vf01              nop
+    nop                                 iand        vi12, vi01, vi02
+    nop                                 fmand       vi03, vi10              ; clip test
+    nop                                 fmand       vi03, vi03              ; clip test
+    nop                                 iand        vi12, vi12, vi03
+    nop                                 nop
+    nop                                 ibeq        vi12, vi10, TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP_END
+    nop                                 nop
+    nop                                 ilw.w       vi12, -1(vi05)
+    nop                                 nop
+    nop                                 nop
+    nop                                 iaddiu      vi10, vi00, 5
+    nop                                 iand        vi12, vi12, vi10
+    nop                                 nop
+    nop                                 ibeq        vi12, vi10, TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP_END
+    nop                                 nop
+    nop                                 ibeq        vi08, vi00, TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP_AFTER_RECURSE
+    nop                                 nop
+; setup for recurse
+;   store current vert_addr
+;   set vert_addr to first vert of tri to be clipped
+;   set output to the next buffer (buffer_start + CLIPPER_SPLIT_BUFF_STRIDE)
+;   set stack pointer to next level (stack_pointer + CLIPPER_SPLIT_STACK_STRIDE)
+    nop                                 isw.x       vi05, 11(vi09)
+    nop                                 iaddi       vi06, vi05, -9
+    nop                                 iaddiu      vi07, vi07, CLIPPER_SPLIT_BUFF_STRIDE
+    nop                                 bal         vi13, TRI_STRIP_CLIP_SPLIT
+    nop                                 iaddiu      vi09, vi09, CLIPPER_SPLIT_STACK_STRIDE
+
+; restore from recurse
+;   set output to this buffer (buffer_start - CLIPPER_SPLIT_BUFF_STRIDE)
+;   set stack pointer to this level (stack_pointer - CLIPPER_SPLIT_STACK_STRIDE)
+;   load current vert_addr
+    nop                                 isubiu      vi07, vi07, CLIPPER_SPLIT_BUFF_STRIDE
+    nop                                 iaddi       vi09, vi09, -CLIPPER_SPLIT_STACK_STRIDE
+    nop                                 iaddiu      vi06, vi00, 0x7fff      ; step 1 of build ADC const
+    nop                                 ilw.x       vi05, 11(vi09)
+    nop                                 iaddiu      vi06, vi06, 0x2         ; step 2 of build ADC const
+    nop                                 nop
+    nop                                 nop
+
+TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP_AFTER_RECURSE:
+    nop                                 ilw.w       vi12, -1(vi05)
+    nop                                 iaddiu      vi10, vi00, 0x5
+    nop                                 nop
+    nop                                 nop
+    nop                                 iand        vi12, vi12, vi10
+    nop                                 nop
+    nop                                 ibeq        vi12, vi10, TRI_STRIP_VERT_3_COMP_LOOP_END
+    nop                                 nop
+    nop                                 iaddiu      vi06, vi00, 0x7fff      ; step 1 of build ADC const
+    nop                                 iaddiu      vi06, vi06, 0x5         ; step 2 of build ADC const
+    nop                                 isw.w       vi06, -1(vi05)
+    
+
+TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP_END:
+    nop                                 sq.xyz      vf10, -7(vi05)
+    nop                                 sq.xyzw     vf11, -9(vi05)
+    nop                                 sq.xyzw     vf12, -8(vi05)
+    nop                                 lq.xyzw     vf01, 2(vi05)
+    nop                                 lq.xyzw     vf02, 0(vi05)
+    nop                                 move.xyzw   vf10, vf07
+    nop                                 move.xyzw   vf11, vf08
+    nop                                 b           TRI_STRIP_CLIP_SPLIT_TRANSFORM_LOOP
+    nop                                 iaddiu      vi01, vi02, 0
+
+TRI_STRIP_CLIP_SPLIT_RETURN:
+    nop                                 sq.xyz      vf10, -4(vi05)
+    nop                                 sq.xyzw     vf11, -6(vi05)
+    nop                                 sq.xyzw     vf12, -5(vi05)
+    nop                                 sq.xyz      vf07, -1(vi05)
+    nop                                 sq.xyzw     vf08, -3(vi05)
+    nop                                 sq.xyzw     vf09, -2(vi05)
+    nop                                 xgkick      vi07
+TRI_STRIP_CLIP_SPLIT_RESTORE:
+    nop                                 lq.xyzw     vf04, 0(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 lq.xyzw     vf05, 1(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 lq.xyzw     vf06, 2(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 lq.xyzw     vf07, 3(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 lq.xyzw     vf08, 4(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 lq.xyzw     vf09, 5(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 lq.xyzw     vf10, 6(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 lq.xyzw     vf11, 7(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 lq.xyzw     vf12, 8(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 ilw.x       vi01, 9(vi09)           ; store vert1 clip test results
+    nop                                 ilw.y       vi02, 9(vi09)           ; store vert2 clip test results
+    nop                                 ilw.z       vi13, 10(vi09)          ; store return address
+    nop                                 ilw.z       vi03, 9(vi09)           ; store vert3 clip test results
+    nop                                 ilw.w       vi08, 9(vi09)           ; store recurse count
+    nop                                 ilw.x       vi05, 10(vi09)          ; store walking buffer ptr
+    nop                                 jr          vi13                    ; return
+    nop                                 ilw.y       vi04, 10(vi09)          ; store walking vert count
+
+
+
+
+TRI_STRIP_CLIPPER_SPLIT_ENVMAP:
+    ; do trivial rejection
+    nop                                 lq.xyzw     vf01, 3(vi06)
+    nop                                 lq.xyzw     vf02, 7(vi06)
+    nop                                 lq.xyzw     vf03, 11(vi06)
+    mulaw.xyzw  acc, vf27, vf00         nop
+    maddaz.xyzw acc, vf26, vf01         nop
+    madday.xyzw acc, vf25, vf01         nop
+    maddx.xyzw  vf01, vf24, vf01        nop
+    mulaw.xyzw  acc, vf27, vf00         nop
+    maddaz.xzyw acc, vf26, vf02         nop
+    madday.xyzw acc, vf25, vf02         nop
+    maddx.xyzw  vf02, vf24, vf02        nop
+    mulaw.xyzw  acc, vf27, vf00         nop
+    maddaz.xyzw acc, vf26, vf03         nop
+    madday.xyzw acc, vf25, vf03         nop
+    maddx.xyzw  vf03, vf24, vf03        nop
+    nop                                 nop
+    clipw.xyz vf01, vf01w               nop
+    clipw.xyz vf02, vf02w               nop
+    clipw.xyz vf03, vf03w               nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 fcor        vi01, 0xfdf7df ; ^0x020820 Z-
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIPPER_SPLIT_RESTORE_CULLED_ENV
+    nop                                 fcor        vi01, 0xfefbef ; ^0x010410 Z+
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIPPER_SPLIT_RESTORE_CULLED_ENV
+    nop                                 fcor        vi01, 0xff7df7 ; ^0x008208 Y-
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIPPER_SPLIT_RESTORE_CULLED_ENV
+    nop                                 fcor        vi01, 0xffbefb ; ^0x004104 Y+
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIPPER_SPLIT_RESTORE_CULLED_ENV
+    nop                                 fcor        vi01, 0xffdf7d ; ^0x002082 X-
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIPPER_SPLIT_RESTORE_CULLED_ENV
+    nop                                 fcor        vi01, 0xffefbe ; ^0x001041 X+
+    nop                                 ibne        vi01, vi00, TRI_STRIP_CLIPPER_SPLIT_RESTORE_CULLED_ENV
+    nop                                 nop
+
+TRI_STRIP_CLIPPER_SPLIT_RESTORE_CULLED_ENV:
+    nop                                 lq.xyzw     vf04, 0(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 lq.xyzw     vf05, 1(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 lq.xyzw     vf06, 2(vi09)           ; store vert1 (vf04-vf06)
+    nop                                 lq.xyzw     vf07, 3(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 lq.xyzw     vf08, 4(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 lq.xyzw     vf09, 5(vi09)           ; store vert2 (vf07-vf09)
+    nop                                 lq.xyzw     vf10, 6(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 lq.xyzw     vf11, 7(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 lq.xyzw     vf12, 8(vi09)           ; store vert3 (vf10-vf12)
+    nop                                 ilw.x       vi01, 9(vi09)           ; store vert1 clip test results
+    nop                                 ilw.y       vi02, 9(vi09)           ; store vert2 clip test results
+    nop                                 ilw.z       vi13, 10(vi09)          ; store return address
+    nop                                 ilw.z       vi03, 9(vi09)           ; store vert3 clip test results
+    nop                                 ilw.w       vi08, 9(vi09)           ; store recurse count
+    nop                                 ilw.x       vi05, 10(vi09)          ; store walking buffer ptr
+    nop                                 jr          vi13                    ; return
+    nop                                 ilw.y       vi04, 10(vi09)          ; store walking vert count
+
+
+
+
+
+
+
+

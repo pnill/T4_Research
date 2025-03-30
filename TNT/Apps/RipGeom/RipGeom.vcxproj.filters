@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{3e698983-4afc-4fce-90dd-97c716816b07}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{db298fe4-2595-4154-8e4f-378d5ccb7439}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GCRipper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeomMerge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PCRipper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PS2Help.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PS2Ripper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RipGeom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Strip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XBOXRipper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Auxiliary\Mesh\AsciiMesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Auxiliary\Mesh\CTextFile.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GCRipper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeomMerge.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PCRipper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PS2Help.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PS2Ripper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RipGeom.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Strip.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XBOXRipper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Auxiliary\Mesh\AsciiMesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Auxiliary\Mesh\CTextFile.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

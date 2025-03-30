@@ -1,0 +1,6376 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="Quag_3"
+	SccProjectName="&quot;$/TnT/Quagmire/Engine&quot;, CQCAAAAA"
+	SccAuxPath=""
+	SccLocalPath="."
+	SccProvider="MSSCCI:Microsoft Visual SourceSafe">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+		<Platform
+			Name="Xbox"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="PS2 USB Release|Win32"
+			OutputDirectory=".\RPS2USB"
+			IntermediateDirectory=".\RPS2USB"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="&quot;$(TNT)/x_files&quot;;&quot;$(TNT)/Quagmire/Engine&quot;;&quot;$(TNT)/Quagmire/Engine/Common&quot;;&quot;$(TNT)/Quagmire/Engine/PS2&quot;;&quot;$(TNT)/Quagmire/Engine/PS2/Helpers&quot;;&quot;$(TNT)\Auxiliary\Bitmap&quot;;&quot;$(TNT)\3rdParty\PS2\sce\DNAS\ee\include&quot;"
+				PreprocessorDefinitions="TARGET_PS2_USB"
+				StringPooling="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="4"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RPS2USB/Quag_3.pch"
+				AssemblerListingLocation=".\RPS2USB/"
+				ObjectFile=".\RPS2USB/"
+				ProgramDataBaseFileName=".\RPS2USB/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\RPS2USB\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 USB Release|Xbox"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DVD Release|Win32"
+			OutputDirectory=".\RPS2DVD"
+			IntermediateDirectory=".\RPS2DVD"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="&quot;$(TNT)/x_files&quot;;&quot;$(TNT)/Quagmire/Engine&quot;;&quot;$(TNT)/Quagmire/Engine/Common&quot;;&quot;$(TNT)/Quagmire/Engine/PS2&quot;;&quot;$(TNT)/Quagmire/Engine/PS2/Helpers&quot;;&quot;$(TNT)\Auxiliary\Bitmap&quot;;&quot;$(TNT)\3rdParty\PS2\sce\DNAS\ee\include&quot;"
+				PreprocessorDefinitions="TARGET_PS2_DVD"
+				StringPooling="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="4"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RPS2DVD/Quag_3.pch"
+				AssemblerListingLocation=".\RPS2DVD/"
+				ObjectFile=".\RPS2DVD/"
+				ProgramDataBaseFileName=".\RPS2DVD/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DVD "
+				OutputFile=".\RPS2DVD\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DVD Release|Xbox"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="XBox Devkit Debug|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="XBox Devkit Debug|Xbox"
+			OutputDirectory=".\DXBOXDEV"
+			IntermediateDirectory=".\DXBOXDEV"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="$(TNT)/x_files,$(TNT)/Quagmire/Engine,$(TNT)/Quagmire/Engine/Common,$(TNT)/Quagmire/Engine/XBOX,$(TNT)\Auxiliary\Bitmap,$(TNT)\Quagmire\Engine\Xbox\Shaders"
+				PreprocessorDefinitions="TARGET_XBOX_DEV,X_DEBUG,_XBOX,ENABLE_ASB_NETWORKING,$(USERNAME)"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DXBOXDEV/Quag_3.pch"
+				AssemblerListingLocation=".\DXBOXDEV/"
+				ObjectFile=".\DXBOXDEV/"
+				ProgramDataBaseFileName=".\DXBOXDEV/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="3"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile=".\DXBOXDEV\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DevKit Release|Win32"
+			OutputDirectory=".\RPS2DEV"
+			IntermediateDirectory=".\RPS2DEV"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				AdditionalIncludeDirectories="&quot;$(TNT)/x_files&quot;;&quot;$(TNT)/Quagmire/Engine&quot;;&quot;$(TNT)/Quagmire/Engine/Common&quot;;&quot;$(TNT)/Quagmire/Engine/PS2&quot;;&quot;$(TNT)/Quagmire/Engine/PS2/Helpers&quot;;&quot;$(TNT)\Auxiliary\Bitmap&quot;;&quot;$(TNT)\3rdParty\PS2\sce\DNAS\ee\include&quot;"
+				PreprocessorDefinitions="TARGET_PS2_DEV"
+				StringPooling="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="4"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RPS2DEV/Quag_3.pch"
+				AssemblerListingLocation=".\RPS2DEV/"
+				ObjectFile=".\RPS2DEV/"
+				ProgramDataBaseFileName=".\RPS2DEV/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\RPS2DEV\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DevKit Release|Xbox"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DVD Debug|Win32"
+			OutputDirectory=".\DPS2DVD"
+			IntermediateDirectory=".\DPS2DVD"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(TNT)/x_files&quot;;&quot;$(TNT)/Quagmire/Engine&quot;;&quot;$(TNT)/Quagmire/Engine/Common&quot;;&quot;$(TNT)/Quagmire/Engine/PS2&quot;;&quot;$(TNT)/Quagmire/Engine/PS2/Helpers&quot;;&quot;$(TNT)\Auxiliary\Bitmap&quot;;&quot;$(TNT)\3rdParty\PS2\sce\DNAS\ee\include&quot;"
+				PreprocessorDefinitions="TARGET_PS2_DVD,X_DEBUG"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DPS2DVD/Quag_3.pch"
+				AssemblerListingLocation=".\DPS2DVD/"
+				ObjectFile=".\DPS2DVD/"
+				ProgramDataBaseFileName=".\DPS2DVD/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DVD "
+				OutputFile=".\DPS2DVD\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DVD Debug|Xbox"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="XBox Devkit Release|Win32"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="XBox Devkit Release|Xbox"
+			OutputDirectory=".\RXBOXDEV"
+			IntermediateDirectory=".\RXBOXDEV"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				OptimizeForProcessor="2"
+				AdditionalIncludeDirectories="$(TNT)/x_files,$(TNT)/Quagmire/Engine,$(TNT)/Quagmire/Engine/Common,$(TNT)/Quagmire/Engine/XBOX,$(TNT)\Auxiliary\Bitmap,$(TNT)\Quagmire\Engine\Xbox\Shaders"
+				PreprocessorDefinitions="TARGET_XBOX_DEV,_XBOX,ENABLE_ASB_NETWORKING"
+				StringPooling="TRUE"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RXBOXDEV/Quag_3.pch"
+				AssemblerListingLocation=".\RXBOXDEV/"
+				ObjectFile=".\RXBOXDEV/"
+				ProgramDataBaseFileName=".\RXBOXDEV/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile=".\RXBOXDEV\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+		</Configuration>
+		<Configuration
+			Name="PC Release|Win32"
+			OutputDirectory=".\RPC"
+			IntermediateDirectory=".\RPC"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				InlineFunctionExpansion="1"
+				OptimizeForProcessor="1"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Quagmire\Engine\Common,$(TNT)\Quagmire\Engine\PC,$(TNT)\Auxiliary\Bitmap"
+				PreprocessorDefinitions="TARGET_PC"
+				StringPooling="TRUE"
+				RuntimeLibrary="4"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\RPC/Quag_3.pch"
+				AssemblerListingLocation=".\RPC/"
+				ObjectFile=".\RPC/"
+				ProgramDataBaseFileName=".\RPC/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile=".\RPC\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PC Release|Xbox"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 USB Debug|Win32"
+			OutputDirectory=".\DPS2USB"
+			IntermediateDirectory=".\DPS2USB"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(TNT)/x_files&quot;;&quot;$(TNT)/Quagmire/Engine&quot;;&quot;$(TNT)/Quagmire/Engine/Common&quot;;&quot;$(TNT)/Quagmire/Engine/PS2&quot;;&quot;$(TNT)/Quagmire/Engine/PS2/Helpers&quot;;&quot;$(TNT)\Auxiliary\Bitmap&quot;;&quot;$(TNT)\3rdParty\PS2\sce\DNAS\ee\include&quot;"
+				PreprocessorDefinitions="TARGET_PS2_USB,X_DEBUG"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DPS2USB/Quag_3.pch"
+				AssemblerListingLocation=".\DPS2USB/"
+				ObjectFile=".\DPS2USB/"
+				ProgramDataBaseFileName=".\DPS2USB/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\DPS2USB\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 USB Debug|Xbox"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PC Debug|Win32"
+			OutputDirectory=".\DPC"
+			IntermediateDirectory=".\DPC"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				OptimizeForProcessor="1"
+				AdditionalIncludeDirectories="$(TNT)\x_files,$(TNT)\Quagmire\Engine,$(TNT)\Quagmire\Engine\Common,$(TNT)\Quagmire\Engine\PC,$(TNT)\Auxiliary\Bitmap,$(TNT)\Quagmire\Engine\PC\Shaders"
+				PreprocessorDefinitions="TARGET_PC,X_DEBUG"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="4"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DPC/Quag_3.pch"
+				AssemblerListingLocation=".\DPC/"
+				ObjectFile=".\DPC/"
+				ProgramDataBaseFileName=".\DPC/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="3"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile=".\DPC\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PC Debug|Xbox"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DevKit Debug|Win32"
+			OutputDirectory=".\DPS2DEV"
+			IntermediateDirectory=".\DPS2DEV"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(TNT)/x_files&quot;;&quot;$(TNT)/Quagmire/Engine&quot;;&quot;$(TNT)/Quagmire/Engine/Common&quot;;&quot;$(TNT)/Quagmire/Engine/PS2&quot;;&quot;$(TNT)/Quagmire/Engine/PS2/Helpers&quot;;&quot;$(TNT)\Auxiliary\Bitmap&quot;;&quot;$(TNT)\3rdParty\PS2\sce\DNAS\ee\include&quot;"
+				PreprocessorDefinitions="TARGET_PS2_DEV,X_DEBUG,$(USERNAME)"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="5"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderFile=".\DPS2DEV/Quag_3.pch"
+				AssemblerListingLocation=".\DPS2DEV/"
+				ObjectFile=".\DPS2DEV/"
+				ProgramDataBaseFileName=".\DPS2DEV/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"
+				CompileAs="0"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				AdditionalOptions="/D:TARGET_PS2_DEV "
+				OutputFile=".\DPS2DEV\Quag_3.lib"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1033"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="PS2 DevKit Debug|Xbox"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="1">
+			<Tool
+				Name="VCCLCompilerTool"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="XboxDeploymentTool"/>
+			<Tool
+				Name="XboxImageTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Implementation"
+			Filter="">
+			<Filter
+				Name="Common"
+				Filter="">
+				<File
+					RelativePath=".\Common\E_AccumTimer.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_AccumTimer.hpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_Geom.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_InputQ.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_InputQ.hpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_SMem.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_SMem.hpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_Text.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_Text.hpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_View.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\E_Visibility-OBB.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\Q_FileReadQueue.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\Q_FileReadQueue.h">
+				</File>
+				<File
+					RelativePath=".\Q_Geom_inline.hpp">
+				</File>
+				<File
+					RelativePath=".\Common\Q_MemoryUnit.cpp">
+				</File>
+				<File
+					RelativePath=".\Common\Q_MemoryUnit.hpp">
+				</File>
+				<File
+					RelativePath=".\Common\Q_MemoryUnitResource.hpp">
+				</File>
+			</Filter>
+			<Filter
+				Name="GameCube"
+				Filter="">
+				<File
+					RelativePath=".\GameCube\GC_Debug.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Draw.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Draw.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_DVD.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_DVD.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Engine.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Font.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Font.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_FontData.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Geom.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Geom.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Geom_inline.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Input.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Input.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_MemoryUnit.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_MemoryUnit.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_MemoryUnitResource.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Video.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_Video.hpp">
+				</File>
+				<File
+					RelativePath=".\GameCube\GC_VRAM.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+			</Filter>
+			<Filter
+				Name="PC"
+				Filter="">
+				<File
+					RelativePath=".\Pc\PC_Debug.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Draw.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Draw.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_Engine.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Font.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Font.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_FontData.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Pc\PC_Geom.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Geom.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_Geom_inline.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_Input.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Input.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_MemoryUnit.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_MemoryUnit.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_MemoryUnitResource.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_Shaders.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Video.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PC\PC_Video.hpp">
+				</File>
+				<File
+					RelativePath=".\PC\PC_VRAM.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<Filter
+					Name="PC Shaders"
+					Filter="">
+					<File
+						RelativePath=".\PC\Shaders\PC_GeomMultiTexShader.h">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_GeomMultiTexShader.vsh">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_GeomObjShader.h">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_GeomObjShader.vsh">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_GeomShaderDefines.h">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_GeomShadowShader.h">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_GeomShadowShader.vsh">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_PSMultiTex.h">
+					</File>
+					<File
+						RelativePath=".\PC\Shaders\PC_PSMultiTex.psh">
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="PS2"
+				Filter="">
+				<File
+					RelativePath=".\PS2\Framebuf.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\Framebuf.hpp">
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_CD.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_CD.hpp">
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_CDUtil.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_CDUtil.hpp">
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_Debug.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_Debug.hpp">
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_Dev.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_Dev.hpp">
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_Engine.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_Font.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_Font.hpp">
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_FontData.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_Geom.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_Geom.hpp">
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_Geom_inline.hpp">
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_Input.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_Input.hpp">
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_MemoryUnit.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_MemoryUnit.hpp">
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_MemoryUnitResource.hpp">
+				</File>
+				<File
+					RelativePath=".\Ps2\PS2_Microcode.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_Primitive.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\ps2_usb.cpp">
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\PS2\ps2_usb.hpp">
+				</File>
+				<File
+					RelativePath=".\PS2\PS2_VRam.cpp">
+					<FileConfiguration
+						Name="XBox Devkit Debug|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="XBox Devkit Release|Xbox"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<Filter
+					Name="Helpers"
+					Filter="">
+					<File
+						RelativePath=".\Ps2\Helpers\dmahelp.cpp">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\Helpers\dmahelp.hpp">
+					</File>
+					<File
+						RelativePath=".\Ps2\Helpers\dmaman.cpp">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\Helpers\dmaman.hpp">
+					</File>
+					<File
+						RelativePath=".\Ps2\Helpers\dvtrace.cpp">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\Helpers\dvtrace.hpp">
+					</File>
+					<File
+						RelativePath="PS2\Helpers\PS2Perf.cpp">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="PS2\Helpers\PS2Perf.h">
+					</File>
+					<File
+						RelativePath=".\PS2\Helpers\SPRhelp.cpp">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\PS2\Helpers\SPRhelp.hpp">
+					</File>
+					<File
+						RelativePath=".\Ps2\Helpers\vifhelp.cpp">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\Helpers\vifhelp.hpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="DRAW"
+					Filter="">
+					<File
+						RelativePath=".\Ps2\PS2_Draw.cpp">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\PS2_DrawLines.cpp">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\PS2_DrawPoints.cpp">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\PS2\PS2_DrawRects.cpp">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\PS2_DrawSprites.cpp">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\PS2_DrawTrans.cpp">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\PS2_DrawTris.cpp">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Ps2\PS2_DrawTrisClip.cpp">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+				</Filter>
+				<Filter
+					Name="Geom"
+					Filter="">
+					<File
+						RelativePath=".\PS2\geom\geom.dsm">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Quagmire\Engine\PS2\Geom&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Quagmire\Engine\PS2\Geom&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Quagmire\Engine\PS2\Geom&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Quagmire\Engine\PS2\Geom&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Quagmire\Engine\PS2\Geom&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="[DSM] $(InputPath)"
+								CommandLine="&quot;$(PS2)\sce\ee\gcc\bin\ps2dvpas&quot; -g -o &quot;$(IntDir)\$(InputName).obj&quot; &quot;-I$(PS2)\sce\ee\include&quot; &quot;-I$(TNT)\Quagmire\Engine\PS2\Geom&quot; &quot;$(InputPath)&quot; &gt; &quot;$(IntDir)\$(InputName).lst&quot;"
+								AdditionalDependencies="tri_strips_3comp.vsm"
+								Outputs="$(IntDir)\$(InputName).obj"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\PS2\geom\memlayout.vsm">
+					</File>
+					<File
+						RelativePath="PS2\Geom\tri_strips_3comp.vsm">
+					</File>
+					<File
+						RelativePath="PS2\Geom\tri_strips_4comp.vsm">
+					</File>
+					<File
+						RelativePath="PS2\Geom\tri_strips_boot.vsm">
+					</File>
+					<File
+						RelativePath="PS2\Geom\tri_strips_clipper.vsm">
+					</File>
+					<File
+						RelativePath="PS2\Geom\tri_strips_envmapper.vsm">
+					</File>
+					<File
+						RelativePath="PS2\Geom\tri_strips_lighting.vsm">
+					</File>
+					<File
+						RelativePath="PS2\Geom\tri_strips_main.vsm">
+					</File>
+					<File
+						RelativePath=".\Ps2\Geom\tri_strips_posttransform_clipper.vsm">
+					</File>
+					<File
+						RelativePath="PS2\Geom\tri_strips_preclipper.vsm">
+					</File>
+					<File
+						RelativePath=".\Ps2\Geom\tri_strips_shadow.vsm">
+					</File>
+				</Filter>
+				<Filter
+					Name="Visibility"
+					Filter="">
+					<File
+						RelativePath=".\Ps2\Visibility\AsmOrientedBBox.s">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32">
+							<Tool
+								Name="VCCLCompilerTool"/>
+						</FileConfiguration>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="XBox"
+				Filter="">
+				<File
+					RelativePath=".\Xbox\XBOX_Debug.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_Dev.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_Dev.hpp">
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Draw.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_Draw.hpp">
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Engine.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Font.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Font.hpp">
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_FontData.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Geom.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Geom.hpp">
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Geom_inline.hpp">
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Input.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Input.hpp">
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_MemoryUnit.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_MemoryUnit.hpp">
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_MemoryUnitResource.hpp">
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Primitive.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\XBOX\XBOX_Shaders.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Video.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_Video.hpp">
+				</File>
+				<File
+					RelativePath=".\Xbox\XBOX_VRAM.cpp">
+					<FileConfiguration
+						Name="PS2 USB Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DVD Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Release|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 USB Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PC Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="PS2 DevKit Debug|Win32"
+						ExcludedFromBuild="TRUE">
+						<Tool
+							Name="VCCLCompilerTool"/>
+					</FileConfiguration>
+				</File>
+				<Filter
+					Name="Shaders"
+					Filter="">
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_Geom2DiffuseShader.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_Geom2DiffuseShader.vsh">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_2DiffuseShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_2DiffuseShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_GeomEnvMapShader.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_GeomEnvMapShader.vsh">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_EnvMapShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_EnvMapShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_GeomMultiTexShader.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_GeomMultiTexShader.vsh">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_MultiTexShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_MultiTexShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_GeomObjShader.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_GeomObjShader.vsh">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_ObjShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_ObjShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_GeomShaderDefines.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_GeomShadowShader.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_GeomShadowShader.vsh">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_ShadowShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Vertex Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_ShadowShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PS_2Diffuse.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PS_2Diffuse.psh">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_2DiffuseShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_2DiffuseShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PS_2Diffuse_Cheat.h">
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PS_2Diffuse_Cheat.psh">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_2Diffuse_CheatShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_2Diffuse_CheatShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSEnvMap.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSEnvMap.psh">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_EnvMapShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_EnvMapShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSEnvMap_Cheat.h">
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSEnvMap_Cheat.psh">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_EnvMap_CheatShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_EnvMap_CheatShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_PSMultiTex.h">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\XBOX\Shaders\XBOX_PSMultiTex.psh">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_MultiTexShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_MultiTexShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSMultiTex_Cheat.h">
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSMultiTex_Cheat.psh">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_MultiTex_CheatShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_MultiTex_CheatShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSSimpleDiffuseNoLight.h">
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSSimpleDiffuseNoLight.psh">
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_SimpleDiffuseNoLightShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_SimpleDiffuseNoLightShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSSimpleDiffuseNoLight_Cheat.h">
+					</File>
+					<File
+						RelativePath=".\Xbox\Shaders\XBOX_PSSimpleDiffuseNoLight_Cheat.psh">
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_SimpleDiffuseNoLight_CheatShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox">
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Generating XBOX Pixel Shader code for $(InputPath)"
+								CommandLine="xsasm -O1 -O2 -nologo -h -hname s_GEOM_PS_SimpleDiffuseNoLight_CheatShader &quot;$(InputPath)&quot;
+copy &quot;$(InputDir)$(InputName).h&quot; &quot;$(OutDir)\$(InputName).bin&quot;"
+								Outputs="$(OutDir)\$(InputName).bin"/>
+						</FileConfiguration>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="LIBS"
+				Filter="">
+				<Filter
+					Name="PS2-Libs"
+					Filter="">
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libcdvd.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libdev.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libdma.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libgraph.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libipu.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libkernl.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\liblout.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libmc.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libmpeg.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libmsin.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libmtap.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libpad.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libpc.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libpkt.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\librspu2.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libsdr.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libssyn.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\lib\libvu0.lib">
+						<FileConfiguration
+							Name="PS2 USB Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Debug|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DVD Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="XBox Devkit Release|Xbox"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Release|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 USB Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PC Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="PS2 DevKit Debug|Win32"
+							ExcludedFromBuild="TRUE">
+							<Tool
+								Name="VCCustomBuildTool"/>
+						</FileConfiguration>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="External"
+				Filter="">
+				<Filter
+					Name="XFiles-Ext"
+					Filter="">
+					<File
+						RelativePath="..\..\x_files\x_bitmap.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_bitmap_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_color.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_color_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_debug.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_files.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_math.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_math_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_math_m4_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_math_q_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_math_r3_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_math_v2_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_math_v3_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_math_v4_inline.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_memory.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_plus.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_stats.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_stdio.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_target.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_time.hpp">
+					</File>
+					<File
+						RelativePath="..\..\x_files\x_types.hpp">
+					</File>
+				</Filter>
+				<Filter
+					Name="PS2-Ext"
+					Filter="">
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\gcc\ee\include\_ansi.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\gcc\ee\include\sys\config.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\devfont.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\devgif.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\devvif0.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\devvif1.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\devvu0.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\devvu1.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\eekernel.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\eeregs.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\eestruct.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\eetypes.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\gcc\ee\include\machine\ieeefp.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\libdev.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\libdma.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\libgifpk.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\libgraph.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\libpad.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\libvu0.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\TnT\PS2_in_VC.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\gcc\ee\include\sys\reent.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\sifdev.h">
+					</File>
+					<File
+						RelativePath="..\..\3rdParty\Ps2\sce\ee\include\sifrpc.h">
+					</File>
+				</Filter>
+			</Filter>
+		</Filter>
+		<File
+			RelativePath=".\Q_Draw.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_Engine.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_GC.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_Geom.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_Input.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_Light.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_PC.hpp">
+		</File>
+		<File
+			RelativePath="Q_Perf.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_Primitive.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_PS2.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_SMem.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_Text.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_View.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_Visibility.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_VRAM.hpp">
+		</File>
+		<File
+			RelativePath=".\Q_XBOX.hpp">
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

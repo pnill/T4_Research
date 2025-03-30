@@ -1,0 +1,366 @@
+;==========================================================================
+;
+; CLIPPER
+;
+;==========================================================================
+;   VI00    Const (0)
+;I  VI01    (Temp)
+;I  VI02    (Temp) - Address of solved 3 verts to grab rgbs from 
+;I  VI03    Address to return to after clipping
+;I  VI04    PlaneTestFlags / Dest address of final clipped fan
+;S  VI05    Current Src clip vert buffer addr
+;S  VI06    Current Dst clip vert buffer addr
+;S  VI07    Num src clip verts
+;S  VI08    Num dst clip verts
+;S  VI09    (Temp)
+;S  VI10    Component to clip by, X=0, Y=1, Z=2
+;S  VI11    Curr clip flag    
+;S  VI12    Next clip flag
+;S  VI13    (Temp) - Loop through planes
+;S  VI14    Src clip vert buffer base
+;S  VI15    Dst clip vert buffer base
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;I  VF01    Clip   XYZ 0  /  Current Vert ST
+;I  VF02    Clip   XYZ 1  /  Current Vert RGB
+;I  VF03    Clip   XYZ 2  /  Current Vert XYZ
+;I  VF04    Clip   XYZ 3  /  Next    Vert ST
+;I  VF05    Source ST  0  /  Next    Vert RGB
+;I  VF06    Source ST  1  /  Next    Vert XYZ
+;I  VF07    Source ST  2  /  Interpolated ST
+;I  VF08    Source ST  3  /  Interpolated RGB
+;I  VF09    Source RGB 0  /  Interpolated XYZ
+;I  VF10    Source RGB 1
+;I  VF11    Source RGB 2
+;I  VF12    Source RGB 3
+;S  VF13    Plane value -1,1
+;S  VF14    ZERO
+;   VF15    
+;   VF16    
+;   VF17    
+;   VF18    
+;   VF19    
+;   VF20    Active local to screen matrix qword 0
+;   VF21    Active local to screen matrix qword 1
+;   VF22    Active local to screen matrix qword 2
+;   VF23    Active local to screen matrix qword 3
+;   VF24    Active local to clip matrix qword 0 
+;   VF25    Active local to clip matrix qword 1 
+;   VF26    Active local to clip matrix qword 2 
+;   VF27    Active local to clip matrix qword 3 
+;   VF28    Active clip to screen matrix qword 0
+;   VF29    Active clip to screen matrix qword 1
+;   VF30    Active clip to screen matrix qword 2
+;   VF31    Active clip to screen matrix qword 3
+;==========================================================================
+
+
+QUAD_CLIPPER_NO_REJECT:
+
+        NOP                             JR VI03
+        NOP                             NOP
+
+        /*
+;------------------------------------------------------------------------
+;   BACKUP ALL NEEDED REGISTERS
+;------------------------------------------------------------------------
+        NOP                             IADDIU VI01, VI00, CLIPPER_STACK
+        NOP                             SQ.xyzw VF07, 0(VI01)
+        NOP                             SQ.xyzw VF08, 1(VI01)
+        NOP                             SQ.xyzw VF09, 2(VI01)
+        NOP                             SQ.xyzw VF10, 3(VI01)
+        NOP                             SQ.xyzw VF11, 4(VI01)
+        NOP                             SQ.xyzw VF12, 5(VI01)
+        NOP                             SQ.xyzw VF13, 6(VI01)
+        NOP                             SQ.xyzw VF14, 7(VI01)
+        NOP                             ISW.x   VI05, 8(VI01)
+        NOP                             ISW.y   VI06, 8(VI01)
+        NOP                             ISW.z   VI07, 8(VI01)
+        NOP                             ISW.w   VI08, 8(VI01)
+        NOP                             ISW.x   VI09, 9(VI01)
+        NOP                             ISW.y   VI02, 9(VI01)
+        NOP                             ISW.z   VI11, 9(VI01)
+        NOP                             ISW.w   VI12, 9(VI01)
+        NOP                             ISW.x   VI13,10(VI01)
+        NOP                             ISW.y   VI14,10(VI01)
+        NOP                             ISW.z   VI15,10(VI01)
+        NOP                             ISW.w   VI04,10(VI01)
+
+;------------------------------------------------------------------------
+;
+;   WRITE INITIAL VERTS TO CLIP BUFFER
+;
+;   Gif verts and Clip verts are in this order
+;
+;   VIFHELP_GIFREG_ST,
+;   VIFHELP_GIFREG_RGBAQ,
+;   VIFHELP_GIFREG_XYZF2,
+;
+;------------------------------------------------------------------------
+
+        SUB.xyzw VF14, VF14, VF14       IADDIU VI14, VI00, CLIPPER_VERTS_0  ; set src base addr
+        NOP                             IADDIU VI15, VI00, CLIPPER_VERTS_1  ; set dst base addr
+        NOP                             IADDIU VI07, VI00, 4                ; set nsrc
+        NOP                             IADD   VI12, VI00, VI14             ; VI12 = list A
+
+        ; fill in the inpute buffer. NOTE: Because we want quads in CW or CCW order, and
+        ; they are currently in strip form, we need to do some reording of the vertices.
+        ; ultimately we'd like vert 0 to be one of the shared verts, so that we minimize
+        ; vert color issues when we switch from strip to fan format. (One of the shared verts
+        ; makes a much better choice for vert 0 of a fan in the case when two of the edges are
+        ; close to being collinear.)
+        ; I choose to convert it as so: 0->3, 1->0, 3->1, 2->2, or...
+        ; 0<-1
+        ; 1<-3
+        ; 2<-2
+        ; 3<-0
+*/
+        ;// HACK HACK HACK HACK
+/*        SUB.xyzw VF09, VF09, VF09       NOP
+        SUB.xyzw VF10, VF10, VF10       NOP
+        SUB.xyzw VF11, VF11, VF11       NOP
+        SUB.xyzw VF12, VF12, VF12       NOP
+
+        NOP                             LOI 128.0
+        ADDi.xw    VF09, VF09, I        NOP             ; Vert0 = Red
+        ADDi.yw    VF10, VF10, I        NOP             ; Vert1 = Green
+        ADDi.zw    VF11, VF11, I        NOP             ; Vert2 = Bblue
+        ADDi.xyzw  VF12, VF12, I        NOP             ; Vert3 = White
+        FTOI0.xyzw VF09, VF09           NOP
+        FTOI0.xyzw VF10, VF10           NOP
+        FTOI0.xyzw VF11, VF11           NOP
+        FTOI0.xyzw VF12, VF12           NOP*/
+        ;// END HACK
+
+/*
+        ITOF0 VF09, VF09                SQ.xyzw VF06, 0(VI12)               ; rgb0->float       ; ST1
+        ITOF0 VF10, VF10                SQ.xyzw VF08, 3(VI12)               ; rgb1->float       ; ST3
+        ITOF0 VF11, VF11                SQ.xyzw VF07, 6(VI12)               ; rgb2->float       ; ST2
+        ITOF0 VF12, VF12                SQ.xyzw VF05, 9(VI12)               ; rgb3->float       ; ST0
+        NOP                             SQ.xyzw VF06, 12(VI12)                                  ; ST1
+
+        NOP                             SQ.xyzw VF02, 2(VI12)               ; XYZ1
+        NOP                             SQ.xyzw VF04, 5(VI12)               ; XYZ3
+        NOP                             SQ.xyzw VF03, 8(VI12)               ; XYZ2
+        NOP                             SQ.xyzw VF01, 11(VI12)              ; XYZ0
+        NOP                             SQ.xyzw VF02, 14(VI12)              ; XYZ1
+
+        NOP                             SQ.xyzw VF10, 1(VI12)               ; RGB1
+        NOP                             SQ.xyzw VF12, 4(VI12)               ; RGB3
+        NOP                             SQ.xyzw VF11, 7(VI12)               ; RGB2
+        NOP                             SQ.xyzw VF09, 10(VI12)              ; RGB0
+        NOP                             SQ.xyzw VF10, 13(VI12)              ; RGB1
+
+;------------------------------------------------------------------------
+; LOOP THROUGH THE SIX PLANES
+;------------------------------------------------------------------------
+
+        NOP                             IADDIU  VI13, VI00, 6
+        NOP                             IADDIU  VI04, VI00, 0xFF            ; Be sure to need plane
+
+QUAD_PLANE_LOOP:
+        NOP                             IADDI   VI13, VI13, -1
+        NOP                             IADDIU  VI01, VI13, CLIPPER_PLANES
+
+        ; Load clipping plane info from table                                                
+        NOP                             ILW.z   VI12, 0(VI01)               ; read next mask from table
+        NOP                             ILW.y   VI11, 0(VI01)               ; read curr mask from table
+        NOP                             ILW.w   VI10, 0(VI01)               ; read component rot from table
+        NOP                             LQ.xyzw VF13, 0(VI01)               ; read plane sign from table
+
+        ; Check if we can skip testing against this plane
+        NOP                             IBEQ    VI04, VI00, QUAD_PLANE_SKIP_ALL
+        NOP                             IAND    VI01, VI04, VI12            ; test plane bits with next mask
+        NOP                             NOP
+        NOP                             IBEQ    VI01, VI00, QUAD_PLANE_SKIP
+
+        ; Setup initial src and dst vert buffers
+        NOP                             IADD    VI05, VI00, VI14            ; src clip vert buffer addr
+        NOP                             IADD    VI06, VI00, VI15            ; dst clip vert buffer addr
+        NOP                             IADDIU  VI08, VI00, 0               ; clear ndst
+        NOP                             LQ.xyzw VF06, 2(VI05)               ; load first vert into 'next'
+        NOP                             LQ.xyzw VF04, 0(VI05)               ; load first vert into 'next'
+        NOP                             LQ.xyzw VF05, 1(VI05)               ; get clip for first vert, load first vert into 'next'
+        NOP                             IADDIU VI05, VI05, 3
+
+        ; Clear VI04 and re-accumulate plane bits
+        NOP                             IADDIU VI04, VI00, 0
+
+QUAD_PLANE_VERT_LOOP:        
+
+        NOP                             BAL VI02, CLIP_SEG_ENTER                ; get next and check segment
+        NOP                             ISUBIU VI07, VI07, 1                    ; dec num src verts
+        NOP                             NOP
+        NOP                             IBNE VI07, VI00, QUAD_PLANE_VERT_LOOP   ; do loop
+        
+        ; (Duplicate first vert on end) & (flip source and dest ptr/counts)
+        NOP                             LQ VF01, 0(VI15)                    ; (BDS)
+        NOP                             LQ VF02, 1(VI15)
+        NOP                             LQ VF03, 2(VI15)
+        NOP                             IADD VI07, VI08, VI00            ; copy ndst into nsrc
+        NOP                             SQI VF01, (VI06++)
+        NOP                             SQI VF02, (VI06++)
+        NOP                             SQI VF03, (VI06++)
+       
+        NOP                             IADD VI08, VI00, VI00            ; set ndst to zero
+        NOP                             IADD VI01, VI14, VI00            ; flip src/dst buffers
+        NOP                             IADD VI14, VI15, VI00
+
+        ; Check if we hit 0 verts
+        NOP                             IBEQ VI07, VI00, QUAD_CLIPPER_RESTORE_RET
+        NOP                             IADD VI15, VI01, VI00           ; (BDS)
+
+        
+QUAD_PLANE_SKIP:   
+        
+        ; Check if we have clipped to all planes
+        NOP                             IBNE VI13, VI00, QUAD_PLANE_LOOP
+        NOP                             NOP
+
+;------------------------------------------------------------------------
+;   Transform clipped verts into final buffer
+;------------------------------------------------------------------------
+QUAD_PLANE_SKIP_ALL:
+        ; Kick 0-vert giftag for stall
+        NOP                             IADDIU VI01, VI00, CLIPPER_GIF_STALL
+        NOP                             NOP
+        NOP                             XGKICK VI01
+        NOP                             NOP
+
+        ; Decide whether to do single_vert or not
+        NOP                             IADDIU VI01, VI00, 0x01
+        NOP                             IAND VI02, VI07, VI01
+
+        ; Get copy of num of verts
+        NOP                             IADD VI01, VI00, VI07
+        
+        ; Get src vert address and load first values
+        NOP                             IADD VI05, VI14, VI00
+        NOP                             LQ VF01, 2(VI05)                ; load xyz
+        NOP                             LQ VF02, 0(VI05)                ; load st
+        NOP                             LQ VF03, 1(VI05)                ; load rgb
+
+        ; Get dst address
+        NOP                             IADDIU VI04, VI00, CLIPPER_GIF_VERTS_0
+
+        ; Check if we need to do a single vert before doubles
+        NOP                             IBEQ VI02, VI00, QUAD_CLIPPER_TRANSFORM_DOUBLE                  
+        NOP                             IADDI VI06, VI04, 1             ; (BDS)
+
+QUAD_CLIPPER_TRANSFORM_SINGLE:
+
+        ; Load XYZ, ST, RGB
+        MULAw.xyzw  ACC, VF31, VF01w    NOP                             ; transform V0 into screen
+        MADDAz.xyzw ACC, VF30, VF01z    NOP                             ; transform V0 into screen
+        MADDAy.xyzw ACC, VF29, VF01y    NOP                             ; transform V0 into screen
+        MADDx.xyzw VF04, VF28, VF01x    NOP                             ; transform V0 into screen
+        FTOI0 VF06, VF03                NOP                             ; convert rgb from float to int
+        NOP                             IADDI VI05, VI05, 3             ; increment source ptr
+        NOP                             NOP
+        NOP                             DIV Q, VF00w, VF04w             ; Do perspective divide
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MULQ VF04, VF04, Q              NOP                             ; project xyz
+        MULQ.xyz VF05, VF02, Q          NOP                             ; compute stq
+        NOP                             LQ VF01, 2(VI05)                ; load xyz
+        NOP                             LQ VF02, 0(VI05)                ; load st 
+        FTOI4 VF04, VF04                LQ VF03, 1(VI05)                ; load rgb ; convert xyz from float to fixed
+        NOP                             SQ VF05, 0(VI06)                ; store stq
+        NOP                             SQ VF06, 1(VI06)                ; store rgb
+        NOP                             IADDI VI01, VI01, -1            ; decrement loop count
+        NOP                             SQ VF04, 2(VI06)                ; store xyz
+        NOP                             IADDI VI06, VI06, 3             ; increment dest ptr
+        
+QUAD_CLIPPER_TRANSFORM_DOUBLE:
+
+        ; Load XYZ, ST, RGB
+        MULAx.xyzw  ACC, VF28, VF01x    LQ VF07, 5(VI05)                ; load xyz2 ; transform V1 into screen
+        MADDAy.xyzw ACC, VF29, VF01y    LQ VF08, 3(VI05)                ; load st2 ; transform V1 into screen
+        MADDAz.xyzw ACC, VF30, VF01z    LQ VF09, 4(VI05)                ; load rgb2; transform V1 into screen
+        MADDw.xyzw VF04, VF31, VF01w    IADDI VI05, VI05, 6             ; transform V1 into screen
+        MULAx.xyzw  ACC, VF28, VF07x    NOP                             ; transform V2 into screen      
+        MADDAy.xyzw ACC, VF29, VF07y    NOP                             ; transform V2 into screen      
+        MADDAz.xyzw ACC, VF30, VF07z    NOP                             ; transform V2 into screen
+        MADDw.xyzw VF07, VF31, VF07w    DIV Q, VF00w, VF04w             ; transform V2 into screen      ; Do perspective divide
+        FTOI0 VF06, VF03                NOP                             ; convert rgb from float to int
+        FTOI0 VF09, VF09                NOP                             ; convert rgb from float to int 
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MULQ VF04, VF04, Q              NOP                             ; project xyz
+        MULQ.xyz VF05, VF02, Q          DIV Q, VF00w, VF07w             ; compute stq                   ; Do perspective divide
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4 VF04, VF04                NOP                             ; convert xyz from float to fixed
+        NOP                             SQ VF05, 0(VI06)                ; store stq
+        NOP                             SQ VF06, 1(VI06)                ; store rgb
+        NOP                             NOP
+        MULQ VF07, VF07, Q              SQ VF04, 2(VI06)                ; project xyz               ; store xyz
+        MULQ.xyz VF08, VF08, Q          NOP                             ; compute stq
+        NOP                             LQ VF01, 2(VI05)                ; load xyz 
+        NOP                             LQ VF02, 0(VI05)                ; load st  
+        FTOI4 VF07, VF07                LQ VF03, 1(VI05)                ; load rgb ; convert xyz from float to fixed
+        NOP                             SQ VF08, 3(VI06)                ; store stq
+        NOP                             SQ VF09, 4(VI06)                ; store rgb
+        NOP                             IADDI VI01, VI01, -2            ; decrement loop count
+        NOP                             SQ VF07, 5(VI06)                ; store xyz
+        NOP                             IBNE VI01, VI00, QUAD_CLIPPER_TRANSFORM_DOUBLE
+        NOP                             IADDI VI06, VI06, 6             ; increment dest ptr
+        
+;------------------------------------------------------------------------
+;   Clear and kick empty giftag to cause stall if needed
+;------------------------------------------------------------------------
+
+        ; Set fan giftag count to num of src verts
+        NOP                             IADDIU VI01, VI00, 0x7FFF           
+        NOP                             IADDIU VI01, VI01, 0x01             
+        NOP                             IADD   VI01, VI01, VI07
+        NOP                             ISW.x  VI01, 0(VI04)
+
+        ; Kick fan giftag
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             XGKICK VI04
+        NOP                             NOP
+
+;------------------------------------------------------------------------
+;   RESTORE ALL NEEDED REGISTERS
+;------------------------------------------------------------------------
+
+QUAD_CLIPPER_RESTORE_RET:
+
+        NOP                             IADDIU VI01, VI00, CLIPPER_STACK
+        NOP                             LQ.xyzw VF07, 0(VI01)
+        NOP                             LQ.xyzw VF08, 1(VI01)
+        NOP                             LQ.xyzw VF09, 2(VI01)
+        NOP                             LQ.xyzw VF10, 3(VI01)
+        NOP                             LQ.xyzw VF11, 4(VI01)
+        NOP                             LQ.xyzw VF12, 5(VI01)
+        NOP                             LQ.xyzw VF13, 6(VI01)
+        NOP                             LQ.xyzw VF14, 7(VI01)
+        NOP                             ILW.x   VI05, 8(VI01)
+        NOP                             ILW.y   VI06, 8(VI01)
+        NOP                             ILW.z   VI07, 8(VI01)
+        NOP                             ILW.w   VI08, 8(VI01)
+        NOP                             ILW.x   VI09, 9(VI01)
+        NOP                             ILW.y   VI02, 9(VI01)
+        NOP                             ILW.z   VI11, 9(VI01)
+        NOP                             ILW.w   VI12, 9(VI01)
+        NOP                             ILW.x   VI13,10(VI01)
+        NOP                             ILW.y   VI14,10(VI01)
+        NOP                             ILW.z   VI15,10(VI01)
+        NOP                             ILW.w   VI04,10(VI01)
+
+;------------------------------------------------------------------------
+;   RETURN TO CALLER
+;------------------------------------------------------------------------
+QUAD_CLIPPER_RET:
+        NOP                             JR VI03
+        NOP                             NOP
+*/

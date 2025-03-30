@@ -1,0 +1,17 @@
+xps.1.1
+
+def c0, 0.68f, 0.680f, 0.700f, 1.0f
+def c1, 0.30f, 0.30f, 0.30f, 1.0f
+def c2, 0.3f, 0.59f, 0.11f, 1.0f
+def c3, 0.9f, 0.7f, 0.3f, 1.0f
+
+tex t0 // base texture
+tex t1 // environment map coordinates
+
+mul r0, v0, c0  ;diffuse*ambient
+mul r0, t0, r0  ;texture*light
+
+mad r0.rgb, c1.rgb, t1.rgb, r0.rgb	;environment reduce * environment + current
+
+dp3 r0.rgb, c2, r0
+mul r0.rgb, c3, r0

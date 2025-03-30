@@ -1,0 +1,350 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\MemCardWiz.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\MemCardWiz.ico"
+IDI_ICON_SMALL          ICON    DISCARDABLE     "res\\MemCardWizSmall.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DLG_MEMCARDWIZ DIALOGEX 0, 0, 363, 246
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "MemCard Wizard"
+FONT 8, "Tahoma"
+BEGIN
+    PUSHBUTTON      "Open Project...",IDC_BTN_OPEN,6,6,74,18,WS_GROUP,
+                    WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Save Project...",IDC_BTN_SAVE,6,29,74,18,0,
+                    WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Export Resource...",IDC_BTN_EXPORT,6,57,74,20,BS_CENTER | 
+                    BS_VCENTER,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Add Save Type...",IDC_BTN_ADDTYPE,92,15,66,14,WS_GROUP
+    PUSHBUTTON      "Delete Save Type",IDC_BTN_DELETETYPE,92,31,66,14
+    PUSHBUTTON      "Rename Type...",IDC_BTN_RENAMETYPE,92,46,66,14
+    CONTROL         "Playstation 2",IDC_RADIO_VIEW_PS2,"Button",
+                    BS_AUTORADIOBUTTON | BS_PUSHLIKE | WS_GROUP | WS_TABSTOP,
+                    112,69,60,12
+    CONTROL         "GameCube",IDC_RADIO_VIEW_GC,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,172,69,60,12
+    CONTROL         "XBOX",IDC_RADIO_VIEW_XBOX,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,232,69,60,12
+    CONTROL         "PC",IDC_RADIO_VIEW_PC,"Button",BS_AUTORADIOBUTTON | 
+                    BS_PUSHLIKE,292,69,60,12
+    PUSHBUTTON      "Browse for Icon...",IDC_BTN_ICON_BROWSE,42,109,78,12,
+                    WS_GROUP
+    PUSHBUTTON      "Edit Icon Properties...",IDC_BTN_ICON_EDIT,126,109,85,
+                    12
+    EDITTEXT        IDC_EDIT_PS2_GAMEID,69,130,79,12,WS_GROUP
+    EDITTEXT        IDC_EDIT_PS2_NFILES,69,155,28,12,ES_READONLY | ES_NUMBER | 
+                    WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_PS2_NFILES,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,99,155,11,12
+    EDITTEXT        IDC_EDIT_PS2_FILESIZE,69,185,52,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_PS2_FILENAME,69,217,126,12,ES_AUTOHSCROLL | 
+                    WS_GROUP
+    EDITTEXT        IDC_EDIT_PS2_DIR1,275,122,55,12,WS_GROUP
+    EDITTEXT        IDC_EDIT_PS2_DIR2,275,134,55,12
+    EDITTEXT        IDC_EDIT_PS2_DIR3,275,146,55,12
+    EDITTEXT        IDC_EDIT_PS2_DIR4,275,158,55,12
+    EDITTEXT        IDC_EDIT_PS2_DIR5,275,170,55,12
+    EDITTEXT        IDC_EDIT_PS2_DIR6,275,182,55,12
+    EDITTEXT        IDC_EDIT_PS2_DIR7,275,194,55,12
+    EDITTEXT        IDC_EDIT_PS2_DIR8,275,206,55,12
+    RTEXT           "Sony Game ID:",IDC_STATIC_PS2_GAMEID,16,131,49,8
+    EDITTEXT        IDC_EDIT_ICON_FILE,41,93,299,12,ES_AUTOHSCROLL | 
+                    ES_READONLY | WS_GROUP
+    LISTBOX         IDC_LIST_FILETYPES,163,13,124,47,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    GROUPBOX        "MemCard File Types",IDC_STATIC,88,3,265,63
+    LTEXT           "View:",IDC_STATIC,91,70,18,8
+    GROUPBOX        "",IDC_STATIC,3,82,350,162
+    LTEXT           "Icon file:",IDC_STATIC_ICONFILE,9,94,29,8
+    RTEXT           "Max # of Files:",IDC_STATIC_PS2_NFILES,16,156,49,8
+    RTEXT           "File Size(bytes):",IDC_STATIC_PS2_FILESIZE,13,187,52,8
+    RTEXT           "Save File Name:",IDC_STATIC_PS2_FILENAME,13,218,52,8
+    RTEXT           "Sony Dir Ext File 1:",IDC_STATIC_PS2_DIR1,211,124,62,8
+    RTEXT           "Sony Dir Ext File 2:",IDC_STATIC_PS2_DIR2,211,136,62,8
+    RTEXT           "Sony Dir Ext File 3:",IDC_STATIC_PS2_DIR3,211,148,62,8
+    RTEXT           "Sony Dir Ext File 4:",IDC_STATIC_PS2_DIR4,211,160,62,8
+    RTEXT           "Sony Dir Ext File 5:",IDC_STATIC_PS2_DIR5,211,172,62,8
+    RTEXT           "Sony Dir Ext File 6:",IDC_STATIC_PS2_DIR6,211,184,62,8
+    RTEXT           "Sony Dir Ext File 7:",IDC_STATIC_PS2_DIR7,211,196,62,8
+    RTEXT           "Sony Dir Ext File 8:",IDC_STATIC_PS2_DIR8,211,208,62,8
+END
+
+IDD_DLG_PS2ICON DIALOGEX 0, 0, 314, 137
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "PS2 Icon Properties"
+FONT 8, "Tahoma", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,201,119,38,12,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,245,119,38,12
+    EDITTEXT        IDC_EDIT_L1_X,64,11,29,12,WS_GROUP
+    EDITTEXT        IDC_EDIT_L1_Y,94,11,29,12
+    EDITTEXT        IDC_EDIT_L1_Z,124,11,29,12
+    EDITTEXT        IDC_EDIT_L1_R,64,27,20,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_L1_G,86,27,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_L1_B,108,27,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_L2_X,64,56,29,12,WS_GROUP
+    EDITTEXT        IDC_EDIT_L2_Y,94,56,29,12
+    EDITTEXT        IDC_EDIT_L2_Z,124,56,29,12
+    EDITTEXT        IDC_EDIT_L2_R,64,72,20,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_L2_G,86,72,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_L2_B,108,72,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_L3_X,64,102,29,12,WS_GROUP
+    EDITTEXT        IDC_EDIT_L3_Y,94,102,29,12
+    EDITTEXT        IDC_EDIT_L3_Z,124,102,29,12
+    EDITTEXT        IDC_EDIT_L3_R,64,118,20,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_L3_G,86,118,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_L3_B,108,118,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_AMBIENT_R,239,4,20,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_AMBIENT_G,261,4,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_AMBIENT_B,283,4,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_BK_ALPHA,239,33,21,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_BK_TL_R,239,49,20,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_BK_TL_G,261,49,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_BK_TL_B,283,49,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_BK_TR_R,239,65,20,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_BK_TR_G,261,65,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_BK_TR_B,283,65,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_BK_BL_R,239,81,20,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_BK_BL_G,261,81,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_BK_BL_B,283,81,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_BK_BR_R,239,97,20,12,ES_NUMBER | WS_GROUP
+    EDITTEXT        IDC_EDIT_BK_BR_G,261,97,20,12,ES_NUMBER
+    EDITTEXT        IDC_EDIT_BK_BR_B,283,97,20,12,ES_NUMBER
+    GROUPBOX        "Light 1",IDC_STATIC,4,2,155,42
+    RTEXT           "Location (XYZ):",IDC_STATIC,11,13,50,8
+    RTEXT           "Color (RGB):",IDC_STATIC,21,28,40,8
+    GROUPBOX        "Light 2",IDC_STATIC,4,47,155,42
+    RTEXT           "Location (XYZ):",IDC_STATIC,12,58,50,8
+    RTEXT           "Color (RGB):",IDC_STATIC,22,74,40,8
+    GROUPBOX        "Light 3",IDC_STATIC,4,93,155,42
+    RTEXT           "Location (XYZ):",IDC_STATIC,12,104,50,8
+    RTEXT           "Color (RGB):",IDC_STATIC,22,119,40,8
+    LTEXT           "Ambient Light (RGB):",IDC_STATIC,169,6,68,8
+    GROUPBOX        "Background Layer Color",IDC_STATIC,167,21,142,94
+    RTEXT           "Alpha (0-128):",IDC_STATIC,188,35,48,8
+    RTEXT           "Upper Left (RGB):",IDC_STATIC,178,51,58,8
+    RTEXT           "Upper Right (RGB):",IDC_STATIC,174,67,62,8
+    RTEXT           "Lower Left (RGB):",IDC_STATIC,178,83,58,8
+    RTEXT           "Lower Right (RGB):",IDC_STATIC,174,99,62,8
+END
+
+IDD_DLG_TEXTEDIT DIALOGEX 0, 0, 152, 12
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Enter Text"
+FONT 8, "Tahoma", 0, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT_TEXTENTRY,0,0,152,12,ES_AUTOHSCROLL
+END
+
+IDD_DLG_GCICON DIALOGEX 0, 0, 151, 58
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "GC Icon Properties"
+FONT 8, "Tahoma", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,86,27,50,12,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,86,41,50,12
+    EDITTEXT        IDC_EDIT_NICONFRAMES,81,7,27,12,ES_READONLY | ES_NUMBER | 
+                    WS_GROUP
+    CONTROL         "Spin1",IDC_SPIN_ICONNFRAMES,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,103,7,10,12
+    CONTROL         "Fast",IDC_RADIO_ICON_ANIMFAST,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,9,15,30,10
+    CONTROL         "Normal",IDC_RADIO_ICON_ANIMNORM,"Button",
+                    BS_AUTORADIOBUTTON,9,26,38,10
+    CONTROL         "Slow",IDC_RADIO_ICON_ANIMSLOW,"Button",
+                    BS_AUTORADIOBUTTON,9,37,31,10
+    GROUPBOX        "Animation Speed",IDC_STATIC,3,4,72,46
+    LTEXT           "# Frames",IDC_STATIC,116,9,32,8
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "MemCardWiz MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "MemCardWiz\0"
+            VALUE "LegalCopyright", "Copyright (C) 2001\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "MemCardWiz.EXE\0"
+            VALUE "ProductName", "MemCardWiz Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DLG_MEMCARDWIZ, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 356
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 239
+    END
+
+    IDD_DLG_PS2ICON, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 307
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 130
+    END
+
+    IDD_DLG_TEXTEDIT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 145
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 5
+    END
+
+    IDD_DLG_GCICON, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 144
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\MemCardWiz.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

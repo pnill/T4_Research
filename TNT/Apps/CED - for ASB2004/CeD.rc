@@ -1,0 +1,1743 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\CeD.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\CeD.ico"
+IDR_CEDTYPE             ICON    DISCARDABLE     "res\\CeDDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDR_MOTIONEDIT          BITMAP  DISCARDABLE     "res\\toolbar1.bmp"
+IDB_PROJECTTREE         BITMAP  DISCARDABLE     "res\\projectt.bmp"
+FRAMEEND_D              BITMAP  DISCARDABLE     "res\\bmp00004.bmp"
+FRAMESTART_X            BITMAP  DISCARDABLE     "res\\bmp00001.bmp"
+FRAMEEND_X              BITMAP  DISCARDABLE     "res\\bmp00007.bmp"
+FRAMESTART_U            BITMAP  DISCARDABLE     "res\\bmp00003.bmp"
+FRAMEEND_H              BITMAP  DISCARDABLE     "res\\bmp00005.bmp"
+FRAMEEND_U              BITMAP  DISCARDABLE     "res\\bmp00006.bmp"
+FRAMESTART_D            BITMAP  DISCARDABLE     "res\\bmp00002.bmp"
+FRAMESTART_F            BITMAP  DISCARDABLE     "res\\framesta.bmp"
+IDR_MOVIE               BITMAP  DISCARDABLE     "res\\bmp00008.bmp"
+IDB_TAB                 BITMAP  DISCARDABLE     "res\\tab.bmp"
+OKD                     BITMAP  DISCARDABLE     "res\\bitmap1.bmp"
+OKF                     BITMAP  DISCARDABLE     "res\\bmp00009.bmp"
+OKU                     BITMAP  DISCARDABLE     "res\\bmp00010.bmp"
+CANCELD                 BITMAP  DISCARDABLE     "res\\bmp00011.bmp"
+CANCELF                 BITMAP  DISCARDABLE     "res\\bmp00012.bmp"
+CANCELU                 BITMAP  DISCARDABLE     "res\\bmp00013.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+    SEPARATOR
+    BUTTON      ID_SELECT
+END
+
+IDR_MOTIONEDIT TOOLBAR DISCARDABLE  19, 18
+BEGIN
+    BUTTON      ID_STATE_SELECT
+    BUTTON      ID_STATE_PAN
+    BUTTON      ID_STATE_ROTATE
+    BUTTON      ID_STATE_ZOOM
+    BUTTON      ID_STATE_FACEDIR
+    BUTTON      ID_STATE_MOVEDIR
+    BUTTON      ID_STATE_EVENT
+    BUTTON      ID_STATE_MOVEPLANEY
+    SEPARATOR
+    BUTTON      ID_ZOOM_ALL
+    SEPARATOR
+    BUTTON      ID_STATE_SELECTMOVE
+    BUTTON      ID_STATE_SELECTROTATE
+    SEPARATOR
+    BUTTON      ID_ANIM_GOTO_START
+    BUTTON      ID_ANIM_PREVIOUS_FRAME
+    BUTTON      ID_ANIM_PLAY
+    BUTTON      ID_ANIM_NEXT_FRAME
+    BUTTON      ID_ANIM_GOTO_END
+END
+
+IDR_MOVIE TOOLBAR DISCARDABLE  19, 18
+BEGIN
+    BUTTON      ID_STATE_SELECT
+    BUTTON      ID_STATE_MOVE
+    BUTTON      ID_STATE_ROTATE
+    BUTTON      ID_STATE_ZOOM
+    SEPARATOR
+    BUTTON      ID_AXISXZ
+    BUTTON      ID_AXISX
+    BUTTON      ID_AXISY
+    BUTTON      ID_AXISZ
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About CeD...",               ID_APP_ABOUT
+    END
+END
+
+IDR_CEDTYPE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "&File Paths",                 ID_EDIT_FILEPATHS, INACTIVE
+        MENUITEM SEPARATOR
+    END
+    POPUP "Eve&nts"
+    BEGIN
+        MENUITEM "&Defined Events",             ID_EVENTS_DEFINEDEVENTS
+    END
+    POPUP "&Characters"
+    BEGIN
+        MENUITEM "&New Character",              ID_CHARACTER_NEW
+        MENUITEM "Delete Character",            ID_CHARACTER_DELETE
+        MENUITEM SEPARATOR
+        MENUITEM "Import Skeleton...",          ID_CHARACTER_IMPORT_SKEL
+        MENUITEM "Import Motion...",            ID_CHARACTER_IMPORT_MOTION
+        MENUITEM SEPARATOR
+        MENUITEM "Load All Motions",            ID_CHARACTER_LOADMOTIONS
+        MENUITEM SEPARATOR
+        MENUITEM "Export Character...",         ID_CHARACTER_EXPORT
+    END
+    POPUP "Me&shes"
+    BEGIN
+        MENUITEM "&New Mesh",                   ID_MESH_NEW
+        MENUITEM "Delete Mesh",                 ID_MESH_DELETE
+    END
+    POPUP "&Movies"
+    BEGIN
+        MENUITEM "&New Movie",                  ID_MOVIE_NEW
+        MENUITEM "&Delete Movie\tCtrl + D",     ID_MOVIE_DELETE
+        MENUITEM "Merge In a Movie",            ID_MOVIE_MERGE
+        MENUITEM "Import Movies from ICP",      ID_MOVIE_IMPORT
+        MENUITEM SEPARATOR
+        MENUITEM "Export Movie N64...",         ID_MOVIE_EXPORTN64
+        MENUITEM "Export Movie WIN95...",       ID_MOVIE_EXPORTPC
+        MENUITEM "Export Movie as ASCII",       ID_MOVIES_EXPORTMOVIEASASCII
+        MENUITEM SEPARATOR
+        MENUITEM "Insert Frames (All Actors)",  ID_MOVIE_INSERTFRAMES
+        MENUITEM "Delete Frames (All Actors)",  ID_MOVIE_DELETEFAMES
+        MENUITEM SEPARATOR
+        MENUITEM "Insert Frames (Current Actor)", ID_ACTOR_INSERTFRAMES
+        MENUITEM "Delete Frames (Current Actor)", ID_ACTOR_DELETEFRAMES
+        MENUITEM SEPARATOR
+        MENUITEM "Insert Copy of Actor",        ID_ACTOR_COPY
+        MENUITEM SEPARATOR
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Project Workspace View",     ID_VIEW_PROJECT
+        MENUITEM "New Motion Edit View",        ID_VIEW_MOTIONEDIT
+        MENUITEM SEPARATOR
+        MENUITEM "View Mirrored Skeleton",      ID_VIEW_MIRRORED_SKELETON
+        MENUITEM "&Ground Plane",               ID_VIEW_GROUND_PLANE
+        MENUITEM "&Construction Plane",         ID_VIEW_CONSTRUCTION_PLANE
+        MENUITEM "View All Face Dirs",          ID_VIEW_ALL_FACEDIRS
+        MENUITEM "View All Move Dirs",          ID_VIEW_ALL_MOVEDIRS
+        MENUITEM SEPARATOR
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM SEPARATOR
+        POPUP "View/Edit Layer"
+        BEGIN
+            MENUITEM "All Layers",                  ID_MOVIEVIEW_LAYERSELECT
+        END
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About CeD...",               ID_APP_ABOUT
+    END
+END
+
+IDR_MED_POPUP MENU DISCARDABLE 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Play / Stop",                 ID_ANIM_PLAY
+        MENUITEM SEPARATOR
+        MENUITEM "Import Skeleton...",          ID_CHARACTER_IMPORT_SKEL
+        MENUITEM "Import Motions...",           ID_CHARACTER_IMPORT_MOTION
+        MENUITEM SEPARATOR
+        MENUITEM "Export Character...",         ID_CHARACTER_EXPORT
+        MENUITEM SEPARATOR
+        MENUITEM "View Primary Motion",         ID_VIEW_PRIMARY_MOTION
+        MENUITEM "View Compressed Motion",      ID_VIEW_COMPRESSED_MOTION
+        MENUITEM "View Blended Motion",         ID_VIEW_MOTION_BLENDED
+        MENUITEM "View Mirrored Skeleton",      ID_VIEW_MIRRORED_SKELETON
+        MENUITEM "View Ground Plane",           ID_VIEW_GROUND_PLANE
+        MENUITEM "View Construction Plane",     ID_VIEW_CONSTRUCTION_PLANE
+        MENUITEM "View All Face Dirs",          ID_VIEW_ALL_FACEDIRS
+        MENUITEM "View All Move Dirs",          ID_VIEW_ALL_MOVEDIRS
+        MENUITEM SEPARATOR
+        MENUITEM "Interpolate FaceDir",         ID_FACEDIR_INTERP
+        MENUITEM "Interpolate MoveDir",         ID_MOVEDIR_INTERP
+    END
+END
+
+IDR_MOVIE_POPUP MENU DISCARDABLE 
+BEGIN
+    POPUP ""
+    BEGIN
+        MENUITEM "Export Movie N64...",         ID_MOVIE_EXPORTGAMECUBE
+        MENUITEM "Export Movie PC",             ID_MOVIE_EXPORTPC
+        MENUITEM "Export Movie XBox",           ID_MOVIE_EXPORTXBOX
+        MENUITEM "Export Movie PS2",            ID_MOVIE_EXPORTPS2
+        MENUITEM SEPARATOR
+        MENUITEM "Insert Frames (All Actors)",  ID_MOVIE_INSERTFRAMES
+        MENUITEM "Delete Frames (All Actors)",  ID_MOVIE_DELETEFAMES
+        MENUITEM SEPARATOR
+        MENUITEM "Insert Frames (Current Actor)", ID_ACTOR_INSERTFRAMES
+        MENUITEM "Delete Frames (Current Actor)", ID_ACTOR_DELETEFRAMES
+        MENUITEM SEPARATOR
+        MENUITEM "Insert Copy of Actor",        ID_ACTOR_COPY
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_MOVIE_DELETE,        VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_END,         ID_ANIM_GOTO_END,       VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_HOME,        ID_ANIM_GOTO_START,     VIRTKEY, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_LEFT,        ID_ANIM_PREVIOUS_FRAME, VIRTKEY, NOINVERT
+    VK_RIGHT,       ID_ANIM_NEXT_FRAME,     VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 217, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About CeD"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "CeD Version 1.1",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 1998/1999",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,32,14,WS_GROUP
+END
+
+IDD_TEST DIALOGEX 0, 0, 127, 471
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_CHARACTER,10,15,105,95,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_CAMERA_TARGETX,25,50,35,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CAMERA_TARGETY,25,65,35,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CAMERA_TARGETZ,25,80,35,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CAMERA_ROTATION,85,50,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CAMERA_ELEVATION,85,65,30,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_CAMERA_BONE,10,115,105,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_MOTION_LIST,10,151,105,89,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add...",IDC_MOTION_ADD,15,245,40,14
+    PUSHBUTTON      "Delete...",IDC_MOTION_DELETE,70,245,40,14
+    LISTBOX         IDC_EVENT_LIST,10,285,105,65,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_EVENT_ADD,15,355,40,14
+    PUSHBUTTON      "Delete...",IDC_EVENT_DELETE,70,355,40,14
+    EDITTEXT        IDC_EVENT_NAME,10,380,105,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_X,29,399,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_Y,29,414,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_Z,29,429,40,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_RADIUS,95,399,25,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_FRAME,95,429,25,14,ES_AUTOHSCROLL
+    RTEXT           "R: ",IDC_STATIC_EVENT_R,71,399,17,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    GROUPBOX        "Motions",IDC_STATIC,7,140,113,125
+    RTEXT           "X:",IDC_STATIC,10,50,10,15,SS_CENTERIMAGE
+    RTEXT           "Y:",IDC_STATIC,10,65,10,15,SS_CENTERIMAGE
+    RTEXT           "Z:",IDC_STATIC,10,80,10,15,SS_CENTERIMAGE
+    GROUPBOX        "Camera",IDC_STATIC,7,40,113,95
+    RTEXT           "RY:",IDC_STATIC,65,50,15,15,SS_CENTERIMAGE
+    RTEXT           "RZ:",IDC_STATIC,65,65,15,15,SS_CENTERIMAGE
+    CTEXT           "Lock Camera To Bone",IDC_STATIC,10,105,105,10,
+                    SS_CENTERIMAGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,100,104,1
+    GROUPBOX        "Character",IDC_STATIC,7,5,113,30
+    GROUPBOX        "Events",IDC_STATIC,7,275,113,192
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,10,375,104,1
+    RTEXT           "X: ",IDC_STATIC_EVENT_X,9,399,17,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    RTEXT           "Y: ",IDC_STATIC_EVENT_Y,9,414,17,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    RTEXT           "Z: ",IDC_STATIC_EVENT_Z,9,429,17,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    RTEXT           "Frm: ",IDC_STATIC_EVENT_FRAME,71,429,17,15,
+                    SS_CENTERIMAGE
+    COMBOBOX        IDC_EVENT_BONE,9,451,108,30,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_ANIMCTRL DIALOG DISCARDABLE  0, 0, 434, 28
+STYLE WS_CHILD | WS_CLIPCHILDREN
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_FRAME,26,1,29,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_FRAME_SPIN,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,54,2,11,14
+    EDITTEXT        IDC_FRAME_TOTAL,26,14,29,12,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "Slider1",IDC_ANIM_SLIDER,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_ENABLESELRANGE | WS_TABSTOP,58,1,331,
+                    21
+    CONTROL         "FRAMESTART_",IDC_FRAME_START,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,389,4,16,14
+    CONTROL         "FRAMEEND_",IDC_FRAME_END,"Button",BS_OWNERDRAW | 
+                    WS_TABSTOP,407,4,16,14
+    RTEXT           "Frame:",IDC_STATIC,1,3,21,8,SS_CENTERIMAGE
+    RTEXT           "Total:",IDC_STATIC,2,16,20,8,SS_CENTERIMAGE
+END
+
+IDD_EXPORT_PROGRESS DIALOGEX 0, 0, 359, 276
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Export Progress"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "Progress1",IDC_PROGRESS,"msctls_progress32",0x0,7,233,
+                    345,15,WS_EX_CLIENTEDGE
+    LISTBOX         IDC_LIST,7,5,345,220,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Ok",IDOK,155,255,50,14
+END
+
+IDD_T DIALOG DISCARDABLE  0, 0, 100, 66
+STYLE DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT1,25,5,40,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Button1",IDC_BUTTON1,25,23,50,14
+    COMBOBOX        IDC_COMBO1,25,41,48,30,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Static",IDC_STATIC,5,0,90,60
+END
+
+IDD_CHARACTER_SELECT DIALOG DISCARDABLE  0, 0, 140, 51
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_CHARACTER,3,2,134,95,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "Do Not Export",IDC_NOEXPORT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,30,58,10
+    EDITTEXT        IDC_CHARACTER_EXPORTFPS,100,20,35,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_CHARACTER_EXPORTFPS_SPIN,"msctls_updown32",
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,129,20,11,
+                    14
+    EDITTEXT        IDC_CHARACTER_EXPORT_BITS,100,35,35,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_CHARACTER_EXPORTBITS_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,129,35,10,14
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,4,18,
+                    134,1
+    LTEXT           "Export FPS:",IDC_CHARACTER_EXPORTFPS_TITLE,62,23,38,8
+    LTEXT           "Export Bits:",IDC_CHARACTER_EXPORTBITS_TITLE,62,38,36,8
+END
+
+IDD_CAMERA1 DIALOG DISCARDABLE  0, 0, 140, 76
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_CAMERA_TARGETX,19,3,35,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CAMERA_TARGETY,19,18,35,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CAMERA_TARGETZ,19,33,35,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CAMERA_ROTATION,107,3,30,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CAMERA_ELEVATION,107,18,30,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_CAMERA_BONE,3,61,134,120,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "X:",IDC_STATIC,3,3,10,15,SS_CENTERIMAGE
+    RTEXT           "Y:",IDC_STATIC,3,18,10,14,SS_CENTERIMAGE
+    RTEXT           "Z:",IDC_STATIC,3,33,10,14,SS_CENTERIMAGE
+    RTEXT           "RY:",IDC_STATIC,90,3,15,14,SS_CENTERIMAGE
+    RTEXT           "RZ:",IDC_STATIC,90,18,15,14,SS_CENTERIMAGE
+    CTEXT           "Lock Camera To Bone",IDC_STATIC,3,52,134,8,
+                    SS_CENTERIMAGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,3,50,134,1
+    CONTROL         "Time Accurate Play",IDC_TIMEACCURATE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,62,36,75,10
+END
+
+IDD_MOTIONLIST DIALOG DISCARDABLE  0, 0, 140, 271
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    LISTBOX         IDC_MOTION_LIST,3,3,133,89,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_EXTENDEDSEL | WS_VSCROLL | 
+                    WS_HSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Add...",IDC_MOTION_ADD,3,95,40,14
+    PUSHBUTTON      "Flags...",IDC_MOTION_FLAGS,50,95,40,14
+    PUSHBUTTON      "Delete...",IDC_MOTION_DELETE,97,95,40,14
+    EDITTEXT        IDC_SYMBOL,37,114,99,14,ES_AUTOHSCROLL
+    CONTROL         "Export",IDC_NOEXPORT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,3,140,36,10
+    CONTROL         "Export FPS:",IDC_MOTION_EXPORTFPS_BUTTON,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,46,132,50,10
+    CONTROL         "Export Bits:",IDC_MOTION_EXPORTBITS_BUTTON,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,46,146,47,10
+    EDITTEXT        IDC_MOTION_EXPORTFPS,96,131,37,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MOTION_EXPORTBITS,96,146,37,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_MOTION_EXPORTFPS_SPIN,"msctls_updown32",
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,126,131,
+                    11,14
+    CONTROL         "Spin1",IDC_MOTION_EXPORTBITS_SPIN,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS,126,146,10,14
+    EDITTEXT        IDC_FACEDIR,38,166,28,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MOVEDIR,38,182,28,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Reset",IDC_RESETFACE,70,166,28,14
+    PUSHBUTTON      "All",IDC_SETALL_FACE,102,166,16,14
+    PUSHBUTTON      ">",IDC_SETREMAINING_FACE,121,166,9,14
+    PUSHBUTTON      "Reset",IDC_RESETMOVE,70,182,28,14
+    PUSHBUTTON      "All",IDC_SETALL_MOVE,101,182,16,14
+    PUSHBUTTON      ">",IDC_SETREMAINING_MOVE,121,182,9,14
+    CONTROL         "Auto Reset Face Direction Vector",
+                    IDC_CHECK_AUTOCLEAR_FACE_DIR_MOTIONLIST,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,6,199,126,10
+    CONTROL         "Auto Reset Move Direction Vector",
+                    IDC_CHECK_AUTOCLEAR_MOVE_DIR_MOTIONLIST,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,6,211,126,10
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,1,224,
+                    134,1
+    CTEXT           "Linked Character / Motion",IDC_STATIC,3,227,88,8
+    COMBOBOX        IDC_LINKCHARACTER,2,238,134,84,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_LINKMOTION,2,252,134,78,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "FaceDir :",IDC_STATIC,4,168,32,11
+    LTEXT           "MoveDir :",IDC_STATIC,4,185,32,11
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,3,111,
+                    134,1
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,3,161,
+                    134,1
+    RTEXT           "Symbol :",IDC_STATIC,5,117,30,8
+    CONTROL         "Export",IDC_EXPORTLINK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,97,227,36,10
+END
+
+IDD_EVENTLIST DIALOGEX 0, 0, 140, 289
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LISTBOX         IDC_EVENT_LIST,3,3,133,81,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Delete Event",IDC_EVENT_DELETE,73,88,63,14
+    EDITTEXT        IDC_EVENT_X,24,171,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_Y,24,184,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_Z,24,197,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_DIR,24,218,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_DIST,24,230,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_XLOCAL,85,171,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_YLOCAL,85,184,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_ZLOCAL,85,197,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_DIRLOCAL,85,217,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_DISTLOCAL,85,230,38,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_RADIUS,37,252,25,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EVENT_FRAME,98,252,25,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,3,151,133,1
+    RTEXT           "Frame:",IDC_STATIC_EVENT_FRAME,70,253,25,9,
+                    SS_CENTERIMAGE
+    COMBOBOX        IDC_COMBO_PROJECT_EVENTS,3,118,133,112,CBS_DROPDOWN | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Defined Events",IDC_STATIC,3,108,82,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,3,105,133,1
+    PUSHBUTTON      "Add Event",IDC_BUTTON_INSERT_EVENT,3,134,63,14
+    PUSHBUTTON      "Edit Events",IDC_BUTTON_NEW_PROJECT_EVENT,73,134,63,14
+    PUSHBUTTON      "Move To Joint",IDC_BUTTON_ATTACH_BONE,16,88,53,14
+    LTEXT           "",IDC_STATIC_ATTACHED_JOINT_DISPLAY_EVENTLIST,55,268,81,
+                    14,SS_CENTERIMAGE,WS_EX_STATICEDGE
+    LTEXT           "Attached Joint:",
+                    IDC_STATIC_ATTACHED_JOINT_TEXT_EVENTLIST,3,268,51,14,
+                    SS_CENTERIMAGE
+    LTEXT           "Z:",IDC_STATIC_EVENT_Z,12,199,8,8
+    LTEXT           "Y:",IDC_STATIC_EVENT_Y,12,186,8,8
+    LTEXT           "X:",IDC_STATIC_EVENT_X,12,173,8,8
+    LTEXT           "Radius:",IDC_STATIC_EVENT_R,9,255,25,8
+    LTEXT           "World",IDC_STATIC_EVENT_WORLD,32,157,20,8
+    LTEXT           "Local",IDC_STATIC_EVENT_LOCAL,94,156,18,8
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDVERT,74,156,1,91
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,3,213,133,1
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,3,166,132,1
+    LTEXT           "Dir:",IDC_STATIC_EVENT_DIR,9,220,12,8
+    LTEXT           "Dist:",IDC_STATIC_EVENT_DIST,7,232,15,8
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,3,246,132,1
+    PUSHBUTTON      """",IDC_BUTTON_ATTACH_BONENOW,4,88,12,14
+END
+
+IDD_ACTORLIST DIALOGEX 0, 0, 140, 124
+STYLE DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Add...",IDC_ADD,2,59,40,14
+    PUSHBUTTON      "Delete...",IDC_DELETE,97,59,40,14
+    CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    LVS_EDITLABELS | LVS_NOCOLUMNHEADER | WS_BORDER | 
+                    WS_TABSTOP,2,2,136,56,WS_EX_CLIENTEDGE
+    EDITTEXT        IDC_CHARACTER,3,79,135,13,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "Show Path",IDC_DISPLAYPATH,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,5,96,49,10
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,2,75,135,1
+    PUSHBUTTON      "Edit...",IDC_EDIT,50,59,40,14
+    COMBOBOX        IDC_ACTORLIST_LAYER,32,109,105,109,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Layer:",IDC_ACTORLIST_STATIC_LAYER,9,112,20,8
+END
+
+IDD_MOVIECTRL DIALOG DISCARDABLE  0, 0, 389, 28
+STYLE WS_CHILD | WS_CLIPSIBLINGS
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_FRAME,26,1,40,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPIN,"msctls_updown32",UDS_WRAP | 
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | UDS_NOTHOUSANDS,66,1,11,14
+    EDITTEXT        IDC_TOTAL,26,14,40,12,ES_AUTOHSCROLL
+    CONTROL         "Slider1",IDC_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | 
+                    TBS_ENABLESELRANGE | WS_TABSTOP,70,1,319,21
+    RTEXT           "Frame:",IDC_STATIC,1,3,21,8,SS_CENTERIMAGE
+    RTEXT           "Total:",IDC_STATIC,2,16,20,8,SS_CENTERIMAGE
+END
+
+IDD_ACTOR_NEW DIALOG DISCARDABLE  0, 0, 236, 108
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "New Actor"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_NAME,59,7,168,14,ES_AUTOHSCROLL | WS_GROUP
+    CONTROL         "Character",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,13,32,47,10
+    CONTROL         "Camera",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,13,45,40,
+                    10
+    CONTROL         "Light",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,13,58,31,
+                    10
+    CONTROL         "Scenery",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,13,71,
+                    42,10
+    COMBOBOX        IDC_CHARACTERS,69,30,155,76,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,125,86,50,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,179,86,50,14
+    RTEXT           "Actor Name: ",IDC_STATIC,11,7,43,14,SS_CENTERIMAGE
+    GROUPBOX        "Actor Type",IDC_STATIC,7,23,221,61
+    COMBOBOX        IDC_MESHES,69,67,155,76,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+END
+
+IDD_NUMFRAMES DIALOG DISCARDABLE  0, 0, 180, 41
+STYLE DS_MODALFRAME | WS_POPUP | WS_CLIPSIBLINGS | WS_CAPTION | WS_SYSMENU
+CAPTION "Enter Number of Frames"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,126,5,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,126,23,50,14
+    EDITTEXT        IDC_EDIT1,71,5,40,14,ES_AUTOHSCROLL
+    RTEXT           "Number of Frames :",IDC_STATIC,3,5,64,13,SS_CENTERIMAGE
+END
+
+IDD_KEY DIALOGEX 0, 0, 140, 338
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_NOCOLUMNHEADER | WS_BORDER | WS_GROUP | WS_TABSTOP,2,
+                    2,135,81,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "New Key",IDC_ADD,3,85,46,14
+    PUSHBUTTON      "Delete...",IDC_DEL,91,85,46,14
+    PUSHBUTTON      "Select All",IDC_SELECT_ALL,3,101,46,14
+    PUSHBUTTON      "Select None",IDC_SELECT_NONE,91,101,46,14
+    RTEXT           "X: ",IDC_MOVE_X,3,133,15,14,SS_NOTIFY | SS_CENTERIMAGE | 
+                    WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_X,20,133,32,14,ES_AUTOHSCROLL
+    RTEXT           "Y: ",IDC_MOVE_Y,3,148,15,13,SS_NOTIFY | SS_CENTERIMAGE | 
+                    WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_Y,20,147,32,14,ES_AUTOHSCROLL
+    RTEXT           "Z: ",IDC_MOVE_Z,3,161,15,14,SS_NOTIFY | SS_CENTERIMAGE | 
+                    WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_Z,20,161,32,14,ES_AUTOHSCROLL
+    RTEXT           "VX: ",IDC_MOVE_VX,86,133,18,13,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_VX,105,133,32,14,ES_AUTOHSCROLL
+    RTEXT           "VY: ",IDC_MOVE_VY,86,147,18,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_VY,105,147,32,14,ES_AUTOHSCROLL
+    RTEXT           "VZ: ",IDC_MOVE_VZ,86,161,18,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_VZ,105,161,32,14,ES_AUTOHSCROLL
+    RTEXT           "RX: ",IDC_MOVE_RX,86,180,18,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_RX,105,180,32,14,ES_AUTOHSCROLL
+    RTEXT           "RY: ",IDC_MOVE_RY,86,194,18,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_RY,105,194,32,14,ES_AUTOHSCROLL
+    RTEXT           "RZ: ",IDC_MOVE_RZ,86,208,18,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    EDITTEXT        IDC_RZ,105,208,32,14,ES_AUTOHSCROLL
+    CONTROL         "Spline",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    BS_NOTIFY | WS_GROUP,84,226,35,9
+    CONTROL         "AMC",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON | BS_NOTIFY,
+                    84,235,31,9
+    EDITTEXT        IDC_FRAME,27,179,37,12,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_FRAMESPIN,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,61,178,11,
+                    14
+    CONTROL         "Auto-Link Pos",IDC_AUTOLINK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,206,60,9
+    COMBOBOX        IDC_MOTION,2,274,135,78,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_STARTFRAME,27,293,28,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_NUMFRAMES,109,293,28,14,ES_AUTOHSCROLL | ES_READONLY
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,3,120,134,1
+    RTEXT           "Frame : ",IDC_STATIC,2,181,25,8,SS_CENTERIMAGE,
+                    WS_EX_RIGHT
+    RTEXT           "Start:",IDC_STATIC,3,296,17,8
+    RTEXT           "Total:",IDC_STATIC,88,296,17,8
+    CTEXT           "Animation Parameters",IDC_STATIC,3,266,134,8
+    CTEXT           "Positional Parameters",IDC_STATIC,3,123,134,8
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,6,264,128,1
+    RTEXT           "Evt:",IDC_STATIC,0,248,14,8,0,WS_EX_RIGHT
+    EDITTEXT        IDC_SCALE,27,192,24,12,ES_AUTOHSCROLL
+    LTEXT           "Scale :",IDC_STATIC,4,194,22,8,0,WS_EX_RIGHT
+    CONTROL         "Visible",IDC_VISIBLE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,226,42,10
+    CONTROL         "Camera Lock",IDC_CAMERALOCK,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,236,55,10
+    COMBOBOX        IDC_EVENT,15,246,122,78,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Blend:",IDC_STATIC,3,323,21,8
+    EDITTEXT        IDC_BLEND,27,321,28,12,ES_AUTOHSCROLL
+    LTEXT           "Rate:",IDC_STATIC,3,309,18,8
+    EDITTEXT        IDC_RATE,27,307,28,12,ES_AUTOHSCROLL
+    CONTROL         "Mirror",IDC_MIRROR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,97,322,33,10
+    CONTROL         "Auto-Link Dir",IDC_AUTOLINKDIR,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,216,57,10
+END
+
+IDD_SHOTLIST DIALOGEX 0, 0, 140, 229
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "List1",IDC_SHOTLIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_SORTASCENDING | 
+                    LVS_EDITLABELS | LVS_NOCOLUMNHEADER | WS_BORDER | 
+                    WS_TABSTOP,3,3,133,107,WS_EX_CLIENTEDGE
+    PUSHBUTTON      "Add...",IDC_ADD,3,112,46,14
+    PUSHBUTTON      "Delete...",IDC_DELETE,91,112,46,14
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,3,128,
+                    134,1
+    COMBOBOX        IDC_EYE,3,139,134,100,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_TARGET,3,163,134,100,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    CTEXT           "Camera Eye Actor",IDC_STATIC,4,131,133,8
+    CTEXT           "Camera Target Actor",IDC_STATIC,4,155,133,8
+    EDITTEXT        IDC_FRAME,68,180,40,14,ES_AUTOHSCROLL
+    RTEXT           "Frame Number :",IDC_STATIC,4,182,57,8
+    RTEXT           "Field of View :",IDC_STATIC,8,199,53,8
+    EDITTEXT        IDC_FOV,68,196,40,14,ES_AUTOHSCROLL
+    RTEXT           "Speed :",IDC_STATIC,8,213,53,8
+    EDITTEXT        IDC_SPEED,68,211,40,14,ES_AUTOHSCROLL
+END
+
+IDD_MOVIEMERGE DIALOG DISCARDABLE  0, 0, 186, 62
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Movie to Merge"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,24,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,41,50,14
+    COMBOBOX        IDC_COMBO1,63,7,116,78,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "Select Movie :",IDC_STATIC,7,7,51,13,SS_CENTERIMAGE
+END
+
+IDD_EXPORT_DIALOG DIALOG DISCARDABLE  0, 0, 320, 215
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Export Parameters"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EXPORT_FILE_GLOBAL,7,10,211,14,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    PUSHBUTTON      "...",IDC_EXPORT_BROWSE_GLOBAL,289,10,17,14,WS_DISABLED
+    CONTROL         "Game Cube File",IDC_EXPORT_ENABLE_GAMECUBE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,44,66,10
+    EDITTEXT        IDC_EXPORT_FILE_GAMECUBE,76,43,208,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_EXPORT_BROWSE_GAMECUBE,289,41,17,14
+    CONTROL         "PC File",IDC_EXPORT_ENABLE_PC,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,10,60,38,10
+    EDITTEXT        IDC_EXPORT_FILE_PC,76,59,208,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_EXPORT_BROWSE_PC,289,58,17,14
+    CONTROL         "Force Uppercase Defines",IDC_EXPORT_FORCE_UPPER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,129,97,10
+    DEFPUSHBUTTON   "Export",IDOK,205,188,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,263,188,50,14
+    GROUPBOX        "Character Files",IDC_STATIC,2,33,311,82
+    GROUPBOX        "Options",IDC_STATIC,3,119,310,64
+    GROUPBOX        "Global Include File ( Flag Bits && Events )",IDC_STATIC,
+                    2,0,311,29,WS_DISABLED
+    CONTROL         "Export Collision Bubbles",IDC_EXPORT_COLLISIONBUBBLES,
+                    "Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,15,
+                    141,91,10
+    CONTROL         "Export User Defined Motion Flags",
+                    IDC_EXPORT_MOTIONFLAGS,"Button",BS_AUTOCHECKBOX | 
+                    WS_DISABLED | WS_TABSTOP,15,154,121,10
+    CONTROL         "XBox File",IDC_EXPORT_ENABLE_XBOX,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,10,78,45,10
+    EDITTEXT        IDC_EXPORT_FILE_XBOX,76,76,209,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_EXPORT_BROWSE_XBOX,289,75,17,14
+    CONTROL         "PS2 File",IDC_EXPORT_ENABLE_PS2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,12,96,42,10
+    EDITTEXT        IDC_EXPORT_FILE_PS2,76,94,209,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_EXPORT_BROWSE_PS2,289,93,17,14
+    EDITTEXT        IDC_EXPORT_FRAMESPERBLOCK,227,128,40,12,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    CONTROL         "Spin1",IDC_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    UDS_NOTHOUSANDS,268,128,11,14
+    LTEXT           "Frames Per Block:",IDC_STATIC,167,130,58,8
+    LTEXT           "More frames per block reduces the size of the exported data, but increases decompression buffer size at run-time.",
+                    IDC_STATIC,157,143,144,24
+    CONTROL         "Front End Specific",IDC_EXPORT_FRONT_END,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,167,74,10
+END
+
+IDD_MOTION_FLAGS DIALOG DISCARDABLE  0, 0, 392, 255
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Motion Flags"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,282,234,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,341,234,43,14
+    CONTROL         "0",IDC_BIT0,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,21,21,8
+    CONTROL         "1",IDC_BIT1,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,34,21,8
+    CONTROL         "2",IDC_BIT2,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,47,21,8
+    CONTROL         "3",IDC_BIT3,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,60,21,8
+    CONTROL         "4",IDC_BIT4,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,73,21,8
+    CONTROL         "5",IDC_BIT5,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,86,21,8
+    CONTROL         "6",IDC_BIT6,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,99,21,8
+    CONTROL         "7",IDC_BIT7,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,112,21,8
+    CONTROL         "8",IDC_BIT8,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,125,21,8
+    CONTROL         "9",IDC_BIT9,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,138,21,8
+    CONTROL         "10",IDC_BIT10,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,151,21,8
+    CONTROL         "11",IDC_BIT11,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,164,21,8
+    CONTROL         "12",IDC_BIT12,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,177,21,8
+    CONTROL         "13",IDC_BIT13,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,190,21,8
+    CONTROL         "14",IDC_BIT14,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,203,21,8
+    CONTROL         "15",IDC_BIT15,"Button",BS_AUTO3STATE | BS_LEFTTEXT | 
+                    WS_TABSTOP,8,216,21,8
+    EDITTEXT        IDC_DEFINE0,34,19,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE1,34,32,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE2,34,45,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE3,34,58,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE4,34,71,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE5,34,84,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE6,34,97,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE7,34,110,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE8,34,123,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE9,34,136,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE10,34,149,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE11,34,162,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE12,34,175,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE13,34,188,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE14,34,201,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINE15,34,214,134,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC0,171,19,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC1,171,32,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC2,171,45,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC3,171,58,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC4,171,71,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC5,171,84,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC6,171,97,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC7,171,110,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC8,171,123,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC9,171,136,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC10,171,149,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC11,171,162,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC12,171,175,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC13,171,188,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC14,171,201,213,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DESC15,171,214,213,12,ES_AUTOHSCROLL
+    CTEXT           "Bit",IDC_STATIC,8,6,26,8
+    CTEXT           "Export ID",IDC_STATIC,34,6,134,8
+    CTEXT           "Text Description",IDC_STATIC,171,6,213,8
+END
+
+IDD_POINTLIST DIALOGEX 0, 0, 140, 200
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Add",IDC_ADD,3,118,46,14
+    PUSHBUTTON      "Delete...",IDC_DELETE,91,118,46,14
+    EDITTEXT        IDC_X,21,139,38,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_Y,21,154,38,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_Z,21,169,38,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_RADIUS,111,139,25,14,ES_AUTOHSCROLL
+    RTEXT           "R: ",IDC_STATIC_R,91,139,17,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDHORZ,3,135,133,1
+    RTEXT           "X: ",IDC_STATIC_X,3,139,15,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    RTEXT           "Y: ",IDC_STATIC_Y,3,154,15,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    RTEXT           "Z: ",IDC_STATIC_Z,3,169,15,14,SS_NOTIFY | 
+                    SS_CENTERIMAGE | WS_TABSTOP,WS_EX_STATICEDGE
+    COMBOBOX        IDC_BONE,2,185,135,100,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    CONTROL         "List1",IDC_LIST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_EDITLABELS | 
+                    LVS_NOCOLUMNHEADER | WS_BORDER | WS_TABSTOP,3,3,134,113,
+                    WS_EX_CLIENTEDGE
+END
+
+IDD_MOVIEPREVIEW DIALOG DISCARDABLE  0, 0, 140, 71
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_PREVIEW_W,24,3,35,14,ES_AUTOHSCROLL
+    RTEXT           "W:",IDC_STATIC,5,3,13,15,SS_CENTERIMAGE
+    EDITTEXT        IDC_PREVIEW_H,89,3,35,14,ES_AUTOHSCROLL
+    RTEXT           "H:",IDC_STATIC,72,3,12,15,SS_CENTERIMAGE
+    PUSHBUTTON      "Play",IDC_PLAY,44,36,50,14
+END
+
+IDD_SELECT_MESH DIALOG DISCARDABLE  0, 0, 285, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Mesh"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,177,47,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,233,47,50,14
+    EDITTEXT        IDC_NAME,52,7,231,14,ES_AUTOHSCROLL | WS_DISABLED | 
+                    WS_GROUP
+    RTEXT           "Actor Name: ",IDC_STATIC,4,7,43,14,SS_CENTERIMAGE
+    COMBOBOX        IDC_MESHES,52,26,231,76,CBS_DROPDOWNLIST | CBS_SORT | 
+                    WS_VSCROLL | WS_GROUP | WS_TABSTOP
+    RTEXT           "Mesh: ",IDC_STATIC,4,25,43,14,SS_CENTERIMAGE
+END
+
+IDD_PROJECT_EVENTS DIALOG DISCARDABLE  0, 0, 376, 274
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Defined Events"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Select Active Event List:",IDC_STATIC,7,6,82,8
+    COMBOBOX        IDC_COMBO_SELECT_ACTIVE_EVENT_LIST,7,16,183,40,
+                    CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_GROUP | 
+                    WS_TABSTOP
+    GROUPBOX        "Insert New Event",IDC_STATIC_INSERT_NEW_EVENT,7,36,183,
+                    153,BS_NOTIFY
+    LTEXT           "Event Name:",IDC_STATIC_EVENT_NAME,16,47,71,9
+    EDITTEXT        IDC_EDIT_PROJECT_EVENT_NAME,16,56,167,15,ES_AUTOHSCROLL | 
+                    WS_GROUP
+    LTEXT           "Default Event Radius:",IDC_STATIC_DEFAULT_RADIUS,82,78,
+                    70,9,NOT WS_GROUP
+    EDITTEXT        IDC_EDIT_PROJECT_EVENT_DEFAULT_RADIUS,155,76,28,12,
+                    ES_RIGHT | ES_AUTOHSCROLL
+    COMBOBOX        IDC_DEFINED_EVENTS_DLG_COMBO_ATTACHED_BONE,20,103,157,
+                    105,CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Add Event",IDC_BUTTON_PROJECT_INSERT_EVENT,204,222,70,
+                    14
+    GROUPBOX        "Import/Export Current Event List",
+                    IDC_STATIC_IMPORT_EXPORT,7,195,183,49
+    PUSHBUTTON      "Import Event List",IDC_BUTTON_PROJECT_EVENT_IMPORT_LIST,
+                    47,208,94,14,BS_NOTIFY | WS_GROUP
+    PUSHBUTTON      "Export Event List",IDC_BUTTON_PROJECT_EVENT_EXPORT_LIST,
+                    47,225,94,14,BS_NOTIFY
+    GROUPBOX        "Event List",IDC_STATIC_EVENT_LIST,198,11,171,233,
+                    BS_NOTIFY
+    PUSHBUTTON      "Remove Event",IDC_BUTTON_PROJECT_EVENT_DELETE,293,222,
+                    70,14,BS_NOTIFY
+    CONTROL         "OK",IDMYOK,"Button",BS_OWNERDRAW | WS_TABSTOP,326,249,
+                    43,18
+    CONTROL         "Cancel",IDCANCEL,"Button",BS_OWNERDRAW | WS_TABSTOP,276,
+                    249,43,18
+    GROUPBOX        "Attached to joint",IDC_STATIC_ATTACHED_BONE,13,92,169,
+                    90
+    LTEXT           "Rot X:",IDC_DEFINED_EVENTS_DLG_STATIC_ROTX,23,123,21,8
+    LTEXT           "Rot Y:",IDC_DEFINED_EVENTS_DLG_STATIC_ROTY,23,137,21,8
+    LTEXT           "Rot Z:",IDC_DEFINED_EVENTS_DLG_STATIC_ROTZ,23,151,21,8
+    CONTROL         "Force Pos X:",IDC_DEFINED_EVENTS_DLG_BUTTON_FORCEPOSX,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,89,124,54,10
+    CONTROL         "Force Pos Y:",IDC_DEFINED_EVENTS_DLG_BUTTON_FORCEPOSY,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,89,137,54,10
+    CONTROL         "Force Pos Z:",IDC_DEFINED_EVENTS_DLG_BUTTON_FORCEPOSZ,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,89,150,55,10
+    EDITTEXT        IDC_DEFINED_EVENTS_DLG_ROTX,47,120,29,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINED_EVENTS_DLG_ROTY,47,135,29,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINED_EVENTS_DLG_ROTZ,47,149,29,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINED_EVENTS_DLG_FORCEPOSX,146,121,29,12,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINED_EVENTS_DLG_FORCEPOSY,146,135,29,12,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_DEFINED_EVENTS_DLG_FORCEPOSZ,146,149,29,12,
+                    ES_AUTOHSCROLL
+    LTEXT           "Dist:",IDC_DEFINED_EVENTS_DLG_STATIC_DISTANCE,24,166,15,
+                    8
+    EDITTEXT        IDC_DEFINED_EVENTS_DLG_DISTANCE,47,165,29,12,
+                    ES_AUTOHSCROLL
+    CONTROL         "Relative To Joint",
+                    IDC_DEFINED_EVENTS_DLG_BUTTON_RELATIVETOJOINT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,99,166,69,10
+    LISTBOX         IDC_LIST_PROJECT_EVENTS,204,23,158,193,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Attached",IDC_DEFINED_EVENTS_DLG_BUTTON_ATTACHED,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,78,45,10
+END
+
+IDD_ATTACH_EVENT_TO_JOINT DIALOGEX 0, 0, 216, 87
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Attach Selected Event to Joint"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    LTEXT           "Attached Joint:",IDC_STATIC_ATTACHED_BONE,10,36,48,8
+    COMBOBOX        IDC_COMBO_ATTACHED_BONE,10,45,194,105,CBS_DROPDOWN | 
+                    CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Cancel",IDCANCEL,113,68,43,13
+    PUSHBUTTON      "Attach",IDC_BUTTON_ATTACH_TO_JOINT,163,68,46,13
+    LTEXT           "",IDC_STATIC_EVENT_NAME,10,17,194,12,SS_NOTIFY | 
+                    SS_CENTERIMAGE,WS_EX_STATICEDGE
+    LTEXT           "Selected Event:",IDC_STATIC,10,7,61,10,SS_CENTERIMAGE
+    CONTROL         "Linked Character",IDC_LINKEDCHARACTER,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,23,64,70,10
+END
+
+IDD_MOTION DIALOG DISCARDABLE  0, 0, 348, 82
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Motion"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_NAME,13,19,153,12,ES_AUTOHSCROLL
+    CONTROL         "Export",IDC_EXPORT,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,184,17,36,10
+    EDITTEXT        IDC_FILEPATHNAME,13,63,302,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,291,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,291,24,50,14
+    LTEXT           "Exported Name",IDC_NAMETITLE,7,7,50,8
+    LTEXT           "Source File",IDC_FILETITLE,7,52,36,8
+    PUSHBUTTON      "...",IDC_BROWSE,320,63,15,12
+    CONTROL         "Export FPS:",IDC_EXPORT_FRAMERATE_SET,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,183,31,52,10
+    EDITTEXT        IDC_EXPORT_FRAMERATE,235,28,28,12,ES_AUTOHSCROLL
+    CONTROL         "Export Bits:",IDC_EXPORT_BITS_SET,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,183,45,49,10
+    EDITTEXT        IDC_EXPORT_BITS,235,43,28,12,ES_AUTOHSCROLL
+END
+
+IDD_FILEPATHS DIALOG DISCARDABLE  0, 0, 244, 124
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Search and Replace file paths"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,187,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,187,24,50,14
+    LTEXT           "Search for:",IDC_STATIC,7,62,36,8
+    LTEXT           "Replace with:",IDC_STATIC,7,89,44,8
+    EDITTEXT        IDC_FILEPATH_SEARCH,13,73,163,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_FILEPATH_REPLACE,13,98,163,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse..",IDC_BROWSESEARCH,184,72,47,13
+    PUSHBUTTON      "Browse..",IDC_BROWSEREPLACE,184,97,47,13
+    CONTROL         "from Start of the string",IDC_RADIO_FROMSTART,"Button",
+                    BS_AUTORADIOBUTTON,13,18,85,10
+    CONTROL         "from End of the string",IDC_RADIO_FROMEND,"Button",
+                    BS_AUTORADIOBUTTON,13,29,83,10
+    CONTROL         "Anywhere within the string",IDC_RADIO_ANYWHERE,"Button",
+                    BS_AUTORADIOBUTTON,13,39,98,10
+    GROUPBOX        "Where to look",IDC_STATIC,7,7,108,48
+END
+
+IDD_EDIT_LAYER DIALOG DISCARDABLE  0, 0, 140, 34
+STYLE WS_CHILD | WS_BORDER
+FONT 8, "MS Sans Serif"
+BEGIN
+    COMBOBOX        IDC_LAYER,3,3,133,145,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "Add ",IDC_ADDLAYER,4,19,30,11
+    PUSHBUTTON      "Delete",IDC_DELETELAYER,38,19,31,11
+    CONTROL         "View All Layers",IDC_VIEWALLLAYERS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,76,20,61,10
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,1,1
+ PRODUCTVERSION 1,0,1,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "Acclaim Entertainment, Austin\0"
+            VALUE "FileDescription", "CeD MFC Application\0"
+            VALUE "FileVersion", "1, 0, 1, 1\0"
+            VALUE "InternalName", "CeD\0"
+            VALUE "LegalCopyright", "Copyright (C) 1998\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "CeD.EXE\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "CeD Application\0"
+            VALUE "ProductVersion", "1, 0, 1, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_TEST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 120
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 457
+    END
+
+    IDD_ANIMCTRL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 427
+        TOPMARGIN, 7
+    END
+
+    IDD_EXPORT_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 352
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 269
+    END
+
+    IDD_T, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 93
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 59
+    END
+
+    IDD_CHARACTER_SELECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 44
+    END
+
+    IDD_CAMERA1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 69
+    END
+
+    IDD_MOTIONLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 264
+    END
+
+    IDD_EVENTLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 136
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 282
+    END
+
+    IDD_ACTORLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 117
+    END
+
+    IDD_MOVIECTRL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 382
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 21
+    END
+
+    IDD_ACTOR_NEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 229
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 100
+    END
+
+    IDD_NUMFRAMES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 173
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 34
+    END
+
+    IDD_KEY, DIALOG
+    BEGIN
+        RIGHTMARGIN, 137
+        TOPMARGIN, 7
+    END
+
+    IDD_SHOTLIST, DIALOG
+    BEGIN
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 222
+    END
+
+    IDD_MOVIEMERGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_EXPORT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 208
+    END
+
+    IDD_MOTION_FLAGS, DIALOG
+    BEGIN
+        RIGHTMARGIN, 384
+        VERTGUIDE, 8
+        VERTGUIDE, 29
+        VERTGUIDE, 34
+        VERTGUIDE, 168
+        VERTGUIDE, 171
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 248
+    END
+
+    IDD_POINTLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 193
+    END
+
+    IDD_MOVIEPREVIEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 64
+    END
+
+    IDD_SELECT_MESH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 278
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_PROJECT_EVENTS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 369
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 267
+    END
+
+    IDD_ATTACH_EVENT_TO_JOINT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 209
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 80
+    END
+
+    IDD_MOTION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 341
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 75
+    END
+
+    IDD_FILEPATHS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 237
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 117
+    END
+
+    IDD_EDIT_LAYER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 133
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 27
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_PAN                 CURSOR  DISCARDABLE     "res\\Cur00001.cur"
+IDC_INVERSE             CURSOR  DISCARDABLE     "res\\Operatio.cur"
+IDC_ROTATE              CURSOR  DISCARDABLE     "res\\Cursor2.cur"
+IDC_ZOOM                CURSOR  DISCARDABLE     "res\\cursor1.cur"
+IDC_MOVEPLANEY          CURSOR  DISCARDABLE     "res\\cur00002.cur"
+IDC_FACEDIR             CURSOR  DISCARDABLE     "res\\facedir.cur"
+IDC_MOVEDIR             CURSOR  DISCARDABLE     "res\\movedir.cur"
+IDC_ACTOR               CURSOR  DISCARDABLE     "res\\cur00003.cur"
+IDC_KEY                 CURSOR  DISCARDABLE     "res\\cur00004.cur"
+IDC_EVENT               CURSOR  DISCARDABLE     "res\\cur00005.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_KEY DLGINIT
+BEGIN
+    IDC_EVENT, 0x403, 10, 0
+0x2e30, 0x3c20, 0x6f6e, 0x656e, 0x003e, 
+    IDC_EVENT, 0x403, 25, 0
+0x2e31, 0x4320, 0x4f48, 0x4349, 0x5f45, 0x4548, 0x4441, 0x5f53, 0x524f, 
+0x545f, 0x4941, 0x534c, "\000" 
+    IDC_EVENT, 0x403, 28, 0
+0x2e32, 0x4320, 0x4f48, 0x4349, 0x5f45, 0x494b, 0x4b43, 0x525f, 0x4345, 
+0x4549, 0x4556, 0x575f, 0x4e49, 0x0044, 
+    IDC_EVENT, 0x403, 23, 0
+0x2e33, 0x4320, 0x4f48, 0x4349, 0x5f45, 0x4f4c, 0x4553, 0x5f52, 0x4843, 
+0x4f4f, 0x4553, "\000" 
+    IDC_EVENT, 0x403, 26, 0
+0x2e34, 0x5420, 0x4952, 0x4747, 0x5245, 0x545f, 0x534f, 0x5f53, 0x4957, 
+0x5f4e, 0x4f4d, 0x4956, 0x0045, 
+    IDC_EVENT, 0x403, 21, 0
+0x2e35, 0x4320, 0x494f, 0x544e, 0x534f, 0x5f53, 0x4f43, 0x504d, 0x454c, 
+0x4554, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "CeD"
+    IDR_CEDTYPE             "\nCeD\nCeD\nCeD Files (*.icp)\n.ICP\nCeD.Document\nCeD Document"
+    IDR_MOTIONLISTTYPE      "Motion List"
+    IDR_EVENTLISTTYPE       "Event List"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "CeD"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_CONSTRUCTION_PLANE 
+                            "Show or Hide Construction Plane\nToggle Contruction Plane\n"
+    ID_VIEW_GROUND_PLANE    "Show or Hide Ground Plane\nToggle Ground Plane\n"
+    ID_VIEW_MOTIONEDIT      "Show or Hide Motion Edit View\nToggle Motion Edit View\n"
+    ID_VIEW_MOTIONLIST      "Show or Hide Motion List View\nToggle Motion List View\n"
+    ID_VIEW_EVENTLIST       "Show or Hide Event List View\nToggle Event List View\n"
+    ID_STATE_SELECT         "Select\nSelect"
+    ID_STATE_MOVE           "Drag\nDrag"
+    ID_STATE_ROTATE         "Rotate\nRotate"
+    ID_STATE_ZOOM           "Zoom\nZoom"
+    ID_STATE_SELECTMOVE     "Select and Move\nSelect and Move"
+    ID_STATE_SELECTROTATE   "Select and Rotate\nSelect and Rotate"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_ANIM_GOTO_START      "Go to Start\nGo to Start"
+    ID_ANIM_PREVIOUS_FRAME  "Previous Frame\nPrevious Frame"
+    ID_ANIM_NEXT_FRAME      "Next Frame\nNextFrame"
+    ID_ANIM_GOTO_END        "Go to End\nGo to End"
+    ID_STATE_DRAG           "Drag\nDrag"
+    ID_STATE_PAN            "Pan\nPan"
+    ID_ANIM_PLAY            "Play\nPlay"
+    ID_ZOOM_ALL             "Zoom All\nZoom All"
+    ID_STATE_MOVEPLANEY     "Move Construction Plane on Y\nMove Construction Plane\n"
+    ID_STATE_FACEDIR        "Set Face Direction\nSet Face Direction"
+    ID_CHARACTER_NEW        "Create New Character\nNew Character"
+    ID_CHARACTER_IMPORT_SKEL "Import Skeleton\nImport Skeleton"
+    ID_CHARACTER_IMPORT_MOTION "Import Motions\nImport Motions"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CAMERA_TARGETX      "Set Camera Target X\nTarget X"
+    IDC_CAMERA_TARGETY      "Set Camera Target Y\nTarget Y"
+    IDC_CAMERA_TARGETZ      "Set Camera Target Z\nTarget Z"
+    IDC_CAMERA_LOCKBONE     "Lock Camera Target to Bone\nLock to Bone"
+    IDC_CAMERA_ROTATION     "Set Camera Rotation\nRotation"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_CAMERA_ELEVATION    "Set Camera Elevation\nElevation"
+    IDC_ANIM_SLIDER         "Frame Control\nFrame Control"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_FRAME_START         "Set Start Frame\nStart Frame"
+    IDC_FRAME_END           "Set End Frame\nEnd Frame"
+    IDC_EVENT_ADD           "Create a New Event"
+    IDC_EVENT_DELETE        "Delete the Selected Event From the List of Events for this Motion"
+    IDC_EVENT_LIST          "List of Events for this Motion"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CHARACTER_EXPORT     "Export Character\nExport Character"
+    IDM_INTERP_FACEDIR      "Interpolate Face Direction\nInterpolate FaceDir"
+    ID_FACEDIR_INTERP       "Interpolate Facing Direction\nInterpolate FaceDir"
+    ID_VIEW_ALL_FACEDIR     "View All Face Directions\nView All FaceDirs"
+    ID_VIEW_ALL_MOVEDIRS    "View All Move Directions\nView All MoveDirs"
+    ID_VIEW_ALL_FACEDIRS    "View All Face Directions\nView All FaceDirs"
+    ID_STATE_MOVEDIR        "Set Move Direction\nSet Move Direction"
+    ID_MOVEDIR_INTERP       "Interpolate Move Direction\nInterpolate MoveDir"
+    ID_CHARACTER_EXPORTN64  "Export Character N64\nExport Character N64"
+    ID_CHARACTER_EXPORTPC   "Export Character WIN95\nExport Character WIN95"
+    ID_VIEW_MIRRORED_SKELETON "View Mirrored Skeleton\nView Mirrored Skeleton"
+    ID_MOVIE_NEW            "New Movie\nNew Movie"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_DELETECHARACTER      "Delete Character\nDelete Character"
+    ID_MOVIE_EXPORTN64      "Export Movie to N64\nExport Movie N64"
+    ID_MOVIE_EXPORTPC       "Export Movie to Win95\nExport Movie to Win95"
+    ID_MOVIE_IMPORT         "Import Movies\nImport Movies"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MOVIE_DELETE         "Delete Movie\nDelete Movie"
+    ID_MENUITEM32834        "New Mesh\nNew Mesh"
+    ID_MESH_DELETE          "Delete Mesh\nDelete Mesh"
+    ID_EXPORT_CHARACTER     "Export Character\nExport Character"
+    ID_MOVIES_EXPORTMOVIEASASCII 
+                            "Export Movie as ASCII\nExport Movie as ASCII\n"
+    ID_EDIT_FILEPATHS       "Search and replace file paths"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_BUTTON_ATTACH_BONE  "Attach the Selected Event to a Joint in this Character's Skeleton"
+    IDC_COMBO_SELECT_ACTIVE_EVENT_LIST 
+                            "Select the List of Global Events for this Project or the List of Events Attached to Joints for the Current Character"
+    IDC_STATIC_EVENT_NAME   "Name of the Event to which the Joint will be Attached"
+    IDC_COMBO_ATTACHED_BONE "List of Joints that may be Attached to the Event"
+    IDC_BUTTON_ATTACH_TO_JOINT 
+                            "Press to Attach the Selected Joint to the Event"
+    IDC_BUTTON_PROJECT_EVENT_IMPORT_LIST 
+                            "Import Global Project Events or Events Attached to Joints of this Character"
+    IDC_DEFINED_EVENTS_DLG_COMBO_ATTACHED_BONE 
+                            "List of Joints that may be Attached to the Event"
+    IDC_CHECK_AUTOCLEAR_FACE_DIR_MOTIONLIST 
+                            "When Checked all Face Direction Vectors are Reset to Default Values"
+    IDC_CHECK_AUTOCLEAR_MOVE_DIR_MOTIONLIST 
+                            "When Checked all Move Direction Vectors are Reset to Default Values"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_LIST_PROJECT_EVENTS "List of Defined Events"
+    IDC_EDIT_PROJECT_EVENT_NAME "Name of the Event to Define"
+    IDC_BUTTON_PROJECT_INSERT_EVENT 
+                            "Press to Insert the Above Event Definition into the Selected Defined Event List"
+    IDC_BUTTON_PROJECT_EVENT_DELETE 
+                            "Remove the Events Selected Above from the Defined Event List"
+    IDC_BUTTON_PROJECT_EVENT_EXPORT_LIST 
+                            "Export Global Project Events or Events Attached to Joint of this Character"
+    IDC_BUTTON_NEW_PROJECT_EVENT 
+                            "Edit the List of Project and Character Defined Event Lists"
+    IDC_BUTTON_ADD_CURRENT_EVENT 
+                            "Add the Selected Event to the Defined Event List"
+    IDC_COMBO_PROJECT_EVENTS "List of Project and Chracter Defined Events"
+    IDC_BUTTON_INSERT_EVENT "Insert the Selected Defined Event into the Event List for this Motion"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDC_EDIT_PROJECT_EVENT_DEFAULT_RADIUS 
+                            "The Default Radius of the Defined Event"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MOVIEVIEW_LAYERSELECT "View all edit/view layers"
+    ID_VIEW_COMPRESSED_MOTION 
+                            "View the selected motion as it will look after being exported."
+    ID_VIEW_PRIMARY_MOTION  "View the raw motion as it is loaded from the source file"
+    ID_VIEW_MOTION_BLENDED  "Interpolate the motion as it plays back for a smooth flow"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\CeD.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

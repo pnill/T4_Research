@@ -1,0 +1,3 @@
+void ReadTreeNode(CArchive &ar)
+{
+}

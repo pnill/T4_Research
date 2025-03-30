@@ -1,0 +1,157 @@
+;==========================================================================
+;
+; CMD_DRAWQUADS_TC_CLIPPED
+;
+; Loads verts using color and texture
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02    ADC bit
+;   VI03    
+;   VI04    Dest Addr
+;   VI05
+;   VI06    Addr of Pos
+;   VI07    Addr of UVs
+;   VI08    Addr of Colors
+;   VI09    Command param 1 - NVerts
+;   VI10    (unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01    XYZ 0
+;   VF02    XYZ 1
+;   VF03    XYZ 2
+;   VF04    XYZ 3
+;   VF05    ST 0
+;   VF06    ST 1
+;   VF07    ST 2
+;   VF08    ST 3
+;   VF09    RGB 0
+;   VF10    RGB 1
+;   VF11    RGB 2
+;   VF12    RGB 3
+;   VF13    Screen XYZ 0
+;   VF14    Screen XYZ 1
+;   VF15    Screen XYZ 2
+;   VF16    Screen XYZ 3
+;   VF17
+;   VF18
+;   VF19
+;   VF20    Active local to screen matrix qword 0
+;   VF21    Active local to screen matrix qword 1
+;   VF22    Active local to screen matrix qword 2
+;   VF23    Active local to screen matrix qword 3
+;   VF24    Active local to clip matrix qword 0 
+;   VF25    Active local to clip matrix qword 1 
+;   VF26    Active local to clip matrix qword 2 
+;   VF27    Active local to clip matrix qword 3 
+;   VF28    Active clip to screen matrix qword 0
+;   VF29    Active clip to screen matrix qword 1
+;   VF30    Active clip to screen matrix qword 2
+;   VF31    Active clip to screen matrix qword 3
+;==========================================================================
+
+CMD_DRAWQUADS_TC_NOTCLIPPED:
+
+        ; Read giftag from input buffer
+        NOP                             LQ.xyzw VF01, 1(VI14)
+
+        ; load up the ADC bit into VI02
+        NOP                             IADDIU VI02, VI00, 0x7FFF
+        NOP                             IADDIU VI02, VI02, 0x01
+
+        ; Get ptrs to source data  & write out giftag
+        NOP                             IADDIU  VI06, VI14, 3   ; Addr of Pos
+        NOP                             SQ.xyzw VF01, 0(VI12)   ; write out giftag
+        NOP                             IADDIU  VI07, VI06, 72  ; Addr of UVs
+        NOP                             IADDIU  VI08, VI07, 72  ; Addr of Colors
+
+        ; Get destination addresses
+        NOP                             IADDIU VI04, VI12, 1
+
+;--------------------------------------------------------------------------
+; Transform all of the verts
+;--------------------------------------------------------------------------
+
+        ; loop preamble
+
+        NOP                             LQI.xyzw VF01, (VI06++)                         ; load xyz0
+        NOP                             LQI.xyzw VF02, (VI06++)                         ; load xyz1
+        NOP                             LQI.xyzw VF03, (VI06++)                         ; load xyz2
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF04, (VI06++)     ; transform V0      ; load xyz3
+        MADDAz.xyzw ACC, VF22, VF01z    LQI.xyzw VF05, (VI07++)     ; transform V0      ; load st0
+        MADDAy.xyzw ACC, VF21, VF01y    LQI.xyzw VF06, (VI07++)     ; transform V0      ; load st1
+        MADDx.xyzw VF13, VF20, VF01x    LQI.xyzw VF07, (VI07++)     ; transform V0      ; load st2
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF08, (VI07++)     ; transform V1      ; load st3
+        MADDAz.xyzw ACC, VF22, VF02z    LQI.xyzw VF09, (VI08++)     ; transform V1      ; load rgb0
+        MADDAy.xyzw ACC, VF21, VF02y    LQI.xyzw VF10, (VI08++)     ; transform V1      ; load rgb1
+
+QUAD_TRANSFORM_LOOP:
+        MADDx.xyzw VF14, VF20, VF02x    DIV Q, VF00w, VF13w         ; transform V1      ; start divide0
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF11, (VI08++)     ; transform V2      ; load rgb2
+        MADDAz.xyzw ACC, VF22, VF03z    LQI.xyzw VF12, (VI08++)     ; transform V2      ; load rgb3
+        MADDAy.xyzw ACC, VF21, VF03y    IADDI VI09, VI09, -4        ; transform V2      ; NVerts--
+        MADDx.xyzw VF15, VF20, VF03x    LQI.xyzw VF01, (VI06++)     ; transform V2      ; load xyz0
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF02, (VI06++)     ; transform V3      ; load xyz1
+        MADDAz.xyzw ACC, VF22, VF04z    LQI.xyzw VF03, (VI06++)     ; transform V3      ; load xyz2
+        MULq.xyzw  VF13, VF13, Q        DIV Q, VF00w, VF14w         ; project V0        ; start divide1
+        MULq.xyzw  VF05, VF05, Q        NOP                         ; project ST0
+        MADDAy.xyzw ACC, VF21, VF04y    NOP                         ; transform V3
+        MADDx.xyzw VF16, VF20, VF04x    NOP                         ; transform V3
+        FTOI4.xyzw VF13, VF13           LQI.xyzw VF04, (VI06++)     ; V0->Fixed         ; load xyz3
+        MULAw.xyzw  ACC, VF23, VF00w    SQI.xyzw VF05, (VI04++)     ; transform V0      ; store STQ0
+        MADDAz.xyzw ACC, VF22, VF01z    SQI.xyzw VF09, (VI04++)     ; transform V0      ; store RGB0
+        MULq.xyzw  VF14, VF14, Q        DIV Q, VF00w, VF15w         ; project V1        ; start divide2
+        MULq.xyzw  VF06, VF06, Q        ISW.w VI02, 0(VI04)         ; project ST1       ; store ADC0
+        MADDAy.xyzw ACC, VF21, VF01y    SQI.xyz VF13, (VI04++)      ; transform V0      ; store XYZ0
+        MADDx.xyzw VF13, VF20, VF01x    LQI.xyzw VF05, (VI07++)     ; transform V0      ; load st0
+        FTOI4.xyzw VF14, VF14           NOP                         ; V1->Fixed
+        MULAw.xyzw  ACC, VF23, VF00w    SQI.xyzw VF06, (VI04++)     ; transform V1      ; store STQ1
+        MADDAz.xyzw ACC, VF22, VF02z    SQI.xyzw VF10, (VI04++)     ; transform V1      ; store RGB1
+        MULq.xyzw  VF15, VF15, Q        DIV Q, VF00w, VF16w         ; project V2        ; start divide3
+        MULq.xyzw  VF07, VF07, Q        ISW.w VI02, 0(VI04)         ; project ST2       ; store ADC1
+        MADDAy.xyzw ACC, VF21, VF02y    SQI.xyz  VF14, (VI04++)     ; transform V1      ; store XYZ1
+        NOP                             LQI.xyzw VF06, (VI07++)                         ; load st1
+        FTOI4.xyzw VF15, VF15           NOP                         ; V2->Fixed
+        NOP                             SQI.xyzw VF07, (VI04++)                         ; store STQ2
+        NOP                             SQI.xyzw VF11, (VI04++)                         ; store RGB2
+        MULq.xyzw  VF16, VF16, Q        LQI.xyzw VF07, (VI07++)     ; project V3        ; load st2
+        MULq.xyzw  VF08, VF08, Q        SQI.xyzw VF15, (VI04++)     ; project ST3       ; store XYZ2
+        NOP                             LQI.xyzw VF09, (VI08++)                         ; load rgb0
+        NOP                             LQI.xyzw VF10, (VI08++)                         ; load rgb1
+        FTOI4.xyzw VF16, VF16           NOP                         ; V3->Fixed
+        NOP                             SQI.xyzw VF08, (VI04++)                         ; store STQ3
+        NOP                             LQI.xyzw VF08, (VI07++)                         ; load st3
+        NOP                             SQI.xyzw VF12, (VI04++)                         ; store RGB3
+        NOP                             IBNE VI09, VI00, QUAD_TRANSFORM_LOOP
+        NOP                             SQI.xyzw VF16, (VI04++)                         ; store XYZ3
+
+;------------------------------------------------------------------------
+; Kick and swap buffers
+;------------------------------------------------------------------------
+
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+
+        NOP                             XGKICK VI12                     ; kick gif to render package 
+        NOP                             IADDIU VI01, VI00, OUTPUT_BUFFER_BASE
+        NOP                             NOP
+        NOP                             IBEQ   VI12, VI01, QUAD_FINISHED
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+QUAD_FINISHED:
+        
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS

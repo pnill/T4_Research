@@ -1,0 +1,180 @@
+;==========================================================================
+;
+; TRANSFORM_SINGLE_MATRIX
+;
+;==========================================================================
+;   VI00    Const (0)
+;S  VI01    Const (0xff) used by AND operations
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;L  VI06    NVerts
+;   VI07
+;S  VI08    Source Addr of Input buffer
+;S  VI09    Command param 1 - NTransforms
+;   VI10    Command param 2 - Unused
+;   VI11    Opcode from latest command
+;S  VI12    GIF packet buffer base address (for double buffering)
+;S  VI13    RESERVED - Next command address in input buffer for kernel
+;S  VI14    RESERVED - Current address of input buffer for kernel
+;S  VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02    
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10
+;   VF11
+;   VF12
+;   VF13
+;   VF14
+;   VF15
+;   VF16
+;   VF17
+;   VF18
+;   VF19
+;   VF20
+;   VF21
+;   VF22
+;   VF23
+;   VF24	Light color matrix qword 0
+;   VF25	Light color matrix qword 1
+;   VF26	Light color matirx qword 2
+;   VF27    Light color matrix qword 3
+;   VF28    Light dir matrix qword 0
+;   VF29    Light dir matrix qword 1
+;   VF30    Light dir matrix qword 2
+;S  VF31    Const (255, 16, 0.5, 0)
+;==========================================================================
+
+        ;// register usage:
+        ;// vf01    xyz0
+        ;// vf02    normal0
+        ;// vf03    stq0
+        ;// vf04    xyz1
+        ;// vf05    normal1
+        ;// vf06    stq1
+        ;// vf07    sxyz0
+        ;// vf08    srgb0
+        ;// vf09    sstq0
+        ;// vf10    sxyz1
+        ;// vf11    srgb1
+        ;// vf12    sstq1
+		;// vf13    L2S col0
+		;// vf14    L2S col1
+		;// vf15    L2S col2
+		;// vf16    L2S col3
+		;// vf17    light dir0
+		;// vf18    light dir1
+		;// vf19    light dir2
+        ;// vi02    ci0
+        ;// vi03    ci1
+		;// vi04	temp register
+
+TRANSFORM_SINGLE_MATRIX:
+        nop								ilw.x vi03, 1(vi08)											; load MatrixOffset
+		nop								ilw.y vi06, 0(vi08)											; load NVerts
+		nop								iaddi vi08, vi08, 2											; pSrc
+		nop								iaddi vi04, vi00, 1											; vi04 = 0x1
+        nop						        iaddiu vi03, vi03, MATRIX_CACHE_BASE	; vi03=&MatrixCache
+        nop                             lq.xyz  vf19, 6(vi03)										; load NL2W col2
+        nop                             lq.xyz  vf18, 5(vi03)										; load NL2W col1
+        nop						        lq.xyz  vf17, 4(vi03)										; load NL2W col0
+		nop								lq.xyzw vf13, 0(vi03)										; L2S col0
+        mulaz.xyz  acc, vf30, vf19z		lq.xyzw vf14, 1(vi03)					; LightDir*NL2W		; L2S col1
+        madday.xyz acc, vf29, vf19y		lq.xyzw vf15, 2(vi03)					; LightDir*NL2W		; L2S col2
+        maddx.xyz vf19, vf28, vf19x		lq.xyzw vf16, 3(vi03)					; LightDir*NL2W		; L2S col3
+        mulaz.xyz  acc, vf30, vf18z		lq.xyzw vf01, 0(vi08)					; LightDir*NL2W		; load xyz0
+        madday.xyz acc, vf29, vf18y		lq.xyzw vf02, 1(vi08)					; LightDir*NL2W		; load normal0
+        maddx.xyz vf18, vf28, vf18x		iand vi04, vi04, vi06					; LightDir*NL2W		; vi04 = vi06 & 0x1
+		mulaz.xyz  acc, vf30, vf17z		nop										; LightDir*NL2W
+		madday.xyz acc, vf29, vf17y		ibeq vi04, vi00, TRANSFORM_SINGLE_TWO_VERTS		; LightDir*NL2W
+		maddx.xyz vf17, vf28, vf17x		lq.xyzw vf03, 2(vi08)					; LightDir*NL2W		; load stq0
+
+TRANSFORM_SINGLE_ONE_VERT:
+
+		;// the slow single-shot (will only be done once if necessary, see the branch above?)
+		mulaz.xyz   acc, vf19, vf02z	ilw.x vi02, 2(vi08)						; light dot0		; load ci0
+		madday.xyz  acc, vf18, vf02y	iaddi vi06, vi06, -1					; light dot0		; NVerts--
+		maddx.xyz  vf08, vf17, vf02x	iaddi vi08, vi08, 3						; light dot0		; pSrc+=3
+		mulaw.xyzw  acc, vf16, vf00w	nop										; transform xyz0
+		maddaz.xyzw acc, vf15, vf01z	iand vi02, vi02, vi01					; transform xyz0	; mask ci0
+		madday.xyzw acc, vf14, vf01y	nop										; transform xyz0
+		maxx.xyz   vf08, vf08, vf00x	nop										; clamp dot<0
+		maddx.xyzw vf07, vf13, vf01x	nop										; transform xyz0
+		nop								nop
+		mulaw.xyzw  acc, vf27, vf00w	nop										; calc rgb0
+		maddaz.xyzw acc, vf26, vf08z	nop										; calc rgb0
+		madday.xyzw acc, vf25, vf08y	div q, vf00w, vf07w						; calc rgb0			; divide0
+		maddx.xzyw vf08, vf24, vf08x	nop										; calc rgb0
+		nop								nop
+		nop								nop
+		nop								nop
+		minix.xyzw vf08, vf08, vf31x	nop										; clamp rgb>255
+		nop								nop
+		mulq.xyzw  vf07, vf07, q		lq.xyzw vf02, 1(vi08)					; project xyz0		; load normal0
+		mulq.xyzw  vf09, vf03, q		lq.xyzw vf01, 0(vi08)					; project stq0		; load xyz0
+		ftoi0.xyzw vf08, vf08			lq.xyzw vf03, 2(vi08)					; rgb0->fixed		; load stq0
+		nop								nop
+		ftoi4.xyzw vf07, vf07			nop										; xyz0->fixed
+		nop								sq.xyzw vf09, 256(vi02)										; store stq0
+		nop								sq.xyzw vf08, 128(vi02)										; store rgb0
+		nop								ibeq vi06, vi00, TRANSFORM_FINISHED
+		nop								sq.xyzw vf07, 0(vi02)										; store xyz0
+
+TRANSFORM_SINGLE_TWO_VERTS:
+
+		;// preamble (vf01..vf03 should already hold the info for vert0)
+		mulaw.xyzw  acc, vf16, vf00w	lq.xyzw vf04, 3(vi08)					; transform xyz0	; load normal1
+		maddaz.xyzw acc, vf15, vf01z	lq.xyzw vf05, 4(vi08)					; transform xyz0	; load stq0
+		madday.xyzw acc, vf14, vf01y	lq.xyzw vf06, 5(vi08)					; transform xyz0	; load stq1
+		maddx.xyzw vf07, vf13, vf01x	nop										; transform xyz0
+		mulaw.xyzw  acc, vf16, vf00w	nop										; transform xyz1
+
+L_TRANSFORM_SINGLE_TWO_VERTS:
+
+		maddaz.xyzw acc, vf15, vf04z	nop
+		madday.xyzw acc, vf14, vf04y	nop
+		maddx.xyzw vf10, vf13, vf04x	div q, vf00w, vf07w						; transform xyz1	; divide0
+		mulaz.xyz   acc, vf19, vf02z	ilw.x vi02, 2(vi08)						; light dot0		; load ci0
+		madday.xyz  acc, vf18, vf02y	ilw.x vi03, 5(vi08)						; light dot0		; load ci1
+		maddx.xyz  vf08, vf17, vf02x	iaddiu vi08, vi08, 6					; light dot0		; pSrc += 2
+		mulaz.xyz   acc, vf19, vf05z	iaddi vi06, vi06, -2					; light dot1		; NVerts -= 2
+		madday.xyz  acc, vf18, vf05y	iand vi02, vi02, vi01					; light dot1		; mask ci0
+		maddx.xyz  vf11, vf17, vf05x	iand vi03, vi03, vi01					; light dot1		; mask ci1
+		maxx.xyz   vf08, vf08, vf00x	nop										; clamp dot0<0
+		mulq.xyzw  vf07, vf07, q		div q, vf00w, vf10w						; project xyz0		; divide1
+		mulq.xyzw  vf09, vf03, q		nop										; project stq0
+		maxx.xyz   vf11, vf11, vf00x	nop										; clamp dot1<0
+		mulaw.xyzw  acc, vf27, vf00w	nop										; calc rgb0
+		maddaz.xyzw acc, vf26, vf08z	nop										; calc rgb0
+		madday.xyzw acc, vf25, vf08y	sq.xyzw	vf09, 256(vi02)					; calc rgb0			; store stq0
+		maddx.xyzw vf08, vf24, vf08x	nop										; calc rgb0
+		mulaw.xyzw  acc, vf27, vf00w	nop										; calc rgb1
+		maddaz.xyzw acc, vf26, vf11z	nop										; calc rgb1
+		madday.xyzw acc, vf25, vf11y	nop										; calc rgb1
+		maddx.xyzw vf11, vf24, vf11x	lq.xyzw vf01, 0(vi08)					; calc rgb1			; load xyz0
+		mulq.xyzw  vf10, vf10, q		lq.xyzw vf04, 3(vi08)					; project xyz1		; load xyz1
+		mulq.xyzw  vf12, vf06, q		lq.xyzw vf02, 1(vi08)					; project stq1		; load normal0
+		minix.xyzw vf08, vf08, vf31x	lq.xyzw vf05, 4(vi08)					; clamp rgb0>255	; load normal1
+		minix.xyzw vf11, vf11, vf31x	lq.xyzw vf03, 2(vi08)					; clamp rgb1>255	; load stq0
+		ftoi4.xyzw vf07, vf07			lq.xyzw vf06, 5(vi08)					; xyz0->fixed		; load stq1
+		ftoi4.xyzw vf10, vf10			sq.xyzw vf12, 256(vi03)					; xyz1->fixed		; store stq1
+		ftoi0.xyzw vf08, vf08			nop										; rgb0->fixed
+		ftoi0.xyzw vf11, vf11			nop										; rgb1->fixed
+		mulaw.xyzw  acc, vf16, vf00w	sq.xyzw vf07, 0(vi02)					; transform xyz0	; store xyz0
+		maddaz.xyzw acc, vf15, vf01z	sq.xyzw vf10, 0(vi03)					; transform xyz0	; store xyz1
+		madday.xyzw acc, vf14, vf01y	sq.xyzw vf08, 128(vi02)					; transform xyz0	; store rgb0
+		maddx.xyzw vf07, vf13, vf01x	ibne vi06, vi00, L_TRANSFORM_SINGLE_TWO_VERTS	; transform xyz0
+		mulaw.xyzw  acc, vf16, vf00w	sq.xyzw vf11, 128(vi03)					; transform xyz1	; store rgb1
+
+		;// we're done
+		nop								b TRANSFORM_FINISHED
+		nop								nop

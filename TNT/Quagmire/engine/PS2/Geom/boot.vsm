@@ -1,0 +1,77 @@
+;==========================================================================
+;
+; BOOT.VSM
+;
+; Basic bootup of microcode
+; included by KERNEL.VSM
+;
+;==========================================================================
+
+BOOT:   
+        ; Store clipping planes out as data
+
+
+        ADDw.x VF01x, VF00x, VF00w      IADDIU VI04, VI00, CLIPPER_PLANES       ; VI04 = &ClipPlanes
+
+        ; Y+,Y-
+        SUBw.x VF02x, VF00x, VF00w      IADDIU VI01, VI00, 0x100                ; VI01 = 0x100
+        NOP                             IADDIU VI02, VI00, 0x004                ; VI02 = 0x004
+        NOP                             IADDIU VI03, VI00, 2                    ; VI03 = 2
+        NOP                             SQ.x   VF01, 0(VI04)                    ; ClipPlanes[0].x = +1
+        NOP                             ISW.y  VI01, 0(VI04)                    ; ClipPlanes[0].y = 0x100
+        NOP                             ISW.z  VI02, 0(VI04)                    ; ClipPlanes[0].z = 0x004
+        NOP                             ISW.w  VI03, 0(VI04)                    ; ClipPlanes[0].w = 2
+        NOP                             IADDIU VI01, VI00, 0x200                ; VI01 = 0x200
+        NOP                             IADDIU VI02, VI00, 0x008                ; VI02 = 0x008
+        NOP                             SQ.x   VF02, 1(VI04)                    ; ClipPlanes[1].x = -1
+        NOP                             ISW.y  VI01, 1(VI04)                    ; ClipPlanes[1].y = 0x200
+        NOP                             ISW.z  VI02, 1(VI04)                    ; ClipPlanes[1].z = 0x008
+        NOP                             ISW.w  VI03, 1(VI04)                    ; ClipPlanes[1].w = 2
+        
+        ; X+,X-
+        NOP                             IADDIU VI01, VI00, 0x040                ; VI01 = 0x040
+        NOP                             IADDIU VI02, VI00, 0x001                ; VI02 = 0x001
+        NOP                             IADDIU VI03, VI00, 4                    ; VI03 = 4
+        NOP                             SQ.x   VF01, 2(VI04)                    ; ClipPlanes[2].x = +1
+        NOP                             ISW.y  VI01, 2(VI04)                    ; ClipPlanes[2].y = 0x040
+        NOP                             ISW.z  VI02, 2(VI04)                    ; ClipPlanes[2].z = 0x001
+        NOP                             ISW.w  VI03, 2(VI04)                    ; ClipPlanes[2].w = 4
+        NOP                             IADDIU VI01, VI00, 0x080                ; VI01 = 0x080
+        NOP                             IADDIU VI02, VI00, 0x002                ; VI02 = 0x002
+        NOP                             SQ.x   VF02, 3(VI04)                    ; ClipPlanes[3].x = -1
+        NOP                             ISW.y  VI01, 3(VI04)                    ; ClipPlanes[3].y = 0x080
+        NOP                             ISW.z  VI02, 3(VI04)                    ; ClipPlanes[3].z = 0x002
+        NOP                             ISW.w  VI03, 3(VI04)                    ; ClipPlanes[3].w = 4
+        
+        ; Z+,Z-
+        NOP                             IADDIU VI01, VI00, 0x400                ; VI01 = 0x400
+        NOP                             IADDIU VI02, VI00, 0x010                ; VI02 = 0x010
+        NOP                             IADDIU VI03, VI00, 0                    ; VI03 = 0
+        NOP                             SQ.x   VF01, 4(VI04)                    ; ClipPlanes[4].x = +1
+        NOP                             ISW.y  VI01, 4(VI04)                    ; ClipPlanes[4].y = 0x400
+        NOP                             ISW.z  VI02, 4(VI04)                    ; ClipPlanes[4].z = 0x010
+        NOP                             ISW.w  VI03, 4(VI04)                    ; ClipPlanes[4].w = 0
+        NOP                             IADDIU VI01, VI00, 0x800                ; VI01 = 0x800
+        NOP                             IADDIU VI02, VI00, 0x020                ; VI02 = 0x020
+        NOP                             SQ.x   VF02, 5(VI04)                    ; ClipPlanes[5].x = -1
+        NOP                             ISW.y  VI01, 5(VI04)                    ; ClipPlanes[5].y = 0x800
+        NOP                             ISW.z  VI02, 5(VI04)                    ; ClipPlanes[5].z = 0x020
+        NOP                             ISW.w  VI03, 5(VI04)                    ; ClipPlanes[5].w = 0
+        
+        ; Load Packet buffer base into double buffer register VI12
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        
+        ; Make sure clipping is on by default
+        NOP                             IADDIU VI01, VI00, 0x1
+        NOP                             IADDIU VI02, VI00, GEOM_FLAGS
+        NOP                             ISW.x  VI01, 0(VI02)
+
+        ; Halt and wait for vif to reboot you
+        NOP     NOP         
+        NOP[E]  NOP
+        NOP     NOP
+
+        ; Branch to kernel start
+        NOP                             B KERNEL_TOP                    ; Jump to kernel to start
+        NOP                             NOP                             ; BDS
+

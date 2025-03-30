@@ -1,0 +1,178 @@
+;==========================================================================
+;
+; MEMLAYOUT.VSM
+;
+; Base memory and register layout
+;
+;==========================================================================
+;
+; VU1 GLOBAL REGISTER USAGE
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06
+;   VI07
+;   VI08
+;   VI09    Command param 1
+;   VI10    Command param 2
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10    
+;   VF11    
+;   VF12    
+;   VF13    
+;   VF14    
+;   VF15    
+;   VF16    
+;   VF17    
+;   VF18    
+;   VF19    
+;   VF20    Active local to screen matrix qword 0
+;   VF21    Active local to screen matrix qword 1
+;   VF22    Active local to screen matrix qword 2
+;   VF23    Active local to screen matrix qword 3
+;   VF24    Active local to clip matrix qword 0 
+;   VF25    Active local to clip matrix qword 1 
+;   VF26    Active local to clip matrix qword 2 
+;   VF27    Active local to clip matrix qword 3 
+;   VF28    Active clip to screen matrix qword 0
+;   VF29    Active clip to screen matrix qword 1
+;   VF30    Active clip to screen matrix qword 2
+;   VF31    Active clip to screen matrix qword 3
+;==========================================================================
+;
+; VU1 MEMORY LAYOUT
+;
+;==========================================================================
+; 870
+;       0 - INPUT_BUFFER_BASE
+;           CMD/ GIFTAG/ GIFTAG / 72*3
+;           219x2 qwords. Holds commands and data for different routines.
+;           The two buffers use XTOP for double buffering.
+;           This is where the VIF sends most data.
+;
+;     438 - OUTPUT_BUFFER_BASE
+;           GIFTAG / 72*3                       (Normal)
+;           GIFTAG / 35*3 / GIFTAG / 35*3       (EnvMapped)
+;           217x2 qwords. Holds giftag and packaged verts for GIF.
+;           The buffer can hold 72 verts, or 24 tris or 18 quads
+;           The two buffers use VI12 for double buffering
+;
+;==========================================================================
+
+;     872 - CLIPPER_STACK
+;           12 qwords, used to hold altered registers during clipping
+;
+;     884 - CLIPPER_VERTS_0
+;           Holds 10, 3 component verts
+;           30 qwords
+;
+;     914 - CLIPPER_VERTS_1
+;           Holds 10, 3 component verts
+;           30 qwords
+;
+;     944 - CLIPPER_GIF_VERTS_0
+;           1 Giftag and Holds 9, 3 component verts
+;           28 qwords
+;
+;     972 - CLIPPER_GIF_VERTS_1
+;           1 Giftag and Holds 9, 3 component verts
+;           28 qwords
+;
+;    1000 - CLIPPER_PLANES
+;           Holds 6 qwords that contain plane clipping info
+;           X = +1.0/-1.0;  Y = Clip Mask, Z = Clip Mask, W = Component Jump address
+;
+;    1006 - CLIPPER_GIF_STALL
+;           1 qword
+;
+;    1007 - LIGHT_MATRIX
+;           4 qwords - holds [LightColor]x[LightDir]x[NormalizedL2W]
+;
+;    1011 - NL2V_MATRIX
+;           3 qwords - holds normalized L2W for environment mapping (w/o translation)
+;
+;    1014 - QUAD_CLIP_HALF
+;           9 qwords - holds xyz,stq,rgb for half of a quad that is waiting to be clipped
+;
+;    1023 - GEOM_FLAGS
+;           1 qword - X is 0x1 if clipping on, and 0x0 if clipping off
+;
+;==========================================================================
+        
+.equ INPUT_BUFFER_BASE,         0
+.equ INPUT_BUFFER_SIZE,         219
+
+.equ OUTPUT_BUFFER_BASE,        438
+.equ OUTPUT_BUFFER_SIZE,        217
+
+;.equ CLIPPER_STACK,             872
+;.equ CLIPPER_VERTS_0,           884
+;.equ CLIPPER_VERTS_1,           914
+;.equ CLIPPER_GIF_VERTS_0,       944
+;.equ CLIPPER_GIF_VERTS_1,       972
+;.equ CLIPPER_PLANES,           1000
+.equ CLIPPER_GIF_STALL,        1006
+.equ LIGHT_MATRIX,             1007        
+.equ NL2V_MATRIX,              1011
+.equ QUAD_CLIP_HALF,           1014
+.equ GEOM_FLAGS,               1023
+
+
+;**************************
+; New tri strip system info
+;**************************
+.equ CLIPPER_STACK,             720
+
+.equ CLIPPER_SPLIT_STACK_STRIDE, 12
+.equ CLIPPER_SPLIT_STACK_START, 733     ; subdivision stacks - for recursive subdivide
+.equ CLIPPER_SPLIT_STACK_LVL1,  CLIPPER_SPLIT_STACK_START                               ;733
+.equ CLIPPER_SPLIT_STACK_LVL2,  CLIPPER_SPLIT_STACK_LVL1 + CLIPPER_SPLIT_STACK_STRIDE   ;745
+.equ CLIPPER_SPLIT_STACK_LVL3,  CLIPPER_SPLIT_STACK_LVL2 + CLIPPER_SPLIT_STACK_STRIDE   ;757
+.equ CLIPPER_SPLIT_STACK_LVL4,  CLIPPER_SPLIT_STACK_LVL3 + CLIPPER_SPLIT_STACK_STRIDE   ;769
+.equ CLIPPER_SPLIT_STACK_LVL5,  CLIPPER_SPLIT_STACK_LVL4 + CLIPPER_SPLIT_STACK_STRIDE   ;781
+.equ CLIPPER_SPLIT_STACK_END,   CLIPPER_SPLIT_STACK_LVL5 + CLIPPER_SPLIT_STACK_STRIDE   ;793
+
+.equ CLIPPER_SPLIT_BUFF_STRIDE,  25
+.equ CLIPPER_SPLIT_START,       CLIPPER_SPLIT_STACK_END         ; buffer w/ 8 verts + 1 GIFtag
+.equ CLIPPER_SPLIT_LVL1,        CLIPPER_SPLIT_START                                     ;793
+.equ CLIPPER_SPLIT_LVL2,        CLIPPER_SPLIT_LVL1 + CLIPPER_SPLIT_BUFF_STRIDE          ;818
+.equ CLIPPER_SPLIT_LVL3,        CLIPPER_SPLIT_LVL2 + CLIPPER_SPLIT_BUFF_STRIDE          ;843
+.equ CLIPPER_SPLIT_LVL4,        CLIPPER_SPLIT_LVL3 + CLIPPER_SPLIT_BUFF_STRIDE          ;868
+.equ CLIPPER_SPLIT_LVL5,        CLIPPER_SPLIT_LVL4 + CLIPPER_SPLIT_BUFF_STRIDE          ;893
+.equ CLIPPER_SPLIT_LVL6,        CLIPPER_SPLIT_LVL5 + CLIPPER_SPLIT_BUFF_STRIDE          ;918
+.equ CLIPPER_SPLIT_LVL7,        CLIPPER_SPLIT_LVL6 + CLIPPER_SPLIT_BUFF_STRIDE          ;943
+.equ CLIPPER_SPLIT_LVL8,        CLIPPER_SPLIT_LVL7 + CLIPPER_SPLIT_BUFF_STRIDE          ;968
+                                                                                        ;993
+
+.equ MATRIX_START,              1001
+.equ MATRIX_C2S_ADDR,           MATRIX_START                    ;1001
+.equ MATRIX_L2S_ADDR,           MATRIX_C2S_ADDR + 4             ;1005
+.equ MATRIX_S2C_ADDR,           MATRIX_L2S_ADDR + 4             ;1009
+.equ MATRIX_NL2V_ADDR,          MATRIX_S2C_ADDR + 4             ;1013
+.equ MATRIX_LIGHT_DIR_ADDR,     MATRIX_NL2V_ADDR + 3            ;1016
+.equ MATRIX_LIGHT_COL_ADDR,     MATRIX_LIGHT_DIR_ADDR + 3       ;1019
+.equ SUBMESH_FLAGS,             MATRIX_LIGHT_COL_ADDR + 4       ;1023
+
+.equ CLIPPER_MAX_VERTS_PER_BUCKET_3,  32
+.equ CLIPPER_MAX_VERTS_PER_BUCKET_4,  24
+

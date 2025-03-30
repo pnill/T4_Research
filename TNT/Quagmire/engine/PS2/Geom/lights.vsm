@@ -1,0 +1,101 @@
+;==========================================================================
+;
+; LIGHTS.VSM
+;
+;==========================================================================
+
+;==========================================================================
+;
+; CMD_LOADLIGHTS
+;
+;==========================================================================
+;
+;   Load the light matrix into vumem
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;L  VI06    Temp Dst Ptr
+;   VI07
+;   VI08
+;   VI09    Command param 1
+;   VI10    Command param 2
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10    
+;   VF11    
+;   VF12    
+;   VF13    
+;   VF14    
+;   VF15    
+;L  VF16    Temp register for load/store
+;L  VF17    Temp register for load/store
+;L  VF18    Temp register for load/store
+;L  VF19    Temp register for load/store
+;S  VF20    Active local to screen matrix qword 0
+;S  VF21    Active local to screen matrix qword 1
+;S  VF22    Active local to screen matrix qword 2
+;S  VF23    Active local to screen matrix qword 3
+;S  VF24    Active local to clip matrix qword 0 
+;S  VF25    Active local to clip matrix qword 1 
+;S  VF26    Active local to clip matrix qword 2 
+;S  VF27    Active local to clip matrix qword 3 
+;S  VF28    Active clip to screen matrix qword 0
+;S  VF29    Active clip to screen matrix qword 1
+;S  VF30    Active clip to screen matrix qword 2
+;S  VF31    Active clip to screen matrix qword 3
+;==========================================================================
+
+CMD_LOADLIGHTS:
+
+        ; Get src & dst ptrs
+        NOP                             IADDIU VI06, VI00, LIGHT_MATRIX
+        
+        ; Copy data into registers
+        NOP                             LQ.xyzw VF16, 1(VI14)
+        NOP                             LQ.xyzw VF17, 2(VI14)
+        NOP                             LQ.xyzw VF18, 3(VI14)
+        NOP                             LQ.xyzw VF19, 4(VI14)
+
+        ; Store back out into vumem
+        NOP                             SQ.xyzw VF16, 0(VI06)
+        NOP                             SQ.xyzw VF17, 1(VI06)
+        NOP                             SQ.xyzw VF18, 2(VI06)
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             SQ.xyzw VF19, 3(VI06)           ; (BDS)
+
+;==========================================================================
+
+CMD_LOAD_NL2V:
+
+        ; Get src & dst ptrs
+        NOP                             IADDIU VI06, VI00, NL2V_MATRIX
+
+        ; Copy data into registers
+        NOP                             LQ.xyzw VF16, 1(VI14)
+        NOP                             LQ.xyzw VF17, 2(VI14)
+        NOP                             LQ.xyzw VF18, 3(VI14)
+
+        ; Store back out into vumem
+        NOP                             SQ.xyzw VF16, 0(VI06)
+        NOP                             SQ.xyzw VF17, 1(VI06)
+        NOP                             B KERNEL_RET                    ; Return to kernel
+        NOP                             SQ.xyzw VF18, 2(VI06)           ; (BDS)

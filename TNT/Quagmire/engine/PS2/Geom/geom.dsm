@@ -1,0 +1,21 @@
+
+.include "vumacros.h"
+
+.global VUM_Geom_Code
+.global VUM_Geom_Code_End
+
+
+
+.data
+.align 4
+VUM_Geom_Code:
+DMAret *
+ixyz 0, 0, 0
+MPG 0,*
+.include "tri_strips_boot.vsm"
+.EndMPG
+VUM_Geom_Code_End: 
+.EndDmaData  
+
+
+

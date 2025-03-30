@@ -1,0 +1,57 @@
+////////////////////////////////////////////////////////////////////////////
+//
+//  X_FILES.CPP
+//
+////////////////////////////////////////////////////////////////////////////
+
+#ifndef X_FILES_HPP
+#include "x_files.hpp"
+#endif
+
+#ifndef X_MEMORY_HPP
+#include "x_memory.hpp"
+#endif
+
+#ifndef X_STDIO_HPP
+#include "x_stdio.hpp"
+#endif
+
+#ifndef X_TIME_HPP
+#include "x_time.hpp"
+#endif
+
+////////////////////////////////////////////////////////////////////////////
+
+static s32 s_xfiles_initialized = 0;
+
+////////////////////////////////////////////////////////////////////////////
+
+void x_Init( void )
+{
+    if( s_xfiles_initialized == 0 )
+    {
+        x_MemoryInit();
+        x_InitSTDIO();
+        x_InitTime();
+    }
+
+    s_xfiles_initialized++;
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+void x_Kill( void )
+{
+    ASSERT( s_xfiles_initialized > 0 );
+
+    s_xfiles_initialized--;
+
+    if( s_xfiles_initialized == 0 )
+    {
+        x_KillSTDIO();
+        x_MemoryKill();
+        x_KillTime();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////

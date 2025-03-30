@@ -1,0 +1,220 @@
+;==========================================================================
+;
+; MATRIXLIGHTS.VSM
+;
+;==========================================================================
+
+;==========================================================================
+;
+; CMD_LOADLIGHTSANDMATRICES
+;
+;==========================================================================
+;
+; Assuming that data is:
+;   L2S, L2C, C2S, LightDir, LightColor
+;
+; Move data through registers and write to vumemory.  
+; Keep matrices in registers.
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01-11 Unused
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF15    Active local to clip matrix qword 0
+;   VF16    Active local to clip matrix qword 1
+;   VF17    Active local to clip matrix qword 2
+;   VF18    Active local to clip matrix qword 3
+;   VF19    Active clip to screen matrix qword 0
+;   VF20    Active clip to screen matrix qword 1
+;   VF21    Active clip to screen matrix qword 2
+;   VF22    Active clip to screen matrix qword 3
+;   VF23    Active light intensity matrix qword 0
+;   VF24    Active light intensity matrix qword 1
+;   VF25    Active light intensity matrix qword 2
+;   VF26    Active light intensity matrix qword 3
+;   VF27    Active light color matrix qword 0    
+;   VF28    Active light color matrix qword 1    
+;   VF29    Active light color matrix qword 2    
+;   VF30    Active light color matrix qword 3    
+;   VF31    Max color value for pegging to 255
+;==========================================================================
+
+CMD_LOADLIGHTSANDMATRICES:
+
+        ; Get ptr to source and dest data
+        NOP                             IADDIU VI01, VI14, 1                ; source
+        NOP                             IADDIU VI02, VI00, MATRIX_L2S_BASE  ; destination
+        
+        ; Copy over L2S
+        NOP                             LQ.xyzw VF15, 0(VI01)           
+        NOP                             LQ.xyzw VF16, 1(VI01)           
+        NOP                             LQ.xyzw VF17, 2(VI01)           
+        NOP                             LQ.xyzw VF18, 3(VI01)           
+        NOP                             SQ.xyzw VF15, 0(VI02)           
+        NOP                             SQ.xyzw VF16, 1(VI02)           
+        NOP                             SQ.xyzw VF17, 2(VI02)           
+        NOP                             SQ.xyzw VF18, 3(VI02)           
+
+        ; Copy over L2C
+        NOP                             IADDIU  VI01, VI01, 4
+        NOP                             IADDIU  VI02, VI02, 4
+        NOP                             LQ.xyzw VF15, 0(VI01)           
+        NOP                             LQ.xyzw VF16, 1(VI01)           
+        NOP                             LQ.xyzw VF17, 2(VI01)           
+        NOP                             LQ.xyzw VF18, 3(VI01)           
+        NOP                             SQ.xyzw VF15, 0(VI02)           
+        NOP                             SQ.xyzw VF16, 1(VI02)           
+        NOP                             SQ.xyzw VF17, 2(VI02)           
+        NOP                             SQ.xyzw VF18, 3(VI02)           
+
+        ; Copy over C2L
+        NOP                             IADDIU  VI01, VI01, 4
+        NOP                             IADDIU  VI02, VI02, 4
+        NOP                             LQ.xyzw VF19, 0(VI01)           
+        NOP                             LQ.xyzw VF20, 1(VI01)           
+        NOP                             LQ.xyzw VF21, 2(VI01)           
+        NOP                             LQ.xyzw VF22, 3(VI01)           
+        NOP                             SQ.xyzw VF19, 0(VI02)           
+        NOP                             SQ.xyzw VF20, 1(VI02)           
+        NOP                             SQ.xyzw VF21, 2(VI02)           
+        NOP                             SQ.xyzw VF22, 3(VI02)           
+
+        ; Copy over LightDir
+        NOP                             IADDIU  VI01, VI01, 4
+        NOP                             IADDIU  VI02, VI02, 4
+        NOP                             LQ.xyzw VF23, 0(VI01)           
+        NOP                             LQ.xyzw VF24, 1(VI01)           
+        NOP                             LQ.xyzw VF25, 2(VI01)           
+        NOP                             LQ.xyzw VF26, 3(VI01)           
+        NOP                             SQ.xyzw VF23, 0(VI02)           
+        NOP                             SQ.xyzw VF24, 1(VI02)           
+        NOP                             SQ.xyzw VF25, 2(VI02)           
+        NOP                             SQ.xyzw VF26, 3(VI02)           
+
+        ; Copy over LightColor
+        NOP                             IADDIU  VI01, VI01, 4
+        NOP                             IADDIU  VI02, VI02, 4
+        NOP                             LQ.xyzw VF27, 0(VI01)           
+        NOP                             LQ.xyzw VF28, 1(VI01)           
+        NOP                             LQ.xyzw VF29, 2(VI01)           
+        NOP                             LQ.xyzw VF30, 3(VI01)           
+        NOP                             SQ.xyzw VF27, 0(VI02)           
+        NOP                             SQ.xyzw VF28, 1(VI02)           
+        NOP                             SQ.xyzw VF29, 2(VI02)           
+        NOP                             SQ.xyzw VF30, 3(VI02)           
+
+        ; Return to kernel
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+;==========================================================================
+;
+; CMD_LOADCLIPMATRICES
+;
+;==========================================================================
+;
+; Move L2C and C2S into registers from vumemory.
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01-11 Unused
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF15    Active local to clip matrix qword 0
+;   VF16    Active local to clip matrix qword 1
+;   VF17    Active local to clip matrix qword 2
+;   VF18    Active local to clip matrix qword 3
+;   VF19    Active clip to screen matrix qword 0
+;   VF20    Active clip to screen matrix qword 1
+;   VF21    Active clip to screen matrix qword 2
+;   VF22    Active clip to screen matrix qword 3
+;   VF23    Active light intensity matrix qword 0
+;   VF24    Active light intensity matrix qword 1
+;   VF25    Active light intensity matrix qword 2
+;   VF26    Active light intensity matrix qword 3
+;   VF27    Active light color matrix qword 0    
+;   VF28    Active light color matrix qword 1    
+;   VF29    Active light color matrix qword 2    
+;   VF30    Active light color matrix qword 3    
+;   VF31    Max color value for pegging to 255
+;==========================================================================
+
+CMD_LOADCLIPMATRICES:
+
+        ; Get source addr of matrices
+        NOP                             IADDIU VI01, VI00, MATRIX_L2C_BASE
+        
+        ; Copy up L2C
+        NOP                             LQ.xyzw VF15, 0(VI01)           
+        NOP                             LQ.xyzw VF16, 1(VI01)           
+        NOP                             LQ.xyzw VF17, 2(VI01)           
+        NOP                             LQ.xyzw VF18, 3(VI01)           
+
+        ; Copy up C2S
+        NOP                             LQ.xyzw VF19, 4(VI01)           
+        NOP                             LQ.xyzw VF20, 5(VI01)           
+        NOP                             LQ.xyzw VF21, 6(VI01)           
+        NOP                             LQ.xyzw VF22, 7(VI01)           
+
+        ; Return to kernel
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+;==========================================================================
+;
+; CMD_LOADNOCLIPMATRICES
+;
+;==========================================================================
+;
+; Move L2S into registers from vumemory.
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01-11 Unused
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF19    Active local to screen matrix qword 0
+;   VF20    Active local to screen matrix qword 1
+;   VF21    Active local to screen matrix qword 2
+;   VF22    Active local to screen matrix qword 3
+;   VF23    Active light intensity matrix qword 0
+;   VF24    Active light intensity matrix qword 1
+;   VF25    Active light intensity matrix qword 2
+;   VF26    Active light intensity matrix qword 3
+;   VF27    Active light color matrix qword 0    
+;   VF28    Active light color matrix qword 1    
+;   VF29    Active light color matrix qword 2    
+;   VF30    Active light color matrix qword 3    
+;   VF31    Max color value for pegging to 255
+;==========================================================================
+
+CMD_LOADNOCLIPMATRICES:
+
+        ; Get source addr of matrices
+        NOP                             IADDIU VI01, VI00, MATRIX_L2S_BASE
+        
+        ; Copy up L2C
+        NOP                             LQ.xyzw VF19, 0(VI01)           
+        NOP                             LQ.xyzw VF20, 1(VI01)           
+        NOP                             LQ.xyzw VF21, 2(VI01)           
+        NOP                             LQ.xyzw VF22, 3(VI01)           
+
+        ; Return to kernel
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS

@@ -1,0 +1,13 @@
+xps.1.1
+
+def c0, 0.68f, 0.680f, 0.700f, 1.0f
+def c1, 0.63f, 0.5925f, 0.5925f, 1.0f
+
+tex t0 // base texture texel color
+tex t1 // 2nd diffuse pass texel color
+
+mul r0.rgb, v0, c0              ;diffuse*ambient
+lrp r1.rgb, v0.a, t0, t1        ; blend the 2 textures into 1
+mul	r0.rgb, r1, r0              ;texture*light source
+
+mul_x4 r0.rgb, r0, c1

@@ -1,0 +1,844 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{45d3713b-62b1-4769-a80a-0ae2241682e3}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{83b6d9bc-de64-4df6-9759-82331fd2d453}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{5335c4ac-6f18-4f41-be0e-1a518b0ecd3d}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Skel &amp; Anim">
+      <UniqueIdentifier>{3b10882f-3960-49e5-9f0e-0e9bbe4edc6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="y_files">
+      <UniqueIdentifier>{15f2f13c-be8f-43ea-9276-09bb51cbf396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="x_files">
+      <UniqueIdentifier>{171363de-7321-45c0-b0a0-38715229b309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QGeom">
+      <UniqueIdentifier>{d628f1db-e91f-4a1d-81f8-8b8fba537f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Skin">
+      <UniqueIdentifier>{93f1a9f4-45be-45c5-b785-e0b1e75499bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectX">
+      <UniqueIdentifier>{cdaed0aa-8780-469f-a34d-c14412cdcae5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AttachJointDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CeD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CeDDoc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CeDView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterExport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChildFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefinedEventListCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefinedEventsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgActorList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgActorNew.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgBiBlendViewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCamera1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCharacter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgEventList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgExportRotationsHelp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFaceDirRecipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgFilePaths.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgKey.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMotion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMotionList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMovieExport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMovieMerge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMoviePreview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgPropDefs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgProps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSelectMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgShotList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSkelPointList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgSkin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportParams.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ExportProgress.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Motion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MotionEditFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MotionEditView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MotionFlags.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MotionList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseStatic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Movie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovieBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovieExport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovieFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovieList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovieView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NumFrames.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Prop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContextCDC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderContextD3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RollupBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RollupCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RollupPane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelPointList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Skin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SkinList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SortedHeaderCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SortedListCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TransitionViewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="eNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ieArchive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ieList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mfcutils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim\Anim.cpp">
+      <Filter>Skel &amp; Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim\Skel.cpp">
+      <Filter>Skel &amp; Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim\acccmp_c.cpp">
+      <Filter>Skel &amp; Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim\acccmp_d.cpp">
+      <Filter>Skel &amp; Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="y_files\y_Arg.cpp">
+      <Filter>y_files</Filter>
+    </ClCompile>
+    <ClCompile Include="y_files\y_ChkSum.cpp">
+      <Filter>y_files</Filter>
+    </ClCompile>
+    <ClCompile Include="y_files\y_Token.cpp">
+      <Filter>y_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_bitmap.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_debug.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_files.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_math.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_memory.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_plus.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_sintable.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_stdio.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_time.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files\x_vsprtf.cpp">
+      <Filter>x_files</Filter>
+    </ClCompile>
+    <ClCompile Include="QRaw.cpp">
+      <Filter>QGeom</Filter>
+    </ClCompile>
+    <ClCompile Include="Skin\CTextFile.cpp">
+      <Filter>Skin</Filter>
+    </ClCompile>
+    <ClCompile Include="Skin\cstring.cpp">
+      <Filter>Skin</Filter>
+    </ClCompile>
+    <ClCompile Include="Skin\skin_mesh.cpp">
+      <Filter>Skin</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX\d3dapp.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX\d3dutil.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX\dxutil.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CeD.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachJointDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CeD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CeDDoc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CeDView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChildFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefinedEventListCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefinedEventsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgActorList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgActorNew.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgBiBlendViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCamera1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgCharacter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgEventList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgExportRotationsHelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFaceDirRecipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgFilePaths.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgKey.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMotion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMotionList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMovieExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMovieMerge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMoviePreview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgPropDefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgProps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSelectMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgShotList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSkelPointList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgSkin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportProgress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Motion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionEditFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionEditView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseStatic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Movie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieExport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovieView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NumFrames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Prop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContextCDC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderContextD3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RollupBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RollupCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RollupPane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelPointList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SkinList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SortedHeaderCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SortedListCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StdAfx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TransitionViewer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="eNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ieArchive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ieList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mfcutils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim\Anim.h">
+      <Filter>Skel &amp; Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim\Skel.h">
+      <Filter>Skel &amp; Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim\acccmp.h">
+      <Filter>Skel &amp; Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="y_files\y_Arg.h">
+      <Filter>y_files</Filter>
+    </ClInclude>
+    <ClInclude Include="y_files\y_ChkSum.h">
+      <Filter>y_files</Filter>
+    </ClInclude>
+    <ClInclude Include="y_files\y_Token.h">
+      <Filter>y_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_bitmap.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_bitmap_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_color.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_color_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_debug.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_files.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_math.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_math_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_math_m4_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_math_q_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_math_r3_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_math_v2_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_math_v3_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_math_v4_inline.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_memory.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_plus.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_stats.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_stdio.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_target.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_time.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="x_files\x_types.hpp">
+      <Filter>x_files</Filter>
+    </ClInclude>
+    <ClInclude Include="QRaw.h">
+      <Filter>QGeom</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\Basics.h">
+      <Filter>Skin</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\CTextFile.h">
+      <Filter>Skin</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\cstring.h">
+      <Filter>Skin</Filter>
+    </ClInclude>
+    <ClInclude Include="Skin\skin_mesh.h">
+      <Filter>Skin</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX\d3dapp.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX\d3dres.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX\d3dutil.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX\dxutil.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\CeD.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\CeD.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\CeDDoc.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cur00001.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Cursor2.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Operatio.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00001.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00002.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00003.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00004.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00005.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00006.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00007.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00008.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00009.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00010.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00011.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00012.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00013.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\bmp00014.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cur00002.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cur00003.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cur00004.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cur00005.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cursor1.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\facedir.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\framesta.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\movedir.cur">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\projectt.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\tab.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar1.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

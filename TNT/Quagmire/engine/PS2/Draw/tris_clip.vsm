@@ -1,0 +1,291 @@
+;==========================================================================
+;
+; CLIPVERTS.VSM
+;
+;==========================================================================
+
+
+;==========================================================================
+;
+; CMD_LOADVERTS_CT_CLIP
+;
+; Loads verts using color and texture
+;
+; PARAM1 - NVerts
+; PARAM2 - Vertex cache offset
+;
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03    
+;   VI04    
+;   VI05    
+;   VI06    Num of tris in packet
+;   VI07    Source Addr XYZ,RGB,ST
+;   VI08    Destination Addr For Tris in giftag buffer
+;   VI09    Command param 1 - NVerts
+;   VI10    Dest Addr For Fans (Command param 2 - Unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01    Clip   XYZ 0  
+;   VF02    Clip   XYZ 1
+;   VF03    Clip   XYZ 2
+;   VF04    Source ST  0
+;   VF05    Source ST  1
+;   VF06    Source ST  2
+;   VF07    
+;   VF08    Screen XYZ
+;   VF09    Screen RGB
+;   VF10    Screen STQ
+;   VF11    
+;   VF12    
+;   VF13    Source XYZ
+;   VF14    Source RGB 
+;
+;   VF15    Active local to clip matrix qword 0
+;   VF16    Active local to clip matrix qword 1
+;   VF17    Active local to clip matrix qword 2
+;   VF18    Active local to clip matrix qword 3
+;   VF19    Active clip to screen matrix qword 0
+;   VF20    Active clip to screen matrix qword 1
+;   VF21    Active clip to screen matrix qword 2
+;   VF22    Active clip to screen matrix qword 3
+;   VF23    Active light intensity matrix qword 0
+;   VF24    Active light intensity matrix qword 1
+;   VF25    Active light intensity matrix qword 2
+;   VF26    Active light intensity matrix qword 3
+;   VF27    Active light color matrix qword 0    
+;   VF28    Active light color matrix qword 1    
+;   VF29    Active light color matrix qword 2    
+;   VF30    Active light color matrix qword 3    
+;   VF31    Max color value for pegging to 255
+;==========================================================================
+;   CMD
+;   Fan Giftag
+;   Tri Giftag
+;   XYZ0
+;   RGB0
+;   UV0
+;   XYZ1
+;   RGB1
+;   UV1
+;==========================================================================
+
+
+; Build verts using Normal, Texture, and Color
+CMD_LOADVERTS_CT_CLIP:
+
+        ; Start with zero tris in packet
+        NOP                             IADDIU VI06, VI00, 0
+
+        ; Get ptrs to source data         
+        NOP                             IADDIU VI07, VI14, 3            ; XYZ  addr = InputBuffer[1]
+        
+        ; Read giftags from input buffer (temporary)
+        NOP                             LQ.xyzw VF01, 1(VI14)
+        NOP                             LQ.xyzw VF02, 2(VI14)
+        
+        ; Copy fan tag to special address for stall command        
+        NOP                             IADDIU VI10, VI00, CLIPPER_FAN_TAG
+        NOP                             SQ.xyzw VF01, 0(VI10)
+
+        ; Get destination addresses
+        NOP                             IADDIU VI08, VI12, 0
+        NOP                             IADDIU VI10, VI00, CLIPPER_GIF_VERTS
+
+        
+        ; Write giftags to buffer
+        NOP                             SQ.xyzw VF01, 0(VI10)
+        NOP                             SQI.xyzw VF02, (VI08++)
+        
+        
+        
+        
+LOADVERTICES_LOOP_CLIP:
+;------------------------------------------------------------------------
+; Process the three verts for this triangle
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF13, 0(VI07)           ; load xyz
+        NOP                             LQ.xyzw VF14, 1(VI07)           ; load rgb
+        NOP                             LQ.xyzw VF04, 2(VI07)           ; load st
+        NOP                             IADDIU  VI07, VI07, 3           ; move to next vert
+        MULAx.xyzw  ACC, VF15, VF13x    NOP                             ; transform V0 into clip
+        MADDAy.xyzw ACC, VF16, VF13y    NOP                             ; transform V0 into clip
+        MADDAz.xyzw ACC, VF17, VF13z    NOP                             ; transform V0 into clip
+        MADDw.xyzw VF01, VF18, VF13w    NOP                             ; transform V0 into clip
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF19, VF01x    NOP                             ; transform V0 into screen
+        MADDAy.xyzw ACC, VF20, VF01y    NOP                             ; transform V0 into screen
+        MADDAz.xyzw ACC, VF21, VF01z    NOP                             ; transform V0 into screen
+        MADDw.xyzw VF08, VF22, VF01w    NOP                             ; transform V0 into screen
+        CLIPw.xyz VF01xyz, VF01w        NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             DIV Q, VF00w, VF08w             ; start divide for V0
+        NOP                             NOP                
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        FTOI0.xyzw VF09, VF14           NOP                             ; convert RGB to int
+        MULq.xyzw  VF08, VF08, Q        NOP                             ; Project screen0
+        MULq.xyzw  VF10, VF04, Q        NOP                             ; st*Q
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyzw VF08, VF08           NOP                             ; convert XYZ to fixed
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             SQ.xyzw VF10, 0(VI08)           ; save STQ (1), convert new st to float
+        NOP                             SQ.xyzw VF09, 1(VI08)           ; save RGB (2)
+        NOP                             SQ.xyzw VF08, 2(VI08)           ; save XYZ (3)
+
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF13, 0(VI07)           ; load xyz
+        NOP                             LQ.xyzw VF14, 1(VI07)           ; load rgb
+        NOP                             LQ.xyzw VF05, 2(VI07)           ; load st
+        NOP                             IADDIU  VI07, VI07, 3           ; move to next vert
+        MULAx.xyzw  ACC, VF15, VF13x    NOP                             ; transform V0 into clip
+        MADDAy.xyzw ACC, VF16, VF13y    NOP                             ; transform V0 into clip
+        MADDAz.xyzw ACC, VF17, VF13z    NOP                             ; transform V0 into clip
+        MADDw.xyzw VF02, VF18, VF13w    NOP                             ; transform V0 into clip
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF19, VF02x    NOP                             ; transform V0 into screen
+        MADDAy.xyzw ACC, VF20, VF02y    NOP                             ; transform V0 into screen
+        MADDAz.xyzw ACC, VF21, VF02z    NOP                             ; transform V0 into screen
+        MADDw.xyzw VF08, VF22, VF02w    NOP                             ; transform V0 into screen
+        CLIPw.xyz VF02xyz, VF02w        NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             DIV Q, VF00w, VF08w             ; start divide for V0
+        NOP                             NOP                
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        FTOI0.xyzw VF09, VF14           NOP                             ; convert RGB to int
+        MULq.xyzw  VF08, VF08, Q        NOP                             ; Project screen0
+        MULq.xyzw  VF10, VF05, Q        NOP                             ; st*Q
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyzw VF08, VF08           NOP                             ; convert XYZ to fixed
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             SQ.xyzw VF10, 3(VI08)           ; save STQ (1), convert new st to float
+        NOP                             SQ.xyzw VF09, 4(VI08)           ; save RGB (2)
+        NOP                             SQ.xyzw VF08, 5(VI08)           ; save XYZ (3)
+
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF13, 0(VI07)           ; load xyz
+        NOP                             LQ.xyzw VF14, 1(VI07)           ; load rgb
+        NOP                             LQ.xyzw VF06, 2(VI07)           ; load st
+        NOP                             IADDIU  VI07, VI07, 3           ; move to next vert
+        MULAx.xyzw  ACC, VF15, VF13x    NOP                             ; transform V0 into clip
+        MADDAy.xyzw ACC, VF16, VF13y    NOP                             ; transform V0 into clip
+        MADDAz.xyzw ACC, VF17, VF13z    NOP                             ; transform V0 into clip
+        MADDw.xyzw VF03, VF18, VF13w    NOP                             ; transform V0 into clip
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF19, VF03x    NOP                             ; transform V0 into screen
+        MADDAy.xyzw ACC, VF20, VF03y    NOP                             ; transform V0 into screen
+        MADDAz.xyzw ACC, VF21, VF03z    NOP                             ; transform V0 into screen
+        MADDw.xyzw VF08, VF22, VF03w    NOP                             ; transform V0 into screen
+        CLIPw.xyz VF03xyz, VF03w        NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             DIV Q, VF00w, VF08w             ; start divide for V0
+        NOP                             NOP                
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        FTOI0.xyzw VF09, VF14           NOP                             ; convert RGB to int
+        MULq.xyzw  VF08, VF08, Q        NOP                             ; Project screen0
+        MULq.xyzw  VF10, VF06, Q        NOP                             ; st*Q
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyzw VF08, VF08           NOP                             ; convert XYZ to fixed
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             SQ.xyzw VF10, 6(VI08)           ; save STQ (1), convert new st to float
+        NOP                             SQ.xyzw VF09, 7(VI08)           ; save RGB (2)
+        NOP                             SQ.xyzw VF08, 8(VI08)           ; save XYZ (3)
+
+;------------------------------------------------------------------------
+; Check if all verts passed clipping
+;------------------------------------------------------------------------
+
+        NOP                             FCAND VI01, 0x3FFFF
+        NOP                             NOP
+;    NOP                             B SKIP_CLIPPING
+;    NOP                             NOP
+        NOP                             IBEQ VI01, VI00, SKIP_CLIPPING
+        NOP                             NOP
+        NOP                             IADDIU VI02, VI08, 0            ; setup vert source ptr
+        NOP                             IADDI VI06, VI06,  -1           ; decrement num tris
+        NOP                             IADDI VI08, VI08,  -9           ; decrement dst ptr
+        NOP                             BAL VI03, CLIPPER_ENTRY         ; branch to clipper
+        NOP                             NOP
+SKIP_CLIPPING:
+        NOP                             IADDI VI06, VI06,  1            ; increment number of tris in packet
+        NOP                             IADDI VI08, VI08, 9             ; move dst addr to next vert         
+
+;------------------------------------------------------------------------
+; Increment pointers and loop for next triangle
+;------------------------------------------------------------------------
+
+        NOP                             IADDI VI09, VI09, -3            ; decrement loop counter
+        NOP                             IBNE VI09, VI00, LOADVERTICES_LOOP_CLIP           
+        NOP                             NOP                             ; BDS
+                                                                        
+;------------------------------------------------------------------------
+; Setup giftag and store number of verts
+;------------------------------------------------------------------------
+
+        NOP                             IBEQ VI06, VI00, NO_TRIANGLES_CLIP
+        NOP                             NOP                             ; BDS
+        NOP                             IADDIU VI06, VI06, 0x7FFF
+        NOP                             IADDIU VI06, VI06, 0x01
+        NOP                             ISW.x VI06, 0(VI12)
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+
+;------------------------------------------------------------------------
+; Kick and swap buffers
+;------------------------------------------------------------------------
+
+        NOP                             XGKICK VI12                 ; kick gif to render package 
+        
+        NOP                             IADDIU VI01, VI00, OUTPUT_BUFFER_BASE
+        NOP                             NOP
+        NOP                             IBEQ   VI12, VI01, USING_PACKET_BASE_CLIP
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        USING_PACKET_BASE_CLIP:
+        
+NO_TRIANGLES_CLIP:
+
+
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+;==========================================================================

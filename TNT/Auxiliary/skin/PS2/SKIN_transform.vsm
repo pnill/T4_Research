@@ -1,0 +1,136 @@
+;==========================================================================
+;
+; TRANSFORM.VSM
+;
+;==========================================================================
+
+;==========================================================================
+;
+; CMD_TRANSFORM
+;
+; W-EMPTY Z-NumTransforms Y-CmdOffset X-Cmd
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;L  VI01    Const (0xff) used in AND operations
+;   VI02
+;   VI03
+;   VI04
+;L  VI05    Light color matrix ptr
+;L  VI06    Transform branch destination
+;   VI07
+;L  VI08    Source Addr of Input buffer
+;   VI09    Command param 1 - NTransforms
+;   VI10    Command param 2 - Unused
+;   VI11    Opcode from latest command
+;S  VI12    GIF packet buffer base address (for double buffering)
+;S  VI13    RESERVED - Next command address in input buffer for kernel
+;S  VI14    RESERVED - Current address of input buffer for kernel
+;S  VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10
+;   VF11
+;   VF12
+;   VF13
+;   VF14
+;   VF15
+;   VF16
+;   VF17
+;   VF18
+;   VF19
+;   VF20
+;   VF21
+;   VF22
+;   VF23
+;   VF24	Light color matrix qword 0
+;   VF25	Light color matrix qword 1
+;   VF26	Light color matirx qword 2
+;   VF27    Light color matrix qword 3
+;   VF28    Light dir matrix qword 0
+;   VF29    Light dir matrix qword 1
+;   VF30    Light dir matrix qword 2
+;S  VF31    Const (128, 16, 0.5, 4095)
+;==========================================================================
+
+; OUR JUMP TABLE - THE TRANSFORM OPCODES SHOULD MATCH THIS JUMP TABLE,
+;                  OTHERWISE, ALL HELL BREAKS LOOSE
+
+TRANSFORM_BRANCH_BASE:
+        NOP                             B TRANSFORM_SINGLE_MATRIX
+        NOP                             NOP
+        NOP                             B TRANSFORM_DOUBLE_MATRIX
+        NOP                             NOP
+        NOP                             B TRANSFORM_TRIPLE_MATRIX
+        NOP                             NOP
+        NOP                             B TRANSFORM_ENV_MAPPED
+        NOP                             NOP
+        NOP                             B TRANSFORM_SHADOW
+        NOP                             NOP
+
+; The Transform CMD - Load the light matrix, and load the constant value for
+;                     doing AND operations, then start doing the transforms
+;                     one at a time.
+
+CMD_TRANSFORM:
+
+        ; Load the constant value 0xff for doing AND operations with
+        NOP                             IADDIU VI01, VI00, 0xFF
+
+        ; Read source address
+        NOP                             IADDI VI08, VI14, 1
+
+        ; Load light matrices
+        NOP                             IADDIU VI05, VI00, COLOR_MATRIX_BASE
+        NOP                             LQ.xyzw VF24, 0(VI05)
+        NOP                             LQ.xyzw VF25, 1(VI05)
+        NOP                             LQ.xyzw VF26, 2(VI05)
+        NOP                             LQ.xyzw VF27, 3(VI05)
+        NOP                             LQ.xyzw VF28, 4(VI05)
+        NOP                             LQ.xyzw VF29, 5(VI05)
+        NOP                             LQ.xyzw VF30, 6(VI05)
+
+
+;------------------------------------------------------------------------
+; Loop through transforms
+;------------------------------------------------------------------------
+MAIN_TRANSFORM_LOOP:
+
+        ; Read transform type
+        NOP                             ILW.x VI06, 0(VI08)
+
+        ; Branch based on the transform type
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             IADDIU VI06, VI06, TRANSFORM_BRANCH_BASE
+        NOP                             NOP
+        NOP                             JR VI06
+        NOP                             NOP
+
+TRANSFORM_FINISHED:
+
+        ; Decrement transform counter and loop for new transform
+        NOP                             IADDI VI09, VI09, -1            ; decrement loop counter
+        NOP                             NOP
+        NOP                             IBNE VI09, VI00, MAIN_TRANSFORM_LOOP           
+        NOP                             NOP ;BDS      
+
+
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+        
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS

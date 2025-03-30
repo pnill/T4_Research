@@ -1,0 +1,67 @@
+////////////////////////////////////////////////////////////////////////////
+//
+//  X_FILES.HPP
+//
+////////////////////////////////////////////////////////////////////////////
+
+#ifndef X_FILES_HPP
+#define X_FILES_HPP
+
+////////////////////////////////////////////////////////////////////////////
+//  INCLUDE ALL GENERAL HEADERS
+////////////////////////////////////////////////////////////////////////////
+
+#ifndef X_TARGET_HPP
+#include "x_target.hpp"
+#endif
+                                
+#ifndef X_TYPES_HPP
+#include "x_types.hpp"
+#endif
+
+#ifndef X_COLOR_HPP
+#include "x_color.hpp"
+#endif
+
+#ifndef X_BITMAP_HPP
+#include "x_bitmap.hpp"
+#endif
+
+//#ifndef X_DEBUG_HPP
+//#include "x_debug.hpp"
+//#endif
+
+#ifndef X_MATH_HPP
+#include "x_math.hpp"
+#endif
+
+#ifndef X_MEMORY_HPP
+#include "x_memory.hpp"
+#endif
+
+#ifndef X_PLUS_HPP
+#include "x_plus.hpp"
+#endif
+
+#ifndef X_STATS_HPP
+#include "x_stats.hpp"
+#endif
+
+#ifndef X_STDIO_HPP
+#include "x_stdio.hpp"
+#endif
+
+#ifndef X_TIME_HPP
+#include "x_time.hpp"
+#endif
+
+////////////////////////////////////////////////////////////////////////////
+//  FUNCTIONS
+////////////////////////////////////////////////////////////////////////////
+
+void x_Init( void );
+void x_Kill( void );
+
+////////////////////////////////////////////////////////////////////////////
+
+#endif

@@ -1,0 +1,189 @@
+;==========================================================================
+;
+; FLUSH.VSM
+;
+;==========================================================================
+
+
+;==========================================================================
+;
+; CMD_FLUSH_TRIS
+;
+; PARAM1 - NPACKS
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01    Vert3 addr
+;   VI02    Vert4 addr
+;L  VI03    Const (0x8000)
+;   VI04    Vert1 addr
+;   VI05    Vert2 addr
+;   VI06    Num Verts
+;   VI07    Num 4-loops
+;   VI08    Src ptr
+;   VI09    Command param 1 - NPACKS
+;   VI10    Destination Addr (Command param 2 - Unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02    Const w=255 integer
+;   VF03    V0 xyz
+;   VF04    V0 rgb
+;   VF05    V0 stq
+;   VF06    V1 xyz
+;   VF07    V1 rgb
+;   VF08    V1 stq
+;   VF09    Strip Giftag
+;   VF10    Tri Giftag
+;   VF11    Active local to screen matrix B qword 0
+;   VF12    Active local to screen matrix B qword 1
+;   VF13    Active local to screen matrix B qword 2
+;   VF14    Active local to screen matrix B qword 3
+;   VF15    Active light intensity matrix B qword 0
+;   VF16    Active light intensity matrix B qword 1
+;   VF17    Active light intensity matrix B qword 2
+;   VF18    Active light intensity matrix B qword 3
+;   VF19    Active local to screen matrix A qword 0
+;   VF20    Active local to screen matrix A qword 1
+;   VF21    Active local to screen matrix A qword 2
+;   VF22    Active local to screen matrix A qword 3
+;   VF23    Active light intensity matrix A qword 0
+;   VF24    Active light intensity matrix A qword 1
+;   VF25    Active light intensity matrix A qword 2
+;   VF26    Active light intensity matrix A qword 3
+;   VF27    Light color matrix qword 0    
+;   VF28    Light color matrix qword 1    
+;   VF29    Light color matrix qword 2    
+;   VF30    Light color matrix qword 3    
+;S  VF31    Const (128, 16, 0.5, 4095)
+;==========================================================================
+
+
+CMD_FLUSH_TRIS:
+        
+        ; Load giftags into registers
+        NOP                             LQ VF09, 1(VI14)
+        NOP                             LQ VF10, 2(VI14)
+        NOP                             IADDI VI08, VI14, 3
+
+        ; Load const 0x80 into VF02
+        NOP                             IADDIU VI03, VI00, 0x80
+        NOP                             MFIR.w VF02, VI03
+
+        ; Load const 0x8000 into VI03
+        ; NOTE: We have to sneak up on the value 0x8000, because
+        ;       the IADDIU instruction only allows an immediate value
+        ;       of 15 bits
+        NOP                             IADDIU VI03, VI00, 0x7FFF
+        NOP                             IADDIU VI03, VI03, 0x01
+
+        ; Write giftag to destination buffers
+        NOP                             IADDIU VI04, VI00, OUTPUT_BUFFER_BASE
+        NOP                             SQ.xyzw VF09, 0(VI04)
+        NOP                             IADDIU VI04, VI04, OUTPUT_BUFFER_SIZE
+        NOP                             SQ.xyzw VF09, 0(VI04)
+
+;------------------------------------------------------------------------
+MAIN_PACK_LOOP:
+
+        ; Get destination address
+        NOP                             IADDIU VI10, VI12, 1
+
+        ; Get number of 4-loops
+        NOP                             ILW.x VI07, 0(VI08)
+
+        ; Get number of verts
+        NOP                             ILW.y VI06, 0(VI08)
+
+        ; Setup GIFtag with correct number of verts
+        NOP                             IADD VI06, VI06, VI03   ; tag on the EOP bit
+        NOP                             ISW.x VI06, 0(VI12)
+
+        NOP                             IADDI VI08, VI08, 1
+
+;------------------------------------------------------------------------
+FLUSH_VERT_LOOP:
+
+        NOP                             IADDI VI07, VI07, -1            ; decrement loop counter
+
+        NOP                             ILW.x VI04, 0(VI08)             ; addr of V0
+        NOP                             ILW.y VI05, 0(VI08)             ; addr of V1
+
+        NOP                             LQ.xyz  VF05, 256(VI04)         ; load  0 stq
+        NOP                             LQ.xyzw VF04, 128(VI04)         ; load  0 rgb
+        NOP                             LQ.xyz  VF03,   0(VI04)         ; load  0 xyz
+        NOP                             LQ.xyz  VF08, 256(VI05)         ; load  1 stq
+        NOP                             LQ.xyzw VF07, 128(VI05)         ; load  1 rgb
+        NOP                             LQ.xyz  VF06,   0(VI05)         ; load  1 xyz
+        NOP                             SQI.xyz VF05,    (VI10++)       ; save  0 stq
+        NOP                             SQ.w    VF02,   0(VI10)         ; save  0 alpha
+        NOP                             SQI.xyz VF04,   (VI10++)        ; save  0 rgb
+        NOP                             ISW.w   VI04,   0(VI10)         ; save ADC bit
+        NOP                             SQI.xyz VF03,    (VI10++)       ; save  0 xyz
+        NOP                             SQI.xyz VF08,    (VI10++)       ; save  1 stq
+        NOP                             SQ.w    VF02,   0(VI10)         ; save  1 alpha
+        NOP                             SQI.xyz VF07,    (VI10++)       ; save  1 rgb
+        NOP                             ISW.w   VI05,   0(VI10)         ; save ADC bit
+        NOP                             SQI.xyz VF06,    (VI10++)       ; save  1 xyz
+
+        NOP                             ILW.z VI01, 0(VI08)             ; addr of V2
+        NOP                             ILW.w VI02, 0(VI08)             ; addr of V3
+
+        NOP                             LQ.xyz  VF05, 256(VI01)         ; load  2 stq
+        NOP                             LQ.xyzw VF04, 128(VI01)         ; load  2 rgb
+        NOP                             LQ.xyz  VF03,   0(VI01)         ; load  2 xyz
+        NOP                             LQ.xyz  VF08, 256(VI02)         ; load  3 stq
+        NOP                             LQ.xyzw VF07, 128(VI02)         ; load  3 rgb
+        NOP                             LQ.xyz  VF06,   0(VI02)         ; load  3 xyz
+        NOP                             SQI.xyz VF05,    (VI10++)       ; save  2 stq
+        NOP                             SQ.w    VF02,   0(VI10)         ; save  2 alpha
+        NOP                             SQI.xyz VF04,   (VI10++)        ; save  2 rgb
+        NOP                             ISW.w   VI01,   0(VI10)         ; save ADC bit
+        NOP                             SQI.xyz VF03,    (VI10++)       ; save  2 xyz
+        NOP                             SQI.xyz VF08,    (VI10++)       ; save  3 stq
+        NOP                             SQ.w    VF02,   0(VI10)         ; save  3 alpha
+        NOP                             SQI.xyz VF07,    (VI10++)       ; save  3 rgb
+        NOP                             ISW.w   VI02,   0(VI10)         ; save ADC bit
+        NOP                             SQI.xyz VF06,    (VI10++)       ; save  3 xyz
+
+        NOP                             IBNE VI07, VI00, FLUSH_VERT_LOOP           
+        NOP                             IADDI VI08, VI08, 1
+
+;------------------------------------------------------------------------
+
+        ; KICK
+		NOP								NOP
+		NOP								NOP
+		NOP								NOP
+        NOP                             XGKICK VI12                 ; kick gif to render package 
+
+        ; Swap output buffers ; Decrement NPacks counter and loop for new pack
+        NOP                             IADDIU VI04, VI00, OUTPUT_BUFFER_BASE
+        NOP                             IADDI VI09, VI09, -1            ; decrement loop counter
+        NOP                             IBEQ   VI12, VI04, FLUSH_TOGGLE_OUTPUT_LABEL
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        FLUSH_TOGGLE_OUTPUT_LABEL:
+        NOP                             IBNE VI09, VI00, MAIN_PACK_LOOP
+        NOP                             NOP ;BDS      
+  
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+        
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP                             ; BDS
+
+
+
+;==========================================================================

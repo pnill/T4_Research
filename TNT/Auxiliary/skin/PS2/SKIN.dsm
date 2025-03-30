@@ -1,0 +1,23 @@
+
+.include "vumacros.h"
+
+.global VUM_Skin_Code
+.global VUM_Skin_Code_End
+
+.data
+.align 4
+
+VUM_Skin_Code:
+
+DMAret *
+ixyz 0, 0, 0
+MPG 0,*
+.include "SKIN_mcode0.vsm"
+.EndMPG
+VUM_Skin_Code_End: 
+.EndDmaData  
+
+
+
+
+

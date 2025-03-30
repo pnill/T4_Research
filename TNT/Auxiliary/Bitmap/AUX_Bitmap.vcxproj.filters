@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Implementation">
+      <UniqueIdentifier>{f3d09d68-a466-4500-a8a0-ec90a389b157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Format Handlers">
+      <UniqueIdentifier>{f920e7dd-3d9d-48dc-9cdc-065b1d2ed759}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Format Handlers\BMP">
+      <UniqueIdentifier>{1da9ed0e-07ff-4e8c-9654-4228082c3d94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Format Handlers\PCX">
+      <UniqueIdentifier>{d394ef2f-047b-4eea-bd31-02cfb4da3105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Format Handlers\TGA">
+      <UniqueIdentifier>{9930854b-1e6d-4b5b-8204-7d070fddc399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Format Handlers\GIF">
+      <UniqueIdentifier>{623db23a-443c-4210-9756-09741832c578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\External">
+      <UniqueIdentifier>{8d29d4ac-0945-4df0-9d05-7bcc5a853141}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Util">
+      <UniqueIdentifier>{e711be1f-0946-4b32-b94e-0c4303261511}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AUX_Bitmap.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="AUX_BitmapConv.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="BmpLd.cpp">
+      <Filter>Implementation\Format Handlers\BMP</Filter>
+    </ClCompile>
+    <ClCompile Include="PcxLd.cpp">
+      <Filter>Implementation\Format Handlers\PCX</Filter>
+    </ClCompile>
+    <ClCompile Include="TgaLd.cpp">
+      <Filter>Implementation\Format Handlers\TGA</Filter>
+    </ClCompile>
+    <ClCompile Include="GifLd.cpp">
+      <Filter>Implementation\Format Handlers\GIF</Filter>
+    </ClCompile>
+    <ClCompile Include="AUX_Compress.cpp">
+      <Filter>Implementation\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="AUX_SizzleXBOX.cpp">
+      <Filter>Implementation\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="AUX_Swizzle.cpp">
+      <Filter>Implementation\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="AUX_SwizzleGC.cpp">
+      <Filter>Implementation\Util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BmpLd.hpp">
+      <Filter>Implementation\Format Handlers\BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="PcxLd.hpp">
+      <Filter>Implementation\Format Handlers\PCX</Filter>
+    </ClInclude>
+    <ClInclude Include="TgaLd.hpp">
+      <Filter>Implementation\Format Handlers\TGA</Filter>
+    </ClInclude>
+    <ClInclude Include="GifLd.hpp">
+      <Filter>Implementation\Format Handlers\GIF</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3rdParty\Ps2\TnT\PS2_in_VC.h">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_bitmap.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_bitmap_inline.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_color.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_color_inline.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_debug.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_memory.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_plus.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_stdio.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_target.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\x_files\x_types.hpp">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="AUX_Bitmap.hpp" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,237 @@
+;==========================================================================
+;
+; TRIS_ENVMAPPED.vsm
+;
+;==========================================================================
+
+;==========================================================================
+;
+; CMD_DRAWTRIS_ENVMAPPED
+;
+; Verts have pos, uvs, and normals
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01    adc0
+;   VI02    adc1
+;   VI03    temp
+;   VI04    
+;   VI05    Destination Addr 2 (second pass for env. map)
+;   VI06    Addr of Pos
+;   VI07    Addr of UVs
+;   VI08    Addr of Normals
+;   VI09    Command param 1 - NVerts
+;   VI10    Destination Addr 1 (Command param 2 - Unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;S  VF00    Const x=0 y=0 z=0 w=1
+;   VF01    XYZ0
+;   VF02    ST0
+;   VF03    Normal0
+;   VF04    RGB0
+;   VF05    Env-mapped ST0
+;   VF06    XYZ1
+;   VF07    ST1
+;   VF08    Normal1
+;   VF09    RGB1
+;   VF10    Env-mapped ST1
+;   VF11    Const values (128, 128, 128, 128)
+;L  VF12    Const values (255, 0.5, ???, ???)
+;L  VF13    Active NL2V matrix qword 0
+;L  VF14    Active NL2V matrix qword 1
+;L  VF15    Active NL2V matrix qword 2
+;L  VF16    Active lighting matrix qword 0
+;L  VF17    Active lighting matrix qword 1
+;L  VF18    Active lighting matrix qword 2
+;L  VF19    Active lighting matrix qword 3
+;S  VF20    Active local to screen matrix qword 0
+;S  VF21    Active local to screen matrix qword 1
+;S  VF22    Active local to screen matrix qword 2
+;S  VF23    Active local to screen matrix qword 3
+;S  VF24    Active local to clip matrix qword 0
+;S  VF25    Active local to clip matrix qword 1
+;S  VF26    Active local to clip matrix qword 2
+;S  VF27    Active local to clip matrix qword 3
+;S  VF28    Active clip to screen matrix qword 0
+;S  VF29    Active clip to screen matrix qword 1
+;S  VF30    Active clip to screen matrix qword 2
+;S  VF31    Active clip to screen matrix qword 3
+;==========================================================================
+
+; Build verts using Pos, Normal, and Texture
+
+CMD_DRAWTRIS_ENVMAPPED:
+
+        ; Read giftag from input buffer
+        NOP                             LQ.xyzw VF01, 1(VI14)       ; context 0
+        NOP                             LQ.xyzw VF02, 2(VI14)       ; context 1
+
+        ; Get ptrs to source data and set up envmap and color consts
+        SUB.xyzw VF05, VF00, VF00       IADDIU  VI06, VI14, 3                           ; pPos
+        SUB.xyzw VF10, VF00, VF00       IADDIU  VI07, VI06, 72                          ; pST
+        SUB.xyzw VF11, VF00, VF00       IADDIU  VI08, VI07, 72                          ; pNormal
+        NOP                             SQ.xyzw VF01, 0(VI12)                           ; store pass0 giftag
+        ADDw.xyzw VF05, VF05, VF00w     SQ.xyzw VF02, 106(VI12)                         ; store pass1 giftag
+        ADDw.xyzw VF10, VF10, VF00w     IADDIU  VI05, VI00, LIGHT_MATRIX                ; pLightMatrix
+        NOP                             IADDIU  VI04, VI00, NL2V_MATRIX                 ; pL2V matrix
+        NOP                             LOI 128.0
+        ADDi.xyzw VF11, VF11, I         LQI.xyzw VF16, (VI05++)                         ; load light matrix col0
+        NOP                             LQI.xyzw VF17, (VI05++)                         ; load light matrix col1
+        NOP                             LQI.xyzw VF18, (VI05++)                         ; load light matrix col2
+        NOP                             LQI.xyzw VF19, (VI05++)                         ; load light matrix col3
+        FTOI0.xyzw VF11, VF11           LQI.xyzw VF13, (VI04++)                         ; load NL2V matrix col0
+        NOP                             LQI.xyzw VF14, (VI04++)                         ; load NL2V matrix col1
+        NOP                             LQI.xyzw VF15, (VI04++)                         ; load NL2V matrix col2
+
+        ; Load const values for clamping colors and calculating env-map UVs, and set up dest vertex ptrs
+        NOP                             LOI 255.0                                       ; load const 255
+        ADDi.x VF12, VF00, I            IADDI VI10, VI12, -2        ; const 255         ; pDestPass0 = (pDest+GifTag-3) three is for pre-increment in transform code
+        NOP                             LOI 0.5
+        ADDi.y VF12, VF00, I            IADDIU VI05, VI10, 106      ; const 0.5         ; pDestPass1
+
+        NOP                             IADDI VI03, VI00, 1                             ; temp = 1
+        NOP                             IAND  VI03, VI03, VI09                          ; temp = NVerts & 0x1
+        NOP                             LQ.xyzw VF01, 0(VI06)                           ; load xyz0
+        NOP                             IBEQ  VI03, VI00, ENVMAP_TWO_VERTS
+        NOP                             ILW.w   VI01, 0(VI06)                           ; load adc0
+
+        ; at this point VF05 is (1,1,1,1)
+        ;               VF10 is (1,1,1,1)
+        ;               VF11 is (128,128,128,128) (fixed)
+        ;               VF12 is (255,0.5,???,???)
+        ;               VI06 is pPos
+        ;               VI07 is pST
+        ;               VI08 is pNormal
+        ;               VI10 is pDstVerts0-3
+        ;               VI05 is pDstVerts1-3
+        ;               VI03 is NVerts&0x1
+        ;               VF01 is xyz0
+        ;               VI01 is adc0
+
+ENVMAP_LOOP_ONE_VERT:
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF02, (VI07++)     ; transform xyz0    ; load st0
+        MADDAz.xyzw ACC, VF22, VF01z    LQI.xyzw VF03, (VI08++)     ; transform xyz0    ; load normal0
+        MADDAy.xyzw ACC, VF21, VF01y    IADDI VI06, VI06, 1         ; transform xyz0    ; pXYZ++
+        MADDx.xyzw VF01, VF20, VF01x    IADDI VI10, VI10, 3         ; transform xyz0    ; ++pDest
+        MULAw.xyzw  ACC, VF19, VF00w    IADDI VI05, VI05, 3         ; transform rgb0    ; ++pDest
+        MADDAz.xyzw ACC, VF18, VF03z    ISW.w VI01, 2(VI10)         ; transform rgb0    ; store adc0 pass0
+        MADDAy.xyzw ACC, VF17, VF03y    ISW.w VI01, 2(VI05)         ; transform rgb0    ; store adc0 pass1
+        MADDx.xyzw VF04, VF16, VF03x    DIV Q, VF00w, VF01w         ; transform rgb0    ; start divide0
+        MULAz.xy    ACC, VF15, VF03z    IADDI VI09, VI09, -1        ; transform emst0   ; NVerts--
+        MADDAy.xy   ACC, VF14, VF03y    NOP                         ; transform emst0
+        MADDx.xy   VF05, VF13, VF03x    NOP                         ; transform emst0
+        MAXx.xyzw  VF04, VF04, VF00x    NOP                         ; clamp rgb0 < 0
+        NOP                             NOP
+        NOP                             NOP
+        MULq.xyzw  VF01, VF01, Q        NOP                         ; project xyz0
+        ADDw.xy    VF05, VF05, VF00w    NOP                         ; add 1.0 to emst0
+        MINIx.xyzw VF04, VF04, VF12x    NOP                         ; clamp rgb0 > 255
+        MULq.xyzw  VF02, VF02, Q        NOP                         ; project st0
+        FTOI4.xyzw VF01, VF01           NOP                         ; xyz0->fixed
+        MULy.xy    VF05, VF05, VF12y    ILW.w VI01, 0(VI06)         ; emst0 *= 0.5      ; load adc0
+        FTOI0.xyzw VF04, VF04           SQ.xyzw VF11, 1(VI05)       ; rgb0->fixed       ; store rgb0 pass1
+        NOP                             SQ.xyzw VF02, 0(VI10)                           ; store st0 pass0
+        NOP                             SQ.xyz  VF01, 2(VI10)                           ; store xyz0 pass0
+        NOP                             SQ.xyz  VF01, 2(VI05)                           ; store xyz0 pass1
+        NOP                             SQ.xyzw VF05, 0(VI05)                           ; store st0 pass1
+        NOP                             LQ.xyzw VF01, 0(VI06)                           ; load xyz0
+        NOP                             IBEQ VI09, VI00, TRIS_ENVMAP_FINISHED
+        ;//NOP                             IBNE VI09, VI00, ENVMAP_LOOP_ONE_VERT
+        NOP                             SQ.xyzw VF04, 1(VI10)                           ; store rgb0 pass0
+
+        ;//#####
+        ;//NOP                             B TRIS_ENVMAP_FINISHED
+        ;//NOP                             NOP
+
+ENVMAP_TWO_VERTS:
+        ; prime the loop
+        ; at this point, we should have:
+        ;   VI05 and VI10 should be pDest-3
+        ;   const registers VF11 and VF12 have been filled
+        ;   const values VF05zw and VF10zw have been filled with 1.0
+        ;   VI09 is a multiple of 2
+        NOP                             IADDI VI10, VI10, -3                            ; because we'll pre-increment dest
+        NOP                             IADDI VI05, VI05, -3                            ; because we'll pre-increment dest
+ENVMAP_LOOP_TWO_VERTS:
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF03, (VI08++)     ; transform xyz0    ; load normal0
+        MADDAz.xyzw ACC, VF22, VF01z    LQI.xyzw VF02, (VI07++)     ; transform xyz0    ; load st0
+        MADDAy.xyzw ACC, VF21, VF01y    IADDI VI06, VI06, 1         ; transform xyz0    ; pXYZ++
+        MADDx.xyzw VF01, VF20, VF01x    LQ.xyzw VF06, 0(VI06)       ; transform xyz0    ; load xyz1
+        MULAz.xy    ACC, VF15, VF03z    ILW.w   VI02, 0(VI06)       ; transform emst0   ; load adc1
+        MADDAy.xy   ACC, VF14, VF03y    LQI.xyzw VF07, (VI07++)     ; transform emst0   ; load st1
+        MADDx.xy   VF05, VF13, VF03x    LQI.xyzw VF08, (VI08++)     ; transform emst0   ; load normal1
+        MULAw.xyzw  ACC, VF23, VF00w    DIV Q, VF00w, VF01w         ; transform xyz1    ; start divide0
+        MADDAz.xyzw ACC, VF22, VF06z    IADDI VI06, VI06, 1         ; transform xyz1    ; pXYZ++
+        MADDAy.xyzw ACC, VF21, VF06y    IADDI VI05, VI05, 6         ; transform xyz1    ; ++pDest
+        MADDx.xyzw VF06, VF20, VF06x    IADDI VI10, VI10, 6         ; transform xyz1    ; ++pDest
+        MULAw.xyzw  ACC, VF19, VF00w    SQ.xyzw VF11, 1(VI05)       ; transform rgb0    ; store rgb0 (pass1)
+        MADDAz.xyzw ACC, VF18, VF03z    SQ.xyzw VF11, 4(VI05)       ; transform rgb0    ; store rgb1 (pass1)
+        MADDAy.xyzw ACC, VF17, VF03y    IADDI VI09, VI09, -2        ; transform rgb0    ; NVerts -= 2
+        MULq.xyzw  VF01, VF01, Q        DIV Q, VF00w, VF06w         ; project xyz0      ; start divide1
+        MULq.xyzw  VF02, VF02, Q        ISW.w   VI01, 2(VI10)       ; project st0       ; store adc0 (pass0)
+        MADDx.xyzw VF04, VF16, VF03x    ISW.w   VI01, 2(VI05)       ; transform rgb0    ; store adc0 (pass1)
+        MULAw.xyzw  ACC, VF19, VF00w    ISW.w   VI02, 5(VI10)       ; transform rgb1    ; store adc1 (pass0)
+        MADDAz.xyzw ACC, VF18, VF08z    ISW.w   VI02, 5(VI05)       ; transform rgb1    ; store adc1 (pass1)
+        MADDAy.xyzw ACC, VF17, VF08y    NOP                         ; transform rgb1
+        MAXx.xyzw  VF04, VF04, VF00x    NOP                         ; clamp rgb0 < 0
+        MULq.xyzw  VF06, VF06, Q        NOP                         ; project xyz1
+        MULq.xyzw  VF07, VF07, Q        NOP                         ; project st1
+        MADDx.xyzw VF09, VF16, VF08x    NOP                         ; transform rgb1
+        MINIx.xyzw VF04, VF04, VF12x    NOP                         ; clamp rgb0 > 255
+        MULAz.xy    ACC, VF15, VF08z    NOP                         ; transform emst1
+        MADDAy.xy   ACC, VF14, VF08y    NOP                         ; transform emst1
+        MADDx.xy   VF10, VF13, VF08x    NOP                         ; transform emst1
+        MAXx.xyzw  VF09, VF09, VF00x    NOP                         ; clamp rgb1 < 0
+        ADDw.xy    VF05, VF05, VF00w    NOP                         ; add 1 to emst0
+        FTOI4.xyzw VF01, VF01           NOP                         ; xyz0->fixed
+        FTOI4.xyzw VF06, VF06           ILW.w   VI01, 0(VI06)       ; xyz1->fixed       ; load adc0
+        MINIx.xyzw VF09, VF09, VF12x    SQ.xyzw VF02, 0(VI10)       ; clamp rgb1 > 255  ; store stq0 (pass0)
+        ADDw.xy    VF10, VF10, VF00w    SQ.xyzw VF07, 3(VI10)       ; add 1 to emst0    ; store stq1 (pass0)
+        MULy.xy    VF05, VF05, VF12y    SQ.xyz  VF01, 2(VI10)       ; mul emst0 by 0.5  ; store xyz0 (pass0)
+        FTOI0.xyzw VF04, VF04           SQ.xyz  VF01, 2(VI05)       ; rgb0->fixed       ; store xyz0 (pass1)
+        FTOI0.xyzw VF09, VF09           SQ.xyz  VF06, 5(VI10)       ; rgb1->fixed       ; store xyz1 (pass0)
+        MULy.xy    VF10, VF10, VF12y    SQ.xyz  VF06, 5(VI05)       ; mul emst1 by 0.5  ; store xyz1 (pass1)
+        NOP                             SQ.xyzw VF05, 0(VI05)                           ; store stq0 (pass1)
+        NOP                             SQ.xyzw VF04, 1(VI10)                           ; store rgb0 (pass0)
+        NOP                             SQ.xyzw VF09, 4(VI10)                           ; store rgb1 (pass0)
+        NOP                             LQ.xyzw VF01, 0(VI06)                           ; load xyz0
+        NOP                             IBNE VI09, VI00, ENVMAP_LOOP_TWO_VERTS          ; loop
+        NOP                             SQ.xyzw VF10, 3(VI05)                           ; store stq1 (pass1)
+
+TRIS_ENVMAP_FINISHED:
+
+;------------------------------------------------------------------------
+; Kick and swap buffers
+;------------------------------------------------------------------------
+
+        ; kick the two passes
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             IADDIU VI05, VI12, 106
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             XGKICK VI12                     ; kick gif to render pass one
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             XGKICK VI05                     ; kick gif to render pass two
+        NOP                             NOP
+
+        ; swap the output buffers
+        NOP                             IADDIU VI01, VI00, OUTPUT_BUFFER_BASE
+        NOP                             NOP
+        NOP                             IBEQ   VI12, VI01, ENVMAP_SWAP
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+ENVMAP_SWAP:
+
+        ; Return to kernel
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS

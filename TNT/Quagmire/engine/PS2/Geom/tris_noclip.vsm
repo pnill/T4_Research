@@ -1,0 +1,351 @@
+;==========================================================================
+;
+; TRIS_NOCLIP.VSM
+;
+;==========================================================================
+
+;==========================================================================
+;
+; CMD_DRAWTRIS_TC_NOTCLIPPED
+;
+; Verts have pos, uvs, and colors
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02    imm. value 1
+;   VI03    imm. value 3
+;   VI04    imm. value 7
+;   VI05    count MOD eight
+;   VI06    Source Addr Pos
+;   VI07    Source Addr UVs
+;   VI08    Source Addr Colors
+;   VI09    Command param 1 - NVerts
+;   VI10    Destination Addr (Command param 2 - Unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01    xyz0/4
+;   VF02    xyz1/5
+;   VF03    xyz2/6
+;   VF04    xyz3/7
+;   VF05    st0/4
+;   VF06    st1/5
+;   VF07    st2/6
+;   VF08    st3/7
+;   VF09    rgb0/4
+;   VF10    rgb1/5
+;   VF11    rgb2/6
+;   VF12    rgb3/7
+;   VF13    screen xyz0/4
+;   VF14    screen xyz1/5
+;   VF15    screen xyz2/6
+;   VF16    screen xyz3/7
+;   VF17
+;   VF18
+;   VF19
+;   VF20    Active local to screen matrix qword 0
+;   VF21    Active local to screen matrix qword 1
+;   VF22    Active local to screen matrix qword 2
+;   VF23    Active local to screen matrix qword 3
+;   VF24    Active local to clip matrix qword 0
+;   VF25    Active local to clip matrix qword 1
+;   VF26    Active local to clip matrix qword 2
+;   VF27    Active local to clip matrix qword 3
+;   VF28    Active clip to screen matrix qword 0
+;   VF29    Active clip to screen matrix qword 1
+;   VF30    Active clip to screen matrix qword 2
+;   VF31    Active clip to screen matrix qword 3
+;==========================================================================
+
+; Build verts using Pos, Color, and Texture
+
+CMD_DRAWTRIS_TC_NOTCLIPPED:
+
+        ; Read giftag from input buffer (temporary)
+        NOP                             LQ.xyzw VF01, 1(VI14)
+
+        ; Get ptrs to source data         
+        NOP                             IADDIU  VI06, VI14, 3   ; Addr of Pos
+        NOP                             IADDIU  VI07, VI06, 72  ; Addr of UVs
+        NOP                             IADDIU  VI08, VI07, 72  ; Addr of Colors
+
+        ; Get destination addresses
+        NOP                             IADDIU VI10, VI12, 1
+
+        ; load up immediate values to be used by an AND operations
+        NOP                             IADDIU VI04, VI00, 7
+        NOP                             IADDIU VI03, VI00, 3
+        NOP                             IADDIU VI02, VI00, 1
+
+        ; Write giftag to buffer
+        NOP                             SQ.xyzw VF01, 0(VI12)
+
+;------------------------------------------------------------------------
+;   The next transforms, we will try to use an unrolled loop
+;   In pseudo-code, here it is:
+;
+;               count = NVerts
+;       BEGIN:
+;               if ( count == 0 )
+;                   goto KICK
+;               if ( (count & 0x7) == 0 )   (same thing as ((count MOD 8) == 0))
+;                   goto TRANSFORM_EIGHT_VERTS_SETUP
+;       TRANSFORM_ONE_VERT:
+;               // WE TRANSFORM ONE VERT HERE
+;               count--
+;               goto BEGIN
+;       TRANSFORM_EIGHT_VERTS_SETUP:
+;               // LOAD IN INITIAL DATA TO PRIME THE LOOP
+;       TRANSFORM_EIGHT_VERTS:
+;               // WE TRANSFORM EIGHT VERTS HERE
+;               count -= 8
+;               if ( count != 0 )
+;                   goto TRANSFORM_EIGHT_VERTS
+;       KICK:
+;               // WE PERFORM THE GIF KICK HERE
+;------------------------------------------------------------------------
+
+TRIS_NOCLIP_BEGIN:
+
+        NOP                             IBEQ VI09, VI00, TRIS_NOCLIP_KICK   ; are we done?
+        NOP                             IAND VI05, VI09, VI04               ; count MOD eight (BDS)
+        NOP                             NOP
+        NOP                             IBEQ VI05, VI00, TRIS_NOCLIP_EIGHT_VERTS_BEGIN
+        NOP                             IAND VI05, VI09, VI03               ; count MOD 4 (BDS)
+        NOP                             NOP                                 ; BDS
+        NOP                             IBEQ VI05, VI00, TRIS_NOCLIP_FOUR_VERTS
+        NOP                             IAND VI05, VI09, VI02
+        NOP                             NOP
+        NOP                             IBEQ VI05, VI00, TRIS_NOCLIP_TWO_VERTS
+        NOP                             NOP
+
+TRIS_NOCLIP_ONE_VERT:
+
+;------------------------------------------------------------------------
+;	Process a single vert
+;------------------------------------------------------------------------
+
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF02, (VI06++)         ; transform vert    ; load xyz
+        MADDAz.xyzw ACC, VF22, VF02z    LQI.xyzw VF03, (VI07++)         ; transform vert    ; load uv
+        MADDAy.xyzw ACC, VF21, VF02y    LQI.xyzw VF04, (VI08++)         ; transform vert    ; load color
+        MADDx.xyzw VF14, VF20, VF02x    NOP                             ; transform vert
+
+        NOP                             DIV Q, VF00w, VF14w             ; Start divide
+        NOP                             IADDI VI09, VI09, -1            ; decrement loop counter
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MULq.xyz    VF02, VF14, Q       NOP                             ; project vert
+        MULq.xyzw   VF03, VF03, Q       NOP                             ; project uvs
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyz   VF02, VF02          NOP                             ; convert XYZ to fixed
+        NOP                             SQI.xyzw VF03, (VI10++)        ; save STQ (0)
+        NOP                             SQI.xyzw VF04, (VI10++)        ; save RGB (1)
+
+        NOP                             B TRIS_NOCLIP_BEGIN
+        NOP                             SQI.xyzw VF02, (VI10++)        ; save XYZW(2) (which also contains ADC bit)
+
+TRIS_NOCLIP_TWO_VERTS:
+        NOP                             LQI.xyzw VF02, (VI06++)                             ; load xyz0
+        NOP                             LQI.xyzw VF03, (VI07++)                             ; load uv0
+        NOP                             LQI.xyzw VF04, (VI08++)                             ; load color0
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF05, (VI06++)         ; transform vert0   ; load xyz1
+        MADDAz.xyzw ACC, VF22, VF02z    LQI.xyzw VF06, (VI07++)         ; transform vert0   ; load uv1
+        MADDAy.xyzw ACC, VF21, VF02y    LQI.xyzw VF07, (VI08++)         ; transform vert0   ; load color0
+        MADDx.xyzw VF14, VF20, VF02x    IADDI VI09, VI09, -2            ; transform vert0   ; decrement loop counter
+        MULAw.xyzw  ACC, VF23, VF00w    NOP                             ; transform vert1
+        MADDAz.xyzw ACC, VF22, VF05z    NOP                             ; transform vert1
+        MADDAy.xyzw ACC, VF21, VF05y    NOP                             ; transform vert1
+        MADDx.xyzw VF15, VF20, VF05x    DIV Q, VF00w, VF14w             ; transform vert1   ; start divide0
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MULq.xyz    VF02, VF14, Q       DIV Q, VF00w, VF15w             ; project vert0     ; start divide1
+        MULq.xyzw   VF03, VF03, Q       NOP                             ; project uv0
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyz   VF02, VF02          NOP                             ; xyz0->fixed
+        NOP                             SQI.xyzw VF03, (VI10++)                             ; save stq0
+        NOP                             SQI.xyzw VF04, (VI10++)                             ; save rgb0
+        MULq.xyz    VF05, VF15, Q       NOP
+        MULq.xyzw   VF06, VF06, Q       SQI.xyzw VF02, (VI10++)         ; project vert1     ; save xyz0
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyz   VF05, VF05          NOP                             ; xyz1->fixed
+        NOP                             SQI.xyzw VF06, (VI10++)                             ; save stq1
+        NOP                             SQI.xyzw VF07, (VI10++)                             ; save rgb1
+        
+        NOP                             B TRIS_NOCLIP_BEGIN
+        NOP                             SQI.xyzw VF05, (VI10++)         ; save xyz1 (BDS)
+
+TRIS_NOCLIP_FOUR_VERTS:
+        NOP                             LQI.xyzw VF01, (VI06++)                             ; load xyz0
+        NOP                             LQI.xyzw VF05, (VI07++)                             ; load stq0
+        NOP                             LQI.xyzw VF09, (VI08++)                             ; load rgb0
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF02, (VI06++)         ; transform V0      ; load xyz1
+        MADDAz.xyzw ACC, VF22, VF01z    LQI.xyzw VF06, (VI07++)         ; transform V0      ; load stq1
+        MADDAy.xyzw ACC, VF21, VF01y    LQI.xyzw VF10, (VI08++)         ; transform V0      ; load rgb1
+        MADDx.xyzw VF13, VF20, VF01x    LQI.xyzw VF03, (VI06++)         ; transform V0      ; load xyz2
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF07, (VI07++)         ; transform V1      ; load stq2
+        MADDAz.xyzw ACC, VF22, VF02z    LQI.xyzw VF11, (VI08++)         ; transform V1      ; load rgb2
+        MADDAy.xyzw ACC, VF21, VF02y    LQI.xyzw VF04, (VI06++)         ; transform V1      ; load xyz3
+        MADDx.xyzw VF14, VF20, VF02x    DIV Q, VF00w, VF13w             ; transform V1      ; start divide0
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF08, (VI07++)         ; transform V2      ; load stq3
+        MADDAz.xyzw ACC, VF22, VF03z    LQI.xyzw VF12, (VI08++)         ; transform V2      ; load rgb3
+        MADDAy.xyzw ACC, VF21, VF03y    IADDI VI09, VI09, -4            ; transform V2      ; decrement loop counter
+        MADDx.xyzw VF15, VF20, VF03x    NOP                             ; transform V2
+        MULAw.xyzw  ACC, VF23, VF00w    NOP                             ; transform V3
+        MADDAz.xyzw ACC, VF22, VF04z    NOP                             ; transform V3
+        MULq.xyz   VF01, VF13, Q        DIV Q, VF00w, VF14w             ; project V0        ; start divide1
+        MULq.xyzw  VF05, VF05, Q        NOP                             ; project ST0
+        MADDAy.xyzw ACC, VF21, VF04y    NOP                             ; transform V3
+        MADDx.xyzw VF16, VF20, VF04x    NOP                             ; transform V3
+        FTOI4.xyz  VF01, VF01           NOP                             ; V0->fixed
+        NOP                             NOP
+        NOP                             NOP
+        MULq.xyz   VF02, VF14, Q        DIV Q, VF00w, VF15w             ; project V1        ; start divide2
+        MULq.xyzw  VF06, VF06, Q        NOP                             ; project ST1
+        NOP                             NOP
+        NOP                             NOP
+        FTOI4.xyz  VF02, VF02           NOP                             ; V1->fixed
+        NOP                             NOP
+        NOP                             NOP
+        MULq.xyz   VF03, VF15, Q        DIV Q, VF00w, VF16w             ; project V2        ; start divide3
+        MULq.xyzw  VF07, VF07, Q        NOP                             ; project ST2
+        NOP                             NOP
+        NOP                             SQI.xyzw VF05, (VI10++)                             ; store stq0
+        FTOI4.xyz  VF03, VF03           SQI.xyzw VF09, (VI10++)         ; V2->fixed         ; store rgb0
+        NOP                             SQI.xywz VF01, (VI10++)                             ; store xyz0
+        NOP                             SQI.xyzw VF06, (VI10++)                             ; store stq1
+        MULq.xyz   VF04, VF16, Q        SQI.xyzw VF10, (VI10++)         ; project V3        ; store rgb1
+        MULq.xyzw  VF08, VF08, Q        SQI.xyzw VF02, (VI10++)         ; project ST3       ; store xyz1
+        NOP                             SQI.xyzw VF07, (VI10++)                             ; store stq2
+        NOP                             SQI.xyzw VF11, (VI10++)                             ; store rgb2
+        FTOI4.xyz  VF04, VF04           SQI.xyzw VF03, (VI10++)         ; V3->fixed         ; store xyz2
+        NOP                             SQI.xyzw VF08, (VI10++)                             ; store stq3
+        NOP                             SQI.xyzw VF12, (VI10++)                             ; store rgb3
+        NOP                             B TRIS_NOCLIP_BEGIN
+        NOP                             SQI.xyzw VF04, (VI10++)                             ; store xyz3
+
+
+TRIS_NOCLIP_EIGHT_VERTS_BEGIN:
+
+        ; prime the loop
+        NOP                             LQI.xyzw VF01, (VI06++)                             ; load xyz0
+        NOP                             LQI.xyzw VF05, (VI07++)                             ; load stq0
+        NOP                             LQI.xyzw VF09, (VI08++)                             ; load rgb0
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF02, (VI06++)         ; transform V0      ; load xyz1
+        MADDAz.xyzw ACC, VF22, VF01z    LQI.xyzw VF06, (VI07++)         ; transform V0      ; load stq1
+        MADDAy.xyzw ACC, VF21, VF01y    LQI.xyzw VF10, (VI08++)         ; transform V0      ; load rgb1
+        MADDx.xyzw VF13, VF20, VF01x    LQI.xyzw VF03, (VI06++)         ; transform V0      ; load xyz2
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF07, (VI07++)         ; transform V1      ; load stq2
+        MADDAz.xyzw ACC, VF22, VF02z    LQI.xyzw VF11, (VI08++)         ; transform V1      ; load rgb2
+        MADDAy.xyzw ACC, VF21, VF02y    LQI.xyzw VF04, (VI06++)         ; transform V1      ; load xyz3
+
+TRIS_NOCLIP_EIGHT_VERTS:
+        MADDx.xyzw VF14, VF20, VF02x    DIV Q, VF00w, VF13w             ; transform V1      ; start divide0
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF08, (VI07++)         ; transform V2      ; load stq3
+        MADDAz.xyzw ACC, VF22, VF03z    LQI.xyzw VF12, (VI08++)         ; transform V2      ; load rgb3
+        MADDAy.xyzw ACC, VF21, VF03y    IADDI VI09, VI09, -8            ; transform V2      ; NVerts -= 8
+        MADDx.xyzw VF15, VF20, VF03x    SQ.w VF01, 2(VI10)              ; transform V2      ; store ADC0
+        MULAw.xyzw  ACC, VF23, VF00w    SQ.w VF02, 5(VI10)              ; transform V3      ; store ADC1
+        MADDAz.xyzw ACC, VF22, VF04z    SQ.w VF03, 8(VI10)              ; transform V3      ; store ADC2
+        MULq.xyzw VF13, VF13, Q         DIV Q, VF00w, VF14w             ; project V0        ; start divide1
+        MULq.xyzw VF05, VF05, Q         LQI.xyzw VF01, (VI06++)         ; project ST0       ; load xyz4
+        MADDAy.xyzw ACC, VF21, VF04y    SQ.w VF04, 11(VI10)             ; transform V3      ; store ADC3
+        MADDx.xyzw VF16, VF20, VF04x    LQI.xyzw VF02, (VI06++)         ; transform V3      ; load xyz5
+        FTOI4.xyzw VF13, VF13           LQI.xyzw VF03, (VI06++)         ; V0->Fixed         ; load xyz6
+        MULAw.xyzw  ACC, VF23, VF00w    SQI.xyzw VF05, (VI10++)         ; transform V4      ; store STQ0
+        MADDAz.xyzw ACC, VF22, VF01z    SQI.xyzw VF09, (VI10++)         ; transform V4      ; store RGB0
+        MULq.xyzw VF14, VF14, Q         DIV Q, VF00w, VF15w             ; project V1        ; start divide2
+        MULq.xyzw VF06, VF06, Q         SQI.xyz VF13, (VI10++)          ; project ST1       ; store XYZ0
+        MADDAy.xyzw ACC, VF21, VF01y    LQI.xyzw VF05, (VI07++)         ; transform V4      ; load stq4
+        MADDx.xyzw VF13, VF20, VF01x    LQI.xyzw VF09, (VI08++)         ; transform V4      ; load rgb4
+        FTOI4.xyzw VF14, VF14           LQI.xyzw VF04, (VI06++)         ; V1->Fixed         ; load xyz7
+        MULAw.xyzw  ACC, VF23, VF00w    SQI.xyzw VF06, (VI10++)         ; transform V5      ; store STQ1
+        MADDAz.xyzw ACC, VF22, VF02z    SQI.xyzw VF10, (VI10++)         ; transform V5      ; store RGB1
+        MULq.xyzw VF15, VF15, Q         DIV Q, VF00w, VF16w             ; project V2        ; start divide3
+        MULq.xyzw VF07, VF07, Q         SQI.xyz VF14, (VI10++)          ; project ST2       ; store XYZ1
+        MADDAy.xyzw ACC, VF21, VF02y    SQ.w VF01, 8(VI10)              ; transform V5      ; store ADC4
+        MADDx.xyzw VF14, VF20, VF02x    SQ.w VF02, 11(VI10)             ; transform V5      ; store ADC5
+        FTOI4.xyzw VF15, VF15           SQ.w VF03, 14(VI10)             ; V2->Fixed         ; store ADC6
+        MULAw.xyzw  ACC, VF23, VF00w    SQI.xyzw VF07, (VI10++)         ; transform V6      ; store STQ2
+        MADDAz.xyzw ACC, VF22, VF03z    SQI.xyzw VF11, (VI10++)         ; transform V6      ; store RGB2
+        MULq.xyzw VF16, VF16, Q         DIV Q, VF00w, VF13w             ; project V3        ; start divide4
+        MULq.xyzw VF08, VF08, Q         SQI.xyz VF15, (VI10++)          ; project ST3       ; store XYZ2
+        MADDAy.xyzw ACC, VF21, VF03y    SQ.w VF04, 14(VI10)             ; transform V6      ; store ADC7
+        MADDx.xyzw VF15, VF20, VF03x    LQI.xyzw VF06, (VI07++)         ; transform V6      ; load stq5
+        FTOI4.xyzw VF16, VF16           LQI.xyzw VF10, (VI08++)         ; V3->Fixed         ; load rgb5
+        MULAw.xyzw  ACC, VF23, VF00w    SQI.xyzw VF08, (VI10++)         ; transform V7      ; store STQ3
+        MADDAz.xyzw ACC, VF22, VF04z    SQI.xyzw VF12, (VI10++)         ; transform V7      ; store RGB3
+        MULq.xyzw VF13, VF13, Q         DIV Q, VF00w, VF14w             ; project V4        ; start divide5
+        MULq.xyzw VF05, VF05, Q         SQI.xyz VF16, (VI10++)          ; project ST4       ; store XYZ3
+        MADDAy.xyzw ACC, VF21, VF04y    LQI.xyzw VF07, (VI07++)         ; transform V7      ; load stq6
+        MADDx.xyzw VF16, VF20, VF04x    LQI.xyzw VF11, (VI08++)         ; transform V7      ; load rgb6
+        FTOI4.xyzw VF13, VF13           LQI.xyzw VF08, (VI07++)         ; V4->Fixed         ; load stq7
+        NOP                             SQI.xyzw VF05, (VI10++)                             ; store STQ4
+        NOP                             SQI.xyzw VF09, (VI10++)                             ; store RGB4
+        MULq.xyzw VF14, VF14, Q         DIV Q, VF00w, VF15w             ; project V5        ; start divide6
+        MULq.xyzw VF06, VF06, Q         SQI.xyz VF13, (VI10++)          ; project ST5       ; store XYZ4
+        NOP                             LQI.xyzw VF12, (VI08++)                             ; load rgb7
+        NOP                             LQI.xyzw VF01, (VI06++)                             ; load xyz0
+        FTOI4.xyzw VF14, VF14           LQI.xyzw VF05, (VI07++)         ; V5->Fixed         ; load stq0
+        NOP                             SQI.xyzw VF06, (VI10++)                             ; store STQ5
+        MULAw.xyzw  ACC, VF23, VF00w    SQI.xyzw VF10, (VI10++)         ; transform V0      ; store RGB5
+        MULq.xyzw VF15, VF15, Q         DIV Q, VF00w, VF16w             ; project V6        ; start divide7
+        MULq.xyzw VF07, VF07, Q         SQI.xyz VF14, (VI10++)          ; project ST6       ; store XYZ5
+        MADDAz.xyzw ACC, VF22, VF01z    LQI.xyzw VF09, (VI08++)         ; transform V0      ; load rgb0
+        MADDAy.xyzw ACC, VF21, VF01y    LQI.xyzw VF02, (VI06++)         ; transform V0      ; load xyz1
+        FTOI4.xyzw VF15, VF15           LQI.xyzw VF06, (VI07++)         ; V6->Fixed         ; load stq1
+        MADDx.xyzw VF13, VF20, VF01x    SQI.xyzw VF07, (VI10++)         ; transform V0      ; store STQ6
+        NOP                             SQI.xyzw VF11, (VI10++)                             ; store RGB6
+        MULq.xyzw VF16, VF16, Q         LQI.xyzw VF10, (VI08++)         ; project V7        ; load rgb1
+        MULq.xyzw VF08, VF08, Q         SQI.xyz VF15, (VI10++)          ; project ST7       ; store XYZ6
+        NOP                             LQI.xyzw VF03, (VI06++)                             ; load xyz2
+        MULAw.xyzw  ACC, VF23, VF00w    LQI.xyzw VF07, (VI07++)         ; transform V1      ; load stq2
+        FTOI4.xyzw VF16, VF16           LQI.xyzw VF11, (VI08++)         ; V7->Fixed         ; load rgb2
+        MADDAz.xyzw ACC, VF22, VF02z    SQI.xyzw VF08, (VI10++)         ; transform V1      ; store STQ7
+        MADDAy.xyzw ACC, VF21, VF02y    SQI.xyzw VF12, (VI10++)         ; transform V1      ; store RGB7
+        NOP                             LQI.xyzw VF04, (VI06++)                             ; load xyz3
+        NOP                             IBNE VI09, VI00, TRIS_NOCLIP_EIGHT_VERTS            ; loop
+        NOP                             SQI.xyz VF16, (VI10++)          ; (BDS)             ; store XYZ7
+
+TRIS_NOCLIP_KICK:
+
+;------------------------------------------------------------------------
+; Kick and swap buffers
+;------------------------------------------------------------------------
+
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+
+        NOP                             XGKICK VI12                     ; kick gif to render package 
+        NOP                             IADDIU VI01, VI00, OUTPUT_BUFFER_BASE
+        NOP                             NOP
+        NOP                             IBEQ   VI12, VI01, OUTPUT_TN_NOTCLIPPED
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+    OUTPUT_TN_NOTCLIPPED:
+        
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+;========================================================================

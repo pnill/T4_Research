@@ -1,0 +1,69 @@
+;==========================================================================
+;
+; MCODE0.VSM - Microcode test
+;
+;==========================================================================
+.vu
+
+.include "SKIN_memlayout.vsm"
+
+;==========================================================================
+;
+; JUMPTABLE
+;
+; !*!*!*! These instructions must be at instruction address ZERO !*!*!*!
+;
+;==========================================================================
+
+;FASTLOOP:
+;        NOP     NOP
+;        NOP[E]  NOP
+;        NOP     NOP
+;        NOP     B FASTLOOP
+;        NOP     NOP 
+
+        NOP                             B       BOOT
+        NOP                             NOP        
+        NOP                             B       CMD_LOADMATRICES        
+        NOP                             NOP
+        NOP                             B       CMD_TRANSFORM
+        NOP                             NOP
+        NOP                             B       CMD_FLUSH_TRIS
+        NOP                             NOP
+        NOP                             B       CMD_FLUSH_SHADOW
+        NOP                             NOP
+        NOP                             B       CMD_TRANSFORM_MORPH
+        NOP                             NOP
+        
+        
+;==========================================================================
+;
+; KERNEL STUB
+;
+;==========================================================================
+          
+.include "SKIN_kernel.vsm"
+.include "SKIN_boot.vsm"
+.include "SKIN_matrix.vsm"
+.include "SKIN_transform.vsm"
+.include "SKIN_SingleMatrix.vsm"
+.include "SKIN_DoubleMatrix.vsm"
+.include "SKIN_TripleMatrix.vsm"
+.include "SKIN_EnvMapped.vsm"
+.include "SKIN_TransShadow.vsm"
+.include "SKIN_flush.vsm"
+.include "SKIN_FlushShadow.vsm"
+.include "SKIN_TransMorph.vsm"
+
+;==========================================================================
+
+CMD_STUB:
+        
+        NOP     NOP
+        NOP[E]  NOP
+        NOP     NOP
+        NOP     B KERNEL_RET
+
+;==========================================================================
+
+        

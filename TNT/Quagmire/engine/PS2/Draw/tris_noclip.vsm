@@ -1,0 +1,542 @@
+;==========================================================================
+;
+; TRIS_NOCLIP.VSM
+;
+;==========================================================================
+
+DT_NC_TOGGLE_OUTPUT:
+        NOP                             IADDIU VI01, VI00, OUTPUT_BUFFER_BASE
+        NOP                             NOP
+        NOP                             IBEQ   VI12, VI01, OUTPUT_TN_NOTCLIPPED
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        OUTPUT_TN_NOTCLIPPED:
+        NOP                             JR VI02
+        NOP                             NOP
+
+
+;==========================================================================
+;
+; CMD_DRAWTRIS_TN_NOTCLIPPED
+;
+; Verts have pos, uvs, and normals
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03    
+;   VI04    
+;   VI05    
+;   VI06    Source Addr Pos
+;   VI07    Source Addr UVs
+;   VI08    Source Addr Normals
+;   VI09    Command param 1 - NVerts
+;   VI10    Destination Addr (Command param 2 - Unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01    
+;   VF02    
+;   VF03    
+;   VF04    
+;   VF05    
+;   VF06    
+;   VF07    Projected XYZ
+;   VF08    Projected UV
+;   VF09    Transformed XYZ
+;   VF10    Transformed Normal
+;   VF11    RGB 
+;   VF12    Source XYZ
+;   VF13    Source UV
+;   VF14    Source Normal
+;   VF15    
+;   VF16    
+;   VF17    
+;   VF18    
+;   VF19    Active local to screen matrix qword 0
+;   VF20    Active local to screen matrix qword 1
+;   VF21    Active local to screen matrix qword 2
+;   VF22    Active local to screen matrix qword 3
+;   VF23    Active light intensity matrix qword 0
+;   VF24    Active light intensity matrix qword 1
+;   VF25    Active light intensity matrix qword 2
+;   VF26    Active light intensity matrix qword 3
+;   VF27    Active light color matrix qword 0    
+;   VF28    Active light color matrix qword 1    
+;   VF29    Active light color matrix qword 2    
+;   VF30    Active light color matrix qword 3    
+;   VF31    Max color value for pegging to 255
+;==========================================================================
+
+; Build verts using Pos, Normal, and Texture
+
+CMD_DRAWTRIS_TN_NOTCLIPPED:
+
+        ; Read giftag from input buffer (temporary)
+        NOP                             LQ.xyzw VF01, 1(VI14)
+
+        ; Get ptrs to source data         
+        NOP                             IADDIU VI06, VI14, 2       ; Addr of Pos
+        NOP                             IADD   VI07, VI06, VI09    ; Addr of UVs
+        NOP                             IADD   VI08, VI07, VI09    ; Addr of Normals
+        
+        ; Get destination addresses
+        NOP                             IADDIU VI10, VI12, 1
+        
+        ; Write giftag to buffer
+        NOP                             SQ.xyzw VF01, 0(VI12)
+        
+LOADV_TN_NOTCLIPPED:
+;------------------------------------------------------------------------
+; Process the three verts for this triangle
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF14, 0(VI08)           ; load normals
+        NOP                             LQ.xyzw VF12, 0(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF13, 0(VI07)           ; load uv
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF23, VF14x    NOP                             ; LDir x N
+        MADDAy.xyzw ACC, VF24, VF14y    NOP                             ; LDir x N
+        MADDAz.xyzw ACC, VF25, VF14z    NOP                             ; LDir x N
+        MADDw.xyzw VF10, VF26, VF14w    NOP                             ; LDir x N -> vf10
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MAXx.xyzw  VF10, VF10, VF00x    NOP                             ; if(vf10<0) vf10=0
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             NOP
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF27, VF10x    NOP                             ; LColor x NI
+        MADDAy.xyzw ACC, VF28, VF10y    DIV Q, VF00w, VF09w             ; LColor x NI / Start divide
+        MADDAz.xyzw ACC, VF29, VF10z    NOP                             ; LColor x NI
+        MADDw.xyzw VF11, VF30, VF10w    NOP                             ; LColor x NI
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MINI.xyzw  VF11, VF11, VF31     NOP                             ; if(vf11>255) vf11=255
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        MULq.xyzw  VF08, VF13, Q        NOP                             ; project uvs
+        NOP                             NOP
+        FTOI0.xyzw VF11, VF11           NOP                             ; convert RGB to int
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             SQ.xyzw VF11, 1(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF08, 0(VI10)           ; save STQ (0)
+        NOP                             SQ.xyzw VF07, 2(VI10)           ; save XYZ (2)
+
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF14, 1(VI08)           ; load normals
+        NOP                             LQ.xyzw VF12, 1(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF13, 1(VI07)           ; load uv
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF23, VF14x    NOP                             ; LDir x N
+        MADDAy.xyzw ACC, VF24, VF14y    NOP                             ; LDir x N
+        MADDAz.xyzw ACC, VF25, VF14z    NOP                             ; LDir x N
+        MADDw.xyzw VF10, VF26, VF14w    NOP                             ; LDir x N -> vf10
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MAXx.xyzw  VF10, VF10, VF00x    NOP                             ; if(vf10<0) vf10=0
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             NOP
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF27, VF10x    NOP                             ; LColor x NI
+        MADDAy.xyzw ACC, VF28, VF10y    DIV Q, VF00w, VF09w             ; LColor x NI / Start divide
+        MADDAz.xyzw ACC, VF29, VF10z    NOP                             ; LColor x NI
+        MADDw.xyzw VF11, VF30, VF10w    NOP                             ; LColor x NI
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MINI.xyzw  VF11, VF11, VF31     NOP                             ; if(vf11>255) vf11=255
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        MULq.xyzw  VF08, VF13, Q        NOP                             ; project uvs
+        NOP                             NOP
+        FTOI0.xyzw VF11, VF11           NOP                             ; convert RGB to int
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             SQ.xyzw VF11, 4(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF08, 3(VI10)           ; save STQ (0)
+        NOP                             SQ.xyzw VF07, 5(VI10)           ; save XYZ (2)
+
+
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF14, 2(VI08)           ; load normals
+        NOP                             LQ.xyzw VF12, 2(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF13, 2(VI07)           ; load uv
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF23, VF14x    NOP                             ; LDir x N
+        MADDAy.xyzw ACC, VF24, VF14y    NOP                             ; LDir x N
+        MADDAz.xyzw ACC, VF25, VF14z    NOP                             ; LDir x N
+        MADDw.xyzw VF10, VF26, VF14w    NOP                             ; LDir x N -> vf10
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MAXx.xyzw  VF10, VF10, VF00x    NOP                             ; if(vf10<0) vf10=0
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             NOP
+        NOP                             NOP
+        MULAx.xyzw  ACC, VF27, VF10x    NOP                             ; LColor x NI
+        MADDAy.xyzw ACC, VF28, VF10y    DIV Q, VF00w, VF09w             ; LColor x NI / Start divide
+        MADDAz.xyzw ACC, VF29, VF10z    NOP                             ; LColor x NI
+        MADDw.xyzw VF11, VF30, VF10w    NOP                             ; LColor x NI
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MINI.xyzw  VF11, VF11, VF31     NOP                             ; if(vf11>255) vf11=255
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        MULq.xyzw  VF08, VF13, Q        NOP                             ; project uvs
+        NOP                             NOP
+        FTOI0.xyzw VF11, VF11           NOP                             ; convert RGB to int
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             SQ.xyzw VF11, 7(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF08, 6(VI10)           ; save STQ (0)
+        NOP                             SQ.xyzw VF07, 8(VI10)           ; save XYZ (2)
+
+
+;------------------------------------------------------------------------
+; Increment pointers and loop for next triangle
+;------------------------------------------------------------------------
+        NOP                             IADDI VI06, VI06, 3             ; move dst addr to next triangle
+        NOP                             IADDI VI07, VI07, 3             ; move dst addr to next triangle
+        NOP                             IADDI VI09, VI09, -3            ; decrement loop counter
+        NOP                             IADDI VI08, VI08, 3             ; move dst addr to next triangle
+        NOP                             IBNE VI09, VI00, LOADV_TN_NOTCLIPPED           
+        NOP                             IADDI VI10, VI10, 9             ; BDS move dst addr to next triangle
+                                                                        
+;------------------------------------------------------------------------
+; Kick and swap buffers
+;------------------------------------------------------------------------
+
+        NOP                             XGKICK VI12                 ; kick gif to render package 
+        
+        NOP                             BAL VI02, DT_NC_TOGGLE_OUTPUT
+        NOP                             NOP
+
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+;========================================================================
+
+
+;==========================================================================
+;
+; CMD_DRAWTRIS_TC_NOTCLIPPED
+;
+; Verts have pos, uvs, and colors
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03    
+;   VI04    
+;   VI05    
+;   VI06    Source Addr Pos
+;   VI07    Source Addr UVs
+;   VI08    Source Addr Colors
+;   VI09    Command param 1 - NVerts
+;   VI10    Destination Addr (Command param 2 - Unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01    
+;   VF02    
+;   VF03    
+;   VF04    
+;   VF05    
+;   VF06    
+;   VF07    Projected XYZ
+;   VF08    Projected UV
+;   VF09    Transformed XYZ
+;   VF10    
+;   VF11    
+;   VF12    Source XYZ
+;   VF13    Source UV
+;   VF14    Source Color
+;   VF15    
+;   VF16    
+;   VF17    
+;   VF18    
+;   VF19    Active local to screen matrix qword 0
+;   VF20    Active local to screen matrix qword 1
+;   VF21    Active local to screen matrix qword 2
+;   VF22    Active local to screen matrix qword 3
+;   VF23    Active light intensity matrix qword 0
+;   VF24    Active light intensity matrix qword 1
+;   VF25    Active light intensity matrix qword 2
+;   VF26    Active light intensity matrix qword 3
+;   VF27    Active light color matrix qword 0    
+;   VF28    Active light color matrix qword 1    
+;   VF29    Active light color matrix qword 2    
+;   VF30    Active light color matrix qword 3    
+;   VF31    Max color value for pegging to 255
+;==========================================================================
+
+; Build verts using Pos, Color, and Texture
+
+CMD_DRAWTRIS_TC_NOTCLIPPED:
+
+        ; Read giftag from input buffer (temporary)
+        NOP                             LQ.xyzw VF01, 1(VI14)
+
+        ; Get ptrs to source data         
+        NOP                             IADDIU VI06, VI14, 2       ; Addr of Pos
+        NOP                             IADD   VI07, VI06, VI09    ; Addr of UVs
+        NOP                             IADD   VI08, VI07, VI09    ; Addr of Colors
+        
+        ; Get destination addresses
+        NOP                             IADDIU VI10, VI12, 1
+        
+        ; Write giftag to buffer
+        NOP                             SQ.xyzw VF01, 0(VI12)
+        
+LOADV_TC_NOTCLIPPED:
+;------------------------------------------------------------------------
+; Process the three verts for this triangle
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF12, 0(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF13, 0(VI07)           ; load uv
+        NOP                             LQ.xyzw VF14, 0(VI08)           ; load colors
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             DIV Q, VF00w, VF09w             ; Start divide
+        NOP                             WAITQ
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        MULq.xyzw  VF08, VF13, Q        NOP                             ; project uvs
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             SQ.xyzw VF14, 1(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF08, 0(VI10)           ; save STQ (0)
+        NOP                             SQ.xyzw VF07, 2(VI10)           ; save XYZ (2)
+
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF12, 1(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF13, 1(VI07)           ; load uv
+        NOP                             LQ.xyzw VF14, 1(VI08)           ; load colors
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             DIV Q, VF00w, VF09w             ; Start divide
+        NOP                             WAITQ
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        MULq.xyzw  VF08, VF13, Q        NOP                             ; project uvs
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             SQ.xyzw VF14, 4(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF08, 3(VI10)           ; save STQ (0)
+        NOP                             SQ.xyzw VF07, 5(VI10)           ; save XYZ (2)
+
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF12, 2(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF13, 2(VI07)           ; load uv
+        NOP                             LQ.xyzw VF14, 2(VI08)           ; load colors
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             DIV Q, VF00w, VF09w             ; Start divide
+        NOP                             WAITQ
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        MULq.xyzw  VF08, VF13, Q        NOP                             ; project uvs
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             SQ.xyzw VF14, 7(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF08, 6(VI10)           ; save STQ (0)
+        NOP                             SQ.xyzw VF07, 8(VI10)           ; save XYZ (2)
+
+;------------------------------------------------------------------------
+; Increment pointers and loop for next triangle
+;------------------------------------------------------------------------
+        NOP                             IADDI VI06, VI06, 3             ; move dst addr to next triangle
+        NOP                             IADDI VI07, VI07, 3             ; move dst addr to next triangle
+        NOP                             IADDI VI09, VI09, -3            ; decrement loop counter
+        NOP                             IADDI VI08, VI08, 3             ; move dst addr to next triangle
+        NOP                             IBNE VI09, VI00, LOADV_TC_NOTCLIPPED           
+        NOP                             IADDI VI10, VI10, 9             ; BDS move dst addr to next triangle
+                                                                        
+;------------------------------------------------------------------------
+; Kick and swap buffers
+;------------------------------------------------------------------------
+
+        NOP                             XGKICK VI12                 ; kick gif to render package 
+        
+        NOP                             BAL VI02, DT_NC_TOGGLE_OUTPUT
+        NOP                             NOP
+        
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+;========================================================================
+
+
+;==========================================================================
+;
+; CMD_DRAWTRIS_C_NOTCLIPPED
+;
+; Verts have pos, and colors
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03    
+;   VI04    
+;   VI05    
+;   VI06    Source Addr Pos
+;   VI07    
+;   VI08    Source Addr Colors
+;   VI09    Command param 1 - NVerts
+;   VI10    Destination Addr (Command param 2 - Unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF07    Projected XYZ
+;   VF08    
+;   VF09    Transformed XYZ
+;   VF10    
+;   VF11    
+;   VF12    Source XYZ
+;   VF13    
+;   VF14    Source Color
+;   VF19    Active local to screen matrix qword 0
+;   VF20    Active local to screen matrix qword 1
+;   VF21    Active local to screen matrix qword 2
+;   VF22    Active local to screen matrix qword 3
+;   VF23    Active light intensity matrix qword 0
+;   VF24    Active light intensity matrix qword 1
+;   VF25    Active light intensity matrix qword 2
+;   VF26    Active light intensity matrix qword 3
+;   VF27    Active light color matrix qword 0    
+;   VF28    Active light color matrix qword 1    
+;   VF29    Active light color matrix qword 2    
+;   VF30    Active light color matrix qword 3    
+;   VF31    Max color value for pegging to 255
+;==========================================================================
+
+; Build verts using Pos, Color, and Texture
+
+CMD_DRAWTRIS_C_NOTCLIPPED:
+
+        ; Read giftag from input buffer (temporary)
+        NOP                             LQ.xyzw VF01, 1(VI14)
+
+        ; Get ptrs to source data         
+        NOP                             IADDIU VI06, VI14, 2       ; Addr of Pos
+        NOP                             IADD   VI08, VI06, VI09    ; Addr of Colors
+        
+        ; Get destination addresses
+        NOP                             IADDIU VI10, VI12, 1
+        
+        ; Write giftag to buffer
+        NOP                             SQ.xyzw VF01, 0(VI12)
+        
+LOADV_C_NOTCLIPPED:
+;------------------------------------------------------------------------
+; Process the three verts for this triangle
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF12, 0(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF14, 0(VI08)           ; load colors
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             DIV Q, VF00w, VF09w             ; Start divide
+        NOP                             WAITQ
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             SQ.xyzw VF14, 0(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF07, 1(VI10)           ; save XYZ (2)
+
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF12, 1(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF14, 1(VI08)           ; load colors
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             DIV Q, VF00w, VF09w             ; Start divide
+        NOP                             WAITQ
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             SQ.xyzw VF14, 2(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF07, 3(VI10)           ; save XYZ (2)
+
+;------------------------------------------------------------------------
+
+        NOP                             LQ.xyzw VF12, 2(VI06)           ; load xyz
+        NOP                             LQ.xyzw VF14, 2(VI08)           ; load colors
+        MULAx.xyzw  ACC, VF19, VF12x    NOP                             ; transform vert
+        MADDAy.xyzw ACC, VF20, VF12y    NOP                             ; transform vert
+        MADDAz.xyzw ACC, VF21, VF12z    NOP                             ; transform vert
+        MADDw.xyzw VF09, VF22, VF12w    NOP                             ; transform vert
+        NOP                             DIV Q, VF00w, VF09w             ; Start divide
+        NOP                             WAITQ
+        MULq.xyzw  VF07, VF09, Q        NOP                             ; project vert
+        FTOI4.xyzw VF07, VF07           NOP                             ; convert XYZ to fixed
+        NOP                             SQ.xyzw VF14, 4(VI10)           ; save RGB (1)
+        NOP                             SQ.xyzw VF07, 5(VI10)           ; save XYZ (2)
+
+;------------------------------------------------------------------------
+; Increment pointers and loop for next triangle
+;------------------------------------------------------------------------
+        NOP                             IADDI VI06, VI06, 3             ; move dst addr to next triangle
+        NOP                             IADDI VI09, VI09, -3            ; decrement loop counter
+        NOP                             IADDI VI08, VI08, 3             ; move dst addr to next triangle
+        NOP                             IBNE VI09, VI00, LOADV_C_NOTCLIPPED           
+        NOP                             IADDI VI10, VI10, 6             ; BDS move dst addr to next triangle
+                                                                        
+;------------------------------------------------------------------------
+; Kick and swap buffers
+;------------------------------------------------------------------------
+
+        NOP                             XGKICK VI12                 ; kick gif to render package 
+        
+        NOP                             BAL VI02, DT_NC_TOGGLE_OUTPUT
+        NOP                             NOP
+        
+;------------------------------------------------------------------------
+; Return to kernel
+;------------------------------------------------------------------------
+
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+;========================================================================

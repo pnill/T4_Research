@@ -1,0 +1,54 @@
+;==========================================================================
+;
+; TRI_STRIPS_BOOT.VSM
+;   This is where all of the static geometry work begins
+;   This portion is responsible for making sure the clipping plane data
+;       is resident in VU memory.
+;   As this does not require any data be sent from CORE, it is its own
+;       stand-alone process that happens before everyone else comes to
+;       the party.
+;
+;   Everything begins with a VIF call to MSCALF with an address of 0
+;       This tells the VU to start running at the very first line
+;       of microcode which is this "boot" sequence
+;
+;==========================================================================
+.vu
+
+.include "memlayout.vsm"
+
+TRI_STRIP_BOOT:
+    ; load the Clip2Screen matrix (should be the same for all objects)
+    nop                         iaddiu vi10, vi00, MATRIX_C2S_ADDR
+    nop                         lq.xyzw vf28,  0(vi10)              ; C2S
+    nop                         lq.xyzw vf29,  1(vi10)              ; C2S
+    nop                         lq.xyzw vf30,  2(vi10)              ; C2S
+    nop                         lq.xyzw vf31,  3(vi10)              ; C2S
+    
+    nop                         lq.xyzw vf20,  4(vi10)              ; L2S
+    nop                         lq.xyzw vf21,  5(vi10)              ; L2S
+    nop                         lq.xyzw vf22,  6(vi10)              ; L2S
+    nop                         lq.xyzw vf23,  7(vi10)              ; L2S
+
+    nop                         lq.xyzw vf24,  8(vi10)              ; L2C
+    nop                         lq.xyzw vf25,  9(vi10)              ; L2C
+    nop                         lq.xyzw vf26, 10(vi10)              ; L2C
+    nop                         lq.xyzw vf27, 11(vi10)              ; L2C
+    
+
+    ; Halt and wait for vif to reboot
+    ;   Data will come through with a VIF MSCNT to start things after this pause
+    nop                         nop
+    nop[e]                      nop
+    nop                         nop
+
+    
+.include "tri_strips_main.vsm"
+.include "tri_strips_3comp.vsm"
+.include "tri_strips_4comp.vsm"
+.include "tri_strips_clipper.vsm"
+.include "tri_strips_lighting.vsm"
+.include "tri_strips_envmapper.vsm"
+.include "tri_strips_shadow.vsm"
+
+

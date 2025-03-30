@@ -1,0 +1,52 @@
+;==========================================================================
+;
+; KERNEL.VSM - VU1 kernel stub
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01-08 Custom to other functions
+;   VI09    Command param 1 
+;   VI10    Command param 2
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;
+;
+; ========================================================================
+; |        W       |        Z        |        Y        |        X        |
+; ========================================================================
+; |     PARAM2     |     PARAM1      |     OFFSET      |     OPCODE      |
+; ========================================================================
+;
+; OPCODE - Address to jump to that will branch to desired function.
+; OFFSET - Number of qwords to next command. ZERO if no next command
+; PARAM1 - Loaded into VI09 for use by function
+; PARAM2 - Loaded into VI10 for use by function
+;
+;==========================================================================
+
+KERNEL_TOP:
+
+        NOP                             XTOP VI14                       ; Get addr of input buffer
+
+KERNEL_LOOP:
+
+        NOP                             ILW.x VI11, 0(VI14)             ; Load opcode      
+        NOP                             ILW.y VI13, 0(VI14)             ; Load offset to next cmd    
+        NOP                             ILW.z VI09, 0(VI14)             ; Load cmd param 1
+        NOP                             JR VI11                         ; Jump to jump table
+        NOP                             ILW.w VI10, 0(VI14)             ; Load cmd param2 (BDS)
+
+KERNEL_RET:
+
+        NOP                             IBGTZ VI13, KERNEL_LOOP         ; process next cmd
+        NOP                             IADD VI14, VI14, VI13           ; BDS, VI14 holds addr of next cmd
+        NOP[E]                          NOP                             ; Shutdown and wait for VIF1
+        NOP                             NOP
+        NOP                             B KERNEL_TOP                    ; VIF1 has restarted kernel
+        NOP                             NOP                             ; BDS
+
+;==========================================================================

@@ -1,0 +1,183 @@
+;==========================================================================
+;
+; TRANSFORM_TRIPLE_MATRIX
+;
+;==========================================================================
+;   VI00    Const (0)
+;S  VI01    Const (0xff) used by AND operations
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06
+;   VI07
+;S  VI08    Source Addr of Input buffer
+;S  VI09    Command param 1 - NTransforms
+;   VI10    Command param 2 - Unused
+;   VI11    Opcode from latest command
+;S  VI12    GIF packet buffer base address (for double buffering)
+;S  VI13    RESERVED - Next command address in input buffer for kernel
+;S  VI14    RESERVED - Current address of input buffer for kernel
+;S  VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10
+;   VF11
+;   VF12
+;   VF13
+;   VF14
+;   VF15
+;   VF16
+;   VF17
+;   VF18
+;   VF19
+;   VF20
+;   VF21
+;   VF22
+;   VF23
+;   VF24	Light color matrix qword 0
+;   VF25	Light color matrix qword 1
+;   VF26	Light color matirx qword 2
+;   VF27    Light color matrix qword 3
+;   VF28    Light dir matrix qword 0
+;   VF29    Light dir matrix qword 1
+;   VF30    Light dir matrix qword 2
+;S  VF31    Const (255, 16, 0.5, 0)
+;==========================================================================
+
+TRANSFORM_TRIPLE_MATRIX:
+
+        ;// register usage:
+		;// vf01	xyz0a
+		;// vf02	xyz0b
+		;// vf03	xyz0c (finished)
+		;// vf04	normal0a
+		;// vf05	normal0b
+		;// vf06	normal0c (finished)
+		;// vf07	stq0
+		;// vf08	projected stq0
+		;// vf09
+		;// vf10	weights0
+		;// vf11	L2S
+		;// vf12	L2S
+		;// vf13	L2S
+		;// vf14	L2S
+		;// vf15	matrix A light matrix
+		;// vf16	matrix A light matrix
+		;// vf17	matrix A light matrix
+		;// vf18	matrix B light matrix
+		;// vf19	matrix B light matrix
+		;// vf20	matrix B light matrix
+		;// vf21	matrix C light matrix
+		;// vf22	matrix C light matrix
+		;// vf23	matrix C light matrix
+		;// vi02	Matrix A
+		;// vi03	Matrix B
+		;// vi04	Matrix C
+		;// vi05	weight0a
+		;// vi06	weight0b
+		;//	vi07	weight0c
+		;// vi10	NVerts
+		;// vi11	ci0
+
+		nop								ilw.z vi04, 1(vi08)													; vi04 = matrix C offset
+		nop								ilw.y vi03, 1(vi08)													; vi03 = matrix B offset
+		nop								ilw.x vi02, 1(vi08)													; vi02 = matrix A offset
+		nop								ilw.y vi10, 0(vi08)													; vi10 = NVerts
+		nop								iaddiu vi04, vi04, MATRIX_CACHE_BASE								; vi04 = matrix C
+		nop								lq.xyz vf23, 6(vi04)												; load matrix C NL2W
+		nop								lq.xyz vf22, 5(vi04)												; load matrix C NL2W
+		nop								lq.xyz vf21, 4(vi04)												; load matrix C NL2W
+		nop								iaddiu vi03, vi03, MATRIX_CACHE_BASE								; vi03 = matrix B
+		mulaz.xyz   acc, vf30, vf23z	lq.xyz vf20, 6(vi03)					; CLightDir*NL2W			; load matrix B NL2W
+		madday.xyz  acc, vf29, vf23y	lq.xyz vf19, 5(vi03)					; CLightDir*NL2W			; load matrix B NL2W
+		maddx.xyz  vf23, vf28, vf23x	lq.xyz vf18, 4(vi03)					; CLightDir*NL2W			; load matrix B NL2W
+		mulaz.xyz   acc, vf30, vf22z	iaddiu vi02, vi02, MATRIX_CACHE_BASE	; CLightDir*NL2W			; vi02 = matrix A
+		madday.xyz  acc, vf29, vf22y	lq.xyz vf17, 6(vi02)					; CLightDir*NL2W			; load matrix A NL2W
+		maddx.xyz  vf22, vf28, vf22x	lq.xyz vf16, 5(vi02)					; CLightDir*NL2W			; load matrix A NL2W
+		mulaz.xyz   acc, vf30, vf21z	lq.xyz vf15, 4(vi02)					; CLightDir*NL2W			; load matrix A NL2W
+		madday.xyz  acc, vf29, vf21y	iaddi  vi08, vi08, 2					; CLightDir*NL2W			; advance to SrcPtr
+		maddx.xyz  vf21, vf28, vf21x	ilw.x  vi05, 1(vi08)					; CLightDir*NL2W			; load weight0a
+		mulaz.xyz   acc, vf30, vf20z	ilw.y  vi06, 1(vi08)					; BLightDir*NL2W			; load weight0b
+		madday.xyz  acc, vf29, vf20y	ilw.z  vi07, 1(vi08)					; BLightDir*NL2W			; load weight0c
+		maddx.xyz  vf20, vf28, vf20x	lq.xyz vf04, 1(vi08)					; BLightDir*NL2W			; load normal0
+		mulaz.xyz   acc, vf30, vf19z	iand   vi05, vi05, vi01					; BLightDir*NL2W			; mask weight0a
+		madday.xyz  acc, vf29, vf19y	iand   vi06, vi06, vi01					; BLightDir*NL2W			; mask weight0b
+		maddx.xyz  vf19, vf28, vf19x	iand   vi07, vi07, vi01					; BLightDir*NL2W			; mask weight0c
+		mulaz.xyz   acc, vf30, vf18z	mfir.x vf10, vi05						; BLightDir*NL2W			; store weight0a
+		madday.xyz  acc, vf29, vf18y	mfir.y vf10, vi06						; BLightDir*NL2W			; store weight0b
+		maddx.xyz  vf18, vf28, vf18x	mfir.z vf10, vi07						; BLightDir*NL2W			; store weight0c
+		mulaz.xyz   acc, vf30, vf17z	lq.xyzw vf01, 0(vi08)					; ALightDir*NL2W			; load xyz0
+		madday.xyz  acc, vf29, vf17y	lq.xyzw vf07, 2(vi08)					; ALightDir*NL2W			; load stq0
+		maddx.xyz  vf17, vf28, vf17x	nop										; ALightDir*NL2W
+		itof12.xy  vf10, vf10			nop										; weights->float
+		mulaz.xyz   acc, vf30, vf16z	nop										; ALightDir*NL2W
+		madday.xyz  acc, vf29, vf16y	nop										; ALightDir*NL2W
+		maddx.xyz  vf16, vf28, vf16x	nop										; ALightDir*NL2W
+        muly.xy    vf10, vf10, vf31y	nop										; weights *= 16
+		mulaz.xyz   acc, vf30, vf15z	nop										; ALightDir*NL2W
+		madday.xyz  acc, vf29, vf15y	nop										; ALightDir*NL2W
+		maddx.xyz  vf15, vf28, vf15x	nop										; ALightDir*NL2W
+
+TRIPLE_TRANSFORM_ONE_VERT:
+		mulaz.xyz   acc, vf23, vf04z	iaddi vi10, vi10, -1					; dot0c						; NVerts--
+		madday.xyz  acc, vf22, vf04y	lq.xyzw vf14, 3(vi04)					; dot0c						; load matrix C L2S
+		maddx.xyz  vf06, vf21, vf04x	lq.xyzw vf13, 2(vi04)					; dot0c						; load matrix C L2S
+		mulaz.xyz   acc, vf20, vf04z	lq.xyzw vf12, 1(vi04)					; dot0b						; load matrix C L2S
+		madday.xyz  acc, vf19, vf04y	lq.xyzw vf11, 0(vi04)					; dot0b						; load matrix C L2S
+		maddx.xyz  vf05, vf18, vf04x	ilw.x  vi11, 2(vi08)					; dot0b						; load ci0
+		mulaz.xyz   acc, vf17, vf04z	iaddi  vi08, vi08, 3					; dot0a						; pSrc++
+		madday.xyz  acc, vf16, vf04y	nop										; dot0a
+		maddx.xyz  vf04, vf15, vf04x	nop										; dot0a
+		mulaw.xyzw  acc, vf14, vf00w	iand vi11, vi11, vi01					; trans xyz0c				; mask out ci0
+		maddaz.xyzw acc, vf13, vf01z	lq.xyzw vf14, 3(vi03)					; trans xyz0c				; load matrix B L2S
+		madday.xyzw acc, vf12, vf01y	lq.xyzw vf13, 2(vi03)					; trans xyz0c				; load matrix B L2S
+		maddx.xyzw vf03, vf11, vf01x	lq.xyzw vf12, 1(vi03)					; trans xyz0c				; load matrix B L2S
+		mulaz.xyz   acc, vf06, vf10z	lq.xyzw vf11, 0(vi03)					; weight0c*dot0c			; load matrix B L2S
+		madday.xyz  acc, vf05, vf10y	nop										; weight0b*dot0b
+		maddx.xyz  vf06, vf04, vf10x	nop										; weight0a*dot0a
+		mulaw.xyzw  acc, vf14, vf00w	nop										; trans xyz0b
+		maddaz.xyzw acc, vf13, vf01z	lq.xyzw vf14, 3(vi02)					; trans xyz0b				; load matrix A L2S
+		madday.xyzw acc, vf12, vf01y	lq.xyzw vf13, 2(vi02)					; trans xyz0b				; load matrix A L2S
+		maddx.xyzw vf02, vf11, vf01x	lq.xyzw vf12, 1(vi02)					; trans xyz0b				; load matrix A L2S
+		maxx.xyz   vf06, vf06, vf00x	lq.xyzw vf11, 0(vi02)					; clamp dot0<0				; load matrix A L2S
+		mulaw.xyzw  acc, vf14, vf00w	ilw.x  vi05, 1(vi08)					; trans xyz0a				; load weight0a
+		maddaz.xyzw acc, vf13, vf01z	ilw.y  vi06, 1(vi08)					; trans xyz0a				; load weight0b
+		madday.xyzw acc, vf12, vf01y	ilw.z  vi07, 1(vi08)					; trans xyz0a				; load weight0c
+		maddx.xyzw vf01, vf11, vf01x	nop										; trans xyz0a
+		nop								nop
+		mulaz.xyzw  acc, vf03, vf10z	iand   vi05, vi05, vi01					; weight0c*xyz0c			; mask weight0a
+		madday.xyzw acc, vf02, vf10y	iand   vi06, vi06, vi01					; weight0b*xyz0b			; mask weight0b
+		maddx.xyzw vf03, vf01, vf10x	iand   vi07, vi07, vi01					; weight0a*xyz0a			; mask weight0c
+		mulaw.xyzw  acc, vf27, vf00w	mfir.x vf10, vi05						; calc rgb0					; store weight0a
+		maddaz.xyzw acc, vf26, vf06z	mfir.y vf10, vi06						; calc rgb0					; store weight0b
+		madday.xyzw acc, vf25, vf06y	mfir.z vf10, vi07						; calc rgb0					; store weight0c
+		maddx.xyzw vf06, vf24, vf06x	div q, vf00w, vf03w						; calc rgb0					; start divide0
+		nop								nop
+		nop								nop
+		nop								nop
+		minix.xyzw vf06, vf06, vf31x	nop										; clamp rgb0>255
+		nop								nop
+		itof12.xy  vf10, vf10			nop										; weights->float
+		mulq.xyzw  vf03, vf03, q		nop										; project xyz0
+		ftoi0.xyzw vf06, vf06			nop										; rgb0->fixed
+		mulq.xyzw  vf08, vf07, q		lq.xyz vf04, 1(vi08)					; project stq0				; load normal0
+		muly.xy    vf10, vf10, vf31y	lq.xyzw vf01, 0(vi08)					; weights *= 16				; load xyz0
+		ftoi4.xyzw vf03, vf03			lq.xyzw vf07, 2(vi08)					; xyz0->fixed				; load stq0
+		nop								sq.xyzw vf06, 128(vi11)												; store rgb0
+		nop								sq.xyzw vf08, 256(vi11)												; store stq0
+		nop								ibne vi10, vi00, TRIPLE_TRANSFORM_ONE_VERT
+		nop								sq.xyzw vf03, 0(vi11)												; store xyz0
+
+        ;// finished
+        NOP                             B TRANSFORM_FINISHED
+        NOP                             NOP

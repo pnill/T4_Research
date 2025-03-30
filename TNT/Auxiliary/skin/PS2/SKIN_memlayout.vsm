@@ -1,0 +1,117 @@
+;==========================================================================
+;
+; MEMLAYOUT.VSM
+;
+; Base memory and register layout
+;
+;==========================================================================
+;
+; VU1 GLOBAL REGISTER USAGE
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06
+;   VI07
+;   VI08
+;   VI09    Command param 1
+;   VI10    Command param 2
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10    
+;   VF11
+;   VF12
+;   VF13
+;   VF14
+;   VF15
+;   VF16
+;   VF17
+;   VF18
+;   VF19
+;   VF20
+;   VF21
+;   VF22
+;   VF23
+;   VF24
+;   VF25
+;   VF26
+;   VF27    Light color matrix qword 0    
+;   VF28    Light color matrix qword 1    
+;   VF29    Light color matrix qword 2    
+;   VF30    Light color matrix qword 3    
+;S  VF31    Const (128, 16, 0.5, 4095)
+;==========================================================================
+;
+; VU1 MEMORY LAYOUT
+;
+;==========================================================================
+;
+;       0 - VERTEX_CACHE_BASE
+;           128 qwords for vertex cache POS
+;
+;     128 - VERTEX_CACHE_BASE+128
+;           128 qwords for vertex cache COLOR
+;
+;     256 - VERTEX_CACHE_BASE+256
+;           128 qwords for vertex cache UV 
+;
+;     384 - MATRIX_CACHE_BASE
+;           23x7=161 qwords for Pos L2W and Normal L2W matrices
+;
+;     545 - INPUT_BUFFER_BASE
+;           2x172=344 qwords for input
+;           Holds commands and data for different routines.
+;           The two buffers use XTOP for double buffering.
+;           This is where the VIF sends most data.
+;
+;     889 - OUTPUT_BUFFER_BASE
+;           2x61=122 qwords for output
+;
+;    1011  - FREE SPACE
+;
+;    1012 - SHADOW_MATRIX_BASE
+;
+;    1016 - COLOR_MATRIX_BASE
+;
+;    1020 - LIGHT_DIR_BASE
+;
+;    1023 - LAST ADDRESSABLE QWORD
+;
+
+;==========================================================================
+
+.equ VERTEX_CACHE_BASE,           0
+.equ MATRIX_CACHE_BASE,         384
+        
+.equ INPUT_BUFFER_BASE,         545
+.equ INPUT_BUFFER_SIZE,         172
+
+; ###### SET THIS UP CORRECTLY!!!!!
+.equ INPUT_BUFFER_MORPH_SIZE,   70
+
+.equ FREE_SPACE,                1011
+
+.equ OUTPUT_BUFFER_BASE,        889
+.equ OUTPUT_BUFFER_SIZE,        61
+
+.equ SHADOW_MATRIX_BASE,       1012
+.equ COLOR_MATRIX_BASE,        1016
+.equ LIGHT_DIR_BASE,           1020

@@ -1,0 +1,196 @@
+;==========================================================================
+;
+; TRIS_NOCLIP_LIT.VSM
+;
+;==========================================================================
+
+;==========================================================================
+;
+; CMD_DRAWTRIS_NOCLIP_LIT
+;
+; Verts have pos, uvs, and normals
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01    temp
+;   VI02
+;   VI03    
+;   VI04    
+;   VI05    Addr of lighting matrix
+;   VI06    Source Addr Pos
+;   VI07    Source Addr UVs
+;   VI08    Source Addr Normals
+;   VI09    Command param 1 - NVerts
+;   VI10    Destination Addr (Command param 2 - Unused)
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    RESERVED - Next command address in input buffer for kernel
+;   VI14    RESERVED - Current address of input buffer for kernel
+;   VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01    
+;   VF02    
+;   VF03    
+;   VF04    
+;   VF05    
+;   VF06    
+;   VF07
+;   VF08
+;   VF09
+;   VF10
+;   VF11    
+;   VF12
+;   VF13
+;   VF14
+;L  VF15    255 for pegging max color
+;L  VF16    Temp lighting matrix
+;L  VF17    Temp lighting matrix
+;L  VF18    Temp lighting matrix
+;L  VF19    Temp lighting matrix
+;S  VF20    Active local to screen matrix qword 0
+;S  VF21    Active local to screen matrix qword 1
+;S  VF22    Active local to screen matrix qword 2
+;S  VF23    Active local to screen matrix qword 3
+;S  VF24    Active local to clip matrix qword 0
+;S  VF25    Active local to clip matrix qword 1
+;S  VF26    Active local to clip matrix qword 2
+;S  VF27    Active local to clip matrix qword 3
+;S  VF28    Active clip to screen matrix qword 0
+;S  VF29    Active clip to screen matrix qword 1
+;S  VF30    Active clip to screen matrix qword 2
+;S  VF31    Active clip to screen matrix qword 3
+;==========================================================================
+
+; Build verts using Pos, Normal, and Texture
+
+CMD_DRAWTRIS_NOCLIP_LIT:
+        ;// read giftag from input buffer
+        sub.xyzw vf15, vf00, vf00       lq.xyzw vf01, 1(vi14)
+        
+        ;// get ptrs to source data and load in lighting matrix
+        nop                             iaddiu vi06, vi14, 3            ; pPos
+        nop                             iaddiu vi07, vi06, 72           ; pUVs
+        nop                             iaddiu vi08, vi07, 72           ; pNormals
+        nop                             iaddiu vi05, vi00, LIGHT_MATRIX ; pLightMatrix
+        nop                             lqi.xyzw vf16, (vi05++)
+        nop                             lqi.xyzw vf17, (vi05++)
+        nop                             lqi.xyzw vf18, (vi05++)
+        nop                             lqi.xyzw vf19, (vi05++)
+
+        ;// get dest address
+        nop                             iaddi vi10, vi12, -2    ;// -2 because we do pre-increment before saving
+
+        ;// write giftag to buffer
+        nop                             sq.xyzw vf01, 0(vi12)
+
+        ;// load max color (255) into vf15
+        ;// determine whether we need to do single-shot
+        nop                             iaddiu vi01, vi00, 1
+        nop                             iand vi01, vi01, vi09
+        nop                             loi 255.0
+        addi.xyzw vf15, vf15, I         lqi.xyzw vf01, (vi06++)
+        nop                             ibeq vi01, vi00, TRIS_NOCLIP_LIT_TWO_VERTS
+        nop                             lqi.xyzw vf02, (vi07++)
+
+        ;// register usage:
+        ;// vf01    xyz0
+        ;// vf02    stq0
+        ;// vf03    normal0
+        ;// vf04    finished xyz0
+        ;// vf05    finished rgb0
+        ;// vf06    finished stq0
+        ;// vf07    xyz1
+        ;// vf08    stq1
+        ;// vf09    normal1
+        ;// vf10    finished xyz1
+        ;// vf11    finished rgb1
+        ;// vf12    finished stq1
+
+        ;// do single-shot
+        mulaw.xyzw  acc, vf23, vf00w    lqi.xyzw vf03, (vi08++)     ; transform xyz0    ; load normal0
+        maddaz.xyzw acc, vf22, vf01z    iaddiu vi10, vi10, 3        ; transform xyz0    ; ++pDest
+        madday.xyzw acc, vf21, vf01y    sq.w vf01, 2(vi10)          ; transform xyz0    ; store adc0
+        maddx.xyzw vf04, vf20, vf01x    nop                         ; transform xyz0
+
+        mulaw.xyzw  acc, vf19, vf00w    nop                         ; light0
+        maddaz.xyzw acc, vf18, vf03z    nop                         ; light0
+        madday.xyzw acc, vf17, vf03y    nop                         ; light0
+        maddx.xyzw vf05, vf16, vf03x    div q, vf00w, vf04w         ; light0            ; divide0
+
+        nop                             lqi.xyzw vf01, (vi06++)                         ; load xyz0
+        nop                             nop
+        nop                             nop
+        maxx.xyzw  vf05, vf05, vf00x    nop                         ; clamp rgb0<0
+        nop                             nop
+        nop                             nop
+        mulq.xyzw vf04, vf04, q         nop                         ; project xyz0
+        mulq.xyzw vf06, vf02, q         nop                         ; project stq0
+        minix.xyzw vf05, vf05, vf15x    nop                         ; clamp rgb0>255
+        nop                             nop
+        ftoi4.xyzw vf04, vf04           iaddi vi09, vi09, -1        ; xyz0->fixed
+        nop                             sq.xyzw vf06, 0(vi10)                           ; store stq0
+        ftoi0.xyzw vf05, vf05           lqi.xyzw vf02, (vi07++)     ; rgb0->fixed       ; load stq0
+        nop                             nop
+        nop                             sq.xyz  vf04, 2(vi10)                           ; store xyz0
+        nop                             ibeq vi09, vi00, FINISHED_TRIS_NOCLIP_LIT
+        nop                             sq.xyzw vf05, 1(vi10)                           ; store rgb0
+
+TRIS_NOCLIP_LIT_TWO_VERTS:
+        nop                             iaddi vi10, vi10, -3        ; because we'll pre-increment pDest
+
+NOCLIP_LIT_TWO_VERTS_LOOP:
+        mulaw.xyzw  acc, vf23, vf00w    lqi.xyzw vf03, (vi08++)     ; transform xyz0    ; load normal0
+        maddaz.xyzw acc, vf22, vf01z    lqi.xyzw vf07, (vi06++)     ; transform xyz0    ; load xyz1
+        madday.xyzw acc, vf21, vf01y    lqi.xyzw vf08, (vi07++)     ; transform xyz0    ; load stq1
+        maddx.xyzw vf04, vf20, vf01x    lqi.xyzw vf09, (vi08++)     ; transform xyz0    ; load normal1
+        mulaw.xyzw  acc, vf19, vf00w    iaddiu vi10, vi10, 6        ; light0            ; pDest += 2
+        maddaz.xyzw acc, vf18, vf03z    sq.w vf01, 2(vi10)          ; light0            ; store adc0
+        madday.xyzw acc, vf17, vf03y    sq.w vf07, 5(vi10)          ; light0            ; store adc1
+        maddx.xyzw vf05, vf16, vf03x    div q, vf00w, vf04w         ; light0            ; divide0
+        mulaw.xyzw  acc, vf23, vf00w    iaddi vi09, vi09, -2        ; transform xyz1    ; NVerts -= 2
+        maddaz.xyzw acc, vf22, vf07z    nop                         ; transform xyz1
+        madday.xyzw acc, vf21, vf07y    nop                         ; transform xyz1
+        maddx.xyzw vf10, vf20, vf07x    nop                         ; transform xyz1
+        mulaw.xyzw  acc, vf19, vf00w    nop                         ; light1
+        maddaz.xyzw acc, vf18, vf09z    nop                         ; light1
+        madday.xyzw acc, vf17, vf09y    nop                         ; light1
+        maddx.xyzw vf11, vf16, vf09x    nop                         ; light1
+        mulq.xyzw vf04, vf04, q         div q, vf00w, vf10w         ; project xyz0      ; divide1
+        mulq.xyzw vf06, vf02, q         nop                         ; project stq0
+        maxx.xyzw vf05, vf05, vf00x     nop                         ; clamp rgb0<0
+        maxx.xyzw vf11, vf11, vf00x     nop                         ; clamp rgb1<0
+        ftoi4.xyzw vf04, vf04           nop                         ; xyz0->fixed
+        nop                             nop
+        minix.xyzw vf05, vf05, vf15x    nop                         ; clamp rgb0>255
+        mulq.xyzw vf10, vf10, q         nop                         ; project xyz1
+        minix.xyzw vf11, vf11, vf15x    nop                         ; clamp rgb1>255
+        mulq.xyzw vf12, vf08, q         lqi.xyzw vf01, (vi06++)     ; project stq1      ; load xyz0
+        ftoi0.xyzw vf05, vf05           lqi.xyzw vf02, (vi07++)     ; rgb0->fixed       ; load stq0
+        ftoi4.xyzw vf10, vf10           sq.xyzw vf06, 0(vi10)       ; xyz1->fixed       ; store stq0
+        ftoi0.xyzw vf11, vf11           sq.xyz  vf04, 2(vi10)       ; rgb1->fixed       ; store xyz0
+        nop                             sq.xyzw vf12, 3(vi10)                           ; store stq1
+        nop                             sq.xyzw vf05, 1(vi10)                           ; store rgb0
+        nop                             sq.xyz  vf10, 5(vi10)                           ; store xyz1
+        nop                             ibne vi09, vi00, NOCLIP_LIT_TWO_VERTS_LOOP
+        nop                             sq.xyzw vf11, 4(vi10)                           ; store rgb1
+        
+FINISHED_TRIS_NOCLIP_LIT:
+        ;// kick and swap buffers
+        nop                             nop
+        nop                             nop
+        nop                             nop
+        nop                             xgkick vi12
+        nop                             nop
+        nop                             iaddiu vi01, vi00, OUTPUT_BUFFER_BASE
+        nop                             nop
+        nop                             ibeq vi12, vi01, TRIS_NOCLIP_LIT_SWAP
+        nop                             iaddiu vi12, vi00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        nop                             iaddiu vi12, vi00, OUTPUT_BUFFER_BASE
+TRIS_NOCLIP_LIT_SWAP:
+        ;// return to kernel
+        nop                             b KERNEL_RET
+        nop                             nop
+

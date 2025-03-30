@@ -1,0 +1,12 @@
+xps.1.1
+
+def c0, 0.68f, 0.680f, 0.700f, 1.0f
+def c1, 0.63f, 0.5925f, 0.5925f, 1.0f
+
+// new
+tex t0 // base texture texel color
+
+mul r0, v0, c0  ;diffuse*ambient
+mul	r0, t0, r0  ;texture*light source
+mul_x4 r0.rgb, r0, c1
+

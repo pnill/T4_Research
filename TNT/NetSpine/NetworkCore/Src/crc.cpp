@@ -1,0 +1,254 @@
+//###################################################################
+//	
+//  Filename  : CRC.CPP
+//
+//  Purpose   : Math Helper Functions
+//
+//###################################################################
+
+#include "x_files.hpp"
+
+#include "crc.h"
+
+//-------------------------------------------------------------------
+
+//-------------------------------------------------------------------
+
+#define CRC16_POLYNOMIAL     0x1021
+#define CRC32_POLYNOMIAL     0xEDB88320L
+#define CRC8_SEED 0x5A
+
+//////////////////////////////////////////////////////////////////////////////
+static const u16 ccitt_16[256] =
+  {
+  0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
+  0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
+  0x1231, 0x0210, 0x3273, 0x2252, 0x52B5, 0x4294, 0x72F7, 0x62D6,
+  0x9339, 0x8318, 0xB37B, 0xA35A, 0xD3BD, 0xC39C, 0xF3FF, 0xE3DE,
+  0x2462, 0x3443, 0x0420, 0x1401, 0x64E6, 0x74C7, 0x44A4, 0x5485,
+  0xA56A, 0xB54B, 0x8528, 0x9509, 0xE5EE, 0xF5CF, 0xC5AC, 0xD58D,
+  0x3653, 0x2672, 0x1611, 0x0630, 0x76D7, 0x66F6, 0x5695, 0x46B4,
+  0xB75B, 0xA77A, 0x9719, 0x8738, 0xF7DF, 0xE7FE, 0xD79D, 0xC7BC,
+  0x48C4, 0x58E5, 0x6886, 0x78A7, 0x0840, 0x1861, 0x2802, 0x3823,
+  0xC9CC, 0xD9ED, 0xE98E, 0xF9AF, 0x8948, 0x9969, 0xA90A, 0xB92B,
+  0x5AF5, 0x4AD4, 0x7AB7, 0x6A96, 0x1A71, 0x0A50, 0x3A33, 0x2A12,
+  0xDBFD, 0xCBDC, 0xFBBF, 0xEB9E, 0x9B79, 0x8B58, 0xBB3B, 0xAB1A,
+  0x6CA6, 0x7C87, 0x4CE4, 0x5CC5, 0x2C22, 0x3C03, 0x0C60, 0x1C41,
+  0xEDAE, 0xFD8F, 0xCDEC, 0xDDCD, 0xAD2A, 0xBD0B, 0x8D68, 0x9D49,
+  0x7E97, 0x6EB6, 0x5ED5, 0x4EF4, 0x3E13, 0x2E32, 0x1E51, 0x0E70,
+  0xFF9F, 0xEFBE, 0xDFDD, 0xCFFC, 0xBF1B, 0xAF3A, 0x9F59, 0x8F78,
+  0x9188, 0x81A9, 0xB1CA, 0xA1EB, 0xD10C, 0xC12D, 0xF14E, 0xE16F,
+  0x1080, 0x00A1, 0x30C2, 0x20E3, 0x5004, 0x4025, 0x7046, 0x6067,
+  0x83B9, 0x9398, 0xA3FB, 0xB3DA, 0xC33D, 0xD31C, 0xE37F, 0xF35E,
+  0x02B1, 0x1290, 0x22F3, 0x32D2, 0x4235, 0x5214, 0x6277, 0x7256,
+  0xB5EA, 0xA5CB, 0x95A8, 0x8589, 0xF56E, 0xE54F, 0xD52C, 0xC50D,
+  0x34E2, 0x24C3, 0x14A0, 0x0481, 0x7466, 0x6447, 0x5424, 0x4405,
+  0xA7DB, 0xB7FA, 0x8799, 0x97B8, 0xE75F, 0xF77E, 0xC71D, 0xD73C,
+  0x26D3, 0x36F2, 0x0691, 0x16B0, 0x6657, 0x7676, 0x4615, 0x5634,
+  0xD94C, 0xC96D, 0xF90E, 0xE92F, 0x99C8, 0x89E9, 0xB98A, 0xA9AB,
+  0x5844, 0x4865, 0x7806, 0x6827, 0x18C0, 0x08E1, 0x3882, 0x28A3,
+  0xCB7D, 0xDB5C, 0xEB3F, 0xFB1E, 0x8BF9, 0x9BD8, 0xABBB, 0xBB9A,
+  0x4A75, 0x5A54, 0x6A37, 0x7A16, 0x0AF1, 0x1AD0, 0x2AB3, 0x3A92,
+  0xFD2E, 0xED0F, 0xDD6C, 0xCD4D, 0xBDAA, 0xAD8B, 0x9DE8, 0x8DC9,
+  0x7C26, 0x6C07, 0x5C64, 0x4C45, 0x3CA2, 0x2C83, 0x1CE0, 0x0CC1,
+  0xEF1F, 0xFF3E, 0xCF5D, 0xDF7C, 0xAF9B, 0xBFBA, 0x8FD9, 0x9FF8,
+  0x6E17, 0x7E36, 0x4E55, 0x5E74, 0x2E93, 0x3EB2, 0x0ED1, 0x1EF0
+  };  
+//-------------------------------------------------------------------
+
+
+u16    A_CalcCRC16( const u8* pabBuf, s32 lSizeBuf )
+{
+u32 crc = 0;  //Starting seed.
+
+while( lSizeBuf-- != 0 )
+    {
+    crc = (crc << 8) ^ ccitt_16[(u8)((crc >> 8) ^ *pabBuf++)];
+    }
+
+return( u16( crc ) );
+}
+//-------------------------------------------------------------------
+
+//crc parameter is the seed
+u16 A_CalcCRC16Byte( u8 b, u32 crc )
+{
+return( (u16) ((crc << 8) ^ ccitt_16[(u8)((crc >> 8) ^ b)]) );
+}
+
+
+//-------------------------------------------------------------------
+static const u32 ccitt_32[256] =
+  {
+  0X00000000L, 0X77073096L, 0XEE0E612CL, 0X990951BAL,
+  0X076DC419L, 0X706AF48FL, 0XE963A535L, 0X9E6495A3L,
+  0X0EDB8832L, 0X79DCB8A4L, 0XE0D5E91EL, 0X97D2D988L,
+  0X09B64C2BL, 0X7EB17CBDL, 0XE7B82D07L, 0X90BF1D91L,
+  0X1DB71064L, 0X6AB020F2L, 0XF3B97148L, 0X84BE41DEL,
+  0X1ADAD47DL, 0X6DDDE4EBL, 0XF4D4B551L, 0X83D385C7L,
+  0X136C9856L, 0X646BA8C0L, 0XFD62F97AL, 0X8A65C9ECL,
+  0X14015C4FL, 0X63066CD9L, 0XFA0F3D63L, 0X8D080DF5L,
+  0X3B6E20C8L, 0X4C69105EL, 0XD56041E4L, 0XA2677172L,
+  0X3C03E4D1L, 0X4B04D447L, 0XD20D85FDL, 0XA50AB56BL,
+  0X35B5A8FAL, 0X42B2986CL, 0XDBBBC9D6L, 0XACBCF940L,
+  0X32D86CE3L, 0X45DF5C75L, 0XDCD60DCFL, 0XABD13D59L,
+  0X26D930ACL, 0X51DE003AL, 0XC8D75180L, 0XBFD06116L,
+  0X21B4F4B5L, 0X56B3C423L, 0XCFBA9599L, 0XB8BDA50FL,
+  0X2802B89EL, 0X5F058808L, 0XC60CD9B2L, 0XB10BE924L,
+  0X2F6F7C87L, 0X58684C11L, 0XC1611DABL, 0XB6662D3DL,
+  0X76DC4190L, 0X01DB7106L, 0X98D220BCL, 0XEFD5102AL,
+  0X71B18589L, 0X06B6B51FL, 0X9FBFE4A5L, 0XE8B8D433L,
+  0X7807C9A2L, 0X0F00F934L, 0X9609A88EL, 0XE10E9818L,
+  0X7F6A0DBBL, 0X086D3D2DL, 0X91646C97L, 0XE6635C01L,
+  0X6B6B51F4L, 0X1C6C6162L, 0X856530D8L, 0XF262004EL,
+  0X6C0695EDL, 0X1B01A57BL, 0X8208F4C1L, 0XF50FC457L,
+  0X65B0D9C6L, 0X12B7E950L, 0X8BBEB8EAL, 0XFCB9887CL,
+  0X62DD1DDFL, 0X15DA2D49L, 0X8CD37CF3L, 0XFBD44C65L,
+  0X4DB26158L, 0X3AB551CEL, 0XA3BC0074L, 0XD4BB30E2L,
+  0X4ADFA541L, 0X3DD895D7L, 0XA4D1C46DL, 0XD3D6F4FBL,
+  0X4369E96AL, 0X346ED9FCL, 0XAD678846L, 0XDA60B8D0L,
+  0X44042D73L, 0X33031DE5L, 0XAA0A4C5FL, 0XDD0D7CC9L,
+  0X5005713CL, 0X270241AAL, 0XBE0B1010L, 0XC90C2086L,
+  0X5768B525L, 0X206F85B3L, 0XB966D409L, 0XCE61E49FL,
+  0X5EDEF90EL, 0X29D9C998L, 0XB0D09822L, 0XC7D7A8B4L,
+  0X59B33D17L, 0X2EB40D81L, 0XB7BD5C3BL, 0XC0BA6CADL,
+  0XEDB88320L, 0X9ABFB3B6L, 0X03B6E20CL, 0X74B1D29AL,
+  0XEAD54739L, 0X9DD277AFL, 0X04DB2615L, 0X73DC1683L,
+  0XE3630B12L, 0X94643B84L, 0X0D6D6A3EL, 0X7A6A5AA8L,
+  0XE40ECF0BL, 0X9309FF9DL, 0X0A00AE27L, 0X7D079EB1L,
+  0XF00F9344L, 0X8708A3D2L, 0X1E01F268L, 0X6906C2FEL,
+  0XF762575DL, 0X806567CBL, 0X196C3671L, 0X6E6B06E7L,
+  0XFED41B76L, 0X89D32BE0L, 0X10DA7A5AL, 0X67DD4ACCL,
+  0XF9B9DF6FL, 0X8EBEEFF9L, 0X17B7BE43L, 0X60B08ED5L,
+  0XD6D6A3E8L, 0XA1D1937EL, 0X38D8C2C4L, 0X4FDFF252L,
+  0XD1BB67F1L, 0XA6BC5767L, 0X3FB506DDL, 0X48B2364BL,
+  0XD80D2BDAL, 0XAF0A1B4CL, 0X36034AF6L, 0X41047A60L,
+  0XDF60EFC3L, 0XA867DF55L, 0X316E8EEFL, 0X4669BE79L,
+  0XCB61B38CL, 0XBC66831AL, 0X256FD2A0L, 0X5268E236L,
+  0XCC0C7795L, 0XBB0B4703L, 0X220216B9L, 0X5505262FL,
+  0XC5BA3BBEL, 0XB2BD0B28L, 0X2BB45A92L, 0X5CB36A04L,
+  0XC2D7FFA7L, 0XB5D0CF31L, 0X2CD99E8BL, 0X5BDEAE1DL,
+  0X9B64C2B0L, 0XEC63F226L, 0X756AA39CL, 0X026D930AL,
+  0X9C0906A9L, 0XEB0E363FL, 0X72076785L, 0X05005713L,
+  0X95BF4A82L, 0XE2B87A14L, 0X7BB12BAEL, 0X0CB61B38L,
+  0X92D28E9BL, 0XE5D5BE0DL, 0X7CDCEFB7L, 0X0BDBDF21L,
+  0X86D3D2D4L, 0XF1D4E242L, 0X68DDB3F8L, 0X1FDA836EL,
+  0X81BE16CDL, 0XF6B9265BL, 0X6FB077E1L, 0X18B74777L,
+  0X88085AE6L, 0XFF0F6A70L, 0X66063BCAL, 0X11010B5CL,
+  0X8F659EFFL, 0XF862AE69L, 0X616BFFD3L, 0X166CCF45L,
+  0XA00AE278L, 0XD70DD2EEL, 0X4E048354L, 0X3903B3C2L,
+  0XA7672661L, 0XD06016F7L, 0X4969474DL, 0X3E6E77DBL,
+  0XAED16A4AL, 0XD9D65ADCL, 0X40DF0B66L, 0X37D83BF0L,
+  0XA9BCAE53L, 0XDEBB9EC5L, 0X47B2CF7FL, 0X30B5FFE9L,
+  0XBDBDF21CL, 0XCABAC28AL, 0X53B39330L, 0X24B4A3A6L,
+  0XBAD03605L, 0XCDD70693L, 0X54DE5729L, 0X23D967BFL,
+  0XB3667A2EL, 0XC4614AB8L, 0X5D681B02L, 0X2A6F2B94L,
+  0XB40BBE37L, 0XC30C8EA1L, 0X5A05DF1BL, 0X2D02EF8DL
+  };  
+//-------------------------------------------------------------------
+
+
+u32   A_CalcCRC32( const u8* pabBuf, u32 crc, s32 lSizeBuf )
+{
+
+while ( lSizeBuf-- != 0 )
+    {
+    crc = A_CalcCRC32Byte( *pabBuf++, crc );
+    }
+
+return( crc );
+}
+
+
+
+u32 A_CalcCRC32_lword(u32 data, u32 crc)
+{
+
+	crc = A_CalcCRC32Byte( (u8)((data >> 24) & 0xFF), crc );
+	crc = A_CalcCRC32Byte( (u8)((data >> 16) & 0xFF), crc );
+	crc = A_CalcCRC32Byte( (u8)((data >>  8) & 0xFF), crc );
+	crc = A_CalcCRC32Byte( (u8)((data >>  0) & 0xFF), crc );
+
+	return crc;
+}
+
+
+u32 A_CalcCRC32_word(u16 data, u32 crc)
+{
+
+	crc = A_CalcCRC32Byte((data >> 8) & 0xFF, crc);
+	crc = A_CalcCRC32Byte(data & 0xFF, crc);
+
+	return crc;
+}
+
+
+
+//-------------------------------------------------------------------
+
+
+//crc parameter is the starting seed.
+u32 A_CalcCRC32Byte( u8  b, u32 crc )
+{
+u32 dw1;
+u32 dw2;
+
+dw1 = (crc >> 8); 
+dw2 = ccitt_32[( (u16) crc ^ b ) & 0xFF ];
+return( dw1 ^ dw2 );
+}
+//-------------------------------------------------------------------
+
+#define CRC_LOWORD(l)           ((u16)(l))
+#define CRC_HIWORD(l)           ((u16)(((u32)(l) >> 16) & 0xFFFF))
+
+u8 A_CalcCRC8( const u8* pabBuf, s32 lSizeBuf )
+{
+u16              crc = CRC8_SEED;      //Starting seed.
+
+ASSERTS( pabBuf!=NULL , "A_CalcCRC8()" );
+ASSERTS( lSizeBuf != 0 , "A_CalcCRC8()");
+
+while( lSizeBuf-- != 0 )
+    {
+    // XOR then ROL.
+    // Simulate ROL by doing a SHL then folding the bytes in together.
+    crc ^= *pabBuf++ ^ lSizeBuf;
+    
+    //What does this operation do???
+    //I commented it out...
+    //crc << 3;
+
+    crc = CRC_HIWORD(crc) | CRC_LOWORD(crc);
+    }
+
+return( (u8) crc );
+}
+//-------------------------------------------------------------------
+
+/*
+//Returns 0 if success, otherwise error.
+s32   A_CalcFileCRC32( s8* pszFileName, u32* pdwCrcValue )
+{
+CMemBuffer  ObMemBuffer;
+s32         iTempError;
+s32         sdwFileSize;
+
+//Returns 0 if success, Use iEndIndex of -1 to read up to the end, piGetLengthRead can be NULL.
+iTempError = ObMemBuffer.FileRead( pszFileName, 0, -1, &sdwFileSize );
+if ( iTempError )
+    {//Error 
+    A_DError( "A_CalcFileCRC32(), Problem reading file.\n");
+    return ( 1 );
+    }
+
+*pdwCrcValue = A_CalcCRC32( (u8*) ObMemBuffer.GetPtr(), sdwFileSize );
+
+return ( 0 );
+};
+*/
+//-------------------------------------------------------------------
+
+
+
+/*-----------------------------------------------------------------*/

@@ -1,0 +1,92 @@
+;==========================================================================
+;
+; MATRIX.VSM
+;
+;==========================================================================
+
+
+
+
+;==========================================================================
+;
+; CMD_LOADMATRICES
+;
+;==========================================================================
+;
+; Assuming that data is:
+;   L2S, L2C, C2S
+;
+; Load matrices into registers
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06
+;   VI07
+;   VI08
+;   VI09    Command param 1
+;   VI10    Command param 2
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10    
+;   VF11    
+;   VF12    
+;   VF13    
+;   VF14    
+;   VF15    
+;   VF16    
+;   VF17    
+;   VF18    
+;   VF19    
+;   VF20    Active local to screen matrix qword 0
+;   VF21    Active local to screen matrix qword 1
+;   VF22    Active local to screen matrix qword 2
+;   VF23    Active local to screen matrix qword 3
+;   VF24    Active local to clip matrix qword 0 
+;   VF25    Active local to clip matrix qword 1 
+;   VF26    Active local to clip matrix qword 2 
+;   VF27    Active local to clip matrix qword 3 
+;   VF28    Active clip to screen matrix qword 0
+;   VF29    Active clip to screen matrix qword 1
+;   VF30    Active clip to screen matrix qword 2
+;   VF31    Active clip to screen matrix qword 3
+;==========================================================================
+
+CMD_LOADMATRICES:
+
+        ; Copy data into registers
+        NOP                             LQ.xyzw VF20, 0x1(VI14)     ; L2S
+        NOP                             LQ.xyzw VF21, 0x2(VI14)     ; L2S
+        NOP                             LQ.xyzw VF22, 0x3(VI14)     ; L2S
+        NOP                             LQ.xyzw VF23, 0x4(VI14)     ; L2S
+
+        NOP                             LQ.xyzw VF24, 0x5(VI14)     ; L2C
+        NOP                             LQ.xyzw VF25, 0x6(VI14)     ; L2C
+        NOP                             LQ.xyzw VF26, 0x7(VI14)     ; L2C
+        NOP                             LQ.xyzw VF27, 0x8(VI14)     ; L2C
+
+        NOP                             LQ.xyzw VF28, 0x9(VI14)     ; C2S
+        NOP                             LQ.xyzw VF29, 0xa(VI14)     ; C2S
+        NOP                             LQ.xyzw VF30, 0xb(VI14)     ; C2S
+        NOP                             B KERNEL_RET                ; Return to kernel 
+        NOP                             LQ.xyzw VF31, 0xc(VI14)     ; C2S
+
+;==========================================================================

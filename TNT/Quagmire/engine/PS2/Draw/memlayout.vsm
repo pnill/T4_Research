@@ -1,0 +1,145 @@
+;==========================================================================
+;
+; MEMLAYOUT.VSM
+;
+; Base memory and register layout
+;
+;==========================================================================
+;
+; VU1 GLOBAL REGISTER USAGE
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06
+;   VI07
+;   VI08
+;   VI09    Command param 1
+;   VI10    Command param 2
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10    
+;   VF11    
+;   VF12    
+;   VF13    
+;   VF14    
+;   VF15    Active local to clip matrix qword 0
+;   VF16    Active local to clip matrix qword 1
+;   VF17    Active local to clip matrix qword 2
+;   VF18    Active local to clip matrix qword 3
+;   VF19    Active clip to screen matrix qword 0
+;   VF20    Active clip to screen matrix qword 1
+;   VF21    Active clip to screen matrix qword 2
+;   VF22    Active clip to screen matrix qword 3
+;   VF23    Active light intensity matrix qword 0
+;   VF24    Active light intensity matrix qword 1
+;   VF25    Active light intensity matrix qword 2
+;   VF26    Active light intensity matrix qword 3
+;   VF27    Light color matrix qword 0    
+;   VF28    Light color matrix qword 1    
+;   VF29    Light color matrix qword 2    
+;   VF30    Light color matrix qword 3    
+;   VF31    Max color value for pegging to 255
+;==========================================================================
+;
+; VU1 MEMORY LAYOUT
+;
+;==========================================================================
+; 870
+;       0 - INPUT_BUFFER_BASE
+;           218x2 qwords. Holds commands and data for different routines.
+;           The two buffers use XTOP for double buffering.
+;           This is where the VIF sends most data.
+;
+;     436 - OUTPUT_BUFFER_BASE
+;           217x2 qwords. Holds giftag and packaged verts for GIF.
+;           The buffer can hold 72 verts, or 24 tris
+;           The two buffers use VI12 for double buffering
+;
+;==========================================================================
+; 134
+;     870 - CLIPPER_STACK
+;           12 qwords, used to hold altered registers during clipping
+;
+;     882 - CLIPPER_VERTS_0
+;           Holds 10, 3 component verts
+;           30 qwords
+;
+;     912 - CLIPPER_VERTS_1
+;           Holds 10, 3 component verts
+;           30 qwords
+;
+;     942 - CLIPPER_GIF_VERTS_0
+;           1 Giftag and Holds 9, 3 component verts
+;           28 qwords
+;
+;     970 - CLIPPER_GIF_VERTS_1
+;           1 Giftag and Holds 9, 3 component verts
+;           28 qwords
+;
+;     998 - CLIPPER_PLANES
+;           Holds 6 qwords that contain plane clipping info
+;           X = +1.0/-1.0;  Y = Clip Mask, Z = Clip Mask, W = Component Jump address
+;
+;==========================================================================
+; 20
+;    1004 - MATRIX_L2S_BASE
+;           4 qwords. Local to screen matrix
+;
+;    1008 - MATRIX_L2C_BASE
+;           4 qwords. Local to clipping matrix
+;
+;    1012 - MATRIX_C2S_BASE
+;           4 qwords. Clipping to screen matrix
+;
+;    1016 - LIGHT_DIR_BASE
+;           4 qwords
+;
+;    1020 - LIGHT_RGB_BASE
+;           4 qwords
+;
+;    1023 - LAST ADDRESSABLE QWORD
+;
+;==========================================================================
+        
+.equ INPUT_BUFFER_BASE,         0
+.equ INPUT_BUFFER_SIZE,         218
+
+.equ OUTPUT_BUFFER_BASE,        436
+.equ OUTPUT_BUFFER_SIZE,        217
+
+.equ MATRIX_L2S_BASE,           1004
+.equ MATRIX_L2C_BASE,           1008
+.equ MATRIX_C2S_BASE,           1012
+.equ LIGHT_DIR_BASE,            1016
+.equ LIGHT_RGB_BASE,            1020
+
+.equ CLIPPER_STACK,             870
+.equ CLIPPER_VERTS_0,           882
+.equ CLIPPER_VERTS_1,           912
+.equ CLIPPER_GIF_VERTS_0,       942
+.equ CLIPPER_GIF_VERTS_1,       970
+.equ CLIPPER_PLANES,            998
+        
+        
+        
+        
+        

@@ -1,0 +1,16 @@
+
+.include "vumacros.h"
+
+.global VUM_Draw_Code
+
+.data
+.align 4
+VUM_Draw_Code:
+DMAret *
+ixyz 0, 0, 0
+MPG 0,*
+.include "mcode0.vsm"
+.EndMPG
+.EndDmaData
+
+

@@ -1,0 +1,71 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RipStad", "RipStad.vcproj", "{AF352754-DFCE-4247-9823-0A04AFEC1BA9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD800E66-92F2-4E8C-A35B-44A529B6045C} = {FD800E66-92F2-4E8C-A35B-44A529B6045C}
+		{A7C7B531-5C1F-4243-B4FB-5A077FAA39C7} = {A7C7B531-5C1F-4243-B4FB-5A077FAA39C7}
+		{A0C08082-6D1E-4792-943E-B84CB8AFAA5C} = {A0C08082-6D1E-4792-943E-B84CB8AFAA5C}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "x_files", "..\..\x_files\x_files.vcproj", "{A0C08082-6D1E-4792-943E-B84CB8AFAA5C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "x_std", "..\..\x_std\x_std.vcproj", "{A7C7B531-5C1F-4243-B4FB-5A077FAA39C7}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AUX_Bitmap", "..\..\Auxiliary\Bitmap\AUX_Bitmap.vcproj", "{FD800E66-92F2-4E8C-A35B-44A529B6045C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{AF352754-DFCE-4247-9823-0A04AFEC1BA9}.Debug.ActiveCfg = Debug|Win32
+		{AF352754-DFCE-4247-9823-0A04AFEC1BA9}.Debug.Build.0 = Debug|Win32
+		{AF352754-DFCE-4247-9823-0A04AFEC1BA9}.Release.ActiveCfg = Release|Win32
+		{AF352754-DFCE-4247-9823-0A04AFEC1BA9}.Release.Build.0 = Release|Win32
+		{A0C08082-6D1E-4792-943E-B84CB8AFAA5C}.Debug.ActiveCfg = Debug|Win32
+		{A0C08082-6D1E-4792-943E-B84CB8AFAA5C}.Debug.Build.0 = Debug|Win32
+		{A0C08082-6D1E-4792-943E-B84CB8AFAA5C}.Release.ActiveCfg = Release|Win32
+		{A0C08082-6D1E-4792-943E-B84CB8AFAA5C}.Release.Build.0 = Release|Win32
+		{A7C7B531-5C1F-4243-B4FB-5A077FAA39C7}.Debug.ActiveCfg = Debug|Win32
+		{A7C7B531-5C1F-4243-B4FB-5A077FAA39C7}.Debug.Build.0 = Debug|Win32
+		{A7C7B531-5C1F-4243-B4FB-5A077FAA39C7}.Release.ActiveCfg = Release|Win32
+		{A7C7B531-5C1F-4243-B4FB-5A077FAA39C7}.Release.Build.0 = Release|Win32
+		{FD800E66-92F2-4E8C-A35B-44A529B6045C}.Debug.ActiveCfg = Debug|Win32
+		{FD800E66-92F2-4E8C-A35B-44A529B6045C}.Debug.Build.0 = Debug|Win32
+		{FD800E66-92F2-4E8C-A35B-44A529B6045C}.Release.ActiveCfg = Release|Win32
+		{FD800E66-92F2-4E8C-A35B-44A529B6045C}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 4
+		SccProjectUniqueName0 = RipStad.vcproj
+		SccProjectName0 = \u0022$/TnT/Apps/RipStad\u0022,\u0020VSDAAAAA
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName1 = ..\\..\\x_files\\x_files.vcproj
+		SccProjectName1 = \u0022$/TnT/x_files\u0022,\u0020GFGAAAAA
+		SccLocalPath1 = ..\\..\\x_files
+		SccProvider1 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = ..\\..\\x_std\\x_std.vcproj
+		SccProjectName2 = \u0022$/TNT/x_std\u0022,\u0020QEBAAAAA
+		SccLocalPath2 = ..\\..\\x_std
+		SccProvider2 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName3 = ..\\..\\Auxiliary\\Bitmap\\AUX_Bitmap.vcproj
+		SccProjectName3 = \u0022$/TnT/Auxiliary/Bitmap\u0022,\u0020WSCAAAAA
+		SccLocalPath3 = ..\\..\\Auxiliary\\Bitmap
+		SccProvider3 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+EndGlobal

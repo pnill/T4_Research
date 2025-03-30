@@ -1,0 +1,234 @@
+/********************************************************************************
+*                                                                               *
+* Tri-Strip Preprocessing environment mapping                                   *
+*                                                                               *
+*********************************************************************************
+*                                                                               *
+* Basics:                                                                       *
+*   This environment mapper is specifically for non-moving (static) objects     *
+*       All environmental effects are based on the relationship                 *
+*       between each vertex and the camera's position.                          *
+*       This environment mapper MAY be used on non-static objects.              *
+*       An object which is subject to a large amount of it's own motion         *
+*           (specifically rotation)                                             *
+*           may use a different, cheaper type of envmapping which does not need *
+*               to take the Eye into account                                    *
+*                                                                               *
+* The Complete Algorithm:                                                       *
+*   Precalculate vert_half = (vert_count * 0.5)                                 *
+*   Precalculate inverse_half = 1/(vert_half)                                   *
+*       Used for a perturb factor later                                         *
+*   For each vert,                                                              *
+*       Transform normal by Normalized Local to View matrix                     *
+*           puts the normal into proper world coordinates                       *
+*       Convert the normal to a UV pair                                         *
+*           XY of normal are now UV                                             *
+*           add 1 to XY to bring them to 0-to-2 range (instead of -1-to-1)      *
+*           multiply by 0.5 to bring to 0-to-1 range UV value                   *
+*       If perturbing,                                                          *
+*           Build a perturb_factorXY for this vert                              *
+*               if vert_index > vert_half                                       *
+*                   index_factor = (vert_count - vert_index) * inverse_half     *
+*               else                                                            *
+*                   index_factor = vert_index * inverse_half                    *
+*               index_factor *= incoming_perturb_factor                         *
+*       else,                                                                   *
+*           index_factor = 0                                                    *
+*       Tweak UV by perturb_factorXY                                            *
+*           UV2 += perturb_factorXY                                             *
+*       Store result back in original vert overtop of Normal                    *
+*           Store index_factor as Z of UV                                       *
+*                                                                               *
+* Specials:                                                                     *
+*   If you read the above algorithm, the "If perturbing" and "index_factor"     *
+*       stuff probably stood out to you.  This environment mapper allows for    *
+*       tweaking the direction of the environment effect.  This usage is scaled *
+*       across the entire strip, so verts at the beginning and end of the strip *
+*       get a lesser effect, while verts in the middle get more.  The intent is *
+*       to allow for magnifying the environment effect based on some other      *
+*       control device.  This will be used for "shaking glass" based on stadium *
+*       volume levels.                                                          *
+*   This "shaking glass" effect relies on an ordered strip, and becomes part of *
+*       the final transform of each environment mapped vertex.  In order to     *
+*       provide an "eye relative" environment map, this microcode is using a    *
+*       screen-space "fudge" to skew the UV lookup based on a vert's screen     *
+*       position after projection.  The "fudge" is further modified by a        *
+*       perturberance fudge to provide the shake.  This envmap code generates   *
+*       a scaled vertex-specific "fudge" factor to be used at transform time.   *
+*                                                                               *
+* Registers:                                                                    *
+*   "System" reserved - please do not modifiy (save and restore if necessary)   *
+*       vi11                envmapping flag                                     *
+*       vi12                clip-flag                                           *
+*       vi13                submesh flags                                       *
+*       vi14                itop                                                *
+*       vi15                return address                                      *
+*   Local Usage                                                                 *
+*       Integer:                                                                *
+*           vi01            walking addr                                        *
+*           vi02            perturb test                                        *
+*           vi03            perturb test                                        *
+*           vi04            vert_half                                           *
+*           vi06            vert count                                          *
+*           vi07            permanent vert count                                *
+*       Floating-point:                                                         *
+*           Constants:                                                          *
+*               vf17-vf19   Normalized Local to View Matrix (just rotation)     *
+*           Working variables:                                                  *
+*               vf01        X,Y = 1,1                                           *
+*                           Z = base_perturb (passed in)                        *
+*                           W = incoming_perturb_factor (passed in)             *
+*               vf02        X,Z = inverse_half                                  *
+*                           Y,W                                                 *
+*               vf03-vf09   normals workspace                                   *
+*               vf10-vf16   UVs workspace                                       *
+*                                                                               *
+********************************************************************************/
+
+/********************************************************************************
+*********************************************************************************
+*********************************************************************************
+*                                                                               *
+* This code is currently unoptimized                                            *
+*   Future Changes:                                                             *
+*       "unrolling" of the loop to pack instructions                            *
+*           Trying to fit up to 7 UV calculations in a single loop              *
+*                                                                               *
+*********************************************************************************
+*********************************************************************************
+********************************************************************************/
+
+TRI_STRIP_ENVMAP:
+    sub.xy vf01, vf00, vf00             ilwr.x vi06, (vi14)x                ; vf01.XY = 0,0     ;load count
+    
+TRI_STRIP_ENVMAP_SKIP:
+    nop                                 iaddiu vi03, vi00, 0x08             ;                   ;build perturb mask
+    nop                                 iand vi02, vi13, vi03               ;                   ;and mask w/flags
+    nop                                 nop
+    addw.xy vf01xy, vf01xy, vf00w       mfir.x vf02x, vi06                  ;                   ;load count
+    nop                                 nop
+    nop                                 nop
+    nop                                 iaddiu vi04, vi00, MATRIX_NL2V_ADDR ; vf01.XY = 1,1     ;get addr of NL2V
+    itof0.x vf02x, vf02x                lq.xyz vf19, 2(vi04)                ; itof(count)       ;load NL2V col2
+    nop                                 lq.xyz vf18, 1(vi04)                ;                   ;load NL2V col1
+    nop                                 lq.xyz vf17, 0(vi04)                ;                   ;load NL2V col0
+    nop                                 loi 0.5                             ;                   ;rdy for * 0.5
+    muli.x vf02, vf02x, i               iaddiu vi01, vi14, 3                ; calc half_count   ;get addr 1st norm
+    nop                                 lq.xyzw vf03, 0(vi01)               ;                   ;load 1st norm
+    nop                                 iaddiu vi07, vi06, 0                ;                   ;store perm vert cnt
+    nop                                 iaddiu vi08, vi00, 0x7FFF           ;                   ;store abs mask
+    ftoi0.x vf02x, vf02x                nop                                 ; ftoi(half_count)
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 mfir.w vf02w, vi07                  ;                   ;store fp count
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    itof0.w vf02w, vf02w                nop
+    nop                                 ibeq vi02, vi00, ENVMAP_NO_PERTURB                      ;jmp if !perturb
+    nop                                 nop
+
+; todo: perturberance - wavering surfaces
+; for now, jump down to "normal"
+    nop                                 b ENVMAP_NO_PERTURB
+    nop                                 nop
+    
+ENVMAP_PERTURB:
+    mulaz.xyzw acc, vf19, vf03z         move.xy vf10xy, vf01xy              ; transform normal  ;move 1,1 to UV
+    madday.xyzw acc, vf18, vf03y        nop                                 ; transform normal
+    maddx.xyzw vf03, vf17, vf03x        mtir vi04, vf02x                    ; transform normal  ;store int version
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    itof0.x vf02x, vf02x                nop                                 ; itof(half_count)
+    add.xy vf10, vf10, vf03             nop                                 ; 1,1+U,V
+    nop                                 nop
+    nop                                 loi 0.5
+    subw.w vf02w, vf02w, vf00w          div q, vf00w, vf02x                                     ;start 1/half calc
+    muli.xy vf10, vf10, i               nop                                 ; UV*=0.5
+    nop                                 mfir.y vf02y, vi06                                      ;vf02y=count
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    itof0.y vf02y, vf02y                nop                                 ; itof(count)
+    addq.z vf02z, vf00z, q              nop                                 ; vf02x = 1/half_count
+    nop                                 lq.xyzw vf03, 3(vi01)
+    nop                                 nop
+    subw.y vf02y, vf02y, vf00w          nop                                 ; count --
+    addz.z vf10z, vf02z, vf00z          nop                                 ; perturb = 1/half_count
+    nop                                 nop
+    nop                                 iaddiu vi01, vi01, 3                ;                   ;increment vert ptr
+    nop                                 iaddi vi06, vi06, -1                ;                   ;decrement count
+    nop                                 nop    
+    nop                                 ibeq vi06, vi00, TRI_STRIP_ENVMAP_END
+    nop                                 nop
+    
+    
+ENVMAP_PERTURB_LOOP:
+    mulaw.xyzw acc, vf00, vf03w         move.xy vf10xy, vf01xy              ; transform normal  ;move 1,1 to UV
+    maddaz.xyzw acc, vf19, vf03z        isub vi05, vi07, vi06               ; transform normal  ;index=total-current
+    madday.xyzw acc, vf18, vf03y        iand vi05, vi05, vi08               ; transform normal  ;abs(index)
+    maddx.xyzw vf03, vf17, vf03x        mtir vi04, vf02x                    ; transform normal  ;store int version
+    sub.w vf02w, vf02w, vf00w           move.z vf10z, vf02z
+    nop                                 nop
+    nop                                 nop
+    add.xy vf10, vf10, vf03             nop                                 ; 1,1+U,V
+    nop                                 nop
+    nop                                 nop
+    nop                                 loi 0.5
+    muli.xy vf10, vf10, i               nop                                 ; UV*=0.5
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    mulw.z vf10z, vf02z, vf02w          nop
+    nop                                 nop
+    nop                                 nop
+    addz.z vf10z, vf02z, vf00z          nop                                 ; perturb = 1/half_count
+    nop                                 iaddiu vi01, vi01, 3                ;                   ;increment vert ptr
+    nop                                 iaddi vi06, vi06, -1                ;                   ;decrement count
+    nop                                 ibeq vi06, vi00, TRI_STRIP_ENVMAP_END
+    nop                                 sq.xyz  vf10, -3(vi01)
+    nop                                 b ENVMAP_PERTURB_LOOP
+    nop                                 nop
+    
+ENVMAP_NO_PERTURB:
+    mulaz.xyz   acc, vf19, vf03z        nop
+    madday.xyz  acc, vf18, vf03y        nop
+    maddx.xyz   vf04, vf17, vf03x       nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 loi    1.0
+    addi.xyz vf04, vf04, i              nop                 ; bring normal from (-1 to 1) to (0 to 2) range
+    addi.y   vf05, vf00, i              nop
+    nop                                 nop
+    nop                                 loi    0.5
+    muli.xyz vf04, vf04, i              nop                 ; cut (0 to 2) to (0 to 1)
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    muly.y vf04, vf05, vf04             nop                 ; invert Y
+    nop                                 nop
+    nop                                 nop
+    nop                                 loi 1.0
+    mini.xy vf04, vf04, i               nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 loi 0.0
+    maxi.xy vf04, vf04, i               nop
+    nop                                 iaddi  vi06, vi06, -1
+    nop                                 iaddiu vi01, vi01, 3
+    nop                                 ibeq   vi06, vi00, TRI_STRIP_ENVMAP_END
+    nop                                 sq.xy  vf04, -3(vi01)
+    nop                                 lq.xyz vf03, 0(vi01)
+    nop                                 nop
+    nop                                 b      ENVMAP_NO_PERTURB
+    nop                                 nop
+    
+TRI_STRIP_ENVMAP_END:
+    nop                                 jr vi15
+    nop                                 nop
+
+
+
+

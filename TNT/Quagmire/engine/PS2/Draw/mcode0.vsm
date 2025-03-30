@@ -1,0 +1,118 @@
+;==========================================================================
+;
+; MCODE0.VSM - Microcode test
+;
+;==========================================================================
+.vu
+
+.include "memlayout.vsm"
+
+;==========================================================================
+;
+; JUMPTABLE
+;
+; !*!*!*! These instructions must be at instruction address ZERO !*!*!*!
+;
+;==========================================================================
+
+;FASTLOOP:
+;        NOP     NOP
+;        NOP[E]  NOP
+;        NOP     NOP
+;        NOP     B FASTLOOP
+;        NOP     NOP 
+
+        ; Boot code
+        NOP                             B       BOOT
+        NOP                             NOP        
+
+        ; Pass through
+        NOP                             B       CMD_JUST_KICK
+        NOP                             NOP
+
+        ; Light and matrix routines
+        NOP                             B       CMD_LOADLIGHTSANDMATRICES        
+        NOP                             NOP        
+        NOP                             B       CMD_LOADCLIPMATRICES        
+        NOP                             NOP        
+        NOP                             B       CMD_LOADNOCLIPMATRICES        
+        NOP                             NOP        
+
+        ; Non clipping routines
+        NOP                             B       CMD_DRAWTRIS_TN_NOTCLIPPED
+        NOP                             NOP
+        NOP                             B       CMD_DRAWTRIS_TC_NOTCLIPPED
+        NOP                             NOP
+        NOP                             B       CMD_DRAWTRIS_C_NOTCLIPPED
+        NOP                             NOP
+
+        
+;        CMD_DRAWTRIS_TN_NOTCLIPPED
+;        CMD_DRAWTRIS_TC_NOTCLIPPED
+;        CMD_DRAWTRIS_C_NOTCLIPPED
+;        CMD_DRAWTRIS_T_NOTCLIPPED
+
+;        CMD_DRAWTRIS_TN_CLIPPED
+;        CMD_DRAWTRIS_TC_CLIPPED
+;        CMD_DRAWTRIS_T_CLIPPED
+;        CMD_DRAWTRIS_C_CLIPPED
+
+;==========================================================================
+;
+; KERNEL STUB
+;
+;==========================================================================
+
+.include "kernel.vsm"
+.include "boot.vsm"
+.include "matrixlights.vsm"
+.include "clipper.vsm"
+;.include "tris_clip.vsm"
+.include "tris_noclip.vsm"
+
+
+;==========================================================================
+
+CMD_STUB:
+        
+        NOP     NOP
+        NOP[E]  NOP
+        NOP     NOP
+        NOP     B KERNEL_RET
+
+;==========================================================================
+
+CMD_JUST_KICK:
+
+        ; Get source and destination addresses
+        NOP                             IADDIU VI08, VI14, 1
+        NOP                             IADDIU VI10, VI12, 0
+
+JUST_KICK_LOOP:
+        NOP                             LQI.xyzw VF01, (VI08++)
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             IADDI VI09, VI09, -1
+        NOP                             SQI.xyzw VF01, (VI10++)
+        NOP                             IBNE VI09, VI00, JUST_KICK_LOOP
+        NOP                             NOP
+
+        ; Kick data to gif
+        NOP                             XGKICK VI12               
+
+        ; Flip dest buffer
+        NOP                             IADDIU VI01, VI00, OUTPUT_BUFFER_BASE
+        NOP                             NOP
+        NOP                             IBEQ   VI12, VI01, JUST_KICK_PACKET_FLIP
+        NOP                             IADDIU VI12, VI00, (OUTPUT_BUFFER_BASE+OUTPUT_BUFFER_SIZE)
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        JUST_KICK_PACKET_FLIP:
+
+        NOP                             NOP
+        NOP                             B KERNEL_RET
+        NOP                             NOP
+        
+        
+;==========================================================================
+
+        

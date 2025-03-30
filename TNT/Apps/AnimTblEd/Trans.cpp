@@ -1,0 +1,27 @@
+// Trans.cpp: implementation of the CTrans class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "AnimTblEd.h"
+#include "Trans.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CTrans::CTrans()
+{
+
+}
+
+CTrans::~CTrans()
+{
+
+}

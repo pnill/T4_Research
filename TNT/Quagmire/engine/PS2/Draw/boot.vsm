@@ -1,0 +1,80 @@
+;==========================================================================
+;
+; BOOT.VSM
+;
+; Basic bootup of microcode
+; included by KERNEL.VSM
+;
+;==========================================================================
+
+BOOT:   
+
+        ; Store clipping planes out as data
+
+        NOP                             IADDIU VI04, VI00, CLIPPER_PLANES
+        ADDw.x VF01x, VF00x, VF00w      NOP     ; X=+1
+        SUBw.x VF02x, VF00x, VF00w      NOP     ; X=-1
+
+        ; X+,X-
+        NOP                             IADDIU VI01, VI00, 0x040
+        NOP                             IADDIU VI02, VI00, 0x001
+        NOP                             IADDIU VI03, VI00, 4;0
+        NOP                             SQ     VF01, 2(VI04)
+        NOP                             ISW.y  VI01, 2(VI04)
+        NOP                             ISW.z  VI02, 2(VI04)
+        NOP                             ISW.w  VI03, 2(VI04)
+        NOP                             IADDIU VI01, VI00, 0x080
+        NOP                             IADDIU VI02, VI00, 0x002
+        NOP                             SQ     VF02, 3(VI04)
+        NOP                             ISW.y  VI01, 3(VI04)
+        NOP                             ISW.z  VI02, 3(VI04)
+        NOP                             ISW.w  VI03, 3(VI04)
+        
+        ; Y+,Y-
+        NOP                             IADDIU VI01, VI00, 0x100
+        NOP                             IADDIU VI02, VI00, 0x004
+        NOP                             IADDIU VI03, VI00, 2;1
+        NOP                             SQ     VF01, 1(VI04)
+        NOP                             ISW.y  VI01, 1(VI04)
+        NOP                             ISW.z  VI02, 1(VI04)
+        NOP                             ISW.w  VI03, 1(VI04)
+        NOP                             IADDIU VI01, VI00, 0x200
+        NOP                             IADDIU VI02, VI00, 0x008
+        NOP                             SQ     VF02, 0(VI04)
+        NOP                             ISW.y  VI01, 0(VI04)
+        NOP                             ISW.z  VI02, 0(VI04)
+        NOP                             ISW.w  VI03, 0(VI04)
+        
+        ; Z+,Z-
+        NOP                             IADDIU VI01, VI00, 0x400
+        NOP                             IADDIU VI02, VI00, 0x010
+        NOP                             IADDIU VI03, VI00, 0;2
+        NOP                             SQ     VF01, 4(VI04)
+        NOP                             ISW.y  VI01, 4(VI04)
+        NOP                             ISW.z  VI02, 4(VI04)
+        NOP                             ISW.w  VI03, 4(VI04)
+        NOP                             IADDIU VI01, VI00, 0x800
+        NOP                             IADDIU VI02, VI00, 0x020
+        NOP                             SQ     VF02, 5(VI04)
+        NOP                             ISW.y  VI01, 5(VI04)
+        NOP                             ISW.z  VI02, 5(VI04)
+        NOP                             ISW.w  VI03, 5(VI04)
+        
+        
+        
+        ; Load Packet buffer base into double buffer register VI12
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        
+        ; Load Max color (255) into VF31        
+        SUB.xyzw VF31, VF00, VF00       LOI 255.0
+        ADDi.xyzw VF31, VF31, I         NOP
+        
+        ; Halt and wait for vif to reboot you
+        NOP     NOP         
+        NOP[E]  NOP
+        NOP     NOP
+
+        ; Branch to kernel start
+        NOP                             B KERNEL_TOP                    ; Jump to kernel to start
+        NOP                             NOP                             ; BDS
+

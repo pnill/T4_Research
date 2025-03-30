@@ -1,0 +1,243 @@
+;==========================================================================
+;
+; TRANSFORM_SHADOW
+;
+;==========================================================================
+;   VI00    Const (0)
+;S  VI01    Const (0xff) used by AND operations
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06
+;   VI07
+;S  VI08    Source Addr of Input buffer
+;S  VI09    Command param 1 - NTransforms
+;   VI10    Command param 2 - Unused
+;   VI11    Opcode from latest command
+;S  VI12    GIF packet buffer base address (for double buffering)
+;S  VI13    RESERVED - Next command address in input buffer for kernel
+;S  VI14    RESERVED - Current address of input buffer for kernel
+;S  VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10
+;   VF11
+;   VF12
+;   VF13
+;   VF14
+;L  VF15    L2S qword 0
+;L  VF16    L2S qword 1
+;L  VF17    L2S qword 2
+;L  VF18    L2S qword 3
+;L  VF19    L2W qword 0
+;L  VF20    L2W qword 1
+;L  VF21    L2W qword 2
+;L  VF22    L2W qword 3
+;L  VF23    Shadow matrix qword 0
+;L  VF24    Shadow matrix qword 1
+;L  VF25    Shadow matrix qword 2
+;L  VF26    Shadow matrix qword 3
+;S  VF27    Light color matrix qword 0
+;S  VF28    Light color matrix qword 1
+;S  VF29    Light color matrix qword 2
+;S  VF30    Light color matrix qword 3
+;S  VF31    Const (128, 16, 0.5, 4095)
+;==========================================================================
+
+TRANSFORM_SHADOW:
+
+        ;// The translation part of the L2W is hidden in the W component of the first three columns,
+        ;// so we need to move it out of there and put it into its own column (what a pain). Doing
+        ;// this saves us 25 qwords of memory, tho...
+
+        ;//nop[d]                          nop
+
+        ;// do initial setup
+        sub.xyzw vf22, vf00, vf00       ilw.x vi03, 1(vi08)                         ; matrix offset
+        nop                             ilw.y vi06, 0(vi08)                         ; NVerts
+        nop                             iaddiu vi04, vi00, SHADOW_MATRIX_BASE
+        nop                             iaddi vi08, vi08, 2                         ; pSrcData
+        nop                             iaddiu vi03, vi03, MATRIX_CACHE_BASE
+        nop                             lq.xyzw vf19, 4(vi03)                       ; l2w col0
+        nop                             lq.xyzw vf20, 5(vi03)                       ; l2w col1
+        nop                             lq.xyzw vf21, 6(vi03)                       ; l2w col2
+        nop                             lq.xyzw vf23, 0(vi04)                       ; shad matrix col0
+        addw.x vf22, vf00, vf19w        lq.xyzw vf24, 1(vi04)                       ; shad matrix col1
+        addw.y vf22, vf00, vf20w        lq.xyzw vf25, 2(vi04)                       ; shad matrix col2
+        addw.z vf22, vf00, vf21w        lq.xyzw vf26, 3(vi04)                       ; shad matrix col3
+
+        ;// concatenate shadow and l2w to get l2s
+        mulax.xyzw  acc, vf23, vf21x    lq.xyzw vf01, 0(vi08)       ; col2          ; load xyz0
+        madday.xyzw acc, vf24, vf21y    iaddi vi02, vi00, 1         ; col2          ; vi02 = 1
+        maddz.xyzw vf17, vf25, vf21z    iand vi02, vi06, vi02       ; col2          ; NVerts
+        mulax.xyzw  acc, vf23, vf22x    nop                         ; col3
+        madday.xyzw acc, vf24, vf22y    nop                         ; col3
+        maddaz.xyzw acc, vf25, vf22z    nop                         ; col3
+        maddw.xyzw vf18, vf26, vf00w    nop                         ; col3
+        mulax.xyzw  acc, vf23, vf20x    nop                         ; col1
+        madday.xyzw acc, vf24, vf20y    nop                         ; col1
+        maddz.xyzw vf16, vf25, vf20z    nop                         ; col1
+        mulax.xyzw  acc, vf23, vf19x    nop                         ; col0
+        madday.xyzw acc, vf24, vf19y    ibeq vi02, vi00, SHADOW_TRANS_TWO_VERTS ; col0
+        maddz.xyzw vf15, vf25, vf19z    nop                         ; col0
+
+        ;// do single transform
+        mulaw.xyzw  acc, vf18, vf00w    ilw.x vi07, 0(vi08)         ; transform xyz0        ; read cache index
+        maddaz.xyzw acc, vf17, vf01z    iaddi vi08, vi08, 1         ; transform xyz0        ; pSrc++
+        madday.xyzw acc, vf16, vf01y    iaddi vi06, vi06, -1        ; transform xyz0        ; NVerts--
+        maddx.xyzw vf02, vf15, vf01x    nop                         ; transform xyz0
+
+        nop                             iand vi07, vi07, vi01                               ; mask out cache index
+        nop                             sq.xyzw vf00, 128(vi07)                             ; store rgb0
+        nop                             lq.xyzw vf01, 0(vi08)                               ; load xyz0
+        nop                             div q, vf00w, vf02w                                 ; divide0
+        nop                             nop
+        nop                             nop
+        nop                             nop
+        nop                             nop
+        nop                             nop
+        nop                             nop
+        mulq.xyzw vf02, vf02, q         nop                         ; project xyz0
+        nop                             nop
+        nop                             nop
+        nop                             ibeq vi06, vi00, SHADOW_TRANSFORM_FINISHED
+        nop                             sq.xyzw vf02, 0(vi07)                               ; store xyz0
+
+        ;// Register Usage:
+        ;// vf01 xyz0
+        ;// vf02 projected xyz0
+        ;// vf03 xyz1
+        ;// vf04 projected xyz1
+        ;// vi02 ci0
+        ;// vi03 ci1
+        ;// vi08 pSrc
+
+SHADOW_TRANS_TWO_VERTS:
+        ;// do preamble for double transform
+        mulaw.xyzw  acc, vf18, vf00w    lq.xyzw vf03, 1(vi08)   ; transform xyz0        ; load xyz1
+        maddaz.xyzw acc, vf17, vf01z    nop                     ; transform xyz0
+        madday.xyzw acc, vf16, vf01y    nop                     ; transform xyz0
+        maddx.xyzw vf02, vf15, vf01x    nop                     ; transform xyz0
+
+SHADOW_TRANS_VERT_LOOP:
+
+        mulaw.xyzw  acc, vf18, vf00w    ilw.x vi02, 0(vi08)         ; transform xyz1        ; load ci0
+        maddaz.xyzw acc, vf17, vf03z    ilw.x vi03, 1(vi08)         ; transform xyz1        ; load ci1
+        madday.xyzw acc, vf16, vf03y    iaddi vi08, vi08, 2         ; transform xyz1        ; pSrc++
+        maddx.xyzw vf04, vf15, vf03x    div q, vf00w, vf02w         ; transform xyz1        ; divide0
+        nop                             iand vi02, vi02, vi01                               ; mask ci0
+        nop                             iand vi03, vi03, vi01                               ; mask ci1
+        nop                             lq.xyzw vf01, 0(vi08)                               ; load xyz0
+        nop                             lq.xyzw vf03, 1(vi08)                               ; load xyz1
+        nop                             sq.xyzw vf00, 128(vi02)                             ; store rgb0
+        nop                             sq.xyzw vf00, 128(vi03)                             ; store rgb1
+        mulq.xyzw vf02, vf02, q         div q, vf00w, vf04w         ; project xyz0          ; divide1
+        nop                             iaddi vi06, vi06, -2                                ; NVerts -= 2
+        mulaw.xyzw  acc, vf18, vf00w    nop
+        maddaz.xyzw acc, vf17, vf01z    nop
+        madday.xyzw acc, vf16, vf01y    sq.xyzw vf02, 0(vi02)                               ; store xyz0
+        maddx.xyzw vf02, vf15, vf01x    nop
+        nop                             nop
+        mulq.xyzw vf04, vf04, q         nop                         ; project xyz1
+        nop                             nop
+        nop                             nop
+        nop                             ibne vi06, vi00, SHADOW_TRANS_VERT_LOOP
+        nop                             sq.xyzw vf04, 0(vi03)                               ; store xyz1
+
+SHADOW_TRANSFORM_FINISHED:
+        nop                             b TRANSFORM_FINISHED
+        nop                             nop
+
+/*
+TRANSFORM_SHADOW:
+        ; Read transform NVerts
+        NOP                             ILW.y VI06, 0(VI08)                     ; VI06 = NVerts
+
+        ; Read transform MatrixA
+        NOP                             ILW.x VI03, 1(VI08)                     ; VI03 = MatrixOffset
+        NOP                             IADDIU VI03, VI03, MATRIX_CACHE_BASE    ; VI03 = MatrixBase + MatrixOffset
+        NOP                             LQ.xyzw VF19, 4(VI03)                   ; VF19 = L2W qword 0
+        NOP                             LQ.xyzw VF20, 5(VI03)                   ; VF20 = L2W qword 1
+        NOP                             LQ.xyzw VF21, 6(VI03)                   ; VF21 = L2W qword 2
+
+        ; The translation part of the L2W is hidden in the W component of the first three columns,
+        ; so we need to move it out of there and put it into its own column (what a pain). Doing
+        ; this saves us 25 qwords of memory, tho...
+
+        NOP                             MOVE.xyzw VF22, VF00
+        ADDw.x  VF22, VF00, VF19w       NOP
+        ADDw.y  VF22, VF00, VF20w       NOP
+        ADDw.z  VF22, VF00, VF21w       NOP
+
+        ; Read shadow MatrixA
+        NOP                             IADDIU VI03, VI00, SHADOW_MATRIX_BASE   ; VI03 = &Shadow matrix
+        NOP                             LQ.xyzw VF23, 0(VI03)                   ; VF23 = Shadow matrix qword 0
+        NOP                             LQ.xyzw VF24, 1(VI03)                   ; VF24 = Shadow matrix qword 1
+        NOP                             LQ.xyzw VF25, 2(VI03)                   ; VF25 = Shadow matrix qword 2
+        NOP                             LQ.xyzw VF26, 3(VI03)                   ; VF26 = Shadow matrix qword 3
+
+        ; Advance src ptr to vert data
+        NOP                             IADDI VI08, VI08, 2                     ; VI08 = &VertData
+       
+;------------------------------------------------------------------------
+
+        ; concatenate Shadow matrix and L2W to get L2S
+        MULAx.xyzw  ACC, VF23, VF19x    NOP     ; the first column
+        MADDAy.xyzw ACC, VF24, VF19y    NOP
+        MADDz.xyzw VF15, VF25, VF19z    NOP
+
+        MULAx.xyzw  ACC, VF23, VF20x    NOP     ; the second column
+        MADDAy.xyzw ACC, VF24, VF20y    NOP
+        MADDz.xyzw VF16, VF25, VF20z    NOP
+
+        MULAx.xyzw  ACC, VF23, VF21x    NOP     ; the third column
+        MADDAy.xyzw ACC, VF24, VF21y    NOP
+        MADDz.xyzw VF17, VF25, VF21z    NOP
+
+        MULAx.xyzw  ACC, VF23, VF22x    NOP     ; the fourth column
+        MADDAy.xyzw ACC, VF24, VF22y    NOP
+        MADDAz.xyzw ACC, VF25, VF22z    NOP
+        MADDw.xyzw VF18, VF26, VF22w    NOP
+
+;------------------------------------------------------------------------
+
+        ; Read source vert
+        NOP                             LQ.xyzw VF08, 0(VI08)           ; load xyz
+
+SHADOW_TRANSFORM_ONE_VERT:
+        MULAw.xyzw  ACC, VF18, VF00w    ILW.x VI07, 0(VI08)             ; transform vert        ; read cache index
+        MADDAz.xyzw ACC, VF17, VF08z    IADDI VI08, VI08, 2             ; transform vert        ; increment source ptr
+        MADDAy.xyzw ACC, VF16, VF08y    IADDI VI06, VI06, -1            ; transform vert        ; NVerts--
+        MADDx.xyzw VF06, VF15, VF08x    ILW.x VI04, 1(VI08)             ; transform vert        ; load alpha
+
+        NOP                             IAND VI07, VI07, VI01           ; mask out cache index
+        NOP                             SQ.xyzw VF00, 128(VI07)         ; store color
+        NOP                             NOP
+        NOP                             DIV Q, VF00w, VF06w             ; start divide
+        NOP                             ISW.w VI04, 128(VI07)           ; store alpha
+        NOP                             NOP
+        NOP                             LQ.xyzw VF08, 0(VI08)           ; load xyz
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        MULq.xyzw VF06, VF06, Q         NOP                             ; project vert
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             IBNE VI06, VI00, SHADOW_TRANSFORM_ONE_VERT
+        NOP                             SQ.xyzw VF06, 0(VI07)           ; store vert (BDS)
+
+SHADOW_TRANSFORM_FINISHED:
+
+        NOP                             B TRANSFORM_FINISHED
+        NOP                             NOP
+*/

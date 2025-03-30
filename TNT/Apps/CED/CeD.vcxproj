@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>"$/TnT/Apps/CeD", HPZBAAAA</SccProjectName>
+    <SccAuxPath />
+    <SccLocalPath>.</SccLocalPath>
+    <SccProvider>MSSCCI:Microsoft Visual SourceSafe</SccProvider>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>y_files;x_files;anim;skin;DirectX;DirectX\include;$(TnT);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>TARGET_PC;TARGET_PC_D3D_NO_ENTRY;WIN32;_WINDOWS;CED_D3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>.\Debug/CeD.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>winmm.lib;.\DirectX\lib\d3d8.lib;.\DirectX\lib\d3dx8.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Debug/CeD.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug/CeD.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Debug/CeD.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>y_files;x_files;anim;skin;DirectX;DirectX\include;$(TnT);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;TARGET_PC_MFC;WIN32;_WINDOWS;TARGET_PC_D3D_NO_ENTRY;CED_D3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Release/CeD.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>winmm.lib;.\DirectX\lib\d3d8.lib;.\DirectX\lib\d3dx8.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Release/CeD.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Release/CeD.tlb</TypeLibraryName>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="ActorList.cpp" />
+    <ClCompile Include="AnimBar.cpp" />
+    <ClCompile Include="AttachJointDlg.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CeD.cpp" />
+    <ClCompile Include="CeDDoc.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Disabled</Optimization>
+    </ClCompile>
+    <ClCompile Include="CeDView.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="CharacterExport.cpp" />
+    <ClCompile Include="CharacterList.cpp" />
+    <ClCompile Include="ChildFrm.cpp" />
+    <ClCompile Include="D3DView.cpp" />
+    <ClCompile Include="DefinedEventListCtrl.cpp" />
+    <ClCompile Include="DefinedEventsDlg.cpp" />
+    <ClCompile Include="DlgActorList.cpp" />
+    <ClCompile Include="DlgActorNew.cpp" />
+    <ClCompile Include="DlgBiBlendViewer.cpp" />
+    <ClCompile Include="DlgCamera1.cpp" />
+    <ClCompile Include="DlgCharacter.cpp" />
+    <ClCompile Include="DlgEventList.cpp" />
+    <ClCompile Include="DlgExportRotationsHelp.cpp" />
+    <ClCompile Include="DlgFaceDirRecipe.cpp" />
+    <ClCompile Include="DlgFilePaths.cpp" />
+    <ClCompile Include="DlgKey.cpp" />
+    <ClCompile Include="DlgLayer.cpp" />
+    <ClCompile Include="DlgMotion.cpp" />
+    <ClCompile Include="DlgMotionList.cpp" />
+    <ClCompile Include="DlgMovieExport.cpp" />
+    <ClCompile Include="DlgMovieMerge.cpp" />
+    <ClCompile Include="DlgMoviePreview.cpp" />
+    <ClCompile Include="DlgPropDefs.cpp" />
+    <ClCompile Include="DlgProps.cpp" />
+    <ClCompile Include="DlgSelectMesh.cpp" />
+    <ClCompile Include="DlgShotList.cpp" />
+    <ClCompile Include="DlgSkelPointList.cpp" />
+    <ClCompile Include="DlgSkin.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventList.cpp" />
+    <ClCompile Include="ExportFile.cpp" />
+    <ClCompile Include="ExportParams.cpp" />
+    <ClCompile Include="ExportProgress.cpp" />
+    <ClCompile Include="Key.cpp" />
+    <ClCompile Include="KeyList.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshList.cpp" />
+    <ClCompile Include="Motion.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TARGET_PC;TARGET_PC_D3D_NO_ENTRY;WIN32;_WINDOWS;CED_D3D;_DEBUG</PreprocessorDefinitions>
+    </ClCompile>
+    <ClCompile Include="MotionEditFrame.cpp" />
+    <ClCompile Include="MotionEditView.cpp" />
+    <ClCompile Include="MotionFlags.cpp" />
+    <ClCompile Include="MotionList.cpp" />
+    <ClCompile Include="MouseStatic.cpp" />
+    <ClCompile Include="Movie.cpp" />
+    <ClCompile Include="MovieBar.cpp" />
+    <ClCompile Include="MovieExport.cpp" />
+    <ClCompile Include="MovieFrame.cpp" />
+    <ClCompile Include="MovieList.cpp" />
+    <ClCompile Include="MovieView.cpp" />
+    <ClCompile Include="MultiBar.cpp" />
+    <ClCompile Include="NumFrames.cpp" />
+    <ClCompile Include="ProjectFrame.cpp" />
+    <ClCompile Include="ProjectView.cpp" />
+    <ClCompile Include="Prop.cpp" />
+    <ClCompile Include="RenderContext.cpp" />
+    <ClCompile Include="RenderContextCDC.cpp" />
+    <ClCompile Include="RenderContextD3D.cpp" />
+    <ClCompile Include="RollupBar.cpp" />
+    <ClCompile Include="RollupCtrl.cpp" />
+    <ClCompile Include="RollupPane.cpp" />
+    <ClCompile Include="Shot.cpp" />
+    <ClCompile Include="ShotList.cpp" />
+    <ClCompile Include="SkelPoint.cpp" />
+    <ClCompile Include="SkelPointList.cpp" />
+    <ClCompile Include="Skeleton.cpp" />
+    <ClCompile Include="Skin.cpp" />
+    <ClCompile Include="SkinList.cpp" />
+    <ClCompile Include="SortedHeaderCtrl.cpp" />
+    <ClCompile Include="SortedListCtrl.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="TransitionViewer.cpp" />
+    <ClCompile Include="eNode.cpp" />
+    <ClCompile Include="ieArchive.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MaxSpeed</Optimization>
+    </ClCompile>
+    <ClCompile Include="ieList.cpp">
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MaxSpeed</Optimization>
+    </ClCompile>
+    <ClCompile Include="mfcutils.cpp" />
+    <ClCompile Include="Anim\Anim.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Anim\Skel.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Anim\acccmp_c.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Anim\acccmp_d.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="y_files\y_Arg.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="y_files\y_ChkSum.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="y_files\y_Token.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_bitmap.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_debug.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_files.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_math.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_memory.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_plus.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_sintable.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_stdio.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_time.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="x_files\x_vsprtf.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="QRaw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Skin\CTextFile.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Skin\cstring.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Skin\skin_mesh.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="DirectX\d3dapp.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DirectX\d3dutil.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DirectX\dxutil.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CeD.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="ActorList.h" />
+    <ClInclude Include="AnimBar.h" />
+    <ClInclude Include="AttachJointDlg.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CeD.h" />
+    <ClInclude Include="CeDDoc.h" />
+    <ClInclude Include="CeDView.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterExport.h" />
+    <ClInclude Include="CharacterList.h" />
+    <ClInclude Include="ChildFrm.h" />
+    <ClInclude Include="D3DView.h" />
+    <ClInclude Include="DefinedEventListCtrl.h" />
+    <ClInclude Include="DefinedEventsDlg.h" />
+    <ClInclude Include="DlgActorList.h" />
+    <ClInclude Include="DlgActorNew.h" />
+    <ClInclude Include="DlgBiBlendViewer.h" />
+    <ClInclude Include="DlgCamera1.h" />
+    <ClInclude Include="DlgCharacter.h" />
+    <ClInclude Include="DlgEventList.h" />
+    <ClInclude Include="DlgExportRotationsHelp.h" />
+    <ClInclude Include="DlgFaceDirRecipe.h" />
+    <ClInclude Include="DlgFilePaths.h" />
+    <ClInclude Include="DlgKey.h" />
+    <ClInclude Include="DlgLayer.h" />
+    <ClInclude Include="DlgMotion.h" />
+    <ClInclude Include="DlgMotionList.h" />
+    <ClInclude Include="DlgMovieExport.h" />
+    <ClInclude Include="DlgMovieMerge.h" />
+    <ClInclude Include="DlgMoviePreview.h" />
+    <ClInclude Include="DlgPropDefs.h" />
+    <ClInclude Include="DlgProps.h" />
+    <ClInclude Include="DlgSelectMesh.h" />
+    <ClInclude Include="DlgShotList.h" />
+    <ClInclude Include="DlgSkelPointList.h" />
+    <ClInclude Include="DlgSkin.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventList.h" />
+    <ClInclude Include="ExportFile.h" />
+    <ClInclude Include="ExportParams.h" />
+    <ClInclude Include="ExportProgress.h" />
+    <ClInclude Include="FileTags.h" />
+    <ClInclude Include="ItemInfo.h" />
+    <ClInclude Include="Key.h" />
+    <ClInclude Include="KeyList.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshList.h" />
+    <ClInclude Include="Motion.h" />
+    <ClInclude Include="MotionEditFrame.h" />
+    <ClInclude Include="MotionEditView.h" />
+    <ClInclude Include="MotionFlags.h" />
+    <ClInclude Include="MotionList.h" />
+    <ClInclude Include="MouseStatic.h" />
+    <ClInclude Include="Movie.h" />
+    <ClInclude Include="MovieBar.h" />
+    <ClInclude Include="MovieExport.h" />
+    <ClInclude Include="MovieFrame.h" />
+    <ClInclude Include="MovieList.h" />
+    <ClInclude Include="MovieView.h" />
+    <ClInclude Include="MultiBar.h" />
+    <ClInclude Include="NumFrames.h" />
+    <ClInclude Include="ProjectFrame.h" />
+    <ClInclude Include="ProjectView.h" />
+    <ClInclude Include="Prop.h" />
+    <ClInclude Include="RenderContext.h" />
+    <ClInclude Include="RenderContextCDC.h" />
+    <ClInclude Include="RenderContextD3D.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="RollupBar.h" />
+    <ClInclude Include="RollupCtrl.h" />
+    <ClInclude Include="RollupPane.h" />
+    <ClInclude Include="Shot.h" />
+    <ClInclude Include="ShotList.h" />
+    <ClInclude Include="SkelPoint.h" />
+    <ClInclude Include="SkelPointList.h" />
+    <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="Skin.h" />
+    <ClInclude Include="SkinList.h" />
+    <ClInclude Include="SortedHeaderCtrl.h" />
+    <ClInclude Include="SortedListCtrl.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="TransitionViewer.h" />
+    <ClInclude Include="eNode.h" />
+    <ClInclude Include="ieArchive.h" />
+    <ClInclude Include="ieList.h" />
+    <ClInclude Include="mfcutils.h" />
+    <ClInclude Include="Anim\Anim.h" />
+    <ClInclude Include="Anim\Skel.h" />
+    <ClInclude Include="Anim\acccmp.h" />
+    <ClInclude Include="y_files\y_Arg.h" />
+    <ClInclude Include="y_files\y_ChkSum.h" />
+    <ClInclude Include="y_files\y_Token.h" />
+    <ClInclude Include="x_files\x_bitmap.hpp" />
+    <ClInclude Include="x_files\x_bitmap_inline.hpp" />
+    <ClInclude Include="x_files\x_color.hpp" />
+    <ClInclude Include="x_files\x_color_inline.hpp" />
+    <ClInclude Include="x_files\x_debug.hpp" />
+    <ClInclude Include="x_files\x_files.hpp" />
+    <ClInclude Include="x_files\x_math.hpp" />
+    <ClInclude Include="x_files\x_math_inline.hpp" />
+    <ClInclude Include="x_files\x_math_m4_inline.hpp" />
+    <ClInclude Include="x_files\x_math_q_inline.hpp" />
+    <ClInclude Include="x_files\x_math_r3_inline.hpp" />
+    <ClInclude Include="x_files\x_math_v2_inline.hpp" />
+    <ClInclude Include="x_files\x_math_v3_inline.hpp" />
+    <ClInclude Include="x_files\x_math_v4_inline.hpp" />
+    <ClInclude Include="x_files\x_memory.hpp" />
+    <ClInclude Include="x_files\x_plus.hpp" />
+    <ClInclude Include="x_files\x_stats.hpp" />
+    <ClInclude Include="x_files\x_stdio.hpp" />
+    <ClInclude Include="x_files\x_target.hpp" />
+    <ClInclude Include="x_files\x_time.hpp" />
+    <ClInclude Include="x_files\x_types.hpp" />
+    <ClInclude Include="QRaw.h" />
+    <ClInclude Include="Skin\Basics.h" />
+    <ClInclude Include="Skin\CTextFile.h" />
+    <ClInclude Include="Skin\cstring.h" />
+    <ClInclude Include="Skin\skin_mesh.h" />
+    <ClInclude Include="DirectX\d3dapp.h" />
+    <ClInclude Include="DirectX\d3dres.h" />
+    <ClInclude Include="DirectX\d3dutil.h" />
+    <ClInclude Include="DirectX\dxutil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\CeD.ico" />
+    <None Include="res\CeD.rc2" />
+    <None Include="res\CeDDoc.ico" />
+    <None Include="res\Cur00001.cur" />
+    <None Include="res\Cursor2.cur" />
+    <None Include="res\Operatio.cur" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\bitmap1.bmp" />
+    <None Include="res\bmp00001.bmp" />
+    <None Include="res\bmp00002.bmp" />
+    <None Include="res\bmp00003.bmp" />
+    <None Include="res\bmp00004.bmp" />
+    <None Include="res\bmp00005.bmp" />
+    <None Include="res\bmp00006.bmp" />
+    <None Include="res\bmp00007.bmp" />
+    <None Include="res\bmp00008.bmp" />
+    <None Include="res\bmp00009.bmp" />
+    <None Include="res\bmp00010.bmp" />
+    <None Include="res\bmp00011.bmp" />
+    <None Include="res\bmp00012.bmp" />
+    <None Include="res\bmp00013.bmp" />
+    <None Include="res\bmp00014.bmp" />
+    <None Include="res\cur00002.cur" />
+    <None Include="res\cur00003.cur" />
+    <None Include="res\cur00004.cur" />
+    <None Include="res\cur00005.cur" />
+    <None Include="res\cursor1.cur" />
+    <None Include="res\facedir.cur" />
+    <None Include="res\framesta.bmp" />
+    <None Include="res\movedir.cur" />
+    <None Include="res\projectt.bmp" />
+    <None Include="res\tab.bmp" />
+    <None Include="res\toolbar1.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

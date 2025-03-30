@@ -1,0 +1,40 @@
+TBlockTool [options] [load] [platform] [export]
+
+
+Options or Misc. Features:
+-EXIT		// exits the app after it's done(doesn't go to main window)
+-WAIT		// waits on cmdline window after done
+-NOERR		// no wait if error(otherwise if ERROR happened it would wait)
+-LOG filename	// log output to filename
+-MIN		// starts minimized
+
+Load/Export:
+-I filename	// imports filename(.tex or .txt)
+-E filename	// exports to filename(.tex or .txt)
+-IE filename	// imports filename(.tex or .txt) then exports it
+filename	// same as -I (implied)
+
+Platform switches:
+-PS2
+-GC
+-XBOX
+-PC
+
+To apply alpha, when using filename.
+namealpha.xxx  - Apply punchthrough alpha
+name_alpha.xxx - Blend the alpha with the original
+
+
+Some examples(I'm leaving out the tblocktool.exe name to be lazy typing):
+
+"dumb.tex"  ->this loads up dumb.tex(what you can use to double-click files)
+-PS2 -IE "dumb.tex"  ->load up dumb.tex, export for PS2
+-EXIT -I "test.txt" -PS2 -E "ps2.tex" -GC -E "gcube.tex"  ->load test.txt, export ps2.tex in PS2 format, then export gcube.tex in gamecube format, exits app
+
+You can then use this stuff in combination with batch file commands to re-export tons of files at once, like using the FOR loop, passing the filename to the tool with -IE and a platform switch.
+
+
+
+// only for text files you are importing
+OTHER FEATURES:
+Try exporting a .tex file to a .txt(text) file.  You'll see that individual textures can have different settings than what's set for the rest of them(global).  Mess around with the settings of a particular texture(s) and re-export as a text file to see how the syntax works for re-importing a text file with those settings.

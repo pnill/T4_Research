@@ -1,0 +1,41 @@
+;==========================================================================
+;
+; BOOT.VSM
+;
+; Basic bootup of microcode
+; included by KERNEL.VSM
+;
+;==========================================================================
+
+BOOT:   
+        ; Load Packet buffer base into double buffer register VI12
+        NOP                             IADDIU VI12, VI00, OUTPUT_BUFFER_BASE
+        
+        ; Clear out VF31
+        SUB.xyzw VF31, VF00, VF00       NOP
+
+        ; Load Max color (255)
+        NOP                             LOI 255.0
+        ADDi.x VF31, VF31, I            NOP
+
+        ; Load mult. value (16) for fixed point to floating point conversion
+        NOP                             LOI 16.0
+        ADDi.y VF31, VF31, I            NOP
+        
+        ; Load the mult. value for part of the env. mapping (0.5)
+        NOP                             LOI 0.5
+        ADDi.z VF31, VF31, I            NOP
+
+        ; Load the screen clamping value
+        NOP                             LOI 3968.0
+        ADDi.w VF31, VF31, I            NOP
+
+        ; Halt and wait for vif to reboot you
+        NOP     NOP         
+        NOP[E]  NOP                                                       
+        NOP     NOP
+
+        ; Branch to kernel start
+        NOP                             B KERNEL_TOP                    ; Jump to kernel to start
+        NOP                             NOP                             ; BDS
+

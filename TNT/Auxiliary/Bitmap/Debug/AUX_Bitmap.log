@@ -1,0 +1,35 @@
+﻿Build started 3/28/2025 10:12:22 PM.
+     1>Project "E:\Projects\TurokDev\TNT\Auxiliary\Bitmap\AUX_Bitmap.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         E:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I\x_files /I\Auxiliary\Bitmap /ZI /nologo /W3 /WX- /Od /Oy- /D _DEBUG /D _USING_V110_SDK71_ /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug/" /Fd".\Debug/vc110.pdb" /Gd /TP /analyze- /errorReport:prompt AUX_Bitmap.cpp AUX_BitmapConv.cpp BmpLd.cpp PcxLd.cpp TgaLd.cpp GifLd.cpp AUX_Compress.cpp AUX_SizzleXBOX.cpp AUX_Swizzle.cpp AUX_SwizzleGC.cpp
+         AUX_Bitmap.cpp
+         AUX_BitmapConv.cpp
+         BmpLd.cpp
+         PcxLd.cpp
+         TgaLd.cpp
+         GifLd.cpp
+         AUX_Compress.cpp
+     1>e:\projects\turokdev\tnt\auxiliary\bitmap\aux_compress.cpp(893): warning C4333: '>>' : right shift by too large amount, data loss
+     1>e:\projects\turokdev\tnt\auxiliary\bitmap\aux_compress.cpp(899): warning C4333: '>>' : right shift by too large amount, data loss
+         AUX_SizzleXBOX.cpp
+         WARNING! XBOX SDK must be installed to swizzle and compress XBOX texture data.
+         AUX_Swizzle.cpp
+         AUX_SwizzleGC.cpp
+         Generating Code...
+       Lib:
+         E:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:".\Debug\AUX_Bitmap.lib" /NOLOGO .\Debug/AUX_Bitmap.obj
+         .\Debug/AUX_BitmapConv.obj
+         .\Debug/BmpLd.obj
+         .\Debug/PcxLd.obj
+         .\Debug/TgaLd.obj
+         .\Debug/GifLd.obj
+         .\Debug/AUX_Compress.obj
+         .\Debug/AUX_SizzleXBOX.obj
+         .\Debug/AUX_Swizzle.obj
+         .\Debug/AUX_SwizzleGC.obj
+         AUX_Bitmap.vcxproj -> E:\Projects\TurokDev\TNT\Auxiliary\Bitmap\.\Debug\AUX_Bitmap.lib
+     1>Done Building Project "E:\Projects\TurokDev\TNT\Auxiliary\Bitmap\AUX_Bitmap.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.43

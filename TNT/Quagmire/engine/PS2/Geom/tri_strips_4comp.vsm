@@ -1,0 +1,158 @@
+
+
+
+TRI_STRIP_VERT_4_COMP:
+; setup to start transform
+; all transforms are L2S
+
+nop b TRI_STRIP_VERT_4_COMP_LOOP_NOCLIP
+nop nop
+
+    
+    nop                                 ibeq vi12, vi00, TRI_STRIP_VERT_4_COMP_LOOP_NOCLIP_SETUP
+    sub.xyzw vf07, vf00, vf00           iaddiu vi08, vi00, 0x7fff       ; step 1 of build ADC const
+    sub.xyzw vf08, vf00, vf00           iaddiu vi08, vi08, 0x1          ; step 2 of build ADC const
+    nop                                 ilw.x vi04, 0(vi14)x            ; load the vert count
+    nop                                 loi 4095.0
+    addi.xy  vf07, vf07, i              loi 30000.0
+    addi.w   vf07, vf07, i              iaddiu vi05, vi14, 3            ; set the walking vert addr
+    nop                                 lq.xyzw vf01, 3(vi05)           ; load XYZ
+    nop                                 lq.xyzw vf02, 0(vi05)           ; load ST1
+    nop                                 lq.xyzw vf03, 1(vi05)           ; load ST2
+    nop                                 iaddiu vi09, vi08, 1            ; set a clip flag var
+    nop                                 loi 10.0
+    addi.w vf08, vf08, i                nop
+    
+    ; test for an empty vert list - should never happen!
+    nop                                 iaddiu vi06, vi00, 0x82
+    nop                                 isub vi06, vi06, vi04
+    nop                                 ibgtz vi06, TRI_STRIP_VERT_4_COMP_LOOP
+    nop                                 nop
+    nop                                 ibne vi04, vi00, TRI_STRIP_VERT_4_COMP_LOOP
+    nop                                 nop
+    nop[e]                              nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 b TRI_STRIP_MESH_LOOP
+    nop                                 nop
+    
+
+
+TRI_STRIP_VERT_4_COMP_LOOP:
+    mulaw.xyzw acc, vf23, vf00w         nop                             ; transform L2S
+    maddaz.xyzw acc, vf22, vf01z        nop                             ; transform L2S
+    madday.xyzw acc, vf21, vf01y        nop                             ; transform L2S
+    maddx.xyzw vf01, vf20, vf01x        nop                             ; transform L2S
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 div q, vf00w, vf01w             ; start 1/w
+    nop                                 lq.yz vf10, 0(vi06)
+    nop                                 iaddiu vi03, vi00, 0x00d0       ; set clip test mask
+    nop                                 nop
+    nop                                 loi 4096.0
+    nop                                 mr32.xy vf10, vf10
+    addi.y vf12, vf00, i                nop
+    mulq.xyz vf01, vf01, q              nop
+    mulq.xyzw vf02, vf02, q             iaddi vi04, vi04, -1
+    mulq.w vf03w, vf00w, q              iaddiu vi06, vi00, SUBMESH_FLAGS
+    nop                                 loi 2048.0
+    subi.x vf12, vf01, i                iaddiu vi05, vi05, 4
+    suby.y vf12, vf12, vf01             move.xyzw vf15, vf00
+    sub.xyw  vf09, vf08, vf01           move.xy vf11, vf01              ; clip test         
+    sub.xyw  vf10, vf01, vf07           sq.xyzw vf02, -4(vi05)          ; clip test
+    nop                                 sq.w vf03w, -3(vi05)
+    mul.xy vf13, vf12, vf10             mr32.z vf15, vf15
+    ftoi4.xyz vf01, vf01                fmand vi02, vi03                                    ; clip test
+    nop                                 fmand vi02, vi02                                    ; clip test
+    nop                                 nop
+    add.xyz vf14, vf03, vf13            move.w vf15, vf00
+    nop                                 sq.xyz vf01, -1(vi05)
+    nop                                 nop
+    nop                                 loi 1.0
+    mini.xy vf15, vf14, i               nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 loi 0.0
+    maxi.xy vf15, vf15, i               nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    mulw.xyzw vf16, vf15, vf03w         nop
+    nop                                 nop
+    nop                                 lq.xyzw vf02, 0(vi05)
+    nop                                 lq.xyzw vf01, 3(vi05)
+    nop                                 sq.xyzw vf16, -3(vi05)
+    
+    nop                                 ibeq vi02, vi03, TRI_STRIP_VERT_4_COMP_LOOP_END
+    nop                                 lq.xyzw vf03, 1(vi05)
+    nop                                 ibeq vi04, vi00, TRI_STRIP_VERT_LOOP_4_COMP_END
+    nop                                 isw.w vi09, -1(vi05)
+    nop                                 isw.w vi09,  3(vi05)
+    nop                                 b TRI_STRIP_VERT_4_COMP_LOOP
+    nop                                 isw.w vi09,  7(vi05)
+    
+
+
+TRI_STRIP_VERT_4_COMP_LOOP_END:
+    nop                                 ibeq vi04, vi00, TRI_STRIP_VERT_LOOP_4_COMP_END
+    nop                                 nop
+    nop                                 b TRI_STRIP_VERT_4_COMP_LOOP
+    nop                                 nop
+
+TRI_STRIP_VERT_4_COMP_LOOP_NOCLIP_SETUP:
+    nop                                 ilw.x vi04, 0(vi14)x            ; load the vert count
+    addi.w   vf07, vf07, i              iaddiu vi05, vi14, 3            ; set the walking vert addr
+    nop                                 lq.xyzw vf01, 3(vi05)           ; load XYZ
+    nop                                 lq.xyzw vf02, 0(vi05)           ; load ST1
+    nop                                 lq.xyzw vf03, 1(vi05)           ; load ST2
+TRI_STRIP_VERT_4_COMP_LOOP_NOCLIP:
+    mulaw.xyzw acc, vf23, vf00w         nop                             ; transform L2S
+    maddaz.xyzw acc, vf22, vf01z        nop                             ; transform L2S
+    madday.xyzw acc, vf21, vf01y        nop                             ; transform L2S
+    maddx.xyzw vf01, vf20, vf01x        nop                             ; transform L2S
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 div q, vf00w, vf01w             ; start 1/w
+    nop                                 lq.yz vf10, 0(vi06)
+    nop                                 nop
+    nop                                 nop
+    nop                                 loi 4096.0
+    nop                                 mr32.xy vf10, vf10
+    addi.y vf12, vf00, i                nop
+    mulq.xyz vf01, vf01, q              nop
+    mulq.xyzw vf02, vf02, q             iaddi vi04, vi04, -1
+    mulq.w vf03w, vf00w, q              iaddiu vi06, vi00, SUBMESH_FLAGS
+    nop                                 loi 2048.0
+    subi.x vf12, vf01, i                iaddiu vi05, vi05, 4
+    suby.y vf12, vf12, vf01             move.xyzw vf15, vf00
+    nop                                 move.xy vf11, vf01
+    nop                                 sq.xyzw vf02, -4(vi05)
+    nop                                 sq.w vf03w, -3(vi05)
+    mul.xy vf13, vf12, vf10             mr32.z vf15, vf15
+    ftoi4.xyz vf01, vf01                nop
+    nop                                 nop
+    nop                                 nop
+    add.xyz vf14, vf03, vf13            move.w vf15, vf00
+    nop                                 sq.xyz vf01, -1(vi05)
+    nop                                 nop
+    nop                                 loi 1.0
+    mini.xy vf15, vf14, i               nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 loi 0.0
+    maxi.xy vf15, vf15, i               nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    mulw.xyzw vf16, vf15, vf03w         nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 lq.xyzw vf01, 3(vi05)
+    nop                                 sq.xyzw vf16, -3(vi05)
+    nop                                 ibeq vi04, vi00, TRI_STRIP_VERT_LOOP_4_COMP_END
+    nop                                 lq.xyzw vf02, 0(vi05)
+    nop                                 b TRI_STRIP_VERT_4_COMP_LOOP_NOCLIP
+    nop                                 lq.xyzw vf03, 1(vi05)

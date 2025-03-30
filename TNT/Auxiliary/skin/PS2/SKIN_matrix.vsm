@@ -1,0 +1,88 @@
+;==========================================================================
+;
+; MATRIX.VSM
+;
+;==========================================================================
+
+
+
+
+;==========================================================================
+;
+; CMD_LOADMATRICES
+;
+;==========================================================================
+;
+; Assuming that data is:
+;   Pos L2S, Normal L2I
+;
+; Load matrices into matrix cache
+;
+;==========================================================================
+;   VI00    Const (0)
+;   VI01
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06
+;   VI07
+;   VI08
+;   VI09    Command param 1 - NMatrices
+;   VI10    Command param 2 - Offset
+;   VI11    Opcode from latest command
+;   VI12    GIF packet buffer base address (for double buffering)
+;   VI13    Next command address in input buffer for kernel
+;   VI14    Current address of input buffer for kernel
+;   VI15    Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10    
+;   VF11    Active local to screen matrix B qword 0
+;   VF12    Active local to screen matrix B qword 1
+;   VF13    Active local to screen matrix B qword 2
+;   VF14    Active local to screen matrix B qword 3
+;   VF15    Active light intensity matrix B qword 0
+;   VF16    Active light intensity matrix B qword 1
+;   VF17    Active light intensity matrix B qword 2
+;   VF18    Active light intensity matrix B qword 3
+;   VF19    Active local to screen matrix A qword 0
+;   VF20    Active local to screen matrix A qword 1
+;   VF21    Active local to screen matrix A qword 2
+;   VF22    Active local to screen matrix A qword 3
+;   VF23    Active light intensity matrix A qword 0
+;   VF24    Active light intensity matrix A qword 1
+;   VF25    Active light intensity matrix A qword 2
+;   VF26    Active light intensity matrix A qword 3
+;   VF27    Light color matrix qword 0    
+;   VF28    Light color matrix qword 1    
+;   VF29    Light color matrix qword 2    
+;   VF30    Light color matrix qword 3    
+;S  VF31    Const (128, 16, 0.5, 4095)
+;==========================================================================
+
+CMD_LOADMATRICES:
+
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+
+        ; Return to kernel
+        NOP                             B KERNEL_RET                    ; Return to kernel 
+        NOP                             NOP                             ; BDS
+
+;==========================================================================

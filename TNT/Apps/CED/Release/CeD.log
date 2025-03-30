@@ -1,0 +1,18 @@
+﻿Build started 3/22/2024 1:06:06 AM.
+     1>Project "D:\TurokDev\TNT\Apps\CED\CeD.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Touching ".\Release\CeD.unsuccessfulbuild".
+       ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Iy_files /Ix_files /Ianim /Iskin /IDirectX /IDirectX\include /Zi /nologo /W3 /WX- /O2 /Ob1 /Oy- /D NDEBUG /D TARGET_PC_MFC /D WIN32 /D _WINDOWS /D TARGET_PC_D3D_NO_ENTRY /D CED_D3D /GF /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp".\Release/CeD.pch" /Fo".\Release/" /Fd".\Release/vc100.pdb" /FR".\Release\\" /Gd /TP /analyze- /errorReport:prompt StdAfx.cpp
+         StdAfx.cpp
+         _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+     1>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winnt.h(290): error C2146: syntax error : missing ';' before identifier 'PVOID64'
+     1>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winnt.h(290): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winnt.h(8992): error C2146: syntax error : missing ';' before identifier 'Buffer'
+     1>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winnt.h(8992): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\include\winnt.h(8992): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>Done Building Project "D:\TurokDev\TNT\Apps\CED\CeD.vcxproj" (build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.66

@@ -1,0 +1,123 @@
+<%@ Language=JavaScript%>
+<% 
+	var gamename = "asbball2005ps2"
+	var GAMEID = 849;
+
+	// indexed table column id's
+	var PIDCOL		= 0;
+	var WINCOL		= 1;
+	var LOSSCOL		= 2;
+	var DISCOL		= 3;
+	var USERTEAMCOL	= 4;
+	var OPPTEAMCOL	= 5;
+	
+	var GENERAL		= 0;
+	var BATTING		= 1;
+	var PITCHING	= 2;
+	var FIELDING	= 3;
+	var THROUGH_40	= 4;
+	var THROUGH_81	= 5;
+	var THROUGH_162	= 6;
+
+	// client-side definition
+	var NUM_ONLINE_STAT_CATEGORIES = 7;
+	var NUM_LEADERBOARDS		= 42;
+	
+	var LB_GENERAL_ROOKIE_6		= 1;
+	var LB_BATTING_ROOKIE_6		= 2;
+	var LB_PITCHING_ROOKIE_6	= 3;
+	var LB_FIELDING_ROOKIE_6	= 4;
+	var LB_40_ROOKIE_6			= 5;
+	var LB_81_ROOKIE_6			= 6;
+	var LB_162_ROOKIE_6			= 7
+
+	var LB_GENERAL_ROOKIE_9		= 8;
+	var LB_BATTING_ROOKIE_9		= 9;
+	var LB_PITCHING_ROOKIE_9	= 10;
+	var LB_FIELDING_ROOKIE_9	= 11;
+	var LB_40_ROOKIE_9			= 12;
+	var LB_81_ROOKIE_9			= 13;
+	var LB_162_ROOKIE_9			= 14
+	
+	var LB_GENERAL_VETERAN_6	= 15;
+	var LB_BATTING_VETERAN_6	= 16;
+	var LB_PITCHING_VETERAN_6	= 17;
+	var LB_FIELDING_VETERAN_6	= 18;
+	var LB_40_VETERAN_6			= 19;
+	var LB_81_VETERAN_6			= 20;
+	var LB_162_VETERAN_6		= 21;
+
+	var LB_GENERAL_VETERAN_9	= 22;
+	var LB_BATTING_VETERAN_9	= 23;
+	var LB_PITCHING_VETERAN_9	= 24;
+	var LB_FIELDING_VETERAN_9	= 25;
+	var LB_40_VETERAN_9			= 26;
+	var LB_81_VETERAN_9			= 27;
+	var LB_162_VETERAN_9		= 28;
+
+	var LB_GENERAL_ALLSTAR_6	= 29;
+	var LB_BATTING_ALLSTAR_6	= 30;
+	var LB_PITCHING_ALLSTAR_6	= 31;
+	var LB_FIELDING_ALLSTAR_6	= 32;
+	var LB_40_ALLSTAR_6			= 33;
+	var LB_81_ALLSTAR_6			= 34;
+	var LB_162_ALLSTAR_6		= 35;
+
+	var LB_GENERAL_ALLSTAR_9	= 36;
+	var LB_BATTING_ALLSTAR_9	= 37;
+	var LB_PITCHING_ALLSTAR_9	= 38;
+	var LB_FIELDING_ALLSTAR_9	= 39;
+	var LB_40_ALLSTAR_9			= 40;
+	var LB_81_ALLSTAR_9			= 41;
+	var LB_162_ALLSTAR_9		= 42;
+
+	var LB_GENERAL_2_ROOKIE_6	= 43;
+	var LB_BATTING_2_ROOKIE_6	= 44;
+	var LB_PITCHING_2_ROOKIE_6	= 45;
+	var LB_FIELDING_2_ROOKIE_6	= 46;
+	var LB_40_2_ROOKIE_6		= 47;
+	var LB_81_2_ROOKIE_6		= 48;
+	var LB_162_2_ROOKIE_6		= 49;
+
+	var LB_GENERAL_2_ROOKIE_9	= 50;
+	var LB_BATTING_2_ROOKIE_9	= 51;
+	var LB_PITCHING_2_ROOKIE_9	= 52;
+	var LB_FIELDING_2_ROOKIE_9	= 53;
+	var LB_40_2_ROOKIE_9		= 54;
+	var LB_81_2_ROOKIE_9		= 55;
+	var LB_162_2_ROOKIE_9		= 56;
+	
+	var LB_GENERAL_2_VETERAN_6	= 57;
+	var LB_BATTING_2_VETERAN_6	= 58;
+	var LB_PITCHING_2_VETERAN_6	= 59;
+	var LB_FIELDING_2_VETERAN_6	= 60;
+	var LB_40_2_VETERAN_6		= 61;
+	var LB_81_2_VETERAN_6		= 62;
+	var LB_162_2_VETERAN_6		= 63;
+
+	var LB_GENERAL_2_VETERAN_9	= 64;
+	var LB_BATTING_2_VETERAN_9	= 65;
+	var LB_PITCHING_2_VETERAN_9	= 66;
+	var LB_FIELDING_2_VETERAN_9	= 67;
+	var LB_40_2_VETERAN_9		= 68;
+	var LB_81_2_VETERAN_9		= 69;
+	var LB_162_2_VETERAN_9		= 70;
+
+	var LB_GENERAL_2_ALLSTAR_6	= 71;
+	var LB_BATTING_2_ALLSTAR_6	= 72;
+	var LB_PITCHING_2_ALLSTAR_6	= 73;
+	var LB_FIELDING_2_ALLSTAR_6	= 74;
+	var LB_40_2_ALLSTAR_6		= 75;
+	var LB_81_2_ALLSTAR_6		= 76;
+	var LB_162_2_ALLSTAR_6		= 77;
+
+	var LB_GENERAL_2_ALLSTAR_9	= 78;
+	var LB_BATTING_2_ALLSTAR_9	= 79;
+	var LB_PITCHING_2_ALLSTAR_9	= 80;
+	var LB_FIELDING_2_ALLSTAR_9	= 81;
+	var LB_40_2_ALLSTAR_9		= 82;
+	var LB_81_2_ALLSTAR_9		= 83;
+	var LB_162_2_ALLSTAR_9		= 84;
+	
+	var colnames = ["Rank", "Name", "W", "L", "D", "User Team Rating", "Opp Team Rating" ];
+%>

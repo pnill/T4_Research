@@ -1,0 +1,158 @@
+;==========================================================================
+;
+; TRI_STRIPS_MAIN.VSM
+;
+;   This is the main transform loop for all tri strip vertices
+;   This file contains two transform loops, one for 3-component verts
+;       and one for 4-component verts.
+;   By the time the verts reach the actual transform loop:
+;       3-component verts contain color, a UV pair, and position
+;       4-component verts contain color, 2 UV pairs, and position
+;
+;   Preprocessing
+;       The main loop calls a series of preprocess functions on the vert 
+;           data:
+;       Lighting
+;           If the verts are set as "lit," then the data will contain
+;               a normal.
+;           In a 3-component vert, the normal is transformed to a color
+;               The color is written back over the normal, so the normal
+;               goes away
+;                   UV      ==>     UV
+;                   Normal  ==>     Color
+;                   Pos     ==>     Pos
+;           In a 4-component vert, the normal is used to generate the 
+;               color, but the color is written to a separate address and
+;               the normal stays intact
+;                   UV1         ==>     UV1
+;                   Normal      ==>     Normal
+;                   EmptyColor  ==>     LitColor
+;                   Pos         ==>     Pos
+;       Environment Mapping
+;           If the verts are set as "envmap"
+;           This only applies to 4-component verts and is the REASON for
+;               4-component verts
+;           The normal of the vertex is transformed into a second UV pair
+;               for the vert.
+;           The final kicks related to these faces are handled through 
+;               special GIFtags that mask out register entries for one
+;               or the other of the UV pairs
+;                   UV1     ==>     UV1
+;                   Normal  ==>     UV2
+;                   Color   ==>     Color   (either lit or pre-lit)
+;                   Pos     ==>     Pos
+;       Clipping
+;           If the verts are set as "clip"
+;           We are using a strip clipper
+;           The strip clipper is handled in two steps:
+;               Preprocess the entire list of verts into buffers of strips
+;                   which require clipping (first address + vert count)
+;               Loop over the buffers and produce new strips which are
+;                   kick by the clipper
+;           See TRI_STRIPS_PRECLIPPER.VSM and TRI_STRIPS_CLIPPER.VSM for
+;               more information
+;
+;   Vertex Transform
+;       After all of the preprocess steps finish their thing, the verts
+;           are transformed in one of two different loops
+;           3-component loop
+;               performs 1 UV perspective correction
+;           4-component loop
+;               performs 2 UV perspective corrections
+;       In both cases, the data is transformed back over the original
+;           vertex memory location.  This saves us from having to read/
+;           write the color data so we move less data
+;
+;==========================================================================
+
+TRI_STRIP_MAIN:
+    nop                                 iaddiu vi10, vi00, SUBMESH_FLAGS
+    nop[e]                              ilw.w vi13, 0(vi10)     ; grab the flags for this submesh
+    nop                                 nop
+    
+;========================================================================
+
+TRI_STRIP_MESH_LOOP:
+
+    nop                                 iaddiu vi10, vi00, SUBMESH_FLAGS
+    nop                                 ilw.w vi13, 0(vi10)         ; grab the flags for this submesh
+    
+    nop                                 xtop    vi14                ; grab the ITOP (changes per strip)
+    nop                                 iaddiu  vi09, vi00, 0x01
+    nop                                 iaddiu  vi08, vi00, 0x02
+    nop                                 iand    vi12, vi13, vi09    ; test for lighting
+    nop                                 iand    vi11, vi13, vi08    ; test for envmapping
+    nop                                 ibeq    vi12, vi00, TRI_STRIP_SKIP_LIGHTING
+    nop                                 nop
+    nop                                 bal     vi15, TRI_STRIP_LIGHT
+    nop                                 nop
+TRI_STRIP_SKIP_LIGHTING:
+    nop                                 ibeq    vi11, vi00, TRI_STRIP_SKIP_ENVMAP
+    nop                                 nop
+    
+    nop                                 bal     vi15, TRI_STRIP_ENVMAP
+    nop                                 nop
+    
+TRI_STRIP_SKIP_ENVMAP:
+    nop                                 iaddiu  vi09, vi00, 0x08
+    nop                                 ilw.x   vi04, 0(vi14)x          ; load the vert count
+    nop                                 iand    vi12, vi13, vi09    ; test for lighting
+    nop                                 iaddiu  vi09, vi00, 0x04
+    nop                                 ibeq    vi12, vi00, TRI_STRIP_SKIP_SHADOW
+    nop                                 iaddiu  vi05, vi14, 3           ; set the walking vert addr
+    nop                                 bal     vi15, TRI_SHADOW
+    nop                                 iand    vi12, vi13, vi09   ; test for clipping
+    nop                                 b       TRI_STRIP_VERT_LOOP_3_COMP_END
+    nop                                 nop
+    
+TRI_STRIP_SKIP_SHADOW:    
+    nop                                 ilw.x   vi04, 0(vi14)x          ; load the vert count
+    nop                                 iaddiu  vi09, vi00, 0x04
+    nop                                 iaddiu  vi05, vi14, 3           ; set the walking vert addr
+    nop                                 bal     vi15, TRI_STRIP_VERT_3_COMP
+    nop                                 iand    vi12, vi13, vi09   ; test for clipping
+
+;========================================================================
+
+TRI_STRIP_VERT_LOOP_3_COMP_END:
+    ; setup the GIFtag
+    nop                                 iaddiu vi10, vi14, 2
+    nop                                 nop
+    nop                                 xgkick vi10
+
+TRI_STRIP_VERT_LOOP_3_COMP_END_NO_CLIP:
+    nop                                 nop
+    nop[e]                              nop
+    nop                                 nop
+    nop                                 b TRI_STRIP_MESH_LOOP
+    nop                                 nop
+
+;========================================================================
+
+TRI_STRIP_VERT_LOOP_4_COMP_END:
+    ; setup the GIFtags
+    nop                                 iaddiu vi10, vi14, 2
+    nop                                 iaddiu vi11, vi14, 1
+;    nop                                 xgkick vi10
+;    nop[e]                              nop
+    nop                                 lq vf01, 0(vi11)           ; move GIFtag from vi11
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+    nop                                 sq vf01, 0(vi10)           ; move GIFtag to vi10
+    nop                                 nop
+    nop                                 nop
+    nop                                 nop
+;    nop                                 xgkick vi10
+
+;    nop                                 nop
+;    nop                                 b TRI_STRIP_POSTPROCESS
+;    nop                                 nop
+    
+    nop                                 nop
+    nop[e]                              nop
+    nop                                 nop
+    nop                                 b TRI_STRIP_MESH_LOOP
+    nop                                 nop
+    
+;========================================================================

@@ -1,0 +1,221 @@
+/********************************************************************************
+*                                                                               *
+* Tri-Strip Shadow Rendering                                                    *
+*                                                                               *
+*********************************************************************************
+*                                                                               *
+* Basics:                                                                       *
+*                                                                               *
+* Registers:                                                                    *
+*   "System" reserved - please do not modify (save and restore if necessary)    *
+*       vi11                envmapping flag                                     *
+*       vi12                clip-flag                                           *
+*       vi13                submesh flags                                       *
+*       vi14                itop                                                *
+*       vi15                return address                                      *
+*   Local Usage                                                                 *
+*       Integer:                                                                *
+*       Floating-point:                                                         *
+*           Constants:                                                          *
+*           Working variables:                                                  *
+*                                                                               *
+********************************************************************************/
+
+
+
+
+
+
+
+; always culltest
+; never envmap
+; stride is 2
+; must "generate" color (0,0,0,0)
+
+TRI_SHADOW:
+
+    sub.xyzw    vf09, vf00, vf00        iaddiu      vi08, vi00, 0x7FFF
+    sub.xyzw    vf10, vf00, vf00        iaddiu      vi08, vi08, 0x1        
+    sub.xyzw    vf04, vf00, vf00        ibeq        vi04, vi00, TRI_SHADOW_LOOP_RETURN_FINISHED
+    ftoi0.xyzw  vf04, vf04              loi         4095.0
+    addi.xy     vf09, vf09, i           loi         30000.0
+    addi.w      vf09, vf09, i           lq.xyzw     vf01, 1(vi05)
+    nop                                 loi         10.0
+    addi.w      vf10, vf10, i           iaddiu      vi09, vi08, 1
+    
+TRI_SHADOW_LOOP_START:
+    mulaw.xyzw  acc, vf23, vf00w        lq.xyzw     vf02, 3(vi05)
+    maddaz.xyzw acc, vf22, vf01z        lq.xyzw     vf03, 5(vi05)
+    madday.xyzw acc, vf21, vf01y        nop
+    maddx.xyzw  vf01, vf20, vf01x       nop
+    mulaw.xyzw  acc, vf23, vf00w        nop
+    maddaz.xyzw acc, vf22, vf02z        nop
+    madday.xyzw acc, vf21, vf02y        nop
+    maddx.xyzw  vf02, vf20, vf02x       div         q, vf00w, vf01w
+    mulaw.xyzw  acc, vf23, vf00w        nop
+    maddaz.xyzw acc, vf22, vf03z        nop
+    madday.xyzw acc, vf21, vf03y        nop
+    maddx.xyzw  vf03, vf20, vf03x       ercpr       p, vf02w
+    nop                                 nop
+    nop                                 nop
+    mulq.xyz    vf01, vf01, q           nop
+    nop                                 div         q, vf00w, vf03w
+    nop                                 nop
+    nop                                 nop
+    sub.xyw     vf11, vf10, vf01        iaddiu      vi07, vi00, 0x00d0
+    sub.xyw     vf12, vf01, vf09        mfp.w       vf01w, p
+    nop                                 nop
+    nop                                 nop
+    mulq.xyz    vf03, vf03, q           fmand       vi01, vi07
+    ftoi4.xyz   vf05, vf01              fmand       vi01, vi01
+    nop                                 mfp.w       vf02w, p
+    nop                                 nop
+    sub.xyw     vf11, vf10, vf03        nop
+    sub.xyw     vf12, vf03, vf09        nop
+    mulw.xyz    vf02, vf02, vf02w       nop
+    nop                                 nop
+    nop                                 fmand       vi03, vi07
+    nop                                 fmand       vi03, vi03
+    sub.xyw     vf11, vf10, vf02        iaddiu      vi05, vi05, 6
+    sub.xyw     vf12, vf02, vf09        iaddi       vi04, vi04, -3
+    ftoi4.xyz   vf07, vf03              nop
+    ftoi4.xyz   vf06, vf02              lq.xyzw     vf01, 1(vi05)
+    nop                                 fmand       vi02, vi07
+    nop                                 fmand       vi02, vi02
+    nop                                 ibeq        vi04, vi00, TRI_SHADOW_LOOP_END
+    nop                                 nop
+    nop                                 b           TRI_SHADOW_STORE_AND_LOOP
+    nop                                 nop
+
+TRI_SHADOW_LOOP:
+;   Start 3 vert transform in upper     load vert positions in lower
+    mulaw.xyzw  acc, vf23, vf00w        lq.xyzw     vf02, 3(vi05)
+    maddaz.xyzw acc, vf22, vf01z        lq.xyzw     vf03, 5(vi05)
+    
+;                                       combine clip test flags
+    madday.xyzw acc, vf21, vf01y        iand        vi06, vi01, vi02
+    maddx.xyzw  vf01, vf20, vf01x       iand        vi06, vi06, vi03
+    mulaw.xyzw  acc, vf23, vf00w        nop
+    maddaz.xyzw acc, vf22, vf02z        nop
+    madday.xyzw acc, vf21, vf02y        nop
+    
+;                                       start perspective divide on vert 1
+    maddx.xyzw  vf02, vf20, vf02x       div         q, vf00w, vf01w
+    mulaw.xyzw  acc, vf23, vf00w        nop
+    maddaz.xyzw acc, vf22, vf03z        nop
+    
+;                                       test for culling - all 3 cull results combined into vi06
+    madday.xyzw acc, vf21, vf03y        ibne        vi06, vi07, TRI_SHADOW_AFTER_CULL
+    
+;                                       start perspective divide on vert 2
+    maddx.xyzw  vf03, vf20, vf03x       ercpr       p, vf02w
+    
+TRI_SHADOW_CULL:
+;                                       set this triangle as culled
+    nop                                 isw.w       vi08, 5(vi05)
+    
+TRI_SHADOW_AFTER_CULL:
+; jump to here to skip culling of this tri - falls through anyway
+    nop                                 nop
+    nop                                 nop
+    
+;   finish perspective on vert 1    
+    mulq.xyz    vf05, vf01, q           nop
+    
+;                                       start perspective divide on vert 3    
+    nop                                 div         q, vf00w, vf03w
+    nop                                 nop
+    nop                                 nop
+
+;   start culling tests for vert 1      build a culling mask for later use    
+    sub.xyw     vf11, vf10, vf05        iaddiu      vi07, vi00, 0x00d0
+    sub.xyw     vf12, vf05, vf09        nop
+    
+;   convert vert 1 to integer    
+    ftoi4.xyz   vf05, vf05              nop
+    nop                                 nop
+    
+;   finish perspective on vert 3        cull test for vert 1 - bit test results from 2 sub's above
+    mulq.xyz    vf07, vf03, q           fmand       vi01, vi07
+    nop                                 fmand       vi01, vi01
+    
+;                                       grab perspective divide result for vert 2
+    nop                                 mfp.w       vf02w, p
+    nop                                 nop
+    
+;   start culling tests for vert 3
+    sub.xyw     vf11, vf10, vf07        nop
+    sub.xyw     vf12, vf07, vf09        nop
+    
+;   finish perspective on vert 2        decrement running vert count    
+    mulw.xyz    vf06, vf02, vf02w       iaddi       vi04, vi04, -3
+    
+;                                       step vert pointer to next triangle
+    nop                                 iaddiu      vi05, vi05, 6   ; step to next tri
+    
+;                                       cull test for vert 3 - bit test results from 2 sub's above
+    nop                                 fmand       vi03, vi07
+    nop                                 fmand       vi03, vi03
+    
+;   start culling tests for vert 2
+    sub.xyw     vf11, vf10, vf06        nop
+    
+;                                       load next 3 verts
+    sub.xyw     vf12, vf06, vf09        lq.xyzw     vf01, 1(vi05)   ; load next tri
+    
+;   convert vert 3 to integer    
+    ftoi4.xyz   vf07, vf07              lq.xyzw     vf02, 3(vi05)
+    nop                                 lq.xyzw     vf03, 5(vi05)
+    
+;                                       cull test for vert 2 - bit test results from 2 sub's above    
+    nop                                 fmand       vi02, vi07
+    
+;   convert vert 2 to integer    
+    ftoi4.xyz   vf06, vf06              fmand       vi02, vi02
+    
+;                                       test to see if we are out of verts
+    nop                                 ibeq        vi04, vi00, TRI_SHADOW_LOOP_END
+    
+TRI_SHADOW_STORE_AND_LOOP:
+;                                       store colors and positions
+    nop                                 sq.xyzw     vf04, -6(vi05)
+    nop                                 sq.xyz      vf05, -5(vi05)
+    nop                                 sq.xyzw     vf04, -4(vi05)
+    nop                                 sq.xyz      vf06, -3(vi05)
+    nop                                 sq.xyzw     vf04, -2(vi05)
+    
+;                                       begin again
+    nop                                 b           TRI_SHADOW_LOOP
+    nop                                 sq.xyz      vf07, -1(vi05)
+
+    
+
+
+TRI_SHADOW_LOOP_END:
+;                                       store colors and positions
+    nop                                 sq.xyz      vf05, -5(vi05)
+    nop                                 sq.xyzw     vf04, -6(vi05)
+    
+;                                       build cull mask
+    nop                                 iaddiu      vi07, vi00, 0x00d0
+    
+;                                       combine cull tests for all 3 verts
+    nop                                 iand        vi06, vi01, vi02
+    nop                                 iand        vi06, vi06, vi03
+    
+;                                       finish storing positions and colors    
+    nop                                 sq.xyzw     vf04, -4(vi05)
+    nop                                 sq.xyzw     vf04, -2(vi05)
+    nop                                 sq.xyz      vf06, -3(vi05)
+    
+;                                       cull test
+    nop                                 ibne        vi06, vi07, TRI_SHADOW_LOOP_RETURN_FINISHED
+    nop                                 sq.xyz      vf07, -1(vi05)
+    
+;                                       set this triangle as culled
+    nop                                 isw.w       vi08, 5(vi05)
+
+TRI_SHADOW_LOOP_RETURN_FINISHED:
+;                                       get the f^$k out of Dodge.
+    nop                                 jr          vi15
+    nop                                 nop

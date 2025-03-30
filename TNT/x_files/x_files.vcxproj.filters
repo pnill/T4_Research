@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Implementation">
+      <UniqueIdentifier>{12b30b0e-54ec-476f-81ba-e918cc5e5409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\Inline">
+      <UniqueIdentifier>{ddcaa20b-4205-42c0-aa78-b7e6625034c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Implementation\External">
+      <UniqueIdentifier>{94fbf9df-30c7-44f6-856c-2b5a09e516c1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="x_bitmap.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_color.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_debug.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_files.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_math.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_math_tables.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_memory.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_plus.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_stdio.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_time.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+    <ClCompile Include="x_vsprtf.cpp">
+      <Filter>Implementation</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="x_bitmap_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="x_color_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="x_math_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="x_math_m4_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="x_math_q_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="x_math_r3_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="x_math_v2_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="x_math_v3_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="x_math_v4_inline.hpp">
+      <Filter>Implementation\Inline</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\PS2\sce\ee\gcc\ee\include\_ansi.h">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Program Files\Microsoft Visual Studio\VC98\Include\BASETSD.H">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\PS2\sce\ee\gcc\ee\include\sys\config.h">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\PS2\TnT\PS2_in_VC.h">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\PS2\sce\ee\gcc\ee\include\sys\reent.h">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\PS2\sce\ee\include\sifdev.h">
+      <Filter>Implementation\External</Filter>
+    </ClInclude>
+    <ClInclude Include="x_bitmap.hpp" />
+    <ClInclude Include="x_color.hpp" />
+    <ClInclude Include="x_debug.hpp" />
+    <ClInclude Include="x_files.hpp" />
+    <ClInclude Include="x_math.hpp" />
+    <ClInclude Include="x_memory.hpp" />
+    <ClInclude Include="x_plus.hpp" />
+    <ClInclude Include="x_stats.hpp" />
+    <ClInclude Include="x_stdio.hpp" />
+    <ClInclude Include="x_target.hpp" />
+    <ClInclude Include="x_time.hpp" />
+    <ClInclude Include="x_types.hpp" />
+  </ItemGroup>
+</Project>

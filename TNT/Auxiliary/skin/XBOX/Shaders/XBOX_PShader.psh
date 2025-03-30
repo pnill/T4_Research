@@ -1,0 +1,12 @@
+;shadowbuffer pixel shader
+xps.1.1
+
+def c1, 0.30f, 0.30f, 0.30f, 1.0f  // reduces the brightness of the environment map texture (used to be TFACTOR)
+
+tex t0			;get texture
+tex t1			;environment map texture
+tex t2			;get shadow from light
+add	r0, t2, c0	;shadow+ambient
+mul r0, v0, r0  ;diffuse*shadowmul	r0, t0, r0	;texture*light
+mul	r0, t0, r0	;texture*light
+mad_x2 r0.rgb, c1.rgb, t1.rgb, r0.rgb	;environment reduce * environment + current

@@ -1,0 +1,71 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AUX_Bitmap", "..\..\Auxiliary\Bitmap\AUX_Bitmap.vcproj", "{E004B180-E80D-4828-9C17-C21D80C0FE30}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZLib", "..\..\Auxiliary\ZLib\ZLib.vcproj", "{E5F8ECF6-1C1F-4B94-8F4B-DDA5305364ED}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "x_files", "..\..\x_files\x_files.vcproj", "{44EA15CD-71BD-473E-AC6E-0579B0B22904}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TBlockTool", "TBlockTool.vcproj", "{704B68D9-F282-400B-96AA-7774631B02DB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E004B180-E80D-4828-9C17-C21D80C0FE30} = {E004B180-E80D-4828-9C17-C21D80C0FE30}
+		{44EA15CD-71BD-473E-AC6E-0579B0B22904} = {44EA15CD-71BD-473E-AC6E-0579B0B22904}
+		{E5F8ECF6-1C1F-4B94-8F4B-DDA5305364ED} = {E5F8ECF6-1C1F-4B94-8F4B-DDA5305364ED}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{E004B180-E80D-4828-9C17-C21D80C0FE30}.Debug.ActiveCfg = Debug|Win32
+		{E004B180-E80D-4828-9C17-C21D80C0FE30}.Debug.Build.0 = Debug|Win32
+		{E004B180-E80D-4828-9C17-C21D80C0FE30}.Release.ActiveCfg = Release|Win32
+		{E004B180-E80D-4828-9C17-C21D80C0FE30}.Release.Build.0 = Release|Win32
+		{E5F8ECF6-1C1F-4B94-8F4B-DDA5305364ED}.Debug.ActiveCfg = Debug|Win32
+		{E5F8ECF6-1C1F-4B94-8F4B-DDA5305364ED}.Debug.Build.0 = Debug|Win32
+		{E5F8ECF6-1C1F-4B94-8F4B-DDA5305364ED}.Release.ActiveCfg = Release|Win32
+		{E5F8ECF6-1C1F-4B94-8F4B-DDA5305364ED}.Release.Build.0 = Release|Win32
+		{44EA15CD-71BD-473E-AC6E-0579B0B22904}.Debug.ActiveCfg = Debug|Win32
+		{44EA15CD-71BD-473E-AC6E-0579B0B22904}.Debug.Build.0 = Debug|Win32
+		{44EA15CD-71BD-473E-AC6E-0579B0B22904}.Release.ActiveCfg = Release|Win32
+		{44EA15CD-71BD-473E-AC6E-0579B0B22904}.Release.Build.0 = Release|Win32
+		{704B68D9-F282-400B-96AA-7774631B02DB}.Debug.ActiveCfg = Debug|Win32
+		{704B68D9-F282-400B-96AA-7774631B02DB}.Debug.Build.0 = Debug|Win32
+		{704B68D9-F282-400B-96AA-7774631B02DB}.Release.ActiveCfg = Release|Win32
+		{704B68D9-F282-400B-96AA-7774631B02DB}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 4
+		SccProjectUniqueName0 = ..\\..\\Auxiliary\\Bitmap\\AUX_Bitmap.vcproj
+		SccProjectName0 = \u0022$/TnT/Auxiliary/Bitmap\u0022,\u0020WSCAAAAA
+		SccLocalPath0 = ..\\..\\Auxiliary\\Bitmap
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName1 = ..\\..\\x_files\\x_files.vcproj
+		SccProjectName1 = \u0022$/TnT/x_files\u0022,\u0020GFGAAAAA
+		SccLocalPath1 = ..\\..\\x_files
+		SccProvider1 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName2 = ..\\..\\Auxiliary\\ZLib\\ZLib.vcproj
+		SccProjectName2 = \u0022$/TNT/Auxiliary/ZLib\u0022,\u0020NYHAAAAA
+		SccLocalPath2 = ..\\..\\Auxiliary\\ZLib
+		SccProvider2 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+		SccProjectUniqueName3 = TBlockTool.vcproj
+		SccProjectName3 = \u0022$/TNT/Apps/TBlockTool\u0022,\u0020APAAAAAA
+		SccLocalPath3 = .
+		SccProvider3 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+		CanCheckoutShared = false
+	EndGlobalSection
+EndGlobal

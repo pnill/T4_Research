@@ -1,0 +1,94 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "AUX_Bitmap"=..\..\Auxiliary\Bitmap\AUX_Bitmap.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/TnT/Auxiliary/Bitmap", WSCAAAAA
+    ..\..\auxiliary\bitmap
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "RipStad"=.\RipStad.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/TnT/Apps/RipStad", VSDAAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name AUX_Bitmap
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name x_files
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name x_std
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "x_files"=..\..\x_files\x_files.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/TnT/x_files", GFGAAAAA
+    ..\..\x_files
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "x_std"=..\..\x_std\x_std.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/TNT/x_std", QEBAAAAA
+    ..\..\x_std
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+    begin source code control
+    "$/TNT/Apps/RipStad", XSKAAAAA
+    .
+    end source code control
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

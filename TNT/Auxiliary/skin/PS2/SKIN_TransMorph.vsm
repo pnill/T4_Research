@@ -1,0 +1,117 @@
+;==========================================================================
+;
+; SKIN_TRANSMORPH.VSM
+;
+;==========================================================================
+
+;==========================================================================
+;
+; CMD_TRANSFORM_MORPH
+;
+; W-EMPTY Z-NumTransforms Y-CmdOffset X-Cmd
+;
+; PARAM1 - NVerts
+;
+;==========================================================================
+;   VI00    Const (0)
+;L  VI01    Const (0xff) used in AND operations
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06    temp
+;L  VI07    Vert offset
+;L  VI08    Source Delta
+;   VI09    Command param 1 - NDeltas
+;   VI10    Command param 2 - Unused
+;   VI11    Opcode from latest command
+;S  VI12    GIF packet buffer base address (for double buffering)
+;S  VI13    RESERVED - Next command address in input buffer for kernel
+;S  VI14    RESERVED - Current address of input buffer for kernel
+;S  VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;L  VF01    Const 0xff
+;L  VF02    Source Delta
+;L  VF03    Vert
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10
+;   VF11
+;   VF12
+;   VF13
+;   VF14
+;   VF15
+;   VF16
+;   VF17
+;   VF18
+;   VF19
+;   VF20
+;   VF21
+;   VF22
+;   VF23
+;   VF24
+;   VF25
+;   VF26
+;   VF27    Light color matrix qword 0    
+;   VF28    Light color matrix qword 1    
+;   VF29    Light color matrix qword 2    
+;   VF30    Light color matrix qword 3    
+;S  VF31    Const (128, 16, 0.5, 4095)
+;==========================================================================
+
+; OUR JUMP TABLE - THE TRANSFORM OPCODES SHOULD MATCH THIS JUMP TABLE,
+;                  OTHERWISE, ALL HELL BREAKS LOOSE
+
+CMD_TRANSFORM_MORPH:
+
+        ; It is possible to have zero deltas, take care of this case
+        NOP                             IBEQ VI09, VI00, KERNEL_RET
+        NOP                             NOP
+
+        ; Let VI08 be the source ptr
+        NOP                             IADDI VI08, VI14, 1
+
+ADD_DELTA_LOOP:
+
+        NOP                             IADDI VI09, VI09, -1    ; NDeltas--
+
+        ; figure out where the Position to be modified is
+        NOP                             IADD VI07, VI00, VI00   ; VI07 = 0;
+        NOP                             ILW.w VI07, 0(VI08)     ; VI07 = Vert Offset
+        NOP                             IADD VI07, VI07, VI14   ; VI07 = InputBufferBase + VertOffset
+
+        ;#####
+        NOP                             IADDIU VI06, VI00, FREE_SPACE
+        NOP                             ISW.w VI07, 0(VI06)
+        ;#####
+
+        ; Load and add the delta
+        NOP                             LQ.xyz VF02, 0(VI08)    ; VF02 = Delta
+        NOP                             LQ.xyzw VF03, 0(VI07)   ; VF03 = Pos
+        NOP                             NOP
+        NOP                             NOP
+        ITOF12.xyz VF02, VF02           NOP
+        NOP                             NOP
+        NOP                             NOP
+        NOP                             NOP
+        ADD.xyz VF03, VF03, VF02        NOP                     ; VF03 = Pos + 1.0f
+;        ADD.xyz VF03, VF03, VF00        NOP
+
+        ;#####
+        NOP                             IADDIU VI06, VI00, FREE_SPACE
+        NOP                             SQ.xyz VF02, 0(VI06)
+        ;#####
+
+        ; store the result vert
+        NOP                             SQ.xyzw VF03, 0(VI07)    ; store the vert
+
+        NOP                             IBNE VI09, VI00, ADD_DELTA_LOOP
+        NOP                             IADDI VI08, VI08, 1     ; (BDS) SrcPtr++
+
+        NOP                             B KERNEL_RET
+        NOP                             NOP

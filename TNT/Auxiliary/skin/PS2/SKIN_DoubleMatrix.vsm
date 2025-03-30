@@ -1,0 +1,252 @@
+;==========================================================================
+;
+; TRANSFORM_DOUBLE_MATRIX
+;
+;==========================================================================
+;   VI00    Const (0)
+;S  VI01    Const (0xff) used by AND operations
+;   VI02
+;   VI03
+;   VI04
+;   VI05
+;   VI06
+;   VI07
+;S  VI08    Source Addr of Input buffer
+;S  VI09    Command param 1 - NTransforms
+;   VI10    Command param 2 - Unused
+;   VI11    Opcode from latest command
+;S  VI12    GIF packet buffer base address (for double buffering)
+;S  VI13    RESERVED - Next command address in input buffer for kernel
+;S  VI14    RESERVED - Current address of input buffer for kernel
+;S  VI15    RESERVED - Return address for function calls
+;==========================================================================
+;   VF00    Const x=0 y=0 z=0 w=1
+;   VF01
+;   VF02
+;   VF03
+;   VF04
+;   VF05
+;   VF06
+;   VF07
+;   VF08
+;   VF09
+;   VF10
+;   VF11
+;   VF12
+;   VF13
+;   VF14
+;   VF15
+;   VF16
+;   VF17
+;   VF18
+;   VF19
+;   VF20
+;   VF21
+;   VF22
+;   VF23
+;   VF24	Light color matrix qword 0
+;   VF25	Light color matrix qword 1
+;   VF26	Light color matrix qword 2
+;   VF27    Light color matrix qword 3
+;   VF28    Light dir matrix qword 0
+;   VF29    Light dir matrix qword 1
+;   VF30    Light dir matrix qword 2
+;S  VF31    Const (255, 16, 0.5, 0)
+;==========================================================================
+
+;==========================================================================
+;  ABOUT THE IMPLEMENTATION:
+;
+;   To transform a vertex by more than one matrix, we transform the pos
+;   by all matrices, and interpolate for the final value before we do
+;   the screen projection.
+;
+;   We also transform the normal's by all matrices, and interpolate for
+;   the final normal. One optimization might be to choose the matrix with
+;   the highest weight for the normal's, since it only affects lighting.
+;
+;   The weight values are -hidden- in the lower eight bits of the normal's
+;   members. They are saved as 0.8 fixed point. You will notice that we
+;   cannot convert from 0.8 fixed point to float easily, but we can
+;   convert from 20.12 to float. So that is what we do, and then multiply
+;   by sixteen to get the proper weight.
+;==========================================================================
+
+		;// register usage:
+		;// vf01	xyz0a
+		;// vf02	xyz0b (finished xyz)
+		;// vf03	rgb0a
+		;// vf04	rgb0b (finished rgb)
+		;// vf05	stq0
+		;// vf06	weight0
+		;// vf07	xyz1a
+		;// vf08	xyz1b (finished xyz)
+		;// vf09	rgb1a
+		;// vf10	rgb1b (finished rgb)
+		;// vf11	stq1
+		;// vf12	weight1
+		;// vf14	L2S
+		;// vf15	L2S
+		;// vf16	L2S
+		;// vf17	L2S
+		;// vf18	matrix A light matrix
+		;// vf19	matrix A light matrix
+		;// vf20	matrix A light matrix
+		;// vf21	matrix B light matrix
+		;// vf22	matrix B light matrix
+		;// vf23	matrix B light matrix
+
+		;// vi02	matrix A offset
+		;// vi03	matrix B offset
+		;// vi04	weight a
+		;// vi05	weight b
+		;// vi06	ci0/temp
+		;// vi07	ci1
+		;// vi10	NVerts
+
+		;// load up the registers
+		;// @ in the comments means its part of the loop preamble
+TRANSFORM_DOUBLE_MATRIX:
+		nop								ilw.y vi03, 1(vi08)													; matrix B offset
+		nop								ilw.x vi02, 1(vi08)													; matrix A offset
+		nop								ilw.y vi10, 0(vi08)													; NVerts
+		nop								iaddi vi08, vi08, 2													; adv ptr to pSrc
+		nop								iaddiu vi03, vi03, MATRIX_CACHE_BASE								; matrix B ptr
+		nop								lq.xyz  vf23, 6(vi03)												; load matrix B NL2W col2
+		nop								lq.xyz	vf22, 5(vi03)												; load matrix B NL2W col1
+		nop								lq.xyz  vf21, 4(vi03)												; load matrix B NL2W col0
+		nop								iaddiu vi02, vi02, MATRIX_CACHE_BASE								; matrix A ptr
+		mulaz.xyz  acc, vf30, vf23z		lq.xyz  vf20, 6(vi02)					; BLightDir*NL2W			; load matrix A NL2W col2
+		madday.xyz acc, vf29, vf23y		lq.xyz  vf19, 5(vi02)					; BLightDir*NL2W			; load matrix A NL2W col1
+		maddx.xyz vf23, vf28, vf23x		lq.xyz  vf18, 4(vi02)					; BLightDir*NL2W			; load matrix A NL2W col0
+		mulaz.xyz  acc, vf30, vf22z		ilw.x vi04, 1(vi08)						; BLightDir*NL2W			; @load weight0a
+		madday.xyz acc, vf29, vf22y		ilw.y vi05, 1(vi08)						; BLightDir*NL2W			; @load weight0b
+		maddx.xyz vf22, vf28, vf22x		lq.xyz  vf03, 1(vi08)					; BLightDir*NL2W			; @load normal0
+		mulaz.xyz  acc, vf30, vf21z		lq.xyzw vf01, 0(vi08)					; BLightDir*NL2W			; @load xyz0
+		madday.xyz acc, vf29, vf21y		iand vi04, vi04, vi01					; BLightDir*NL2W			; @mask weight0a
+		maddx.xyz vf21, vf28, vf21x		iand vi05, vi05, vi01					; BLightDir*NL2W			; @mask weight0b
+		mulaz.xyz  acc, vf30, vf20z		mfir.x  vf06, vi04						; ALightDir*NL2W			; @mfir weight0a
+		madday.xyz acc, vf29, vf20y		mfir.y  vf06, vi05						; ALightDir*NL2W			; @mfir weight0b
+		maddx.xyz vf20, vf28, vf20x		ilw.x vi04, 4(vi08)						; ALightDir*NL2W			; @load weight1a
+		mulaz.xyz  acc, vf30, vf19z		ilw.y vi05, 4(vi08)						; ALightDir*NL2W			; @load weight1b
+		madday.xyz acc, vf29, vf19y		lq.xyzw vf05, 2(vi08)					; ALightDir*NL2W			; @load stq0
+		maddx.xyz vf19, vf28, vf19x		iadd vi06, vi00, 1						; ALightDir*NL2W			; vi06=1
+		mulaz.xyz  acc, vf30, vf18z		iand vi04, vi04, vi01					; ALightDir*NL2W			; @mask weight1a
+		madday.xyz acc, vf29, vf18y		iand vi05, vi05, vi01					; ALightDir*NL2W			; @mask weight1b
+		maddx.xyz vf18, vf28, vf18x		mfir.x  vf12, vi04						; ALightDir*NL2W			; @mfir weight1a
+		mulaz.xyz   acc, vf23, vf03z	mfir.y  vf12, vi05						; @dot0b					; @mfir weight1b
+		madday.xyz	acc, vf22, vf03y	iand vi06, vi10, vi06					; @dot0b					; vi06=vi10%2
+		maddx.xyz  vf04, vf21, vf03x	lq.xyzw vf17, 3(vi03)					; @dot0b					; @load L2Sb col3
+		mulaz.xyz   acc, vf20, vf03z	ibeq vi06, vi00, DOUBLE_TRANSFORM_TWO_VERTS			; @dot0a		; do two verts at a time
+		madday.xyz  acc, vf19, vf03y	lq.xyzw vf16, 2(vi03)					; @dot0a					; @load L2Sb col2 (only for single-shot)
+
+
+DOUBLE_TRANSFORM_ONE_VERT:
+		;// do a single-shot if necessary
+		maddx.xyz  vf03, vf18, vf03x	lq.xyzw vf15, 1(vi03)					; dot0a						; load L2Sb col1
+		itof12.xy  vf06, vf06			lq.xyzw vf14, 0(vi03)					; weights0->float			; load L2Sb col0
+		mulaw.xyzw  acc, vf17, vf00w	ilw.x   vi06, 2(vi08)					; trans xyz0b				; load ci0
+		maddaz.xyzw acc, vf16, vf01z	lq.xyzw vf17, 3(vi02)					; trans xyz0b				; load L2Sa col3
+		madday.xyzw acc, vf15, vf01y	lq.xyzw vf16, 2(vi02)					; trans xyz0b				; load L2Sa col2
+		maddx.xyzw vf02, vf14, vf01x	lq.xyzw vf15, 1(vi02)					; trans xyz0b				; load L2Sa col1
+		muly.xy    vf06, vf06, vf31y	lq.xyzw vf14, 0(vi02)					; weights0 *= 16			; load L2Sa col0
+		mulaw.xyzw  acc, vf17, vf00w	iand vi06, vi06, vi01					; trans xyz0a				; mask ci0
+		maddaz.xyzw acc, vf16, vf01z	iaddiu vi08, vi08, 3					; trans xyz0a				; pSrc++
+		madday.xyzw acc, vf15, vf01y	iaddi vi10, vi10, -1					; trans xyz0a				; NVerts--
+		maddx.xyzw vf01, vf14, vf01x	ilw.x vi04, 4(vi08)						; trans xyz0a				; @load weight1a
+		mulay.xyz   acc, vf04, vf06y	ilw.y vi05, 4(vi08)						; weight0b*dot0b			; @load weight1b
+		maddx.xyz  vf04, vf03, vf06x	nop										; weight0a*dot0a
+		mulay.xyzw  acc, vf02, vf06y	nop										; weight0b*xyz0b
+		maddx.xyzw vf02, vf01, vf06x	iand vi04, vi04, vi01					; weight0a*xyz0a			; @mask weight1a
+		nop								iand vi05, vi05, vi01												; @mask weight1b
+		maxx.xyz   vf04, vf04, vf00x	mfir.x  vf12, vi04						; clamp dot0<0				; @mfir weight1a
+		nop								mfir.y  vf12, vi05													; @mfir weight1b
+		nop								div q, vf00w, vf02w													; divide0
+		mulaw.xyzw  acc, vf27, vf00w	ilw.x vi04, 1(vi08)						; calc rgb0					; @load weight0a
+		maddaz.xyzw acc, vf26, vf04z	ilw.y vi05, 1(vi08)						; calc rgb0					; @load weight0b
+		madday.xyzw acc, vf25, vf04y	nop										; calc rgb0
+		maddx.xyzw vf04, vf24, vf04x	nop										; calc rgb0
+		nop								iand vi04, vi04, vi01												; @mask weight0a
+		nop								iand vi05, vi05, vi01												; @mask weight0b
+		mulq.xyzw  vf02, vf02, q		mfir.x  vf06, vi04						; project xyz0				; @mfir weight0a
+		minix.xyzw vf04, vf04, vf31x	mfir.y  vf06, vi05						; clamp rgb>255				; @mfir weight0a
+		mulq.xyzw  vf05, vf05, q		nop										; project stq0
+		nop								nop
+		ftoi4.xyzw vf02, vf02			nop										; xyz0->fixed
+		ftoi0.xyzw vf04, vf04			lq.xyz  vf03, 1(vi08)					; rgb0->fixed				; @load normal0
+		nop								sq.xyzw vf05, 256(vi06)												; store stq0
+		nop								lq.xyzw vf05, 2(vi08)												; @load stq0
+		nop								sq.xyzw vf02, 0(vi06)												; store xyz0
+		mulaz.xyz   acc, vf23, vf03z	ibeq vi10, vi00, DOUBLE_TRANSFORM_FINISHED	; @dot0b
+		madday.xyz  acc, vf22, vf03y	sq.xyzw vf04, 128(vi06)					; @dot0b					; store rgb0
+		maddx.xyz  vf04, vf21, vf03x	lq.xyzw vf01, 0(vi08)					; @dot0b					; @load xyz0
+		mulaz.xyz   acc, vf20, vf03z	lq.xyzw vf17, 3(vi03)					; @dot0a					; @load L2Sb col3
+		madday.xyz  acc, vf19, vf03y	nop										; @dot0a
+
+DOUBLE_TRANSFORM_TWO_VERTS:
+		;// at this point, some of the work has already been done by the loop preamble--see notes above
+		maddx.xyz  vf03, vf18, vf03x	lq.xyzw vf16, 2(vi03)					; dot0a						; load L2Sb col2
+		itof12.xy  vf06, vf06			lq.xyzw vf15, 1(vi03)					; weights0->float			; load L2Sb col1
+		itof12.xy  vf12, vf12			lq.xyzw vf14, 0(vi03)					; weights1->float			; load L2Sb col0
+		mulaw.xyzw  acc, vf17, vf00w	lq.xyz  vf09, 4(vi08)					; trans xyz0b				; load normal1
+		maddaz.xyzw acc, vf16, vf01z	lq.xyzw vf07, 3(vi08)					; trans xyz0b				; load xyz1
+		madday.xyzw acc, vf15, vf01y	lq.xyzw vf11, 5(vi08)					; trans xyz0b				; load stq1
+		maddx.xyzw vf02, vf14, vf01x	ilw.x   vi06, 2(vi08)					; trans xyz0b				; load ci0
+		muly.xy    vf06, vf06, vf31y	ilw.x   vi07, 5(vi08)					; weights0*16				; load ci1
+		muly.xy    vf12, vf12, vf31y	iaddiu vi08, vi08, 6					; weights1*16				; pSrc += 2
+		mulaw.xyzw  acc, vf17, vf00w	iaddi vi10, vi10, -2					; trans xyz1b				; NVerts -= 2
+		maddaz.xyzw acc, vf16, vf07z	nop										; trans xyz1b
+		madday.xyzw acc, vf15, vf07y	lq.xyzw vf17, 3(vi02)					; trans xyz1b				; load L2Sa col3
+		maddx.xyzw vf08, vf14, vf07x	lq.xyzw vf16, 2(vi02)					; trans xyz1b				; load L2Sa col2
+		mulay.xyz   acc, vf04, vf06y	lq.xyzw vf15, 1(vi02)					; weight0b*dot0b			; load L2Sa col1
+		maddx.xyz  vf04, vf03, vf06x	lq.xyzw vf14, 0(vi02)					; weight0a*dot0a			; load L2Sa col0
+		mulaw.xyzw  acc, vf17, vf00w	iand vi06, vi06, vi01					; trans xyz0a				; mask ci0
+		maddaz.xyzw acc, vf16, vf01z	iand vi07, vi07, vi01					; trans xyz0a				; mask ci1
+		madday.xyzw acc, vf15, vf01y	nop										; trans xyz0a
+		maddx.xyzw vf01, vf14, vf01x	nop										; trans xyz0a
+		mulaz.xyz   acc, vf23, vf09z	nop										; dot1b
+		madday.xyz  acc, vf22, vf09y	nop										; dot1b
+		maddx.xyz  vf10, vf21, vf09x	nop										; dot1b
+		mulay.xyzw  acc, vf02, vf06y	nop										; weight0b*xyz0b
+		maddx.xyzw vf02, vf01, vf06x	nop										; weight0a*xyz0a
+		mulaz.xyz   acc, vf20, vf09z	nop										; dot1a
+		madday.xyz  acc, vf19, vf09y	nop										; dot1a
+		maddx.xyz  vf09, vf18, vf09x	nop										; dot1a
+		maxx.xyz   vf04, vf04, vf00x	div q, vf00w, vf02w						; clamp dot0<0				; divide0
+		mulaw.xyzw  acc, vf17, vf00w	nop										; trans xyz1a
+		maddaz.xyzw acc, vf16, vf07z	nop										; trans xyz1a
+		madday.xyzw acc, vf15, vf07y	nop										; trans xyz1a
+		maddx.xyzw vf07, vf14, vf07x	nop										; trans xyz1a
+		mulay.xyz   acc, vf10, vf12y	nop										; weight1b*dot1b
+		maddx.xyz  vf10, vf09, vf12x	nop										; weight1a*dot1a
+		mulay.xyzw  acc, vf08, vf12y	ilw.x   vi04, 1(vi08)					; weight1b*xyz1b			; @load weight0a
+		maddx.xyzw vf08, vf07, vf12x	ilw.y   vi05, 1(vi08)					; weight1a*xyz1a			; @load weight0b
+		mulaw.xyzw  acc, vf27, vf00w	nop										; calc rgb0
+		maddaz.xyzw acc, vf26, vf04z	nop										; calc rgb0
+		maxx.xyz   vf10, vf10, vf00x	iand vi04, vi04, vi01					; clamp dot1<0				; @mask weight0a
+		mulq.xyzw  vf02, vf02, q		div q, vf00w, vf08w						; project xyz0				; divide1
+		mulq.xyzw  vf05, vf05, q		iand vi05, vi05, vi01					; project stq0				; @mask weight0b
+		madday.xyzw acc, vf25, vf04y	mfir.x  vf06, vi04						; calc rgb0					; @mfir weight0a
+		maddx.xyzw vf04, vf24, vf04x	mfir.y  vf06, vi05						; calc rgb0					; @mfir weight0b
+		mulaw.xyzw  acc, vf27, vf00w	lq.xyzw vf03, 1(vi08)					; calc rgb1					; @load normal0
+		maddaz.xyzw acc, vf26, vf10z	sq.xyzw vf05, 256(vi06)					; calc rgb1					; store stq0
+		madday.xyzw acc, vf25, vf10y	ilw.x   vi04, 4(vi08)					; calc rgb1					; @load weight1a
+		maddx.xyzw vf10, vf24, vf10x	ilw.y   vi05, 4(vi08)					; calc rgb1					; @load weight1b
+		mulq.xyzw  vf08, vf08, q		lq.xyzw vf01, 0(vi08)					; project xyz1				; @load xyz0
+		minix.xyz  vf04, vf04, vf31x	lq.xyzw vf05, 2(vi08)					; clamp rgb0				; @load stq0
+		mulq.xyzw  vf11, vf11, q		iand vi04, vi04, vi01					; project stq1				; @mask weight1a
+		minix.xyz  vf10, vf10, vf31x	iand vi05, vi05, vi01					; clamp rgb1				; @mask weight1b
+		ftoi4.xyzw vf02, vf02			mfir.x  vf12, vi04						; xyz0->fixed				; @mfir weight1a
+		ftoi0.xyzw vf04, vf04			mfir.y  vf12, vi05						; rgb0->fixed				; @mfir weight1b
+		ftoi4.xyzw vf08, vf08			sq.xyzw vf11, 256(vi07)					; xyz1->fixed				; store stq1
+		ftoi0.xyzw vf10, vf10			lq.xyzw vf17, 3(vi03)					; rgb1->fixed				; @load L2Sb col3
+		mulaz.xyz   acc, vf23, vf03z	sq.xyzw vf02, 0(vi06)					; @dot0b					; store xyz0
+		madday.xyz  acc, vf22, vf03y	sq.xyzw vf04, 128(vi06)					; @dot0b					; store rgb0
+		maddx.xyz  vf04, vf21, vf03x	sq.xyzw vf08, 0(vi07)					; @dot0b					; store xyz1
+		mulaz.xyz   acc, vf20, vf03z	ibne vi10, vi00, DOUBLE_TRANSFORM_TWO_VERTS	; @dot0a
+		madday.xyz  acc, vf19, vf03y	sq.xyzw vf10, 128(vi07)					; @dot0a					; store rgb1
+																				
+
+DOUBLE_TRANSFORM_FINISHED:
+		nop								b TRANSFORM_FINISHED
+		nop								nop

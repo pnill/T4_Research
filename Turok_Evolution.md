@@ -6,7 +6,7 @@ This is anything that I deem non-engine specific related to Evolution, most of w
 
 There's a high posibility what I've defined as the CBaseAI constructor is actually some other generic routine, as it's referenced often in places I wouldn't expect. This is not a exhaustive list of potential classes/objects in Turok Evo, just the things I've been able to identify or have taken specific interest in.
 
-### Classes / Functions
+## Classes / Functions
 
 I hope to eventually create individual pages for each of the classes where I have members, structuctures, or virtual functions even partially documented or reverse engineered right now the only one defined is the CTurok4Game and others simply point to their object definitions that would've been used in ActorEd or their World Builder.
 
@@ -88,7 +88,7 @@ I hope to eventually create individual pages for each of the classes where I hav
 | RidingRaptorAI ||
 | MPGeneratorObject || 
 
-### Linked Events
+## Linked Events
 In addition to the above classes/objects and the fact that the spawning routine creates them there's also a large set of linked events that will end up being useful for RE later and are likely triggered by actor files, almost like a scripted event in some way.
 
 | Linked Event       | Notes  |
@@ -153,7 +153,7 @@ In addition to the above classes/objects and the fact that the spawning routine 
 | FE:SaveWeaponState ||
 
 
-### Turok4_debug.xbe
+## Turok4_debug.xbe
 
 Figured this deserves it's own section in here as there are interesting things it's asserts expose, for instance within one routine it's possible to see how an actor would be referenced within an routine as it shows the debug string `pActor != 0`.
 
@@ -563,12 +563,12 @@ Some references to Turok 4 specific code which is not shared are also found with
 
 
 
- ### Object Properties and Modes
+## Object Properties and Modes
 Every object seems to have a list of properties that define specific things related to it's object, such as a follow distance, throw distance, max throw distance etc. As well as "Modes" which I sometimes refer to as "Actions".
 
 These actions/modes can be anything from the way a weapon fires to a player crouching, using ChangeMode typically does impact both the animation and do the actual action meaning these are not just an animation table but some kind of control system for every actor instance.
 
-### God Files
+## God Files
 
 The ".god" files appear to be related to their "WorldBuilder" system for Quagmire and are utilized to compile the actual .ATR/.ATI files down the line I assume, one was seemingly accidentally included in the PC build. It only appears to define generic actors related to the game and has the following in it's header:
 ```

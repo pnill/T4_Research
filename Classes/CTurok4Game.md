@@ -4,7 +4,8 @@ Most of the reverse engineering of this is going to be based on other game's imp
 I don't know a ton of about what's happening here and the current T4MP_V2 code probably references anything to do with this incorrectly.
 
 ## Constructor
-The CTurok4Game object is created using a `MakeGame` call called within `QuagMain`. The game allocates a total of 0x1258 bytes for it, and assigns the result of the constructor/initialization to `g_Turok4Game` which is later referenced all throughout the engine.
+The CTurok4Game object is created using a `MakeGame` call called within `QuagMain`. The game allocates a total of 0x1258 bytes for it, and assigns the result of the constructor/initialization to `g_Turok4Game` which is later referenced all throughout the engine. The actual class name is `CTurokGame`,
+and the global is `g_TurokGame` discovered after discovering a build with RTTI.
 
 ```cpp
 CTurok4Game *__cdecl MakeGame(CIndexedStringGroup *a1)
@@ -71,58 +72,60 @@ Most of the known members pointers to specific things like CSoundManager, ActorT
 
 ## Members / Structure
 I use "int" as a place holder for anything that's 4 bytes, even if it's not actually represented as an integer. Where possible or if I know it's a pointer I've updated the table to void*.
+Total struct size is `0x1258` but this won't cover all of it (yet), `CGame` is inherited as well so some of the properties are inherited from whatever was assigned to it.
 
-| m_Type               | m_Name              | offset | Notes                                                                                                                                                   |
-|:-------------------- | :------------------ | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| int                  | field_0x04          |  0x04  | Manipulating it seemed to have no imapct on it, not sure what it is or used for.                                                                        |
-| CLevel*              | m_pLevel            |  0x08  | This might acutally be something like loading level, it's set in CLevel:Update and zero'd out later.                                                    | 
-| Font**               | m_pFontList         |  0x0C  | "Font**" probably isn't the appropriate type here but you get the idea, it's a list of CFont object pointers.                                           |
-| CIndexedStringGroup* | m_pStringGroup      |  0x10  | All of the strings current loaded into the game in some sorted array.                                                                                   | 
-| CLevel**             | m_levelListBegin    |  0x14  | Technically this is a vector and there's something like .begin() happening here which this points to.                                                   |
-| CLevel**             | m_levelListEnd      |  0x18  | Like the above, it's the pointer to the vector but .end().                                                                                              |
-| int                  | field_0x1C          |  0x1C  | Unknown, appeared to be set to a pointer but not sure.                                                                                                  |
-| void*                | m_StandbyLevelBegin |  0x20  | Accordding to old notes I didn't know what it was, but I seem to have labeled it as the beginning of a standby level array, like the level list vector. |
-| void*                | m_StandbyLevelEnd   |  0x24  | Like the above, technically neither of them are void* but I don't know what datatype they're supposed to have likely CLevel**                           | 
-| int                  | field_0x28          |  0x28  | Uknown, setting it to 1-255 had no impact on the game.                                                                                                  |
-| char*                | dataPath            |  0x2C  | A non-translated path to where the data folder is, e.x. "$\Data\"                                                                                       |
-| CLevelCreationInfo*  | m_LevelCreationInfo |  0x30  | An object indiciating what information is passed to create/push a level. I assume this contains data about the last level pushed.                       |
-| int                  | field_0x34          |  0x34  | Unknown but initialized to 1 during MP modes, resets itself to 1 if you update it to 0. Breakpointing it could be useful in discovering what's going on.|
-| int                  | field_0x38          |  0x38  | Same as the above at 0x34.                                                                                                                              |
-| int                  | field_0x3C          |  0x3C  | Unknown have no other details.                                                                                                                          |
-| int                  | field_0x40          |  0x40  | Unknown.                                                                                                                                                |
-| int                  | field_0x44          |  0x44  | Unknown.                                                                                                                                                |
-| void*                | field_0x48          |  0x48  | Pointer of some sort, but unknown.                                                                                                                      |
-| char*                | m_LevelPath         |  0x4C  | Utilized in CGame::PushLevelSoon.                                                                                                                       |
-| char*                | m_ClassName         |  0x50  | Statically assigned to "Turok4".                                                                                                                        |
-| CLevel**             | m_PendingLevels     |  0x54  | Array of pending levels, x_std_vector most likely.                                                                                                      |
-| CLevel**             | m_PendingLevelsEnd  |  0x58  | Seems to be the end of the array. Likely the result of vector.end().                                                                                    |
-| CLevel**             | m_PendingLevelsBegin|  0x5C  | Likely the result of vector.begin()                                                                                                                     |
-| int                  | field_0x60          |  0x60  | Unknown, incremented actively.                                                                                                                          |
-| float                | field_0x64          |  0x64  | Unknown, incremented actively in MP, appears to be audio tick related.                                                                                  |
-| float                | field_0x68          |  0x68  | unknown copies the previous field.                                                                                                                      |
-| float                | field_0x6C          |  0x6C  | unknown - updateCount, incremented on CGame::Update.                                                                                                    |
-| int                  | field_0x70          |  0x70  | unknown.                                                                                                                                                |
-| void*                | m_pHostInfo         |  0x74  | Actually don't know what CHostInfo is responsible for, but this is what it points at according to notes.                                                |
-| int                  | field_0x78          |  0x78  | unknown.                                                                                                                                                |
-| int                  | field_0x7C          |  0x7C  | unknown.                                                                                                                                                |
-| CHistories*          | m_pHistories        |  0x80  | Where the game stores all the data about histories that are loaded/accessed.                                                                            |
-| float                | field_0x84          |  0x84  | Unknown, modifying it manipulated the camera. Values over 200 resulted in the camera being upside down.                                                 |
-| int                  | globalRenderFlags   |  0x88  | Uknown what render flags are specified, originally had notes stating it modified an update timer.                                                       |
-| float                | field_0x8C          |  0x8C  | Uknown. Most likely rendering related based on previous values.                                                                                         |
-| int                  | field_0x90          |  0x90  | Uknown.                                                                                                                                                 |
-| CTextGroups*         | m_pTextGroups       |  0x94  | Haven't reverse engineered "CTextGroups" yet but according to notes it points at an instance of it.                                                     |
-| CTreeFileManager*    | m_pTreeFileManager  |  0x98  | Haven't reverse engineered "CTreeFIleManager" but tree files are mounted/streamed from and act like archives for game data.                             |
-| CMemoryUnit*         | m_pMemoryUnit       |  0x9C  | Haven't reverse engineered "CMemoryUnit" or "CMemoryUnitManager" but this appears to point to an instance of it.                                        |
-| CSoundManager*       | m_pSoundManager     |  0xA0  | Haven't reverse engineered "CSoundManager" but this points to an instance of it.                                                                        |
-| CGameControllers*    | m_pGameControllers  |  0xA4  | Like the above haven't reverse engineered "CGameControllers" but this has a pointer to an instance of it.                                               |
-| int                  | m_LangIndex         |  0xA8  | Set by CGame::SetLanguage                                                                                                                               |
-| CActorTypeList*      | m_pActorTypeList    |  0xAC  | Pointer to array of Actor Types.                                                                                                                        |
-| bool                 | field_0xB0          |  0xB0  | Unknown, checked when determining if specific sounds should be loaded.                                                                                  |
-| char                 | field_0xB1          |  0xB1  | Unknown.                                                                                                                                                |
-| bool                 | field_0xB2          |  0xB2  | Checked before loading font list and sounds.                                                                                                            |
-| char                 | field_0xB3          |  0xB3  | Unknown.                                                                                                                                                |
-| int                  | field_0xB4          |  0xB4  | Unknown.                                                                                                                                                |
-| int                  | field_0xB8          |  0xB8  | Unknown.                                                                                                                                                |
+| m_Type               | m_Name              | offset   | Notes                                                                                                                                                   |
+|:-------------------- | :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| int                  | field_0x04          |  0x04    | Manipulating it seemed to have no impact on it, not sure what it is or used for.                                                                        |
+| CLevel*              | m_pLevel            |  0x08    | This might acutally be something like loading level, it's set in CLevel:Update and zero'd out later.                                                    | 
+| Font**               | m_pFontList         |  0x0C    | "Font**" probably isn't the appropriate type here but you get the idea, it's a list of CFont object pointers.                                           |
+| CIndexedStringGroup* | m_pStringGroup      |  0x10    | All of the strings current loaded into the game in some sorted array.                                                                                   | 
+| CLevel**             | m_levelListBegin    |  0x14    | Technically this is a vector and there's something like .begin() happening here which this points to.                                                   |
+| CLevel**             | m_levelListEnd      |  0x18    | Like the above, it's the pointer to the vector but .end().                                                                                              |
+| int                  | field_0x1C          |  0x1C    | Unknown, appeared to be set to a pointer but not sure.                                                                                                  |
+| void*                | m_StandbyLevelBegin |  0x20    | Accordding to old notes I didn't know what it was, but I seem to have labeled it as the beginning of a standby level array, like the level list vector. |
+| void*                | m_StandbyLevelEnd   |  0x24    | Like the above, technically neither of them are void* but I don't know what datatype they're supposed to have likely CLevel**                           | 
+| int                  | field_0x28          |  0x28    | Uknown, setting it to 1-255 had no impact on the game.                                                                                                  |
+| char*                | dataPath            |  0x2C    | A non-translated path to where the data folder is, e.x. "$\Data\"                                                                                       |
+| CLevelCreationInfo*  | m_LevelCreationInfo |  0x30    | An object indiciating what information is passed to create/push a level. I assume this contains data about the last level pushed.                       |
+| int                  | field_0x34          |  0x34    | Unknown but initialized to 1 during MP modes, resets itself to 1 if you update it to 0. Breakpointing it could be useful in discovering what's going on.|
+| int                  | field_0x38          |  0x38    | Same as the above at 0x34.                                                                                                                              |
+| int                  | field_0x3C          |  0x3C    | Unknown have no other details.                                                                                                                          |
+| int                  | field_0x40          |  0x40    | Unknown.                                                                                                                                                |
+| int                  | field_0x44          |  0x44    | Unknown.                                                                                                                                                |
+| void*                | field_0x48          |  0x48    | Pointer of some sort, but unknown.                                                                                                                      |
+| char*                | m_LevelPath         |  0x4C    | Utilized in CGame::PushLevelSoon.                                                                                                                       |
+| char*                | m_ClassName         |  0x50    | Statically assigned to "Turok4".                                                                                                                        |
+| CLevel**             | m_PendingLevels     |  0x54    | Array of pending levels, x_std_vector most likely.                                                                                                      |
+| CLevel**             | m_PendingLevelsEnd  |  0x58    | Seems to be the end of the array. Likely the result of vector.end().                                                                                    |
+| CLevel**             | m_PendingLevelsBegin|  0x5C    | Likely the result of vector.begin()                                                                                                                     |
+| int                  | field_0x60          |  0x60    | Unknown, incremented actively.                                                                                                                          |
+| float                | field_0x64          |  0x64    | Unknown, incremented actively in MP, appears to be audio tick related.                                                                                  |
+| float                | field_0x68          |  0x68    | unknown copies the previous field.                                                                                                                      |
+| float                | field_0x6C          |  0x6C    | unknown - updateCount, incremented on CGame::Update.                                                                                                    |
+| int                  | field_0x70          |  0x70    | unknown.                                                                                                                                                |
+| void*                | m_pHostInfo         |  0x74    | Actually don't know what CHostInfo is responsible for, but this is what it points at according to notes.                                                |
+| int                  | field_0x78          |  0x78    | unknown.                                                                                                                                                |
+| int                  | field_0x7C          |  0x7C    | unknown.                                                                                                                                                |
+| CHistories*          | m_pHistories        |  0x80    | Where the game stores all the data about histories that are loaded/accessed.                                                                            |
+| float                | field_0x84          |  0x84    | Unknown, modifying it manipulated the camera. Values over 200 resulted in the camera being upside down.                                                 |
+| int                  | globalRenderFlags   |  0x88    | Uknown what render flags are specified, originally had notes stating it modified an update timer.                                                       |
+| float                | field_0x8C          |  0x8C    | Uknown. Most likely rendering related based on previous values.                                                                                         |
+| int                  | field_0x90          |  0x90    | Uknown.                                                                                                                                                 |
+| CTextGroups*         | m_pTextGroups       |  0x94    | Haven't reverse engineered "CTextGroups" yet but according to notes it points at an instance of it.                                                     |
+| CTreeFileManager*    | m_pTreeFileManager  |  0x98    | Haven't reverse engineered "CTreeFIleManager" but tree files are mounted/streamed from and act like archives for game data.                             |
+| CMemoryUnit*         | m_pMemoryUnit       |  0x9C    | Haven't reverse engineered "CMemoryUnit" or "CMemoryUnitManager" but this appears to point to an instance of it.                                        |
+| CSoundManager*       | m_pSoundManager     |  0xA0    | Haven't reverse engineered "CSoundManager" but this points to an instance of it.                                                                        |
+| CGameControllers*    | m_pGameControllers  |  0xA4    | Like the above haven't reverse engineered "CGameControllers" but this has a pointer to an instance of it.                                               |
+| int                  | m_LangIndex         |  0xA8    | Set by CGame::SetLanguage                                                                                                                               |
+| CActorTypeList*      | m_pActorTypeList    |  0xAC    | Pointer to array of Actor Types.                                                                                                                        |
+| bool                 | field_0xB0          |  0xB0    | Unknown, checked when determining if specific sounds should be loaded.                                                                                  |
+| char                 | field_0xB1          |  0xB1    | Unknown.                                                                                                                                                |
+| bool                 | field_0xB2          |  0xB2    | Checked before loading font list and sounds.                                                                                                            |
+| char                 | field_0xB3          |  0xB3    | Unknown.                                                                                                                                                |
+| int                  | field_0xB4          |  0xB4    | Unknown.                                                                                                                                                |
+| int                  | field_0xB8          |  0xB8    | Unknown.                                                                                                                                                |
+| CGameMode*           | m_pGameMode         |  0x1028  | The currently set GameMode whether it be "Default" I'm guessing used for single player, or CBagTagMode, CSingleFlagCTF, etc.                            |
 
 ## Custom Functions
 I created some custom functions to handle things that were inlined by the engine, so basically re-implementations of functions that no longer exist based on reverse engineering. Plan to list some of them here.
@@ -189,4 +192,3 @@ The game inlined every reference to this in the Turok4_Debug.xbe and some of the
 | CGame::RestartLevel((char const *))                                               | 0x0063C834  | Handles restarting the current level.                                                                                                                                                                                               |
 | ProportionalFont_Name                                                             | 0x0063C838  | Reference to a proportional font name string.                                                                                                                                                                                       |
 | DebugFont_Name                                                                    | 0x0063C83C  | Reference to a debug font name string.                                                                                                                                                                                              |
-
